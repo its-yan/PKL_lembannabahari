@@ -142,12 +142,15 @@ header h1 {
 .promo-container {
     overflow: hidden;
     position: relative;
+    margin: 0 -2rem;
+    padding: 0 2rem;
 }
 
 .promo-scroll {
     display: flex;
     gap: 2rem;
-    animation: scrollPromo 20s linear infinite;
+    animation: scrollPromo 15s linear infinite;
+    width: max-content;
 }
 
 @keyframes scrollPromo {
@@ -156,88 +159,122 @@ header h1 {
 }
 
 .promo-card {
-    min-width: 300px;
+    min-width: 280px;
     background: var(--white-color);
     color: var(--primary-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 1rem;
+    border-radius: 15px;
+    padding: 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
 }
 
 .promo-image {
-    width: 80px;
-    height: 80px;
-    background: #ddd;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    font-size: 0.8rem;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+}
+
+.promo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.promo-card:hover .promo-image img {
+    transform: scale(1.05);
+}
+
+.promo-content {
+    padding: 1rem;
 }
 
 .promo-content h3 {
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     color: var(--primary-color);
-    font-size: var(--fontB);
+    font-size: var(--fontMM);
+    line-height: 1.3;
 }
 
 .promo-content p {
     color: var(--secondary-color);
     font-size: var(--fontMM);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Recommendation Section */
 .recommendation-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 .recommendation-card {
     background: var(--white-color);
     color: var(--primary-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 1rem;
+    border-radius: 15px;
+    padding: 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     transition: all 0.3s ease;
+    overflow: hidden;
     cursor: pointer;
 }
 
 .recommendation-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
 .recommendation-image {
-    width: 80px;
-    height: 80px;
-    background: #ddd;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    font-size: 0.8rem;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+}
+
+.recommendation-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.recommendation-card:hover .recommendation-image img {
+    transform: scale(1.05);
+}
+
+.recommendation-content {
+    padding: 1rem;
 }
 
 .recommendation-content h3 {
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     color: var(--primary-color);
     font-size: var(--fontB);
+    line-height: 1.3;
 }
 
 .recommendation-content p {
     color: var(--secondary-color);
     font-size: var(--fontMM);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Tab Content */
@@ -254,6 +291,98 @@ header h1 {
     background-color: var(--primary-color);
     color: var(--white-color);
     padding: 3rem 2rem 1rem;
+}
+
+/* Hiasan Section */
+.hiasan {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    overflow: visible;
+    margin-bottom: -60px;
+    z-index: 1;
+}
+
+.waves-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+}
+
+.waves-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hiasan img {
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.hiasan-ship {
+    position: absolute;
+    left: 39%;
+    bottom:40px;
+    top: -10px;
+    width: 200px;
+    z-index: 2;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+    animation: floatShip 6s ease-in-out infinite;
+}
+
+.hiasan-kue {
+    position: absolute;
+    right: 42.5%;
+    bottom: 20px;
+    width: 120px;
+    z-index: 2;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.10));
+    animation: floatKue 7s ease-in-out infinite;
+}
+
+.hiasan-bubble2 {
+    position: absolute;
+    left: 38%;
+    bottom: 40px;
+    width: 120px;
+    z-index: 1;
+    opacity: 0.95;
+    animation: floatBubble2 7s ease-in-out infinite;
+}
+
+.hiasan-bubble1 {
+    position: absolute;
+    left: 48%;
+    bottom: 50px;
+    width: 100px;
+    z-index: 1;
+    opacity: 0.92;
+    animation: floatBubble1 7s ease-in-out infinite;
+}
+
+@keyframes floatShip {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes floatKue {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+@keyframes floatBubble2 {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes floatBubble1 {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-12px) scale(1.08); }
 }
 
 .footer-content {
@@ -326,10 +455,40 @@ header h1 {
 
     .promo-card,
     .recommendation-card {
-        min-width: 250px;
+        min-width: 280px;
     }
 
     .recommendation-grid {
         grid-template-columns: 1fr;
     }
+
+    .hiasan-ship {
+        left: 5%;
+        width: 140px;
+    }
+
+    .hiasan-kue {
+        right: 5%;
+        width: 100px;
+    }
+
+    .hiasan-bubble2 {
+        left: 10%;
+        width: 100px;
+    }
+
+    .hiasan-bubble1 {
+        left: 20%;
+        width: 80px;
+    }
+}
+
+/* Pause animation on hover */
+.promo-container:hover .promo-scroll {
+    animation-play-state: paused;
+}
+
+/* Smooth scrolling for better performance */
+.promo-scroll {
+    will-change: transform;
 }
