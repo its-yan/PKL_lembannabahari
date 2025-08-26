@@ -1,0 +1,704 @@
+@import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display SC';
+    scroll-behavior: smooth;
+    scroll-margin-top: 2rem; 
+    box-sizing: border-box;
+}
+:root {
+    --fontXL: 4rem;
+    --fontL: 2rem;
+    --fontB: 1.5rem;
+    --fontMM: 1.2rem;
+    --fontM: 1rem;
+    --fontS: 0.85rem;
+    --primary-color: #133E87;
+    --secondary-color: #608BC1;
+    --third-color: #CBDCEB;
+    --light-color: #F3F3E0;
+    --white-color: #FFFFFF;
+    --primary-transparent: #133e8782;
+}
+
+
+.profil-header {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.header-bg {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: var(--primary-color);
+}
+
+.header-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.profil-title {
+    position: relative;
+    z-index: 2;
+    color: var(--light-color);
+    font-size: var(--fontXL);
+    font-weight: bold;
+    text-align: center;
+    top: 200px;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-family: 'Playfair Display SC', serif;
+}
+
+.profil-nav {
+    position: absolute;
+    left: 50%;
+    top: 470px; /* adjust as needed for your header image */
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--primary-color);
+    border-radius: 50px;
+    min-width: 500px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    transition: box-shadow 0.2s, background 0.2s, top 0.2s;
+}
+
+.profil-nav.floating {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    z-index: 100;
+}
+
+.profil-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profil-nav li {
+    margin: 0 24px;
+}
+
+.profil-nav a {
+    display: block;
+    padding: 16px 0;
+    color: var(--light-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--fontB);
+    transition: color 0.2s;
+}
+
+.profil-nav a:hover {
+    color: var(--secondary-color);
+}
+
+.profil-nav ul li a.active {
+    color: var(--white-color);
+    font-weight: bold;
+    border-bottom: 1px solid var(--white-color);
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Main Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    background: #133E87;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 0;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0 32px;
+    min-height: 56px;
+}
+
+.main-nav li {
+    margin-left: 32px;
+}
+
+.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Playfair Display SC', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 12px 0;
+    transition: color 0.2s;
+    display: block;
+}
+
+.main-nav a:hover {
+    color: #CBDCEB;
+}
+
+@media (max-width: 600px) {
+    .main-nav ul {
+        padding: 0 8px;
+        min-height: 44px;
+    }
+    .main-nav li {
+        margin-left: 12px;
+    }
+    .main-nav a {
+        font-size: 0.95rem;
+        padding: 8px 0;
+    }
+}
+
+/* Data Desa Section */
+
+.data-desa-section {
+    background: #7296cb;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100vw;
+    min-height: 400px;
+    padding: 0 0 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    margin-top: -30px; /* move up to overlap header */
+}
+
+.data-desa-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 400;
+    color: #fff;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+.data-desa-grid {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.data-desa-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+}
+
+.data-desa-box {
+    background: #d6e3f3;
+    border-radius: 0;
+    min-height: 56px;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 1.4rem;
+    color: #7296cb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 400;
+    box-shadow: none;
+    border: none;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sejarah Section */
+.sejarah-section {
+    background: #254a8a;
+    color: #fff;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 60px 0 60px 0;
+    width: 100vw;
+}
+
+.sejarah-header h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+    color: #fff;
+}
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.timeline-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+
+.timeline-row.left {
+    justify-content: flex-start;
+}
+
+.timeline-row.right {
+    justify-content: flex-end;
+}
+
+.timeline-content {
+    background: transparent;
+    color: #fff;
+    padding: 0 32px;
+    max-width: 380px;
+    position: relative;
+    z-index: 2;
+    font-family: 'Karma', serif;
+    font-size: 1.1rem;
+}
+
+.timeline-year {
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.timeline-row.left .timeline-content,
+.timeline-row.right .timeline-content {
+    text-align: left;
+}
+
+.timeline-row:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    border: 4px solid #254a8a;
+    z-index: 1;
+}
+
+.timeline-row.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-row.active .timeline-content {
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-radius: 8px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.timeline-row.active:after {
+    background: #7296cb;
+    border-color: #7296cb;
+}
+
+/* VISI & MISI Section */
+.visi-misi-section {
+    background: #f3f3e0;
+    color: #254a8a;
+    width: 100vw;
+    padding: 40px 0 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.visi-title {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #254a8a;
+    letter-spacing: 1px;
+}
+
+.misi-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #254a8a;
+    letter-spacing: 1px;
+}
+
+.visi-desc {
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: 'Karma', serif;
+    margin-bottom: 24px;
+    color: #254a8a;
+}
+
+.misi-list {
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Karma', serif;
+    font-size: 1rem;
+    color: #254a8a;
+    padding-left: 20px;
+}
+
+.misi-list li {
+    margin-bottom: 10px;
+}
+
+/* Struktur Organisasi Section */
+.struktur-section {
+    background: #eaf4fb;
+    width: 100vw;
+    padding: 48px 0 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.struktur-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 700;
+    color: #254a8a;
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+}
+
+.struktur-menu {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.struktur-tab {
+    background: #7296cb;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.struktur-tab.active,
+.struktur-tab:hover {
+    background: #254a8a;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.struktur-content {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 32px 24px;
+    min-height: 220px;
+}
+
+.struktur-org-title {
+    font-size: 1.4rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 600;
+    color: #254a8a;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.struktur-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Karma', serif;
+    font-size: 1.05rem;
+    color: #254a8a;
+}
+
+.struktur-list li {
+    margin-bottom: 10px;
+    padding: 6px 0;
+    margin-left: 35px;
+    border-bottom: 1px solid #eaf4fb;
+}
+.struktur-list-img .struktur-img {
+    width: 90px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 16px;
+    vertical-align: middle;
+    border: 2px solid #7296cb;
+    background: #fff;
+}
+.struktur-list-img li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.struktur-org-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+.struktur-org-img {
+    max-width: 100%;
+    width: 480px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    background: #fff;
+}
+
+/* Footer */
+.main-footer {
+    background: #254a8a;
+    color: #fff;
+    font-family: 'Playfair Display SC', serif;
+    padding: 0;
+    margin-top: 0;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: flex-start;
+    gap: 80px;
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 32px 0 0 0;
+}
+
+.footer-col {
+    min-width: 180px;
+}
+
+.footer-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    font-size: var(--fontM);
+    font-family: 'Karma', serif;
+    color: #fff;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+.footer-copyright {
+    text-align: right;
+    font-size: 1.2rem;
+    font-family: 'Karma', serif;
+    color: #fff;
+    opacity: 0.9;
+    padding: 0 32px 18px 0;
+}
+
+@media (max-width: 900px) {
+    .footer-columns {
+        gap: 32px;
+        flex-wrap: wrap;
+        padding: 24px 0 0 0;
+    }
+    .footer-col {
+        min-width: 140px;
+    }
+    .footer-title {
+        font-size: 1.2rem;
+    }
+    .footer-col ul li {
+        font-size: 1rem;
+    }
+    .footer-copyright {
+        font-size: 1rem;
+        padding: 0 12px 12px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-columns {
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 0 0 0;
+    }
+    .footer-col {
+        min-width: 0;
+        margin-bottom: 18px;
+    }
+    .footer-title {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+    .footer-col ul li {
+        font-size: 0.9rem;
+    }
+    .footer-copyright {
+        font-size: 0.9rem;
+        padding: 0 8px 8px 0;
+    }
+}
+    .visi-desc, .misi-list {
+        font-size: 0.9rem;
+    }
+    .visi-desc, .misi-list {
+        font-size: 0.9rem;
+    }
+.struktur-pdf-wrapper {
+    margin: 24px 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.struktur-pdf-wrapper iframe {
+    max-width: 100%;
+    min-height: 320px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.struktur-pdf-btn {
+    display: block;
+    margin: 18px auto 0 auto;
+    padding: 12px 32px;
+    background: #254a8a;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, color 0.2s;
+}
+.struktur-pdf-btn:hover {
+    background: #7296cb;
+    color: #fff;
+}
+
+/* Image Modal Styles */
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.img-modal-content {
+    display: block;
+    margin: 60px auto;
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+    background: #fff;
+}
+
+.img-modal-close {
+    position: absolute;
+    top: 32px;
+    right: 48px;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.2s;
+}
+
+.img-modal-close:hover {
+    color: #7296cb;
+}
+
+@media (max-width: 600px) {
+    .img-modal-content {
+        margin: 24px auto;
+        max-width: 98vw;
+        max-height: 60vh;
+    }
+    .img-modal-close {
+        top: 12px;
+        right: 18px;
+        font-size: 2rem;
+    }
+}
