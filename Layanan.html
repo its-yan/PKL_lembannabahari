@@ -4,108 +4,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan - Website Desa</title>
+    <title>Layanan - Website Desa Lembanna Bahari</title>
     <link rel="stylesheet" href="CSS/Layanan.css">
     <link rel="stylesheet" href="CSS/Global.css">
     <link rel="stylesheet" href="CSS/Responsive.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="JS/Global.js"></script>
 </head>
 
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Beranda</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Wisata</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Informasi</span>
+                </a>
+                <a href="Layanan.html" class="nav-link active">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Layanan</span>
+                </a>
+                <a href="profil.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+            </div>
+
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Cari layanan, produk, atau fasilitas...">
+                    <button type="button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header Section -->
     <header class="header">
-        <h1>LAYANAN </h1>
-        <div class="innovative-banner" style="position:absolute;bottom:18px;right:32px;background:#ffeb3b;color:#1a237e;padding:8px 18px;border-radius:20px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.08);animation:pulse 2s infinite;">2025</div>
-        <div class="top-bar" role="navigation" aria-label="Layanan Navigation">
-            <nav class="profil-nav" id="profil-nav">
-                <ul>
-                    <li><a href="#data-desa">DATA </a></li>
-                    <li><a href="#sejarah">SEJARAH</a></li>
-                    <li><a href="#visi-misi">VISI </a></li>
-                    <li><a href="#struktur-organisasi">STRUKTUR </a></li>
-                </ul>
-            </nav>
-            <div class="search-bar" role="search">
-                <input type="text" aria-label="Cari layanan kreatif" placeholder="Cari layanan kreatif...">
-                <span class="search-icon">🔍</span>
+        <div class="header-content">
+            <h1 class="header-title">LAYANAN DESA</h1>
+            <p class="header-subtitle">Temukan berbagai layanan dan fasilitas terbaik untuk kebutuhan Anda</p>
+            
+            <div class="header-buttons">
+                <button class="header-btn active" data-tab="produk">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Produk UMKM</span>
+                </button>
+                <button class="header-btn" data-tab="fasilitas">
+                    <i class="fas fa-building"></i>
+                    <span>Fasilitas Umum</span>
+                </button>
             </div>
-        </div>        
+        </div>
+        
+        <div class="header-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </header>
 
-    <!-- Fasilitas Umum Content -->
-    <div id="fasilitas-content" class="tab-content active">
-        <!-- Promo Section -->
-        <section class="content-section">
-            <h2 class="section-title">PRODUK</h2>
-            <div class="promo-container">
-                <div class="promo-scroll">
-                    <div class="promo-card">
-                        <a href="#" class="card-link">
-                            <div class="promo-image">
-                                <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg" alt="UMKM 1">
-                                <div class="card-date-label">23 May 2024</div>
-                            </div>
-                            <div class="promo-content">
-                                <h3>Kerajinan Tangan Digital</h3>
-                                <p>Produk lokal yang dipadukan dengan teknologi digital, hasil karya kreatif pengrajin desa. Temukan inovasi unik dan personalisasi produk!</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="promo-card">
-                        <a href="#" class="card-link">
-                            <div class="promo-image">
-                                <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="UMKM 2">
-                                <div class="card-date-label">23 May 2024</div>
-                            </div>
-                            <div class="promo-content">
-                                <h3>Kuliner Tradisional Kreatif</h3>
-                                <p>Kuliner desa yang dikemas modern, cita rasa autentik dengan sentuhan inovasi. Nikmati pengalaman kuliner interaktif dan demo masak live!</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="promo-card">
-                        <a href="#" class="card-link">
-                            <div class="promo-image">
-                                <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg" alt="UMKM 3">
-                                <div class="card-date-label">23 May 2024</div>
-                            </div>
-                            <div class="promo-content">
-                                <h3>Produk Laut Berteknologi</h3>
-                                <p>Hasil laut segar diolah dengan teknologi modern, kualitas premium, dan inovasi packaging ramah lingkungan. Cek demo interaktif produk!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Produk UMKM Section -->
+        <section id="produk-content" class="content-section active">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    PRODUK UMKM UNGGULAN
+                </h2>
+                <p class="section-description">Produk-produk berkualitas dari warga desa kami</p>
             </div>
 
-        </section>
-
-        <!-- Recommendation Section -->
-        <section class="content-section">
-            <h2 class="section-title">FASILITAS INOVATIF</h2>
-            <div class="recommendation-grid">
-                <div class="recommendation-card">
-                    <a href="pusat-informasi.html" class="card-link">
-                        <div class="recommendation-image">
-                            <img src="IMG/WhatsApp Image 2025-08-20 at 3.35.03 PM.jpeg" alt="Kapal Pinisi">
-                            <div class="card-date-label">23 May 2024</div>
+            <div class="products-grid">
+                <div class="product-card featured">
+                    <div class="product-badge">Terlaris</div>
+                    <a href="umkm_snack.html" class="product-link">
+                        <div class="product-image">
+                            <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional">
+                            <div class="product-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
                         </div>
-                        <div class="recommendation-content">
-                            <h3>Pusat Informasi Inovatif</h3>
-                            <p>Pusat informasi digital dengan QR scan, live chat, agenda kreatif, dan update event interaktif untuk pengunjung!</p>
+                        <div class="product-content">
+                            <h3 class="product-title">Makanan Tradisional</h3>
+                            <p class="product-description">Kuliner tradisional desa yang lezat dan autentik. Nikmati cita rasa asli yang diwariskan turun-temurun.</p>
+                            <div class="product-meta">
+                                <span class="product-price">Mulai Rp 15.000</span>
+                            </div>
                         </div>
                     </a>
                 </div>
-                
+
+                <div class="product-card">
+                    <a href="#" class="product-link">
+                        <div class="product-image">
+                            <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg" alt="Kerajinan Tangan">
+                            <div class="product-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Kerajinan Tangan</h3>
+                            <p class="product-description">Kerajinan tangan unik dan berkualitas tinggi hasil karya warga desa.</p>
+                            <div class="product-meta">
+                                <span class="product-price">Mulai Rp 50.000</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="product-card">
+                    <a href="#" class="product-link">
+                        <div class="product-image">
+                            <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg" alt="Makanan Ringan">
+                            <div class="product-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Makanan Ringan</h3>
+                            <p class="product-description">Cemilan sehat dan lezat untuk menemani aktivitas Anda.</p>
+                            <div class="product-meta">
+                                <span class="product-price">Mulai Rp 10.000</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
-    </div>
 
-    
-    </div>
+        <!-- Fasilitas Umum Section -->
+        <section id="fasilitas-content" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-building"></i>
+                    FASILITAS UMUM
+                </h2>
+                <p class="section-description">Fasilitas-fasilitas yang tersedia untuk kenyamanan warga dan pengunjung</p>
+            </div>
 
-    <!-- Hiasan Section dengan background waves -->
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <a href="pusat-informasi.html" class="facility-link">
+                        <div class="facility-image">
+                            <img src="IMG/WhatsApp Image 2025-08-20 at 3.35.03 PM.jpeg" alt="Pusat Informasi">
+                            <div class="facility-overlay">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">Pusat Informasi</h3>
+                            <p class="facility-description">Pusat informasi wisata untuk membantu Anda merencanakan perjalanan dengan baik.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="facility-card">
+                    <a href="#" class="facility-link">
+                        <div class="facility-image">
+                            <img src="IMG/Layanan.jpeg" alt="Tempat Ibadah">
+                            <div class="facility-overlay">
+                                <i class="fas fa-mosque"></i>
+                            </div>
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">Tempat Ibadah</h3>
+                            <p class="facility-description">Fasilitas ibadah yang nyaman untuk warga dan pengunjung.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="facility-card">
+                    <a href="#" class="facility-link">
+                        <div class="facility-image">
+                            <img src="IMG/Layanan.jpeg" alt="Taman Bermain">
+                            <div class="facility-overlay">
+                                <i class="fas fa-child"></i>
+                            </div>
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">Taman Bermain</h3>
+                            <p class="facility-description">Area bermain yang aman dan menyenangkan untuk anak-anak.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Decorative Section -->
     <div class="hiasan">
         <div class="waves-background">
             <img src="IMG/Waves.png" alt="Waves" class="waves-img">
@@ -122,39 +226,39 @@
             <div class="footer-col">
                 <div class="footer-title">Profil Desa</div>
                 <ul>
-                    <li>Data Desa</li>
-                    <li>Sejarah Desa</li>
-                    <li>Visi-Misi Desa</li>
-                    <li>Struktur Organisasi</li>
+                    <li><a href="#">Data Desa</a></li>
+                    <li><a href="#">Sejarah Desa</a></li>
+                    <li><a href="#">Visi-Misi Desa</a></li>
+                    <li><a href="#">Struktur Organisasi</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <div class="footer-title">Wisata</div>
                 <ul>
-                    <li>Objek Wisata</li>
-                    <li>Atraksi Wisata</li>
-                    <li>Akomodasi</li>
-                    <li>Kuliner</li>
-                    <li>Sewa Mobil Motor</li>
+                    <li><a href="#">Objek Wisata</a></li>
+                    <li><a href="#">Atraksi Wisata</a></li>
+                    <li><a href="#">Akomodasi</a></li>
+                    <li><a href="#">Kuliner</a></li>
+                    <li><a href="#">Sewa Mobil Motor</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <div class="footer-title">Informasi</div>
                 <ul>
-                    <li>Agenda</li>
-                    <li>Berita</li>
+                    <li><a href="#">Agenda</a></li>
+                    <li><a href="#">Berita</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <div class="footer-title">Layanan</div>
                 <ul>
-                    <li>Fasilitas Umum</li>
-                    <li>Produk</li>
+                    <li><a href="#">Fasilitas Umum</a></li>
+                    <li><a href="#">Produk</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-copyright">
-            Copyright
+            <p>&copy; 2024 Desa Lembanna Bahari. All rights reserved.</p>
         </div>
     </footer>
 

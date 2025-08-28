@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makanan Tradisional - UMKM Desa Lembanna Bahari</title>
+    <link rel="stylesheet" href="CSS/umkm_snack.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            
+            <div class="nav-menu">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Beranda</span>
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Wisata</span>
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Informasi</span>
+                    </a>
+                    <a href="Layanan.html" class="nav-link active">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Layanan</span>
+                    </a>
+                    <a href="profil.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Profil</span>
+                    </a>
+            </div>
+
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+        <script>
+        // Floating navbar show/hide on scroll
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('floatingNavbar');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scroll down - show navbar
+                navbar.classList.add('navbar-visible');
+                navbar.classList.remove('navbar-hidden');
+            } else {
+                // Scroll up - hide navbar
+                navbar.classList.add('navbar-hidden');
+                navbar.classList.remove('navbar-visible');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+        </script>
+
+    <!-- Back Button -->
+    <a href="Layanan.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Kembali ke Layanan</span>
+    </a>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Product Gallery -->
+            <section class="product-gallery">
+                <div class="gallery-main">
+                    <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional" id="mainImage" class="main-image">
+                    <div class="gallery-overlay">
+                        <button class="zoom-btn" id="zoomBtn">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="gallery-thumbs">
+                    <div class="thumb-item active" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg">
+                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional 1">
+                    </div>
+                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg">
+                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg" alt="Makanan Tradisional 2">
+                    </div>
+                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg">
+                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg" alt="Makanan Tradisional 3">
+                    </div>
+                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg">
+                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg" alt="Makanan Tradisional 4">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Info -->
+            <section class="product-info">
+                <div class="product-header">
+                    <div class="product-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Terlaris</span>
+                    </div>
+                    <h1 class="product-title">Makanan Tradisional Desa</h1>
+                </div>
+
+                <div class="product-description">
+                    <h2>Deskripsi Produk</h2>
+                    <p>Nikmati cita rasa autentik makanan tradisional desa yang diwariskan turun-temurun. Setiap hidangan dibuat dengan bahan-bahan segar dan resep tradisional yang telah teruji selama puluhan tahun.</p>
+                    
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>100% Bahan Alami</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Dibuat Segar Setiap Hari</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Tanpa Pengawet</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Halal & Terjamin</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="product-ingredients">
+                    <h3>Bahan Utama</h3>
+                    <div class="ingredients-list">
+                        <span class="ingredient-tag">Beras Ketan</span>
+                        <span class="ingredient-tag">Kelapa Parut</span>
+                        <span class="ingredient-tag">Gula Merah</span>
+                        <span class="ingredient-tag">Daun Pandan</span>
+                        <span class="ingredient-tag">Garam</span>
+                        <span class="ingredient-tag">Air</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aside Panel -->
+            <aside class="aside-panel">
+                <div class="order-card">
+                    <div class="price-section">
+                        <div class="current-price">
+                            <span class="price-label">Harga</span>
+                            <span class="price-amount">Rp 25.000</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-secondary" id="contactBtn">
+                            <i class="fas fa-phone"></i>
+                            <span>Hubungi Penjual</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <h3>Scan untuk Info Lebih Lanjut</h3>
+                    <div class="qr-container">
+                        <div class="qr-code" id="qrCode">
+                            <!-- QR Code will be generated here -->
+                        </div>
+                        <p class="qr-desc">Scan QR code untuk mendapatkan informasi detail produk dan cara pemesanan</p>
+                    </div>
+                </div>
+
+                <!-- Seller Info -->
+                <div class="seller-info">
+                    <h3>Informasi Penjual</h3>
+                    <div class="seller-card">
+                        <div class="seller-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="seller-details">
+                            <h4>Ibu Siti Aminah</h4>
+                            <p>Pengusaha UMKM Desa</p>
+                        </div>
+                    </div>
+                    <div class="seller-contact">
+                        <a href="tel:+6281234567890" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <span>+62 812-3456-7890</span>
+                        </a>
+                        <a href="https://wa.me/6281234567890" class="contact-link whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" id="lightboxImage">
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Desa Lembanna Bahari. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="JS/umkm_snack.js"></script>
+</body>
+
+</html>
