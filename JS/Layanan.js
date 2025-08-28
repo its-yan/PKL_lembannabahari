@@ -1,27 +1,36 @@
-function switchTab(tabName) {
-    // Hide all tab contents
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => {
-        content.classList.remove('active');
-    });
-
-    // Remove active class from all tabs
-    const tabs = document.querySelectorAll('.nav-tab');
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-    // Show selected tab content
-    if (tabName === 'fasilitas') {
-        document.getElementById('fasilitas-content').classList.add('active');
-        tabs[0].classList.add('active');
-    } else if (tabName === 'produk') {
-        document.getElementById('produk-content').classList.add('active');
-        tabs[1].classList.add('active');
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
+    // Infinite promo-scroll logic
+    document.querySelectorAll('.promo-scroll').forEach(function(scroll) {
+        // Only clone if not already cloned
+        if (!scroll.classList.contains('infinite-ready')) {
+            scroll.classList.add('infinite-ready');
+            const children = Array.from(scroll.children);
+            children.forEach(child => {
+                const clone = child.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                scroll.appendChild(clone);
+            });
+        }
+        // Set scroll behavior
+        scroll.addEventListener('scroll', function() {
+            // If scrolled to end, reset to start
+            if (scroll.scrollLeft >= scroll.scrollWidth / 2) {
+                scroll.scrollLeft = 0;
+            }
+        });
+        // For smooth auto-scroll (optional, if you want it to move automatically)
+        let autoScroll = function() {
+            if (!scroll.matches(':hover')) {
+                scroll.scrollLeft += 1;
+                if (scroll.scrollLeft >= scroll.scrollWidth / 2) {
+                    scroll.scrollLeft = 0;
+                }
+            }
+            requestAnimationFrame(autoScroll);
+        };
+        autoScroll();
+    });
+
     // Back button scroll/fade logic
     const backBtn = document.querySelector('.back-layanan-btn');
     if (backBtn) {
@@ -62,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
             currentIdx = idx;
             lightboxContent.innerHTML = '';
             const el = items[idx].cloneNode(true);
-            el.style.maxWidth = '700px';
-            el.style.maxHeight = '70vh';
+            el.style.maxWidth = '1000vw';
+            el.style.maxHeight = '100vh';
             el.setAttribute('controls', el.tagName === 'VIDEO' ? true : undefined);
             lightboxContent.appendChild(el);
             lightbox.style.display = 'flex';
@@ -95,68 +104,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    // Promo Scroll Indicator Dots Logic
-    function setupPromoScrollIndicator(scrollSelector, indicatorSelector) {
-        const scroll = document.querySelector(scrollSelector);
-        const indicator = document.querySelector(indicatorSelector);
-        if (!scroll || !indicator) return;
-
-        const cards = scroll.querySelectorAll('.promo-card');
-        indicator.innerHTML = '';
-        cards.forEach((card, idx) => {
-            const dot = document.createElement('button');
-            dot.className = 'promo-scroll-dot';
-            dot.setAttribute('aria-label', 'Go to card ' + (idx + 1));
-            dot.addEventListener('click', () => {
-                card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            });
-            indicator.appendChild(dot);
-        });
-
-        function updateActiveDot() {
-            let activeIdx = 0;
-            let minDist = Infinity;
-            cards.forEach((card, idx) => {
-                const rect = card.getBoundingClientRect();
-                const dist = Math.abs(rect.left - scroll.getBoundingClientRect().left);
-                if (dist < minDist) {
-                    minDist = dist;
-                    activeIdx = idx;
-                }
-            });
-            indicator.querySelectorAll('.promo-scroll-dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === activeIdx);
-            });
-        }
-        scroll.addEventListener('scroll', updateActiveDot);
-        window.addEventListener('resize', updateActiveDot);
-        updateActiveDot();
-    }
 
     setupPromoScrollIndicator('.promo-container .promo-scroll');
     setupPromoScrollIndicator('#produk-content .promo-scroll');
     const topBar = document.querySelector('.top-bar');
     let lastScroll = window.scrollY;
+    let ticking = false;
 
-    window.addEventListener('scroll', function() {
-        let currentScroll = window.scrollY;
+    function onScroll() {
+        const currentScroll = window.scrollY;
         if (currentScroll > lastScroll) {
-            // Scroll down: show top-bar
-            topBar.style.transform = 'translate(-50%, 0)';
+            // scrolling down -> show
+            topBar.style.transform = 'translateX(-50%) translateY(0)';
             topBar.style.opacity = '1';
         } else {
-            // Scroll up: hide top-bar
-            topBar.style.transform = 'translate(-50%, -100%)';
+            // scrolling up -> hide
+            topBar.style.transform = 'translateX(-50%) translateY(-120%)';
             topBar.style.opacity = '0';
         }
         lastScroll = currentScroll;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(onScroll);
+            ticking = true;
+        }
     });
 
     const searchInput = document.querySelector('.search-bar input');
     const promoCards = document.querySelectorAll('.promo-card');
     const recommendationCards = document.querySelectorAll('.recommendation-card');
 
-    searchInput.addEventListener('input', function(e) {
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase();
         // Filter promo cards
         promoCards.forEach(card => {
@@ -180,7 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.display = 'none';
             }
         });
-    });
+      });
+    }
 
     // Enhanced promo scroll functionality
     const promoScrolls = document.querySelectorAll('.promo-scroll');
@@ -214,9 +197,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.animationPlayState = 'running';
         });
     });
-
-    // Biarkan anchor .card-link melakukan navigasi normal (hapus preventDefault dan console.log)
-    // Tidak diperlukan handler khusus di sini.
 
     // Lightbox/Gallery logic
     function createLightbox() {
@@ -346,8 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('is-visible');
             }
         });
     }, observerOptions);
@@ -355,9 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Observe cards for animation
     const allCards = document.querySelectorAll('.promo-card, .recommendation-card');
     allCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        card.classList.add('reveal-up');
         observer.observe(card);
     });
 

@@ -3,41 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pusat Informasi</title>
-    <link rel="stylesheet" href="CSS/Layanan.css">
+    <title>Pusat Informasi Desa Lembanna</title>
+    <link rel="stylesheet" href="CSS/pusat-informasi.css">
 </head>
 <body>
     <a href="Layanan.html" class="back-layanan-btn">&larr; Kembali ke Layanan</a>
-    <header class="header" style="height: 50vh;">
-        <h1>Pusat Informasi</h1>
+    <header class="header">
+        <h1>Pusat Informasi Desa Lembanna</h1>
     </header>
     <section class="content-section">
         <div class="detail-layout">
             <div class="detail-main">
-                <h2 class="section-title">Galeri</h2>
+                <h2 class="section-title">Pusat Informasi </h2>
                 <div class="gallery reveal">
                     <div class="gallery-thumbs">
-                        <figure><img src="IMG/WhatsApp Image 2025-08-20 at 3.35.03 PM.jpeg" alt="Info 1"></figure>
+                        <figure><img src="IMG/WhatsApp Image 2025-08-20 at 3.35.03 PM.jpeg" alt="Denah Pusat Informasi" onclick="openLightbox(this.src)"></figure>
                     </div>
-                    <div class="gallery-lightbox" style="display:none">
-                        <span class="gallery-close">&times;</span>
-                        <span class="gallery-prev">&#10094;</span>
-                        <span class="gallery-next">&#10095;</span>
+                    <div class="gallery-lightbox" id="galleryLightbox" style="display:none">
+                        <span class="gallery-close" onclick="closeLightbox()">&times;</span>
+                        <span class="gallery-prev" onclick="prevLightbox()">&#10094;</span>
+                        <span class="gallery-next" onclick="nextLightbox()">&#10095;</span>
                         <div class="gallery-lightbox-content"></div>
+                    </div>
+                </div>
+                <div class="atourin-info reveal" style="margin-top:24px">
+                    <div class="atourin-info-main">
+                        <h2 class="atourin-title">Jam Layanan & Kontak</h2>
+                        <div class="atourin-time"><strong>Jam Operasional:</strong> Senin - Minggu, 08:00 - 17:00 WITA</div>
+                        <div class="atourin-location"><strong>Lokasi:</strong> Kantor Pusat Informasi Desa Lembanna</div>
+                        <div class="atourin-need">
+                            <strong>Layanan Unggulan:</strong>
+                            <ul>
+                                <li>Informasi digital wisata & desa</li>
+                                <li>Virtual tour & peta interaktif</li>
+                                <li>Live chat bantuan wisatawan</li>
+                                <li>Update event & agenda kreatif desa</li>
+                                <li>Pengaduan online & bantuan darurat</li>
+                            </ul>
+                        </div>
+                        <div class="atourin-note">
+                            <strong>Kontak:</strong>
+                            <ul>
+                                <li>Email: info@lembanna.desa</li>
+                                <li>Telepon/WA: 08xx-xxxx-xxxx</li>
+                                <li>Instagram: @desalembanna</li>
+                            </ul>
+                        </div>
+                        <div class="atourin-desc">
+                            <strong>Tentang Pusat Informasi:</strong>
+                            <p>Pusat Informasi Desa Lembanna kini hadir dengan inovasi digital, layanan kreatif, dan teknologi terkini untuk mendukung wisatawan dan warga desa. Temukan info terbaru, event, dan layanan publik secara mudah dan interaktif!</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <aside class="info-panel reveal">
-                <h3>QRCode Produk Wisata</h3>
-                <div class="qr-box"><img data-qr="page-url" alt="QR Lokasi Halaman"></div>
-                <div class="price-label">Harga Mulai Dari</div>
-                <div class="price-chip">Gratis</div>
-                <p style="margin-top:16px">Pusat informasi wisata. Scan QR untuk simpan detail dan arahkan teman Anda.</p>
+                <h3>FAQ Kreatif</h3>
+                <div class="faq-creative">
+                    <ul>
+                        <li><strong>Bagaimana cara akses info terbaru?</strong> Scan QR atau kunjungi website desa.</li>
+                        <li><strong>Ada layanan digital?</strong> Ya, tersedia virtual tour & live chat.</li>
+                        <li><strong>Event desa bisa diikuti?</strong> Tentu! Cek agenda di pusat informasi.</li>
+                    </ul>
+                </div>
+                <div class="qr-box">
+                    <img data-qr="page-url" alt="QR Halaman" />
+                    <span style="font-size:0.9rem;color:#1976d2;margin-top:6px;">Scan untuk info digital</span>
+                </div>
+                <div class="price-chip" onclick="window.open('brosur.pdf','_blank')">Unduh Brosur Inovasi</div>
             </aside>
         </div>
     </section>
     <script src="JS/Layanan.js"></script>
+    <script src="JS/pusat-informasi.js"></script>
 </body>
 </html>
+
 
 
