@@ -78,7 +78,7 @@ function displaySearchResults(results) {
                 <p>Tidak ada hasil ditemukan</p>
             </div>
         `;
-    } else {
+            } else {
         searchResults.innerHTML = results.map(item => `
             <div class="search-result-item" onclick="navigateTo('${item.url}')">
                 <h4>${item.title}</h4>
@@ -235,19 +235,19 @@ searchInput.addEventListener('keydown', (e) => {
 });
 
 // Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
 // Observe all cards for animation
 document.addEventListener('DOMContentLoaded', () => {
@@ -271,8 +271,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 block: 'start'
             });
         }
+        });
     });
-});
 
 // Add loading states for better UX
 function showLoading(element) {

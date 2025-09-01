@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UMKM Desa Lembanna Bahari</title>
+    <title>Bengkel Souvenir Kapal - UMKM Desa Lembanna Bahari</title>
     <link rel="stylesheet" href="CSS/umkm_general.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -13,30 +13,28 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            
             <div class="nav-menu">
-                    <a href="index.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Beranda</span>
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Wisata</span>
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Informasi</span>
-                    </a>
-                    <a href="Layanan.html" class="nav-link active">
-                        <i class="fas fa-concierge-bell"></i>
-                        <span>Layanan</span>
-                    </a>
-                    <a href="profil.html" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Profil</span>
-                    </a>
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Beranda</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Wisata</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Informasi</span>
+                </a>
+                <a href="Layanan.html" class="nav-link active">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Layanan</span>
+                </a>
+                <a href="profil.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
             </div>
-
             <div class="nav-toggle" id="navToggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -44,24 +42,6 @@
             </div>
         </div>
     </nav>
-        <script>
-        // Floating navbar show/hide on scroll
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('floatingNavbar');
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                // Scroll down - show navbar
-                navbar.classList.add('navbar-visible');
-                navbar.classList.remove('navbar-hidden');
-            } else {
-                // Scroll up - hide navbar
-                navbar.classList.add('navbar-hidden');
-                navbar.classList.remove('navbar-visible');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, false);
-        </script>
 
     <!-- Back Button -->
     <a href="Layanan.html" class="back-btn">
@@ -75,26 +55,22 @@
             <!-- Product Gallery -->
             <section class="product-gallery">
                 <div class="gallery-main">
-                    <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional" id="mainImage" class="main-image">
+                    <img src="IMG/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg" alt="Souvenir Kapal Kayu" id="mainImage" class="main-image">
                     <div class="gallery-overlay">
                         <button class="zoom-btn" id="zoomBtn">
                             <i class="fas fa-search-plus"></i>
                         </button>
                     </div>
                 </div>
-                
                 <div class="gallery-thumbs">
-                    <div class="thumb-item active" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg">
-                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg" alt="Makanan Tradisional 1">
+                    <div class="thumb-item active" data-src="IMG/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg">
+                        <img src="IMG/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg" alt="Kapal Mini 1">
                     </div>
-                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg">
-                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg" alt="Makanan Tradisional 2">
+                    <div class="thumb-item" data-src="IMG/Layanan_Pinisi.png">
+                        <img src="IMG/Layanan_Pinisi.png" alt="Kapal Mini 2">
                     </div>
-                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg">
-                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (1).jpeg" alt="Makanan Tradisional 3">
-                    </div>
-                    <div class="thumb-item" data-src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg">
-                        <img src="IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM (2).jpeg" alt="Makanan Tradisional 4">
+                    <div class="thumb-item" data-src="IMG/Layanan.jpeg">
+                        <img src="IMG/Layanan.jpeg" alt="Kapal Mini 3">
                     </div>
                 </div>
             </section>
@@ -103,45 +79,44 @@
             <section class="product-info">
                 <div class="product-header">
                     <div class="product-badge">
-                        <i class="fas fa-star"></i>
-                        <span>Terlaris</span>
+                        <i class="fas fa-ship"></i>
+                        <span>Souvenir Kapal</span>
                     </div>
-                    <h1 class="product-title">Keripik Pisang</h1>
+                    <h1 class="product-title">Bengkel Souvenir Kapal Kayu</h1>
                 </div>
 
                 <div class="product-description">
                     <h2>Deskripsi Produk</h2>
-                    <p>Nikmati cita rasa autentik keripik pisang yang telah teruji selama puluhan tahun.</p>
+                    <p>Souvenir kapal kayu handmade dengan detail rapih dan finishing halus. Cocok sebagai hadiah, pajangan meja, atau oleh-oleh khas bahari dari Desa Lembanna.</p>
                     
                     <div class="product-features">
                         <div class="feature-item">
-                            <i class="fas fa-leaf"></i>
-                            <span>100% Bahan Alami</span>
+                            <i class="fas fa-tree"></i>
+                            <span>Kayu berkualitas</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Dibuat Segar Setiap Hari</span>
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Finishing halus</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-heart"></i>
-                            <span>Tanpa Pengawet</span>
+                            <i class="fas fa-hand-sparkles"></i>
+                            <span>Buatan tangan</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-certificate"></i>
-                            <span>Halal & Terjamin</span>
+                            <i class="fas fa-gift"></i>
+                            <span>Cocok untuk hadiah</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="product-ingredients">
-                    <h3>Bahan Utama</h3>
+                    <h3>Bahan</h3>
                     <div class="ingredients-list">
-                        <span class="ingredient-tag">Beras Ketan</span>
-                        <span class="ingredient-tag">Kelapa Parut</span>
-                        <span class="ingredient-tag">Gula Merah</span>
-                        <span class="ingredient-tag">Daun Pandan</span>
-                        <span class="ingredient-tag">Garam</span>
-                        <span class="ingredient-tag">Air</span>
+                        <span class="ingredient-tag">Kayu Pilihan</span>
+                        <span class="ingredient-tag">Lem Kayu</span>
+                        <span class="ingredient-tag">Cat Kayu</span>
+                        <span class="ingredient-tag">Vernish</span>
+                        <span class="ingredient-tag">Benang Tali</span>
                     </div>
                 </div>
             </section>
@@ -152,14 +127,14 @@
                     <div class="price-section">
                         <div class="current-price">
                             <span class="price-label">Harga</span>
-                            <span class="price-amount">Rp 25.000</span>
+                            <span class="price-amount">Rp 75.000</span>
                         </div>
                     </div>
 
                     <div class="action-buttons">
                         <button class="btn-secondary" id="contactBtn">
                             <i class="fas fa-phone"></i>
-                            <span>Hubungi Penjual</span>
+                            <span>Hubungi Pengrajin</span>
                         </button>
                     </div>
                 </div>
@@ -171,20 +146,20 @@
                         <div class="qr-code" id="qrCode">
                             <!-- QR Code will be generated here -->
                         </div>
-                        <p class="qr-desc">Scan QR code untuk mendapatkan informasi detail produk dan cara pemesanan</p>
+                        <p class="qr-desc">Scan QR untuk detail produk, harga tiap ukuran, dan pemesanan.</p>
                     </div>
                 </div>
 
                 <!-- Seller Info -->
                 <div class="seller-info">
-                    <h3>Informasi Penjual</h3>
+                    <h3>Informasi Pengrajin</h3>
                     <div class="seller-card">
                         <div class="seller-avatar">
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="seller-details">
-                            <h4>Ibu </h4>
-                            <p>Pengusaha UMKM Desa</p>
+                            <h4>Pak</h4>
+                            <p>Pengrajin Kapal Kayu Mini</p>
                         </div>
                     </div>
                     <div class="seller-contact">
