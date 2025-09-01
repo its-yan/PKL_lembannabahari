@@ -48,10 +48,14 @@ body {
     border-bottom: 1px solid rgba(19, 62, 135, 0.1);
     z-index: 1000;
     transition: all 0.3s ease;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-light);
+    border-radius: 12px 12px 12px 12px;
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -223,7 +227,6 @@ body {
     color: var(--white-color);
     text-align: center;
     position: relative;
-    margin-top: 70px;
 }
 
 .header-content {
