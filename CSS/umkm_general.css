@@ -775,7 +775,7 @@ body {
 .lightbox-close,
 .lightbox-nav {
     position: absolute;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
     color: var(--white-color);
     border: none;
     border-radius: 50%;
@@ -892,82 +892,106 @@ body {
   }
 }
 
+/* Add responsive styles for tablets and small screens */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0 1rem;
+        
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 70%;
     }
 
     .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: var(--white-color);
-        flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        padding-top: 2rem;
-        transition: left 0.3s ease;
-        box-shadow: var(--shadow-medium);
+        text-align: center;
     }
 
-    .nav-menu.active {
-        left: 0;
+    .main-content {
+        text-align: center;
     }
 
-    .nav-link {
-        flex-direction: row;
-        gap: 0.5rem;
-        font-size: 1rem;
-        padding: 1rem;
+    .container {
+        /* Center grid content */
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
     }
 
-    .nav-toggle {
-        display: flex;
+    .product-info,
+    .product-gallery,
+    .aside-panel {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .gallery-main .main-image {
+        height: 250px;
+    }
+
+    .gallery-thumbs img {
+        height: 60px;
+    }
+
+    .order-card,
+    .qr-section,
+    .seller-info {
+        padding: 1.2rem;
     }
 
     .back-btn {
         left: 1rem;
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
-    }
-
-    .container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 0 1rem;
-    }
-
-    .product-title {
-        font-size: 2rem;
-    }
-
-    .product-features {
-        grid-template-columns: 1fr;
-    }
-
-    .variant-options {
-        flex-direction: column;
-    }
-
-    .lightbox-prev {
-        left: 1rem;
-    }
-
-    .lightbox-next {
-        right: 1rem;
-    }
-
-    .modal-content {
-        width: 95%;
-        margin: 1rem;
+        top: 75px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .nav-container {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-menu {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-content {
+        text-align: center;
+    }
+
+    .container {
+        justify-items: center;
+        align-items: center;
         padding: 0 0.5rem;
+    }
+
+    .product-info,
+    .product-gallery,
+    .aside-panel {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .footer {
+        text-align: center;
     }
 
     .back-btn {
@@ -980,16 +1004,62 @@ body {
         display: none;
     }
 
+    .order-card,
+    .qr-section,
+    .seller-info {
+        padding: 1.5rem;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-menu {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-content {
+        text-align: center;
+    }
+
     .container {
+        justify-items: center;
+        align-items: center;
         padding: 0 0.5rem;
     }
 
-    .product-title {
-        font-size: 1.5rem;
+    .product-info,
+    .product-gallery,
+    .aside-panel {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
-    .price-amount {
-        font-size: 1.5rem;
+    .footer {
+        text-align: center;
+    }
+
+    .back-btn {
+        left: 0.5rem;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .back-btn span {
+        display: none;
     }
 
     .order-card,
