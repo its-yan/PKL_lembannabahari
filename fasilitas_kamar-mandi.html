@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kamar Mandi Umum - Fasilitas Desa</title>
+  <link rel="stylesheet" href="CSS/fasilitas_detail.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-menu">
+        <a href="#" class="nav-link"><i class="fas fa-map-marked-alt"></i><span>Wisata</span></a>
+        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i><span>Informasi</span></a>
+        <a href="Layanan.html" class="nav-link active"><i class="fas fa-concierge-bell"></i><span>Layanan</span></a>
+        <a href="profil.html" class="nav-link"><i class="fas fa-user"></i><span>Profil</span></a>
+      </div>
+      <div class="search-container">
+        <div class="search-bar">
+          <input id="searchInput" type="text" placeholder="Cari fasilitas...">
+          <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+      <div class="nav-toggle" id="navToggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Kamar Mandi Umum</h1>
+    <p>Fasilitas kamar mandi umum yang bersih dan nyaman untuk pengunjung dan warga desa.</p>
+  </header>
+
+  <main class="main">
+    <section class="section">
+      <h2>Galeri</h2>
+      <div class="gallery">
+        <img src="IMG/Kamar mandi umum terbaik di Mandala Ria Beach.jpg" alt="Kamar Mandi Umum">
+      </div>
+      <h2>Deskripsi</h2>
+      <p>Kamar mandi umum tersedia di beberapa titik strategis desa, terawat, bersih, dan mudah diakses oleh semua pengunjung.</p>
+    </section>
+
+    <aside class="aside">
+      <div class="info-card">
+        <div class="badge">Buka 24 Jam</div>
+      </div>
+      <div class="info-card">
+        <h3>Lokasi</h3>
+        <iframe id="facilityMap" class="location-map" data-query="Kamar Mandi Umum Desa Lembanna Bahari"></iframe>
+      </div>
+      <div class="info-card">
+        <h3>Catatan</h3>
+        <div class="info-row"><i class="fas fa-check"></i><span>Air bersih tersedia</span></div>
+        <div class="info-row"><i class="fas fa-shower"></i><span>Fasilitas shower & toilet duduk</span></div>
+        <div class="info-row"><i class="fas fa-lock"></i><span>Privasi terjaga</span></div>
+      </div>
+      <a href="Layanan.html" class="back-btn" style="text-decoration:none;text-align:center;">&larr; Kembali ke Layanan</a>
+    </aside>
+  </main>
+
+  <footer class="footer">&copy; 2024 Desa Lembanna Bahari</footer>
+  <script src="JS/fasilitas_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu & Kuliner Desa Lembanna Bahari</title>
+    <link rel="stylesheet" href="CSS/umkm_general.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Beranda</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Wisata</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Informasi</span>
+                </a>
+                <a href="Layanan.html" class="nav-link active">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Layanan</span>
+                </a>
+                <a href="profil.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <a href="Layanan.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Kembali ke Layanan</span>
+    </a>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Product Gallery -->
+            <section class="product-gallery">
+                <div class="gallery-main">
+                    <img src="IMG/jajanan produk lokal.jpg" alt="Menu Kuliner" id="mainImage" class="main-image">
+                    <div class="gallery-overlay">
+                        <button class="zoom-btn" id="zoomBtn">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb-item active" data-src="IMG/jajanan produk lokal.jpg">
+                        <img src="IMG/jajanan produk lokal.jpg" alt="Menu 1">
+                    </div>
+                    <div class="thumb-item" data-src="IMG/jajanan kue bahan baku lokal.jpg">
+                        <img src="IMG/jajanan kue bahan baku lokal.jpg" alt="Menu 2">
+                    </div>
+                    <div class="thumb-item" data-src="IMG/Juice dll Di Segara Resto.jpg">
+                        <img src="IMG/Juice dll Di Segara Resto.jpg" alt="Menu 3">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Info -->
+            <section class="product-info">
+                <div class="product-header">
+                    <div class="product-badge">
+                        <i class="fas fa-utensils"></i>
+                        <span>Kuliner Desa</span>
+                    </div>
+                    <h1 class="product-title">Menu & Makanan Khas</h1>
+                </div>
+
+                <div class="product-description">
+                    <h2>Deskripsi Menu</h2>
+                    <p>Beragam makanan dan minuman khas Desa Lembanna, mulai dari jajanan tradisional, snack, hingga minuman segar yang dibuat dari bahan lokal berkualitas.</p>
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>Bahan Lokal Segar</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bread-slice"></i>
+                            <span>Resep Tradisional</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>Minuman Khas</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-star"></i>
+                            <span>Favorit Pengunjung</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-ingredients">
+                    <h3>Contoh Menu</h3>
+                    <div class="ingredients-list">
+                        <span class="ingredient-tag">Keripik Pisang</span>
+                        <span class="ingredient-tag">Lemper</span>
+                        <span class="ingredient-tag">Beppa Ta</span>
+                        <span class="ingredient-tag">Juice Segar</span>
+                        <span class="ingredient-tag">Kue Tradisional</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aside Panel -->
+            <aside class="aside-panel">
+                <div class="order-card">
+                    <div class="price-section">
+                        <div class="current-price">
+                            <span class="price-label">Harga Mulai</span>
+                            <span class="price-amount">Rp 5.000</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-secondary" id="contactBtn">
+                            <i class="fas fa-phone"></i>
+                            <span>Hubungi Penjual</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- QR Code Section -->
+               <div class="qr-section">
+                    <div class="qr-container">
+                        <img src="IMG/BARCODE DESA WISATA ANDALAN JADESTA.png" alt="QR Code" class="qr-code">
+                        <p class="qr-desc">Scan QR untuk detail produk, harga tiap ukuran, dan pemesanan.</p>
+                    </div>
+                </div>
+                <!-- Seller Info -->
+                <div class="seller-info">
+                    <h3>Informasi Penjual</h3>
+                    <div class="seller-card">
+                        <div class="seller-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="seller-details">
+                            <h4>Ibu & Pak</h4>
+                            <p>Pengusaha Kuliner Desa</p>
+                        </div>
+                    </div>
+                    <div class="seller-contact">
+                        <a href="tel:+6285399075151" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <span>+62 85399075151</span>
+                        </a>
+                        <a href="https://wa.me/6285399075151" class="contact-link whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" id="lightboxImage">
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Desa Lembanna Bahari. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+    <script src="JS/umkm_general.js"></script>
+</body>
+</html>
