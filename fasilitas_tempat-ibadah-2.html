@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pusat Informasi - Fasilitas Desa</title>
+  <title>Tempat Ibadah - Fasilitas Desa</title>
   <link rel="stylesheet" href="CSS/fasilitas_detail.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -28,8 +28,8 @@
   </nav>
 
   <header class="hero">
-    <h1>Pusat Informasi</h1>
-    <p>Panduan dan bantuan untuk perjalanan Anda.</p>
+    <h1>Tempat Ibadah</h1>
+    <p>Fasilitas ibadah yang nyaman untuk semua.</p>
   </header>
 
   <main class="main">
@@ -37,12 +37,12 @@
   <h2>Galeri</h2>
   <div class="gallery"></div>
       <h2>Deskripsi</h2>
-      <p>Pusat Informasi menyediakan layanan konsultasi rute, rekomendasi tempat, dan bantuan selama berada di desa.</p>
+      <p>Tempat ibadah tersedia dan dapat diakses mudah oleh warga dan pengunjung.</p>
     </section>
 
     <aside class="aside">
       <div class="info-card">
-        <div class="badge">Buka: 08.00 - 17.00</div>
+        <div class="badge">Musolah villa</div>
       </div>
       <div class="info-card">
   <h3>Lokasi</h3>
@@ -50,28 +50,15 @@
   <iframe id="facilityMap" class="location-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127.123456789!2d120.4447975!3d-5.5202072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbc0a1009d360f9%3A0x14cc3836f78155c8!2sPantai%20Mandala%20Ria!5e0!3m2!1sid!2sid!4v1690000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div class="info-card">
-        <h3>Kontak</h3>
-        <div class="info-row"><i class="fas fa-phone"></i><span>+62 812-0000-0000</span></div>
-        <div class="info-row"><i class="fas fa-envelope"></i><span>info@lembannabahari.id</span></div>
+        <h3>Catatan</h3>
+        <div class="info-row"><i class="fas fa-check"></i><span>Area bersih dan tertata</span></div>
       </div>
       <a href="Layanan.html" class="back-btn" style="text-decoration:none;text-align:center;">&larr; Kembali ke Layanan</a>
     </aside>
   </main>
 
-  <footer class="footer">
-    &copy; 2024 Desa Lembanna Bahari
-  </footer>
-
+  <footer class="footer">&copy; 2024 Desa Lembanna Bahari</footer>
   <script src="JS/fasilitas_detail.js"></script>
-  <script>
-    // Auto-populate Google Maps iframe src from data-map-url for easy updating
-    document.addEventListener('DOMContentLoaded', function() {
-      var map = document.getElementById('facilityMap');
-      if(map && map.dataset.mapUrl) {
-        map.src = map.dataset.mapUrl;
-      }
-    });
-  </script>
 </body>
 </html>
 
