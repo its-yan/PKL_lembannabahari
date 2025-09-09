@@ -1,28 +1,28 @@
 const galleryImageMap = {
 	'fasilitas_kamar-mandi.html': [
-		'IMG/Kamar mandi umum terbaik di Mandala Ria Beach.jpg',
+		'asset3/IMG/Kamar mandi umum terbaik di Mandala Ria Beach.jpg',
 	],
 	'fasilitas_pusat-informasi.html': [
-		'IMG/Pusat_info/Pusat_informasi.jpeg',
+		'asset3/IMG/Pusat_info/Pusat_informasi.jpeg',
 	],
 	'fasilitas_pusat-informasi-2.html': [
-		'IMG/Pusat_info/Pusat_informasi_2.jpeg',
+		'asset3/IMG/Pusat_info/Pusat_informasi_2.jpeg',
 	],
 	'fasilitas_taman-camping.html': [
-		'IMG/Camping_ground/Camping Ground-1.jpeg',
-		'IMG/Camping_ground/Camping Ground-2.jpeg',
-		'IMG/Camping_ground/Camping Ground-3.jpeg',
-		'IMG/Camping_ground/Camping Ground-4.jpeg',
-		'IMG/Camping_ground/Camping Ground-5.jpeg',
-		'IMG/Camping_ground/Camping Ground-6.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-1.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-2.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-3.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-4.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-5.jpeg',
+		'asset3/IMG/Camping_ground/Camping Ground-6.jpeg',
 	],
 	'fasilitas_tempat-ibadah.html': [
-		'IMG/Musollah/Masjid.jpeg',
-        'IMG/Musollah/Masjid_1.jpeg',
+		'asset3/IMG/Musollah/Masjid.jpeg',
+        'asset3/IMG/Musollah/Masjid_1.jpeg',
 	],
 	'fasilitas_tempat-ibadah-2.html': [
-		'IMG/Musollah/Musolah_villa.jpeg',
-        'IMG/Musollah/Musolah_villa_2.jpeg',
+		'asset3/IMG/Musollah/Musolah_villa.jpeg',
+        'asset3/IMG/Musollah/Musolah_villa_2.jpeg',
 	],
 };
 
