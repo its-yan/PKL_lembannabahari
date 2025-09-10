@@ -136,6 +136,66 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Show/hide Bumdes PDF
+    const openBumdesPdfBtn = document.getElementById('openBumdesPdf');
+    const bumdesPdfWrapper = document.getElementById('bumdesPdfWrapper');
+    if (openBumdesPdfBtn && bumdesPdfWrapper) {
+        openBumdesPdfBtn.addEventListener('click', function() {
+            if (bumdesPdfWrapper.style.display === 'none' || bumdesPdfWrapper.style.display === '') {
+                bumdesPdfWrapper.style.display = 'block';
+                openBumdesPdfBtn.textContent = 'Tutup PDF';
+            } else {
+                bumdesPdfWrapper.style.display = 'none';
+                openBumdesPdfBtn.textContent = 'Lihat PDF';
+            }
+        });
+    }
+
+    // Show/hide Karang Taruna PDF
+    const openKarangTarunaPdfBtn = document.getElementById('openKarangTarunaPdf');
+    const karangTarunaPdfWrapper = document.getElementById('karangTarunaPdfWrapper');
+    if (openKarangTarunaPdfBtn && karangTarunaPdfWrapper) {
+        openKarangTarunaPdfBtn.addEventListener('click', function() {
+            if (karangTarunaPdfWrapper.style.display === 'none' || karangTarunaPdfWrapper.style.display === '') {
+                karangTarunaPdfWrapper.style.display = 'block';
+                openKarangTarunaPdfBtn.textContent = 'Tutup PDF';
+            } else {
+                karangTarunaPdfWrapper.style.display = 'none';
+                openKarangTarunaPdfBtn.textContent = 'Lihat PDF';
+            }
+        });
+    }
+
+    // Show/hide Pokdarwis PDF
+    const openPokdarwisPdfBtn = document.getElementById('openPokdarwisPdf');
+    const pokdarwisPdfWrapper = document.getElementById('pokdarwisPdfWrapper');
+    if (openPokdarwisPdfBtn && pokdarwisPdfWrapper) {
+        openPokdarwisPdfBtn.addEventListener('click', function() {
+            if (pokdarwisPdfWrapper.style.display === 'none' || pokdarwisPdfWrapper.style.display === '') {
+                pokdarwisPdfWrapper.style.display = 'block';
+                openPokdarwisPdfBtn.textContent = 'Tutup PDF';
+            } else {
+                pokdarwisPdfWrapper.style.display = 'none';
+                openPokdarwisPdfBtn.textContent = 'Lihat PDF';
+            }
+        });
+    }
+
+    // Show/hide Sardes PDF
+    const openSardesPdfBtn = document.getElementById('openSardesPdf');
+    const sardesPdfWrapper = document.getElementById('sardesPdfWrapper');
+    if (openSardesPdfBtn && sardesPdfWrapper) {
+        openSardesPdfBtn.addEventListener('click', function() {
+            if (sardesPdfWrapper.style.display === 'none' || sardesPdfWrapper.style.display === '') {
+                sardesPdfWrapper.style.display = 'block';
+                openSardesPdfBtn.textContent = 'Tutup PDF';
+            } else {
+                sardesPdfWrapper.style.display = 'none';
+                openSardesPdfBtn.textContent = 'Lihat PDF';
+            }
+        });
+    }
+
     // Pop-out image modal for Struktur Organisasi BPD
     const strukturImg = document.getElementById('bpdStrukturImg');
     const imgModal = document.getElementById('imgModal');
