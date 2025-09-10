@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisata</title>
+    <link rel="stylesheet" href="asset/css/index.css">
+    <link rel="stylesheet" href="asset/css/wisata.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="asset/css/profil-responsive.css">
+    <script src="asset/js/index.js"></script>
+    <script src="asset/js/wisata-objek.js"></script>
+    <script src="asset/js/atraksi.js"></script>
+    <script src="asset/js/akomodasi.js"></script>
+    <script src="asset/js/kuliner.js"></script>
+    <script src="asset/js/sewa.js"></script>
+    <script src="asset/js/global.js"></script>
+    <script src="https://kit.fontawesome.com/f80ebe0ec4.js" crossorigin="anonymous"></script>
+</head>
+<body id="wisata-page" onload="initWisata()">
+    <div class="nav-atas">
+        <div class="logo">
+            <img src="asset/img/profil-desa/logo.jpeg" alt="">
+            <div class="logo-text">
+                <p class="desa">Desa Lembanna</p>
+                <p class="kabupaten">Kabupaten Bulukumba</p>
+            </div>
+        </div>
+        <div class="main-nav">
+            <ul class="menu-list">
+                <li class="has-submenu">
+                <a href="beranda.html">Beranda</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="berandaSubmenu">
+                    <li><a href="#welcome">Selamat Datang</a></li>
+                    <li><a href="#news">Berita Terbaru</a></li>
+                    <li><a href="#announcements">Pengumuman</a></li>
+                    <li><a href="#gallery">Galeri Foto</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="profil.html">Profil Desa</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="profilSubmenu">
+                    <li><a href="#data-desa">Data Desa</a></li>
+                    <li><a href="#sejarah">Sejarah</a></li>
+                    <li><a href="#visi-misi">Visi Misi</a></li>
+                    <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="wisata.html">Wisata</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="wisataSubmenu">
+                    <li><a href="#objek-wisata">Objek Wisata</a></li>
+                    <li><a href="#paket-wisata">Paket Wisata</a></li>
+                    <li><a href="#akomodasi">Akomodasi</a></li>
+                    <li><a href="#kuliner">Kuliner Khas</a></li>
+                    <li><a href="#sewa-kendaraan">Sewa Kendaraan</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="layanan.html">Layanan</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="layananSubmenu">
+                    <li><a href="#pelayanan-publik">Pelayanan Publik</a></li>
+                    <li><a href="#administrasi">Administrasi</a></li>
+                    <li><a href="#surat-menyurat">Surat Menyurat</a></li>
+                    <li><a href="#fasilitas-umum">Fasilitas Umum</a></li>
+                </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <header class="profil-header">
+        <div class="header-bg">
+            <img src="asset/img/profil-desa/profil-bg.jpeg" alt="Desa Background" class="header-img">
+            <h1 class="profil-title">Wisata Andalan</h1>
+        </div>
+        <div class="profil-nav" id="profil-nav">
+            <ul>
+                
+            </ul>
+        </div>
+    </header>
+    <main class="profil-main">
+        <section class="nav-wisata-section">
+            <div class="menu-wisata">
+                <ul>
+                    <li><a href="#objekwisata"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" ><path d="M0 0h24v24H0z" fill="none"/><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>Objek Wisata</a></li>
+                    <li><a href="#atraksi-wisata"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 20 20" height="48px" viewBox="0 0 20 20" width="48px"><g><rect fill="none" height="20" width="20"/></g><g><g><path d="M16,10c0-0.57-0.08-1.12-0.23-1.64c0.51-0.46,0.65-1.24,0.29-1.86c-0.36-0.62-1.1-0.89-1.76-0.68 C14.04,5.03,13.06,4.46,11.96,4.19C11.32,3.51,10.72,3,10,3S8.68,3.51,8.53,4.19C7.44,4.46,6.46,5.04,5.7,5.82 C5.04,5.61,4.3,5.88,3.94,6.5C3.58,7.12,3.72,7.9,4.23,8.36C4.08,8.88,4,9.43,4,10c0,0.57,0.08,1.12,0.23,1.64 c-0.51,0.46-0.65,1.24-0.29,1.86c0.36,0.62,1.1,0.89,1.76,0.68C6,14.49,6.33,14.76,6.69,15l-0.87,2h1.09l0.66-1.52 c0.31,0.14,0.63,0.24,0.96,0.33C8.68,16.49,9.28,17,10,17s1.32-0.51,1.47-1.19c0.33-0.08,0.65-0.19,0.96-0.33L13.09,17h1.09 l-0.87-2c0.36-0.24,0.69-0.52,0.99-0.83c0.66,0.21,1.4-0.05,1.76-0.68c0.36-0.62,0.22-1.4-0.29-1.86C15.92,11.12,16,10.57,16,10z M11.32,14.8C11.07,14.33,10.57,14,10,14s-1.07,0.33-1.32,0.8c-0.24-0.07-0.48-0.14-0.71-0.24l1.2-2.75C9.42,11.93,9.7,12,10,12 s0.58-0.07,0.83-0.18l1.2,2.75C11.8,14.66,11.56,14.73,11.32,14.8z M11.63,11.15C11.86,10.83,12,10.43,12,10c0-1.1-0.9-2-2-2 s-2,0.9-2,2c0,0.43,0.14,0.83,0.37,1.15L7.1,14.06c-0.21-0.15-0.42-0.32-0.61-0.5C6.79,13.1,6.83,12.5,6.54,12 c-0.29-0.5-0.82-0.76-1.36-0.74C5.07,10.85,5,10.44,5,10s0.07-0.85,0.18-1.26C5.72,8.76,6.25,8.5,6.54,8 c0.29-0.5,0.25-1.1-0.04-1.56c0.6-0.59,1.35-1.01,2.19-1.24C8.93,5.67,9.43,6,10,6s1.07-0.33,1.32-0.8 c0.83,0.23,1.59,0.65,2.19,1.24C13.21,6.9,13.17,7.5,13.46,8c0.29,0.5,0.82,0.76,1.36,0.74C14.93,9.15,15,9.56,15,10 s-0.07,0.85-0.18,1.26c-0.54-0.02-1.07,0.24-1.36,0.74c-0.29,0.5-0.25,1.1,0.04,1.56c-0.19,0.18-0.39,0.35-0.61,0.5L11.63,11.15z"/></g></g></svg>Atraksi Wisata</a></li>
+                    <li><a href="#akomodasi"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Akomodasi</a></li>
+                    <li><a href="#kuliner"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>Kuliner</a></li>
+                    <li><a href="#sewa"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99 2.52 1.29 5.48 1.29 8 0 1.26.65 2.62.99 4 .99h2v2h-2zM3.95 19H4c1.6 0 3.02-.88 4-2 .98 1.12 2.4 2 4 2s3.02-.88 4-2c.98 1.12 2.4 2 4 2h.05l1.89-6.68c.08-.26.06-.54-.06-.78s-.34-.42-.6-.5L20 10.62V6c0-1.1-.9-2-2-2h-3V1H9v3H6c-1.1 0-2 .9-2 2v4.62l-1.29.42c-.26.08-.48.26-.6.5s-.15.52-.06.78L3.95 19zM6 6h12v3.97L12 8 6 9.97V6z"/></svg>Sewa</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="wisata-section" id="objekwisata">
+            <h2 class="objek-wisata-title">Objek Wisata</h2>
+            <div class="cards-container">
+                <div class="cards-grid">
+                    <div class="card" data-wisata-key="Mandala" role="button" tabindex="0" aria-label="Lihat detail Pantai Mandala">
+                        <div class="card-image">
+                            <img src="asset/img/wisata andalah/pantai-andalan-1.jpeg" alt="Pantai Mandala">
+                            <div class="card-overlay">
+                                <div class="card-title">Pantai Mandala</div>
+                                <div class="card-location">Lembanabahari, Bulukumba</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-wisata-key="GuaPassea" role="button" tabindex="0" aria-label="Lihat detail Gua Passea">
+                        <div class="card-image">
+                            <img src="asset/img/wisata andalah/gua-passea-1.webp" alt="Gua Passea">
+                            <div class="card-overlay">
+                                <div class="card-title">Gua Passea</div>
+                                <div class="card-location">Lembanabahari, Bulukumba</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-wisata-key="TebingMatto" role="button" tabindex="0" aria-label="Lihat detail Tebing Mattoanging">
+                        <div class="card-image">
+                            <img src="asset/img/wisata andalah/tebing-mattoanging.webp" alt="Tebing Mattoanging">
+                            <div class="card-overlay">
+                                <div class="card-title">Tebing Mattoanging</div>
+                                <div class="card-location">Lembanabahari, Bulukumba</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-wisata-key="TebingTongkarayya" role="button" tabindex="0" aria-label="Lihat detail Tebing Tongkarayya">
+                        <div class="card-image">
+                            <img src="asset/img/wisata andalah/batu-tongkarayya-1.jpg" alt="Tebing Tongkarayya">
+                            <div class="card-overlay">
+                                <div class="card-title">Tebing Tongkarayya</div>
+                                <div class="card-location">Lembanabahari, Bulukumba</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="atraksi-section" id="atraksi-wisata">
+            <h2 class="atraksi-title"><span>Atraksi Wisata</span></h2>
+            <div class="atraksi-search">
+                <input type="text" id="atraksiSearchInput" placeholder="Cari atraksi..." aria-label="Cari atraksi" />
+                <button type="button" id="atraksiSearchBtn">SEARCH</button>
+            </div>
+            <button class="atraksi-prev" aria-label="Sebelumnya">
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
+            </button>
+            <div class="atraksi-viewport">
+                <div class="atraksi-track">
+                    <!-- Konten atraksi akan dibangun oleh JS -->
+                </div>
+            </div>
+            <button class="atraksi-next" aria-label="Berikutnya">
+               <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="40px" fill="#133E87"><path d="M673-446.67H160v-66.67h513l-240-240L480-800l320 320-320 320-47-46.67 240-240Z"/></svg>
+            </button>
+        </section>
+
+        <!-- Akomodasi Section -->
+        <section class="akomodasi-section" id="akomodasi">
+          <div class="hero">
+            <h1>AKOMODASI</h1>
+            <p class="subtitle">Temukan tempat menginap terbaik untuk liburan impian Anda</p>
+          </div>
+
+          <div class="toolbar-akomodasi">
+            <button id="filterAllBtn" data-type="all"><i class="fas fa-filter"></i> Semua</button>
+            <select id="filterSelect">
+              <option value="all">Pilih Kategori</option>
+              <option value="villa">Villa</option>
+              <option value="guesthouse">Homestay</option>
+            </select>
+            <input type="text" id="akomodasiSearchInput" placeholder="🔍 Cari akomodasi...">
+            <button id="sortByPriceBtn"><i class="fas fa-sort-amount-down"></i> Urutkan Harga</button>
+          </div>
+
+          <div class="ak-viewport">
+              <button class="ak-prev" aria-label="Sebelumnya" id="akPrev" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28" fill="#F3F3E0"><path d="M560-240 320-480l240-240 40 40-200 200 200 200-40 40Z"/></svg>
+              </button>
+              <div class="ak-track" id="akTrack">
+                <!-- Konten akomodasi akan dibangun oleh JS -->
+              </div>
+              <button class="ak-next" aria-label="Berikutnya" id="akNext" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="http://www.w3.org/2000/svg" width="28" fill="#ffff"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
+              </button>
+            </div>
+            <div id="noResults" style="display:none; text-align:center; padding:20px; color:var(--primary-color);">Tidak ada hasil ditemukan.</div>
+        </section>
+        
+    </main>
+
+    <!-- Modal Wisata (Objek Wisata) -->
+    <div id="wisataModal" class="modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="close" id="wisataModalCloseBtn" type="button" aria-label="Tutup">&times;</button>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Gambar destinasi" loading="lazy">
+                <div class="modal-header-overlay">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <p class="modal-location" id="modalLocation"></p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-features" id="modalFeatures"></div>
+                <div class="atraksi-sejarah" id="modalSejarah"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Atraksi -->
+    <div id="atraksiDetailModal" class="modal atraksi-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="atraksiTitle" aria-describedby="atraksiDesc">
+      <div class="modal-content atraksi-modal-content fullscreen-modal redesigned-modal">
+        <button class="back-button" id="atraksiBackBtn" aria-label="Kembali ke daftar atraksi">
+          <i class="fa-solid fa-arrow-left"></i> Kembali
+        </button>
+        <span class="close" id="atraksiDetailModalCloseBtn" aria-label="Tutup">&times;</span>
+        <div class="modal-main">
+          <div class="modal-images">
+            <div class="main-image-container">
+              <img src="" alt="Main Atraksi Image" class="main-image" loading="lazy" />
+            </div>
+            <div class="image-grid">
+              <!-- Gambar thumbnail akan diisi oleh JS -->
+            </div>
+          </div>
+          <div class="modal-info">
+            <h2 class="modal-title" id="atraksiTitle"></h2>
+            <p class="modal-location" id="atraksiLocation"></p>
+            <div class="atraksi-info-modal">
+              <p class="modal-opening-hours"><strong>Jam buka:</strong> <span id="atraksiOpeningHours"></span></p>
+              <p class="modal-price"><strong>Mulai dari:</strong> <span id="atraksiPrice"></span></p>
+            </div>
+            <p class="modal-description" id="atraksiDesc"></p>
+             <div class="modal-facilities" id="atraksiFacilities">
+             <h3>Fasilitas</h3>
+             </div>
+            <div class="modal-actions">
+              <button class="btn-pesan-lg" id="atraksiPesanBtn">Pesan sekarang</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Akomodasi -->
+    <div class="modal" id="akomodasiDetailModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="akomodasiDetailModalCloseBtn">&times;</span>
+            <div id="akomodasiModalContent"></div>
+        </div>
+    </div>
+
+    <section class="kuliner-section" id="kuliner">
+        <h2 class="kuliner-title"><span>Kuliner</span></h2>
+        <div class="kuliner-search">
+            <input type="text" id="kulinerSearchInput" placeholder="Cari kuliner..." aria-label="Cari kuliner" />
+            <button type="button" id="kulinerSearchBtn">SEARCH</button>
+        </div>
+        <div class="kuliner-viewport">
+            <button class="kuliner-prev" aria-label="Sebelumnya" id="kulinerPrev">
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
+            </button>
+            <div class="kuliner-track" id="kulinerTrack">
+                <!-- Konten kuliner akan dibangun oleh JS -->
+            </div>
+            <button class="kuliner-next" aria-label="Berikutnya" id="kulinerNext">
+                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
+            </button>
+        </div>
+    </section>
+
+    <section class="sewa" id="sewa">
+        <h2 class="sewa-title"><span>Sewa</span></h2>
+        <div class="sewa-search">
+            <input type="text" id="sewaSearchInput" placeholder="Cari sewa..." aria-label="Cari sewa" />
+            <button type="button" id="sewaSearchBtn">SEARCH</button>
+        </div>
+        <div class="sewa-viewport">
+            <button class="sewa-prev" aria-label="Sebelumnya" id="sewaPrev">
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
+            </button>
+            <div class="sewa-track" id="sewaTrack">
+                <!-- Konten sewa akan dibangun oleh JS -->
+            </div>
+            <button class="sewa-next" aria-label="Berikutnya" id="sewaNext">
+                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
+            </button>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <div class="footer-title">Profil Desa</div>
+                <ul>
+                    <li>Data Desa</li>
+                    <li>Sejarah Desa</li>
+                    <li>Visi-Misi Desa</li>
+                    <li>Struktur Organisasi</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-title">Wisata</div>
+                <ul>
+                    <li>Objek Wisata</li>
+                    <li>Atraksi Wisata</li>
+                    <li>Akomodasi</li>
+                    <li>Kuliner</li>
+                    <li>Sewa Mobil Motor</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-title">Informasi</div>
+                <ul>
+                    <li>Agenda</li>
+                    <li>Berita</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-title">Layanan</div>
+                <ul>
+                    <li>Fasilitas Umum</li>
+                    <li>Produk</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            Copyright
+        </div>
+    </footer>
+
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-nav-container">
+            <a href="#" class="mobile-nav-item" data-page="beranda">
+                <div class="mobile-nav-icon">
+                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-200v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H600q-17 0-28.5-11.5T560-160v-200q0-17-11.5-28.5T520-400h-80q-17 0-28.5 11.5T400-360v200q0 17-11.5 28.5T360-120H240q-33 0-56.5-23.5T160-200Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Beranda</span>
+            </a>
+
+            <a href="profil.html" class="mobile-nav-item" data-page="profil">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Profil Desa</span>
+            </a>
+
+            <a href="wisata.html" class="mobile-nav-item active" data-page="wisata">
+                <div class="mobile-nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-80q-106 0-173-33.5T240-200q0-19 8.5-35t25.5-30q14-10 30.5-8t26.5 16q10 14 7.5 30.5T322-200q13 16 60 28t98 12q51 0 98-12t60-28q-14-10-16.5-26.5T629-257q10-14 26.5-16t30.5 8q17 14 25.5 30t8.5 35q0 53-67 86.5T480-80Zm0-139q-12 0-24-4t-22-12q-118-94-176-183.5T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 86-58 175.5T526-235q-10 8-22 12t-24 4Zm0-301q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Wisata</span>
+            </a>
+
+            <a href="Layanan.html" class="mobile-nav-item" data-page="layanan">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Layanan</span>
+            </a>
+
+            <a href="#" class="mobile-nav-item" data-page="berita">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Berita <br>Informasi</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>
