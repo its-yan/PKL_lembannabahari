@@ -1,0 +1,40 @@
+:root {
+  --mobile-padding: 16px;
+  --mobile-gap: 12px;
+  --tablet-padding: 24px;
+  --tablet-gap: 16px;
+  --menu-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --bounce-timing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --smooth-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --fontXXL: 4rem;
+    --fontXL: 2.3rem;
+    --fontL: 2rem;
+    --fontB: 1.5rem;
+    --fontMM: 1.2rem;
+    --fontM: 1rem;
+    --fontS: 0.85rem;
+    --primary-color: #133E87;
+    --secondary-color: #608BC1;
+    --third-color: #CBDCEB;
+    --light-color: #F3F3E0;
+    --white-color: #FFFFFF;
+    --primary-transparent: #133e8782;
+}
+
+@media (max-width: 600px) {
+    .menu-wisata svg{
+        width: 40px;
+        height: 40px;
+
+    }
+    .menu-wisata ul {
+        flex-wrap: wrap;
+        gap: 2px;
+    }
+    .menu-wisata li {
+        width: 30%;
+    }
+    .menu-wisata li:nth-child(n+6) {
+        width: 45%;
+    }
+}

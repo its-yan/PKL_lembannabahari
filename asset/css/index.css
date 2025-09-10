@@ -558,6 +558,43 @@ html, body {
     gap: 12px;
 }
 
+.struktur-menu-karang-taruna {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 24px;
+    padding: 8px 0;
+}
+
+.struktur-tab-d {
+    background: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 28px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    outline-offset: 4px;
+}
+
+.struktur-tab-d:hover,
+.struktur-tab-d:focus {
+    background: var(--primary-color);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    transform: scale(1.05);
+    outline: none;
+}
+
+.struktur-tab-d:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
 .struktur-org-img-wrapper {
     display: flex;
     justify-content: center;
@@ -745,4 +782,7 @@ html, body {
 
 .img-modal-close:hover {
     color: #7296cb;
+}
+.mobile-bottom-nav{
+    display: none;
 }
