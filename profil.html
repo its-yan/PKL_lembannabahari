@@ -5,15 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Desa</title>
     <link rel="stylesheet" href="asset/css/index.css">
+    <link rel="stylesheet" href="asset/css/profil-responsive.css">
     <script src="asset/js/index.js"></script>
+    <script src="asset/js/profil.js"></script>
+    <script src="asset/js/responsive.js"></script>
 </head>
 <body>
-    <div class="main-nav">
-        <ul>
-            <li><a href="">Beranda</a></li>
-            <li><a href="">Wisata</a></li>
-            <li><a href="">Layanan</a></li>
-        </ul>
+    <div class="nav-atas">
+        <div class="logo">
+            <img src="asset/img/profil-desa/logo.jpeg" alt="">
+            <div class="logo-text">
+                <p class="desa">Desa Wisata Andalan</p>
+                <p class="kabupaten">Kabupaten Bulukumba</p>
+            </div>
+        </div>
+        <div class="hamburger" id="hamburgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="main-nav" id="mainNav">
+            <ul class="menu-list">
+                <li class="has-submenu beranda">
+                <a href="beranda.html">Beranda</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="berandaSubmenu">
+                    <li><a href="#welcome">Selamat Datang</a></li>
+                    <li><a href="#news">Berita Terbaru</a></li>
+                    <li><a href="#announcements">Pengumuman</a></li>
+                    <li><a href="#gallery">Galeri Foto</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="profil.html" id="profilMenuToggle">Profil Desa</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="profilSubmenu">
+                    <li><a href="#data-desa">Data Desa</a></li>
+                    <li><a href="#sejarah">Sejarah</a></li>
+                    <li><a href="#visi-misi">Visi Misi</a></li>
+                    <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="wisata.html">Wisata</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="wisataSubmenu">
+                    <li><a href="#objek-wisata">Objek Wisata</a></li>
+                    <li><a href="#paket-wisata">Paket Wisata</a></li>
+                    <li><a href="#akomodasi">Akomodasi</a></li>
+                    <li><a href="#kuliner">Kuliner Khas</a></li>
+                    <li><a href="#sewa-kendaraan">Sewa Kendaraan</a></li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                <a href="layanan.html">Layanan</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
+                <ul class="submenu" id="layananSubmenu">
+                    <li><a href="#pelayanan-publik">Pelayanan Publik</a></li>
+                    <li><a href="#administrasi">Administrasi</a></li>
+                    <li><a href="#surat-menyurat">Surat Menyurat</a></li>
+                    <li><a href="#fasilitas-umum">Fasilitas Umum</a></li>
+                </ul>
+                </li>
+            </ul>
+            <ul class="mobile-menu-list">
+                <li><a href="#data-desa">Data Desa</a></li>
+                <li><a href="#sejarah">Sejarah</a></li>
+                <li><a href="#visi-misi">Visi Misi</a></li>
+                <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+            </ul>
+        </nav>
     </div>
     <header class="profil-header">
         <div class="header-bg">
@@ -34,66 +91,87 @@
             <h2 class="data-desa-title">DATA DESA WISATA ANDALAN</h2>
             <div class="data-desa-grid">
                 <div class="data-desa-col">
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
+                    <div class="data-desa-box">
+                        <strong>Kode Desa:</strong>
+                    </div>
+                    <div class="data-desa-box">
+                        <strong>Tahun Pembentukan Desa Wisata:</strong>
+                    </div>
+                    <div class="data-desa-box">
+                        <strong>Luas Wilayah:</strong>
+                    </div>
+                    <div class="data-desa-box">
+                        <strong>Kategori:</strong>
+                    </div>
+                    <div class="data-desa-box">
+                        <strong>Penghargaan:</strong>
+                    </div>
                 </div>
                 <div class="data-desa-col">
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
-                    <div class="data-desa-box"></div>
+                    <div class="data-desa-box">
+                        <p>73032032008</p>
+                    </div>
+                    <div class="data-desa-box">
+                        <p>2019</p>
+                    </div>
+                    <div class="data-desa-box">
+                        <p>1200 Ha</p>
+                    </div>
+                    <div class="data-desa-box">
+                        <p>Maju</p>
+                    </div>
+                    <div class="data-desa-box">
+                        <ul>
+                        <li>ADWI 2022 - 300 besar</li>    
+                        <li>ADWI 2023 - 75 besar</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="sejarah-section">
-            <div class="sejarah-header" id="sejarah">
+        <section class="sejarah-section" id="sejarah">
+            <div class="sejarah-header">
                 <h2>SEJARAH</h2>
             </div>
             <div class="timeline">
                 <div class="timeline-row left">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-left">
                         <span class="timeline-year">TAHUN 1978</span>
                         <p>ANDI ANISI PADULUNGI terpilih sebagai Kepala Desa Ara sebagai hasil pemilihan langsung dari warga Desa Ara.</p>
                     </div>
                 </div>
                 <div class="timeline-row right">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-right">
                         <span class="timeline-year">TAHUN 1980</span>
                         <p>MUHAEMIN A. KARIM, BA menjadi Kepala Desa Ara menggantikan istrinya ANDI ANISI PADULUNGI karena Andi Anisi Padulungi mengundurkan diri.</p>
                     </div>
                 </div>
                 <div class="timeline-row left">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-left">
                         <span class="timeline-year">TAHUN 1984</span>
                         <p>DAENG PASAU berhasil menjadi Kepala Desa Ara menggantikan MUHAEMIN A. KARIM, BA berdasarkan hasil Pemilihan langsung dari warga Desa.</p>
                     </div>
                 </div>
                 <div class="timeline-row right">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-right">
                         <span class="timeline-year">TAHUN 1987</span>
                         <p>H. MUSTARI kembali terpilih sebagai Kepala Desa Ara menggantikan Kakak kandungnya DAENG PASAU sebagai hasil pilihan warga Desa.</p>
                     </div>
                 </div>
                 <div class="timeline-row left">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-left">
                         <span class="timeline-year">TAHUN 1989</span>
                         <p>Desa Ara membangun sarana Jalan Desa terutama yang menuju Pantai Mandala Ria yang hingga saat ini jalan tersebut sudah dapat dilalui kendaraan 4 (empat) roda dimana Mandala Ria adalah merupakan obyek wisata pantai di Kabupaten Bulukumba.</p>
                     </div>
                 </div>
                 <div class="timeline-row right">
-                    <div class="timeline-content">
+                    <div class="timeline-content c-right">
                         <span class="timeline-year">TAHUN 1992</span>
                         <p>H. MUSTARI meninggal dunia dan untuk penjabat sementara ditunjuklah ABDUL FATTAH AT (Kaur Pemerintahan) guna menjalankan tugas Pemerintaha sehari – hari sambil menunggu pejabat yang definitif.</p>
                     </div>
                 </div>
-                <div class="timeline-row left">
-                    <div class="timeline-content">
+                <div class="timeline-row left ">
+                    <div class="timeline-content c-left">
                         <span class="timeline-year">TAHUN 1993</span>
                         <p>Desa Ara dimekarkan sehingga lahirlah Desa Lembanna dengan Pejabat Kepala Desa Pertama ialah ARDI BASO DG MANAHANG, dimana Desa Lembanna ini terdiri atas 3 (tiga) Dusun yakni Dusun Pompantu, Dusun Lembanna dan Dusun Bakung-Bakung.</p>
                     </div>
@@ -102,18 +180,14 @@
         </section>
         <section class="visi-misi-section" id="visi-misi">
             <div class="visi-title">VISI</div>
-            <div class="visi-desc">Terwujudnya Masyarakat Desa Lembanna yang Sejahtera dan Religius</div>
+            <div class="visi-desc">Menjadikan Desa Wisata Andalan sebagai desa wisata yang maju, mandiri, berkelas dunia, bermartabat, berkelanjutan guna meningkatkan kesejahteraan masyarakat.</div>
             <div class="misi-title">MISI</div>
             <ol class="misi-list">
-                <li>Menjadikan terjadinya persatuan dan sarana publik yang memadai</li>
-                <li>Meningkatkan sarana dan prasarana di segala bidang</li>
-                <li>Meningkatkan kualitas sumber daya manusia</li>
-                <li>Meningkatkan kesejahteraan masyarakat dan ekonomi masyarakat</li>
-                <li>Meningkatkan pelayanan publik dan tata kelola pemerintahan yang baik</li>
-                <li>Meningkatkan pengelolaan lingkungan hidup dan pelestarian budaya</li>
-                <li>Meningkatkan sinergitas Pemerintah Desa, lembaga desa dan masyarakat</li>
-                <li>Melaksanakan administrasi Pemerintahan Desa yang efektif dan efisien</li>
-                <li>Mewujudkan tata pemerintahan yang aman, tertib dan damai</li>
+                <li>Meningkatkan kemampuan Sumber Daya Manusia dan inovasi sumber daya alam yang dimiliki.</li>
+                <li>Meningkatkan berbagai inovasi dan kreativitas menuju digitalisasi wisata.</li>
+                <li>Menjaga kelestarian lingkungan alam dan budaya guna berpartisipasi dalam pengembangan wisata berkelas dunia.</li>
+                <li>Menjalin kerjasama dengan berbagai stakeholder pariwisata</li>
+                <li>Konsisten melakukan promosi potensi Desa Wisata Andalan menuju digitalisasi desa wisata.</li>
             </ol>
         </section>
         <section class="struktur-section" id="struktur-organisasi">
@@ -121,7 +195,7 @@
             <div class="struktur-menu">
                 <button class="struktur-tab active" data-org="org1">BPD</button>
                 <button class="struktur-tab" data-org="org2">Pemerintah Desa</button>
-                <button class="struktur-tab" data-org="org3">Bundes</button>
+                <button class="struktur-tab" data-org="org3">Bumdes</button>
                 <button class="struktur-tab" data-org="org4">Karang Taruna</button>
                 <button class="struktur-tab" data-org="org5">Pokdarwis</button>
                 <button class="struktur-tab" data-org="org6">Sardes</button>
@@ -165,34 +239,64 @@
                 </div>
                 <div class="struktur-org" id="org2" style="display:none;">
                     <div class="struktur-org-title">Pemerintah Desa</div>
-                    <ul class="struktur-list">
-                        <li>Ketua: Ahmad Fauzi</li>
-                        <li>Sekretaris: Dewi Lestari</li>
-                        <li>Bendahara: Bambang</li>
-                        <li>Anggota: Sari, Tono</li>
+                    <ul class="struktur-list struktur-list-img">
+                        <h3>PENGAWAS</h3>
+                        <li>Ketua: H. Syahran, ST</li>
+                        <li>Wakil Ketua: H. Muh. Sayuti</li>
+                        <li>Sekretaris: Zakariah</li>
+                        <h3>PELAKSANA OPERASIONAL</h3>
+                        <li>Direktur: Arsandi, S.Pd</li>
+                        <li>Sekretaris: Nurjayadi, SE</li>
+                        <li>Bendahara: Israwi, S.Pd</li>
                     </ul>
                 </div>
                 <div class="struktur-org" id="org3" style="display:none;">
-                    <div class="struktur-org-title">Bundes</div>
-                    <ul class="struktur-list">
-                        <li>Ketua: Ibu Sulastri</li>
-                        <li>Sekretaris: Ibu Rahayu</li>
-                        <li>Bendahara: Ibu Fitri</li>
-                        <li>Anggota: Ibu Wati, Ibu Nani</li>
+                    <div class="struktur-org-title">Bumdes</div>
+                    <ul class="struktur-list struktur-list-img">
+                        <h3>PENGAWAS</h3>
+                        <li>Ketua: H. Syahran, ST</li>
+                        <li>Wakil Ketua: H. Muh. Sayuti</li>
+                        <li>Sekretaris: Zakariah</li>
+                        <h3>PELAKSANA OPERASIONAL</h3>
+                        <li>Direktur: Arsandi, S.Pd</li>
+                        <li>Sekretaris: Nurjayadi, SE</li>
+                        <li>Bendahara: Israwi, S.Pd</li>
                     </ul>
                 </div>
                 <div class="struktur-org" id="org4" style="display:none;">
                     <div class="struktur-org-title">Karang Taruna</div>
-                    <ul class="struktur-list">
-                        <li>Ketua: Rudi Hartono</li>
-                        <li>Sekretaris: Dimas</li>
-                        <li>Bendahara: Sinta</li>
-                        <li>Anggota: Eko, Putri</li>
+                    <ul class="struktur-list struktur-list-img">
+                        <li>Ketua: Erwin Eka Saputra, S.Pd, M.Pd</li>
+                        <li>Wakil Ketua: Adrian Adiwinata, S.Pd</li>
+                        <li>Sekretaris: Arif Gunandar</li>
+                        <li>Wakil Sekretaris: Agus Ilham, S.Pd</li>
+                        <li>Bendahara:lis Hartawati, S.Kep, Ns</li>
+                        <li>Wakil Bendahara: Riska Damayanti, SE</li>
                     </ul>
+                    <div class="struktur-menu-karang-taruna">
+                        <button class="struktur-tab-d" data-org="d-1">Departemen Pendidikan dan Pelatihan</button>
+                        <button class="struktur-tab-d" data-org="d-2">Departemen Seni</button>
+                        <button class="struktur-tab-d" data-org="d-3">Departemen Budaya</button>
+                        <button class="struktur-tab-d" data-org="d-4">Departemen Pemuda dan Olahraga</button>
+                        <button class="struktur-tab-d" data-org="d-5">Departemen Perempuan dan Anak</button>
+                        <button class="struktur-tab-d" data-org="d-6">Departemen Pariwisata dan Kebudayaan</button>
+                        <button class="struktur-tab-d" data-org="d-7">Departemen Kelautan dan Perikanan</button>
+                        <button class="struktur-tab-d" data-org="d-8">Departemen Koperasi UMKM</button>
+                        <button class="struktur-tab-d" data-org="d-9">Departemen Kehutanan dan Pertanian</button>
+                        <button class="struktur-tab-d" data-org="d-10">Departemen Perindustrian dan Perdagangan</button>
+                        <button class="struktur-tab-d" data-org="d-11">Departemen Informasi dan Komunikasi</button>
+                        <button class="struktur-tab-d" data-org="d-12">Departemen Ekonomi</button>
+                        <button class="struktur-tab-d" data-org="d-13">Departemen Keuangan</button>
+                        <button class="struktur-tab-d" data-org="d-14">Departemen Keagamaan</button>
+                        <button class="struktur-tab-d" data-org="d-15">Departemen Kesehatan</button>
+                        <button class="struktur-tab-d" data-org="d-16">Departemen Pelayanan Kesejahteraan Sosial</button>
+                        <button class="struktur-tab-d" data-org="d-17">Departemen Hukum dan HAM</button>
+                    </div>
+                    
                 </div>
                 <div class="struktur-org" id="org5" style="display:none;">
                     <div class="struktur-org-title">Pokdarwis</div>
-                    <ul class="struktur-list">
+                    <ul class="struktur-list struktur-list-img">
                         <li>Ketua: Pak Slamet</li>
                         <li>Sekretaris: Pak Agus</li>
                         <li>Anggota: Pak Yanto, Pak Udin</li>
@@ -200,7 +304,8 @@
                 </div>
                 <div class="struktur-org" id="org6" style="display:none;">
                     <div class="struktur-org-title">Sardes</div>
-                    <ul class="struktur-list">
+        
+                    <ul class="struktur-list struktur-list-img">
                         <li>RT 01: Pak Budi</li>
                         <li>RT 02: Pak Joko</li>
                         <li>RW 01: Pak Hasan</li>
@@ -254,5 +359,51 @@
         <span class="img-modal-close" id="imgModalClose">&times;</span>
         <img class="img-modal-content" id="imgModalContent" src="" alt="Struktur Organisasi BPD">
     </div>
+
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-nav-container">
+            <a href="#" class="mobile-nav-item" data-page="beranda">
+                <div class="mobile-nav-icon">
+                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M160-200v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H600q-17 0-28.5-11.5T560-160v-200q0-17-11.5-28.5T520-400h-80q-17 0-28.5 11.5T400-360v200q0 17-11.5 28.5T360-120H240q-33 0-56.5-23.5T160-200Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Beranda</span>
+            </a>
+
+            <a href="profil.html" class="mobile-nav-item active" data-page="profil">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Profil Desa</span>
+            </a>
+
+            <a href="wisata.html" class="mobile-nav-item" data-page="wisata">
+                <div class="mobile-nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-80q-106 0-173-33.5T240-200q0-19 8.5-35t25.5-30q14-10 30.5-8t26.5 16q10 14 7.5 30.5T322-200q13 16 60 28t98 12q51 0 98-12t60-28q-14-10-16.5-26.5T629-257q10-14 26.5-16t30.5 8q17 14 25.5 30t8.5 35q0 53-67 86.5T480-80Zm0-139q-12 0-24-4t-22-12q-118-94-176-183.5T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 86-58 175.5T526-235q-10 8-22 12t-24 4Zm0-301q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Wisata</span>
+            </a>
+
+            <a href="Layanan.html" class="mobile-nav-item" data-page="layanan">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Layanan</span>
+            </a>
+
+            <a href="#" class="mobile-nav-item" data-page="berita">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Berita <br>Informasi</span>
+            </a>
+        </div>
+    </nav>
 </body>
+</html>
 </html>
