@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengkel Souvenir Kapal - UMKM Desa Lembanna Bahari</title>
+    <link rel="stylesheet" href="asset3/CSS/umkm_general.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Beranda</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Wisata</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Informasi</span>
+                </a>
+                <a href="Layanan.html" class="nav-link active">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>Layanan</span>
+                </a>
+                <a href="profil.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <a href="Layanan.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Kembali ke Layanan</span>
+    </a>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Product Gallery -->
+            <section class="product-gallery">
+                <div class="gallery-main">
+                    <img src="asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg" alt="Souvenir Kapal Kayu" id="mainImage" class="main-image">
+                    <div class="gallery-overlay">
+                        <button class="zoom-btn" id="zoomBtn">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb-item active" data-src="asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg">
+                        <img src="asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg" alt="Kapal Mini 1">
+                    </div>
+                    <div class="thumb-item" data-src="asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg">
+                        <img src="asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg" alt="Kapal Mini 2">
+                    </div>
+                    <div class="thumb-item" data-src="asset3/IMG/Bengkel/Miniatur Pinisi.png">
+                        <img src="asset3/IMG/Bengkel/Miniatur Pinisi.png" alt="Kapal Mini 3">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Info -->
+            <section class="product-info">
+                <div class="product-header">
+                    <div class="product-badge">
+                        <i class="fas fa-ship"></i>
+                        <span>Souvenir Kapal</span>
+                    </div>
+                    <h1 class="product-title">Bengkel Souvenir Kapal Kayu</h1>
+                </div>
+
+                <div class="product-description">
+                    <h2>Deskripsi Produk</h2>
+                    <p>Souvenir kapal kayu handmade dengan detail rapih dan finishing halus. Cocok sebagai hadiah, pajangan meja, atau oleh-oleh khas bahari dari Desa Lembanna.</p>
+                    
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <i class="fas fa-tree"></i>
+                            <span>Kayu berkualitas</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Finishing halus</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-hand-sparkles"></i>
+                            <span>Buatan tangan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-gift"></i>
+                            <span>Cocok untuk hadiah</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-ingredients">
+                    <h3>Bahan</h3>
+                    <div class="ingredients-list">
+                        <span class="ingredient-tag">Kayu Pilihan</span>
+                        <span class="ingredient-tag">Lem Kayu</span>
+                        <span class="ingredient-tag">Cat Kayu</span>
+                        <span class="ingredient-tag">Vernish</span>
+                        <span class="ingredient-tag">Benang Tali</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aside Panel -->
+            <aside class="aside-panel">
+                <div class="order-card">
+                    <div class="price-section">
+                        <div class="current-price">
+                            <span class="price-label">Harga</span>
+                            <span class="price-amount">Rp 75.000</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-secondary" id="contactBtn">
+                            <i class="fas fa-phone"></i>
+                            <span>Hubungi Pengrajin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <div class="qr-container">
+                        <img src="asset3/IMG/BARCODE DESA WISATA ANDALAN JADESTA.png" alt="QR Code" class="qr-code">
+                        <p class="qr-desc">Scan QR untuk detail produk, harga tiap ukuran, dan pemesanan.</p>
+                    </div>
+                </div>
+
+                <!-- Seller Info -->
+                <div class="seller-info">
+                    <h3>Informasi Pengrajin</h3>
+                    <div class="seller-card">
+                        <div class="seller-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="seller-details">
+                            <h4>Pak</h4>
+                            <p>Pengrajin Kapal Kayu Mini</p>
+                        </div>
+                    </div>
+                    <div class="seller-contact">
+                        <a href="tel:+6285399075151" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <span>+62 85399075151</span>
+                        </a>
+                        <a href="https://wa.me/6285399075151" class="contact-link whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" id="lightboxImage">
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Desa Lembanna Bahari. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="asset3/JS/umkm_general.js"></script>
+</body>
+
+</html>
