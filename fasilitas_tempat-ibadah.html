@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempat Ibadah - Fasilitas Desa</title>
+  <link rel="stylesheet" href="asset3/CSS/fasilitas_detail.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-menu">
+        <a href="#" class="nav-link"><i class="fas fa-map-marked-alt"></i><span>Wisata</span></a>
+        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i><span>Informasi</span></a>
+        <a href="Layanan.html" class="nav-link active"><i class="fas fa-concierge-bell"></i><span>Layanan</span></a>
+        <a href="profil.html" class="nav-link"><i class="fas fa-user"></i><span>Profil</span></a>
+      </div>
+      <div class="search-container">
+        <div class="search-bar">
+          <input id="searchInput" type="text" placeholder="Cari fasilitas...">
+          <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+      <div class="nav-toggle" id="navToggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Tempat Ibadah</h1>
+    <p>Fasilitas ibadah yang nyaman untuk semua.</p>
+  </header>
+
+  <main class="main">
+    <section class="section">
+  <h2>Galeri</h2>
+  <div class="gallery"></div>
+      <h2>Deskripsi</h2>
+      <p>Tempat ibadah tersedia dan dapat diakses mudah oleh warga dan pengunjung.</p>
+    </section>
+
+    <aside class="aside">
+      <div class="info-card">
+        <div class="badge">Mesjid Mandala</div>
+      </div>
+      <div class="info-card">
+  <h3>Lokasi</h3>
+  <!-- Update the src below to change the map location easily! -->
+  <iframe id="facilityMap" class="location-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127.123456789!2d120.4447975!3d-5.5202072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbc0a1009d360f9%3A0x14cc3836f78155c8!2sPantai%20Mandala%20Ria!5e0!3m2!1sid!2sid!4v1690000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="info-card">
+        <h3>Catatan</h3>
+        <div class="info-row"><i class="fas fa-check"></i><span>Area bersih dan tertata</span></div>
+      </div>
+      <a href="Layanan.html" class="back-btn" style="text-decoration:none;text-align:center;">&larr; Kembali ke Layanan</a>
+    </aside>
+  </main>
+
+  <footer class="footer">&copy; 2024 Desa Lembanna Bahari</footer>
+  <script src="asset3/JS/fasilitas_detail.js"></script>
+</body>
+</html>
+
+
