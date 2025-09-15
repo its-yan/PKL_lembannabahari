@@ -6,80 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layanan - Website Desa Lembanna Bahari</title>
     <link rel="stylesheet" href="asset3/CSS/Layanan.css">
-
-    <link rel="stylesheet" href="CSS/Global.css">
-    <link rel="stylesheet" href="CSS/Responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="JS/Global.js"></script>
 </head>
 
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span>Beranda</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <span>Wisata</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Informasi</span>
-                </a>
-                <a href="Layanan.html" class="nav-link active">
-                    <i class="fas fa-concierge-bell"></i>
-                    <span>Layanan</span>
-                </a>
-                <a href="profil.html" class="nav-link">
-                    <i class="fas fa-user"></i>
-                    <span>Profil</span>
-                </a>
+<body class="layanan-page">
+    <header class="header">
+        <div class="header-overlay">
+            <div class="header-top">
+                <div class="header-brand">
+                    <img class="header-logo" src="asset2/WhatsApp Image 2025-08-20 at 18.48.36.png"
+                        alt="Logo Desa Lembanna" width="32" height="32" loading="lazy" decoding="async">
+                    <div class="header-title">
+                        <p class="desa-name">Desa Lembanna</p>
+                        <p class="kabupaten-name">Kabupaten Bulukumba</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="search-container">
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Cari layanan, produk, atau fasilitas...">
-                    <button type="button" id="searchBtn">
-                        <i class="fas fa-search"></i>
+            <div class="main-title">
+                <h1><span>LAYANAN DESA</span></h1>
+                <p class="hero-tagline">Temukan berbagai layanan dan fasilitas terbaik untuk kebutuhan Anda</p>
+                <div class="header-buttons">
+                    <button class="header-btn active" data-tab="produk">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Produk UMKM</span>
+                    </button>
+                    <button class="header-btn" data-tab="fasilitas">
+                        <i class="fas fa-building"></i>
+                        <span>Fasilitas Umum</span>
                     </button>
                 </div>
-                <div class="search-results" id="searchResults"></div>
             </div>
 
-            <div class="nav-toggle" id="navToggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <span></span>
+                </div>
+                <p class="scroll-text">Jelajahi Lebih Lanjut</p>
             </div>
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="header-title">LAYANAN DESA</h1>
-            <p class="header-subtitle">Temukan berbagai layanan dan fasilitas terbaik untuk kebutuhan Anda</p>
-
-            <div class="header-buttons">
-                <button class="header-btn active" data-tab="produk">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>Produk UMKM</span>
-                </button>
-                <button class="header-btn" data-tab="fasilitas">
-                    <i class="fas fa-building"></i>
-                    <span>Fasilitas Umum</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="header-scroll">
-            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
+    <div class="tape"></div>
+    <div class="nav-wrapper">
+        <nav>
+            <div class="logo">
+                <a href="#">Desa Wisata Andalan</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#wisata">WISATA</a></li>
+                <li><a href="informasi.html">INFORMASI</a></li>
+                <li><a href="#layanan">LAYANAN</a></li>
+                <li><a href="#profil-desa">PROFIL DESA</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -106,10 +91,30 @@
                         </div>
                         <div class="product-content">
                             <h3 class="product-title">Keripik pisang</h3>
+                            <p class="product-description">Kuliner modern desa yang lezat dan autentik. Nikmati
+                                cita rasa asli yang diwariskan turun-temurun.</p>
+                            <div class="product-meta">
+                                <span class="product-price">Mulai Rp 8.000</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="product-card featured">
+                    <div class="product-badge">Terlaris</div>
+                    <a href="umkm_snack.html" class="product-link">
+                        <div class="product-image">
+                            <img src="asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.49 PM.jpeg"
+                                alt="Makanan Tradisional">
+                            <div class="product-overlay">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Keripik pisang</h3>
                             <p class="product-description">Kuliner tradisional desa yang lezat dan autentik. Nikmati
                                 cita rasa asli yang diwariskan turun-temurun.</p>
                             <div class="product-meta">
-                                <span class="product-price">Mulai Rp 15.000</span>
+                                <span class="product-price">Mulai Rp 5.000</span>
                             </div>
                         </div>
                     </a>
@@ -131,25 +136,6 @@
                                 warga desa.</p>
                             <div class="product-meta">
                                 <span class="product-price">Mulai Rp 50.000</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="product-card">
-                    <a href="umkm_menu.html" class="product-link">
-                        <div class="product-image">
-                            <img src="asset3/IMG/UMKM Andalan/jajanan kue bahan baku lokal.jpg" alt="Kuliner Lokal">
-                            <div class="product-overlay">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3 class="product-title">Kuliner Lokal</h3>
-                            <p class="product-description">Cicipi jajanan tradisional, snack, dan minuman khas Desa
-                                Lembanna yang dibuat dari bahan lokal segar.</p>
-                            <div class="product-meta">
-                                <span class="product-price">Mulai Rp 5.000</span>
                             </div>
                         </div>
                     </a>
@@ -273,49 +259,33 @@
         <img src="asset3/IMG/Hiasan/Snack.png" alt="Kue" class="hiasan-kue">
         <img src="asset3/IMG/Hiasan/Layanan_bubble2.png" alt="Bubble2" class="hiasan-bubble2">
 
-            <div class="cta-waves">
-                    <!-- Wave Layer 1 - Front wave -->
-                    <div class="cta-wave wave-layer-1">
-                            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                                    <path
-                                            d="M0,120V46.29c47.79-22.2,103.59-32.17,158-28,70.36,5.37,136.33,33.31,206.8,37.5C438.64,87.57,512.34,66.33,583,47.95c69.27-18,138.3-24.88,209.4-13.08,36.15,6,69.85,17.84,104.45,29.34C989.49,95,1113,134.29,1200,67.53V120Z"
-                                            fill="currentColor"></path>
-                            </svg>
-                    </div>
-                    <!-- Wave Layer 2 - Middle wave -->
-                    <div class="cta-wave wave-layer-2">
-                            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                                    <path
-                                            d="M0,120V104.19c13-21.11,27.64-41.05,47.69-56.24,51.72-39.22,117.31-39.49,176.89-20.07,31.15,10.15,60.09,26.07,89.67,39.8,40.92,19,84.73,46,130.83,49.67,36.26,2.85,70.9-9.42,98.6-31.56,31.77-25.39,62.32-62,103.63-73,40.44-10.79,81.35,6.69,119.13,24.28s75.16,39,116.92,43.05c59.73,5.85,113.28-22.88,168.9-38.84,30.2-8.66,59-6.17,87.09,7.5,22.43,10.89,48,26.93,60.65,49.24V120Z"
-                                            opacity="0.7" fill="currentColor"></path>
-                            </svg>
-                    </div>
-                    <!-- Wave Layer 3 - Back wave -->
-                    <div class="cta-wave wave-layer-3">
-                            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                                    <path
-                                            d="M0,120V114.37c149.93-53.37,314.09-65.69,475.83-36.94,43,7.64,84.23,20.12,127.61,26.46,59,8.63,112.48-12.24,165.56-35.4C827.93,42.78,886,24.76,951.2,30c86.53,7,172.46,45.71,248.8,84.81V120Z"
-                                            opacity="0.4" fill="currentColor"></path>
-                            </svg>
-                    </div>
+        <div class="cta-waves">
+            <!-- Wave Layer 1 - Front wave -->
+            <div class="cta-wave wave-layer-1">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M0,120V46.29c47.79-22.2,103.59-32.17,158-28,70.36,5.37,136.33,33.31,206.8,37.5C438.64,87.57,512.34,66.33,583,47.95c69.27-18,138.3-24.88,209.4-13.08,36.15,6,69.85,17.84,104.45,29.34C989.49,95,1113,134.29,1200,67.53V120Z"
+                        fill="currentColor"></path>
+                </svg>
             </div>
-            <script>
-            // Show waves when in view (optional: fade in on scroll)
-            document.addEventListener('DOMContentLoaded', function() {
-                var waves = document.querySelector('.cta-waves');
-                if (!waves) return;
-                function showWaves() {
-                    var rect = waves.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        waves.classList.remove('hide');
-                    } else {
-                        waves.classList.add('hide');
-                    }
-                }
-                showWaves();
-                window.addEventListener('scroll', showWaves);
-            });
-            </script>
+            <!-- Wave Layer 2 - Middle wave -->
+            <div class="cta-wave wave-layer-2">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M0,120V104.19c13-21.11,27.64-41.05,47.69-56.24,51.72-39.22,117.31-39.49,176.89-20.07,31.15,10.15,60.09,26.07,89.67,39.8,40.92,19,84.73,46,130.83,49.67,36.26,2.85,70.9-9.42,98.6-31.56,31.77-25.39,62.32-62,103.63-73,40.44-10.79,81.35,6.69,119.13,24.28s75.16,39,116.92,43.05c59.73,5.85,113.28-22.88,168.9-38.84,30.2-8.66,59-6.17,87.09,7.5,22.43,10.89,48,26.93,60.65,49.24V120Z"
+                        opacity="0.7" fill="currentColor"></path>
+                </svg>
+            </div>
+            <!-- Wave Layer 3 - Back wave -->
+            <div class="cta-wave wave-layer-3">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M0,120V114.37c149.93-53.37,314.09-65.69,475.83-36.94,43,7.64,84.23,20.12,127.61,26.46,59,8.63,112.48-12.24,165.56-35.4C827.93,42.78,886,24.76,951.2,30c86.53,7,172.46,45.71,248.8,84.81V120Z"
+                        opacity="0.4" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+
     </div>
 
     <div id="carousel-modal" class="modal">
@@ -374,8 +344,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="asset2/js/script.js"></script>
     <script src="asset3/JS/Layanan.js"></script>
 </body>
 
