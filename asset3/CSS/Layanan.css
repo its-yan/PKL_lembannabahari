@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Playfair Display SC';
-    scroll-behavior: smooth;
-    scroll-margin-top: 5rem;
-}
-
 :root {
     --fontXL: 4rem;
     --fontL: 2rem;
@@ -22,7 +13,7 @@
     --light-color: #F3F3E0;
     --white-color: #FFFFFF;
     --primary-transparent: #133e8782;
-    --accent-color: #22a32a;
+    --accent-color: #608BC1;
     --gradient-primary: linear-gradient(135deg, #133E87 0%, #608BC1 100%);
     --gradient-secondary: linear-gradient(135deg, #608BC1 0%, #CBDCEB 100%);
     --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -30,196 +21,38 @@
     --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-body {
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent 60% !important;
+    box-sizing: border-box;
+}
+.layanan-page * {    box-sizing: border-box;
+    font-family: 'Playfair Display SC';
+    scroll-behavior: smooth;
+    scroll-margin-top: 5rem;
+}
+
+.layanan-page body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--primary-color);
-    background: var(--light-color);
-}
-
-/* Navigation Bar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(19, 62, 135, 0.1);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    max-width: 1000px;
-    margin: 0 auto;
-    box-shadow: var(--shadow-light);
-    border-radius: 12px 12px 12px 12px;
-}
-
-.nav-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-}
-
-.nav-logo a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.nav-logo i {
-    font-size: 1.5rem;
-    color: var(--accent-color);
-}
-
-.nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.nav-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    text-decoration: none;
-    color: var(--primary-color);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem;
-    border-radius: 8px;
-}
-
-.nav-link i {
-    font-size: 1.2rem;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--accent-color);
-    background: rgba(34, 163, 42, 0.1);
-    transform: translateY(-2px);
-}
-
-.search-container {
-    position: relative;
-    flex: 1;
-    max-width: 400px;
-    margin: 0 2rem;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    background: var(--white-color);
-    border: 2px solid rgba(19, 62, 135, 0.1);
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-light);
-}
-
-.search-bar:focus-within {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(34, 163, 42, 0.1);
-}
-
-.search-bar input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 0.9rem;
-    color: var(--primary-color);
-}
-
-.search-bar input::placeholder {
-    color: rgba(19, 62, 135, 0.6);
-}
-
-.search-bar button {
-    background: var(--accent-color);
-    color: var(--white-color);
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.search-bar button:hover {
-    background: #1a8a22;
-    transform: scale(1.1);
-}
-
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--white-color);
-    border-radius: 12px;
-    box-shadow: var(--shadow-medium);
-    margin-top: 0.5rem;
-    max-height: 300px;
-    overflow-y: auto;
-    display: none;
-    z-index: 1001;
-}
-
-.search-results.active {
-    display: block;
-}
-
-.search-result-item {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(19, 62, 135, 0.1);
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.search-result-item:hover {
-    background: rgba(34, 163, 42, 0.1);
-}
-
-.search-result-item:last-child {
-    border-bottom: none;
-}
-
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.nav-toggle .bar {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-color);
-    transition: all 0.3s ease;
+    background: transparent !important;
 }
 
 /* Header Section */
-.header {
+.layanan-page .header {
     background: linear-gradient(var(--primary-color), rgba(0, 0, 0, 0.2)), url('../IMG/Layanan.jpeg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -227,37 +60,82 @@ body {
     color: var(--white-color);
     text-align: center;
     position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
+.layanan-page .header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(19,62,135,0.85) 0%, 
+        rgba(96,139,193,0.75) 50%, 
+        rgba(19,62,135,0.85) 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+    z-index: 3;
+    animation: overlayPulse 25s ease-in-out infinite alternate;
+}
 .header-content {
-    max-width: 800px;
-    padding: 0 2rem;
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 40px;
+    align-items: center;
+    justify-items: stretch;
+    padding: 30px 0 30px 0;
+    min-height: 70vh;
+}
+.header-top {
+    width: 100%;
 }
 
 .header-title {
-    font-size: var(--fontXL);
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    width: fit-content;
+}
+
+.header-title .desa-name {
+    font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 1rem;
-    font-family: 'Times New Roman', serif;
-    color: var(--white-color);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 3;
 }
 
-.header-subtitle {
-    font-size: var(--fontMM);
-    margin-bottom: 3rem;
-    opacity: 0.9;
-    line-height: 1.6;
+.header-title .kabupaten-name {
+    font-size: 0.9em;
+    margin: 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    opacity: 0.95;
+    position: relative;
+    z-index: 3;
 }
 
-.header-buttons {
+.layanan-page .header-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.header-btn {
+.layanan-page .header-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -273,24 +151,24 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.header-btn:hover,
-.header-btn.active {
+.layanan-page .header-btn:hover,
+.layanan-page .header-btn.active {
     background: var(--accent-color);
     border-color: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(34, 163, 42, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 13, 255, 0.3);
 }
 
-.header-scroll {
+.layanan-page .header-scroll {
     position: absolute;
     bottom: 2rem;
-    left: 50%;
+    
     transform: translateX(-50%);
     animation: bounce 2s infinite;
     cursor: pointer;
 }
 
-.header-scroll i {
+.layanan-page .header-scroll i {
     font-size: 2rem;
     color: var(--white-color);
 }
@@ -300,35 +178,430 @@ body {
         transform: translateX(-50%) translateY(0);
     }
     40% {
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(-50%) translateY(-5px);
     }
     60% {
         transform: translateX(-50%) translateY(-5px);
     }
 }
-
-/* Main Content */
-.main-content {
-    background: var(--light-color);
+.layanan-page .header-top {
+    padding: 8px 0 0 0;
+}
+.layanan-page .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+}
+.layanan-page .header-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.2px solid rgba(255,255,255,0.85);
+    box-shadow: 0 1.5px 4px rgba(0,0,0,0.13);
+    object-fit: cover;
+    backdrop-filter: blur(1px);
+}
+.layanan-page .header-title {
+    line-height: 1.1;
+}
+.layanan-page .main-title h1 {
+    font-size: 3.2rem;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.5rem;
+}
+.layanan-page .hero-tagline {
+    font-size: 1.1rem;
+    font-weight: 500;
+    max-width: 90%;
+    background: rgba(255,255,255,0.18);
+    border-radius: 1.2rem;
+    padding: 0.5em 1.5em;
+    box-shadow: 0 1px 6px rgba(19,62,135,0.07);
+    backdrop-filter: blur(2px);
+    letter-spacing: 0.03em;
+}
+.layanan-page .header-buttons {
+    width: auto;
+    height: auto;
+    margin-top: 2.5rem;
 }
 
-.content-section {
+
+.layanan-page .hero-tagline {
+    margin-top: 14px;
+    font-size: 1.08em;
+    color: var(--white-color);
+    letter-spacing: 0.3px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.16);
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: inline-block;
+}
+
+.layanan-page .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 4;
+}
+.layanan-page .scroll-arrow { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.layanan-page .scroll-arrow span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--white-color);
+    border-right: 2px solid var(--white-color);
+    transform: rotate(45deg);
+    animation: scrollBounce 2s infinite;
+}
+.layanan-page .scroll-arrow span:nth-child(2) { animation-delay: 0.15s; }
+.layanan-page .scroll-arrow span:nth-child(3) { animation-delay: 0.3s; }
+.layanan-page .scroll-text { color: var(--white-color); font-size: 0.9em; font-weight: 500; margin: 0; opacity: 0.9; }
+
+@keyframes scrollBounce {
+    0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.7; }
+    40% { transform: rotate(45deg) translateY(-10px); opacity: 1; }
+    60% { transform: rotate(45deg) translateY(-5px); opacity: 0.9; }
+}
+
+.layanan-page .nav-wrapper { text-align: center; padding: 0; margin-top: 0; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 200; transition: top 0.35s ease, transform 0.35s ease, opacity 0.25s ease, box-shadow 0.3s ease; will-change: transform, opacity; width: min(1200px, 90%); }
+.layanan-page .nav-wrapper.nav-sticky { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 300; }
+.layanan-page .nav-wrapper::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 100%; width: 100%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); border-radius: 25px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.1); z-index: 0; opacity: 0.95; transition: opacity 0.3s ease, transform 0.3s ease; }
+.layanan-page nav { display: flex; justify-content: space-around; align-items: center; width: 100%; margin: 0 auto; background: transparent; border-radius: 25px; padding: 12px 30px; box-shadow: none; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: visible; z-index: 1; }
+.layanan-page nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="navGrainL" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23navGrainL)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+.layanan-page .logo a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.layanan-page .logo a:hover {
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
+}
+.layanan-page .nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    list-style: none;
+}
+.layanan-page .nav-links a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.layanan-page .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+.layanan-page .nav-links a:hover::before { opacity: 1; }
+.layanan-page .nav-links a:hover {
+    color: var(--white-color);
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+.layanan-page .nav-links a.active {
+    color: var(--white-color);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.layanan-page .hamburger { display: none; cursor: pointer; }
+.layanan-page .hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) { 
+    .layanan-page .nav-links { 
+        position: absolute; 
+        right: 0px; 
+        height: 80vh; 
+        top: calc(100% + 8px); 
+        background: linear-gradient(180deg, var(--primary-color), var(--secondary-color)); 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        width: 80vw; 
+        max-width: 420px; 
+        gap: 6px; 
+        padding-top: 16px; 
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-in-out; 
+        border-radius: 16px; 
+        box-shadow: 0 12px 32px rgba(0,0,0,0.25); 
+    }
+
+    /* Show hamburger on mobile */
+    .layanan-page .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+}
+
+.layanan-page .toggle .line:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+.layanan-page .toggle .line:nth-child(2) { opacity: 0; }
+.layanan-page .toggle .line:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+.layanan-page .nav-wrapper {
+    padding: 0;
+    max-width: 100vw;
+    text-align: center;
+    margin-top: 0;
+    top: 80%;
+    left: 50%;
+    z-index: 200;
+    transition: top 0.35s ease, transform 0.35s ease, background-color 0.3s;
+    transform: translate(-50%, -50%);
+}
+.layanan-page .nav-wrapper.nav-sticky {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+}
+.layanan-page .nav-wrapper.nav-sticky nav {
+    width: 90%;
+    border-radius: 25px;
+    padding: 12px 30px;
+    box-shadow: none;
+    background: transparent;
+}
+/* Midpoint position (used when scrolling up) */
+.layanan-page .nav-wrapper.nav-mid {
+    transition: top 360ms cubic-bezier(.2,.9,.28,1), transform 360ms cubic-bezier(.2,.9,.28,1), box-shadow 360ms ease;
+}
+.nav-spacer {
+    height: 0px;
+    width: 100%;
+    opacity: 0;
+}
+.nav-spacer.visible {
+    opacity: 1;
+}
+
+@keyframes navMidPulse {
+    0% { transform: translateY(-6px); opacity: 0.95; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+.layanan-page .nav-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: min(1200px, calc(100vw - 32px));
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+.layanan-page nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="navGrainL" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23navGrainL)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+.layanan-page .logo a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.layanan-page .logo a:hover {
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
+}
+.layanan-page .nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    list-style: none;
+}
+.layanan-page .nav-links a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.layanan-page .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+.layanan-page .nav-links a:hover::before { opacity: 1; }
+.layanan-page .nav-links a:hover {
+    color: var(--white-color);
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+.layanan-page .nav-links a.active {
+    color: var(--white-color);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.layanan-page .hamburger { display: none; cursor: pointer; }
+.layanan-page .hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile menu open state - slide nav into view */
+.layanan-page .nav-links.nav-active {
+    transform: translateX(0);
+}
+
+/* Overlay for mobile menu (created by JS) */
+#navOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 180;
+}
+
+#navOverlay.show {
+    display: block;
+    opacity: 1;
+}
+
+
+/* Only one set of navbar rules below this line. All duplicates above are removed. */
+/* Main Content */
+.layanan-page .main-content {
+    background: var(--light-color);
+    width: 100vw;
+}
+
+.layanan-page .main-title {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 24px 28px;
+    margin-top: 7vh;
+    border-radius: 20px;
+    border: none;
+    box-shadow: none;
+    max-width: 900px;
+    max-height: 300px;
+}
+
+.layanan-page .main-title h1 {
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: 3px;
+    position: relative;
+    z-index: 4;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 25%, #e6f3ff 50%, #ffffff 75%, #f0f8ff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.layanan-page .main-title h1 span {
+    font-weight: 500;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff;
+}
+.layanan-page .content-section {
     display: none;
     padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.content-section.active {
+.layanan-page .content-section.active {
     display: block;
 }
 
-.section-header {
+.layanan-page .section-header {
     text-align: center;
     margin-bottom: 3rem;
 }
 
-.section-title {
+.layanan-page .section-title {
     font-size: var(--fontL);
     color: var(--primary-color);
     margin-bottom: 1rem;
@@ -339,11 +612,11 @@ body {
     gap: 0.5rem;
 }
 
-.section-title i {
+.layanan-page .section-title i {
     color: var(--accent-color);
 }
 
-.section-description {
+.layanan-page .section-description {
     font-size: var(--fontMM);
     color: var(--secondary-color);
     max-width: 600px;
@@ -351,14 +624,14 @@ body {
 }
 
 /* Products Grid */
-.products-grid {
+.layanan-page .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.product-card {
+.layanan-page .product-card {
     background: var(--white-color);
     border-radius: 20px;
     overflow: hidden;
@@ -367,16 +640,16 @@ body {
     position: relative;
 }
 
-.product-card:hover {
+.layanan-page .product-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-heavy);
 }
 
-.product-card.featured {
+.layanan-page .product-card.featured {
     border: 3px solid var(--accent-color);
 }
 
-.product-badge {
+.layanan-page .product-badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -389,27 +662,27 @@ body {
     z-index: 2;
 }
 
-.product-link {
+.layanan-page .product-link {
     text-decoration: none;
     color: inherit;
     display: block;
     height: 100%;
 }
 
-.product-image {
+.layanan-page .product-image {
     position: relative;
     height: 250px;
     overflow: hidden;
 }
 
-.product-image img {
+.layanan-page .product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.product-overlay {
+.layanan-page .product-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -423,52 +696,52 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.product-overlay i {
+.layanan-page .product-overlay i {
     color: var(--white-color);
     font-size: 2rem;
 }
 
-.product-card:hover .product-image img {
+.layanan-page .product-card:hover .product-image img {
     transform: scale(1.1);
 }
 
-.product-card:hover .product-overlay {
+.layanan-page .product-card:hover .product-overlay {
     opacity: 1;
 }
 
-.product-content {
+.layanan-page .product-content {
     padding: 1.5rem;
 }
 
-.product-title {
+.layanan-page .product-title {
     font-size: var(--fontB);
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
-.product-description {
+.layanan-page .product-description {
     color: var(--secondary-color);
     font-size: var(--fontM);
     line-height: 1.6;
     margin-bottom: 1rem;
 }
 
-.product-meta {
+.layanan-page .product-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 /* Facilities Grid */
-.facilities-grid {
+.layanan-page .facilities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.facility-card {
+.layanan-page .facility-card {
     background: var(--white-color);
     border-radius: 20px;
     overflow: hidden;
@@ -476,32 +749,32 @@ body {
     transition: all 0.3s ease;
 }
 
-.facility-card:hover {
+.layanan-page .facility-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-heavy);
 }
 
-.facility-link {
+.layanan-page .facility-link {
     text-decoration: none;
     color: inherit;
     display: block;
     height: 100%;
 }
 
-.facility-image {
+.layanan-page .facility-image {
     position: relative;
     height: 200px;
     overflow: hidden;
 }
 
-.facility-image img {
+.layanan-page .facility-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.facility-overlay {
+.layanan-page .facility-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -515,31 +788,31 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.facility-overlay i {
+.layanan-page .facility-overlay i {
     color: var(--white-color);
     font-size: 2rem;
 }
 
-.facility-card:hover .facility-image img {
+.layanan-page .facility-card:hover .facility-image img {
     transform: scale(1.1);
 }
 
-.facility-card:hover .facility-overlay {
+.layanan-page .facility-card:hover .facility-overlay {
     opacity: 1;
 }
 
-.facility-content {
+.layanan-page .facility-content {
     padding: 1.5rem;
 }
 
-.facility-title {
+.layanan-page .facility-title {
     font-size: var(--fontB);
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
-.facility-description {
+.layanan-page .facility-description {
     color: var(--secondary-color);
     font-size: var(--fontM);
     line-height: 1.6;
@@ -547,21 +820,21 @@ body {
 }
 
 /* Decorative Section */
-.hiasan {
+.layanan-page .hiasan {
     position: relative;
-    width: 100%;
+    width: 100vw;
     min-height: 300px;
     overflow: visible;
     margin-bottom: -60px;
     z-index: 50;
 }
-.hiasan img {
+.layanan-page .hiasan img {
     pointer-events: none;
     user-select: none;
     transition: transform 0.3s ease;
 }
 
-.hiasan-ship {
+.layanan-page .hiasan-ship {
     position: absolute;
     left: 39%;
     top: 90px;
@@ -571,32 +844,32 @@ body {
     animation: floatShip 6s ease-in-out infinite;
 }
 
-.hiasan-kue {
+.layanan-page .hiasan-kue {
     position: absolute;
     right: 54%;
     bottom: -23%;
     width: 100px;
     z-index: 54;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.10));
-    animation: floatKue 7s ease-in-out infinite;
+    animation: floatKue 6s ease-in-out infinite;
 }
 
-.hiasan-bubble2 {
+.layanan-page .hiasan-bubble2 {
     position: absolute;
     left: 38%;
     bottom: -19%;
     width: 120px;
     z-index: 30;
     opacity: 0.95;
-    animation: floatBubble2 7s ease-in-out infinite;
+    animation: floatBubble2 6s ease-in-out infinite;
 }
 /* Wave Container */
-.cta-waves {
+.layanan-page .cta-waves {
     position: absolute;
     bottom: -1px;
     left: 0;
     width: 100%;
-    height: 120px;
+    height: 130px;
     overflow: hidden;
     line-height: 0;
     opacity: 1;
@@ -606,12 +879,12 @@ body {
     z-index: 5;
 }
 
-.cta-waves.hide {
+.layanan-page .cta-waves.hide {
     opacity: 0;
 }
 
 /* Individual Wave Layers */
-.cta-wave {
+.layanan-page .cta-wave {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -621,7 +894,7 @@ body {
     will-change: transform;
 }
 
-.cta-wave svg {
+.layanan-page .cta-wave svg {
     position: relative;
     display: block;
     width: 200%; /* exact 2x for seamless -50% loop */
@@ -634,36 +907,58 @@ body {
 }
 
 /* Wave Layer 1 - Front layer (darkest, fastest) */
-.wave-layer-1 {
+.layanan-page .wave-layer-1 {
     z-index: 30;
 }
-
-
-.wave-layer-1 svg {
-    color: #0a2a5c;
-    animation: waveMove1 12s linear infinite;
-}
-
-/* Wave Layer 2 - Middle layer (medium opacity, medium speed) */
-.wave-layer-2 {
+.layanan-page .wave-layer-2 {
     z-index: 20;
 }
-
-
-.wave-layer-2 svg {
-    color: #133E87;
-    animation: waveMove2 18s linear infinite reverse;
-}
-
-/* Wave Layer 3 - Back layer (lightest, slowest) */
-.wave-layer-3 {
+.layanan-page .wave-layer-3 {
     z-index: 10;
 }
+.layanan-page .wave-layer-1 svg {
+    color: #0a2a5c;
+    animation: waveMove1 8s linear infinite;
+    width: 200vw; /* Double the viewport width for smooth looping */
+    min-width: 200%;
+    max-width: none;
+    display: block;
+    border: none;
+    outline: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    margin-left: -1px; /* Prevent visible seams */
+}
 
+.layanan-page .wave-layer-2 svg {
+    color: #133E87;
+    animation: waveMove2 16s linear infinite reverse;
+    width: 200vw;
+    min-width: 200%;
+    max-width: none;
+    display: block;
+    border: none;
+    outline: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    margin-left: -1px;
+}
 
-.wave-layer-3 svg {
+.layanan-page .wave-layer-3 svg {
     color: #608BC1;
-    animation: waveMove3 28s linear infinite;
+    animation: waveMove3 24s linear infinite;
+    width: 200vw;
+    min-width: 200%;
+    max-width: none;
+    display: block;
+    border: none;
+    outline: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    margin-left: -1px;
 }
 
 
@@ -682,18 +977,104 @@ body {
 
 /* Accessibility: Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-    .wave-layer-1 svg,
-    .wave-layer-2 svg,
-    .wave-layer-3 svg {
+    .layanan-page .wave-layer-1 svg,
+    .layanan-page .wave-layer-2 svg,
+    .layanan-page .wave-layer-3 svg {
         animation: none;
-        transform: translateX(-16.666%) translateZ(0); /* Static position showing partial wave */
+        transform: translateX(66%) translateZ(0); /* Static position showing partial wave */
     }
     
-    .cta-waves {
+    .layanan-page .cta-waves {
         animation: none;
     }
 }
 /* Footer */
+.layanan-page .site-footer {
+    background: linear-gradient(135deg, #103478 0%, var(--primary-color) 50%, #0a2555 100%);
+    color: #E8E8E8;
+    width: 100vw;
+    font-family: 'Cormorant Garamond', serif;
+    padding: 60px 0 30px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.layanan-page .site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerGrainLayanan" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerGrainLayanan)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+.layanan-page .footer-column a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(90deg, var(--third-color) 0%, var(--white-color) 100%);
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.layanan-page .footer-column a:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.layanan-page .footer-column a:hover::after {
+    width: 100%;
+}
+
+.layanan-page .footer-bottom {
+    text-align: right;
+    font-size: 1rem;
+    color: #E8E8E8;
+    opacity: 0.8;
+    padding-top: 30px;
+    border-top: 1px solid rgba(232, 232, 232, 0.15);
+}
+@keyframes floatShip {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+}
+
+@keyframes floatKue {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(-2deg);
+    }
+}
+
+@keyframes floatBubble2 {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.08);
+    }
+}
+
+@keyframes floatBubble1 {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-12px) scale(1.08);
+    }
+}
+
 .site-footer {
     background: linear-gradient(135deg, #103478 0%, var(--primary-color) 50%, #0a2555 100%);
     color: #E8E8E8;
@@ -788,111 +1169,22 @@ body {
     padding-top: 30px;
     border-top: 1px solid rgba(232, 232, 232, 0.15);
 }
-@keyframes floatShip {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
     }
-    50% {
-        transform: translateY(-10px) rotate(1deg);
-    }
-}
-
-@keyframes floatKue {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-8px) rotate(-2deg);
-    }
-}
-
-@keyframes floatBubble2 {
-    0%, 100% {
-        transform: translateY(0px) scale(1);
-    }
-    50% {
-        transform: translateY(-15px) scale(1.08);
-    }
-}
-
-@keyframes floatBubble1 {
-    0%, 100% {
-        transform: translateY(0px) scale(1);
-    }
-    50% {
-        transform: translateY(-12px) scale(1.08);
-    }
-}
-
-/* Footer */
-.main-footer {
-    background: var(--primary-color);
-    color: var(--white-color);
-    font-family: 'Playfair Display SC', serif;
-    padding: 0;
-    margin-top: 0;
-}
-
-.footer-columns {
-    display: flex;
-    justify-content: flex-start;
-    gap: 80px;
-    max-width: 90vw;
-    margin: 0 auto;
-    padding: 32px 0 0 0;
-}
-
-.footer-col {
-    min-width: 180px;
-}
-
-.footer-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--white-color);
-}
-
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-col ul li {
-    font-size: var(--fontM);
-    font-family: 'Karma', serif;
-    color: var(--white-color);
-    margin-bottom: 6px;
-    font-weight: 400;
-}
-
-.footer-col ul li a {
-    color: var(--white-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: var(--accent-color);
-}
-
-.footer-copyright {
-    text-align: right;
-    font-size: 1.2rem;
-    font-family: 'Karma', serif;
-    color: var(--white-color);
-    opacity: 0.9;
-    padding: 0 32px 18px 0;
 }
 
 /* Responsive Design */
 @media (max-width: 400px) {
-    .nav-container {
+    .layanan-page .nav-container {
         padding: 0 1rem;
     }
 
-    .nav-menu {
+    .layanan-page .nav-menu {
         position: fixed;
         top: 70px;
         left: -100%;
@@ -907,108 +1199,113 @@ body {
         box-shadow: var(--shadow-medium);
     }
 
-    .nav-menu.active {
+    .layanan-page .nav-menu.active {
         left: 0;
     }
 
-    .nav-link {
+    .layanan-page .nav-link {
         flex-direction: row;
         gap: 0.5rem;
         font-size: 1rem;
         padding: 1rem;
     }
 
-    .search-container {
+    .layanan-page .search-container {
         margin: 0 1rem;
         max-width: 300px;
     }
-
-    .nav-toggle {
+    .layanan-page .search-bar {
+        font-size: 0.85rem;
+        width: 120%;
         display: flex;
     }
 
-    .header-title {
+    .layanan-page .nav-toggle {
+        display: flex;
+    }
+
+    .layanan-page .header-title {
         font-size: 2.5rem;
     }
 
-    .header-buttons {
+    .layanan-page .header-buttons {
         flex-direction: column;
         align-items: center;
     }
 
-    .header-btn {
+    .layanan-page .header-btn {
         width: 100%;
         max-width: 300px;
         justify-content: center;
     }
 
-    .products-grid,
-    .facilities-grid {
+    .layanan-page .products-grid,
+    .layanan-page .facilities-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
-    .content-section {
+    .layanan-page .content-section {
         padding: 2rem 1rem;
     }
 
-    .footer-columns {
+    .layanan-page .footer-columns {
         flex-direction: column;
         gap: 2rem;
         padding: 2rem 1rem 0;
     }
 
-    .footer-copyright {
+    .layanan-page .footer-copyright {
         text-align: center;
         padding: 1rem;
     }
 
-    .hiasan-ship {
-        left: 25%;
-        top: 20%;
+    .layanan-page .hiasan-ship {
+        left: 35%;
+        top: 50%;
         width: 140px;
     }
 
-    .hiasan-kue {
-        right: 52%;
+    .layanan-page .hiasan-kue {
+        left: 25%;
         width: 90px;
     }
 
-    .hiasan-bubble2 {
+    .layanan-page .hiasan-bubble2 {
         left: 25%;
         width: 100px;
     }
 
-    .hiasan-bubble1 {
+    .layanan-page .hiasan-bubble1 {
         left: 50%;
         width: 80px;
     }
 }
 
 @media (max-width: 480px) {
-    .nav-container {
+    .layanan-page .nav-container {
         padding: 0 0.5rem;
     }
 
-    .search-container {
+    .layanan-page .search-container {
         margin: 0 0.5rem;
         max-width: 250px;
     }
 
-    .header-title {
+    .layanan-page .header-title {
         font-size: 2rem;
     }
 
-    .header-subtitle {
+    .layanan-page .header-subtitle {
         font-size: var(--fontM);
     }
 
-    .section-title {
+    .layanan-page .section-title {
         font-size: var(--fontB);
     }
 
-    .product-card,
-    .facility-card {
+    .layanan-page .product-card,
+    .layanan-page .facility-card {
         margin: 0 0.5rem;
     }
 }
