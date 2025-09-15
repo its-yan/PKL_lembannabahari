@@ -56,6 +56,12 @@
     padding: 0 8px;
   }
   
+  .profil-nav.floating {
+    width: auto;
+    max-width: 92vw;
+    top: 12px !important;
+  }
+  
   .profil-nav ul {
     gap: var(--tablet-gap);
   }
@@ -161,6 +167,13 @@
     .mobile-menu-list {
       display: flex !important;
     }
+  }
+
+  /* Keep floating nav compact on small tablets if shown */
+  .profil-nav.floating {
+    width: auto;
+    max-width: 94vw;
+    top: 8px !important;
   }
   
   /* Data Desa Section */
