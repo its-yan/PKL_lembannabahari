@@ -12,6 +12,11 @@ function formatPrice(num, unit) {
 function closeModal() {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
+        // Clear any slideshow interval stored on modal dataset
+        if (modal && modal.dataset && modal.dataset.slideInterval) {
+            try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+            delete modal.dataset.slideInterval;
+        }
         modal.style.display = 'none';
     });
     document.body.style.overflow = 'auto'; // Kembalikan scroll body
@@ -32,6 +37,10 @@ document.addEventListener('click', function(e) {
 document.addEventListener('click', function(e) {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
+        // ignore if click came from inside modal content (stopPropagation should prevent this, but double-guard)
+        if (e.target && (e.target.closest && e.target.closest('.modal .modal-content'))) return;
+        // ignore immediately after open to avoid open->close race
+        if (modal.dataset && (modal.dataset.openGuard === '1' || (modal.dataset.justOpenedAt && (Date.now() - Number(modal.dataset.justOpenedAt) < 800)))) return;
         if (e.target === modal && modal.style.display === 'block') {
             closeModal();
         }
@@ -177,103 +186,7 @@ window.atraksiData = [
     }
 ];
 
-// Data dummy untuk akomodasi (sebaiknya dimuat dari JSON)
-window.akomodasiData = [
-    {
-        name: 'Hotel Mandala', type: 'hotel', price: 750000, location: 'Lembanabahari, Bulukumba', rating: 4,
-        images: ['asset/img/wisata andalah/pantai-andalan-1.jpeg', 'asset/img/wisata andalah/pantai-mandala-2.jpeg', 'asset/img/wisata andalah/pantai-mandala-3.jpeg'],
-        desc: 'Penginapan nyaman dekat pantai Mandala dengan fasilitas lengkap, kolam renang, dan restoran.',
-        stayInfo: '1 malam, 2 dewasa'
-    },
-    {
-        name: 'Villa Batu Tongkaraya', type: 'villa', price: 1500000, location: 'Lembanabahari, Bulukumba', rating: 5,
-        images: ['asset/img/wisata andalah/tebing-mattoanging.webp', 'asset/img/wisata andalah/tebing-mattoanging-2.webp'],
-        desc: 'Villa mewah dengan pemandangan laut indah, udara sejuk, dan fasilitas private pool.',
-        stayInfo: '1 malam, 2 dewasa'
-    },
-    {
-        name: 'Guest House Ria', type: 'guesthouse', price: 300000, location: 'Lembanabahari, Bulukumba', rating: 3,
-        images: ['asset/img/wisata andalah/gua-passea-1.webp', 'asset/img/wisata andalah/gua-passea-2.jpg', 'asset/img/wisata andalah/gua-passea-3.jpeg'],
-        desc: 'Guest house sederhana dan bersih, cocok untuk backpacker hemat dengan WiFi gratis.',
-        stayInfo: '1 malam, 2 dewasa'
-    },
-    {
-        name: 'Villa Angin Laut', type: 'villa', price: 2200000, location: 'Lembanabahari, Bulukumba', rating: 5,
-        images: ['asset/img/wisata andalah/tebing-mattoanging-3.webp', 'asset/img/wisata andalah/tebing-mattoanging.webp'],
-        desc: 'Villa private dengan kolam renang infinity, view laut 360°, dan butler service.',
-        stayInfo: '1 malam, 2 dewasa'
-    },
-    {
-        name: 'Guest House Melati', type: 'guesthouse', price: 450000, location: 'Lembanabahari, Bulukumba', rating: 4,
-        images: ['asset/img/wisata andalah/camping-ground-1.jpg', 'asset/img/wisata andalah/pantai-mandala-7.webp'],
-        desc: 'Tempat menginap keluarga dengan breakfast, playground anak, dan taman yang asri.',
-        stayInfo: '1 malam, 2 dewasa'
-    },
-    {
-        name: 'Guest House Bukit', type: 'guesthouse', price: 350000, location: 'Lembanabahari, Bulukumba', rating: 3,
-        images: ['asset/img/wisata andalah/gua-passea-1.webp', 'asset/img/wisata andalah/gua-passea-2.jpg'],
-        desc: 'View bukit dan udara sejuk, cocok untuk backpacker.',
-        stayInfo: '1 malam, 2 dewasa'
-    }
-];
-
-// Data dummy untuk kuliner (sebaiknya dimuat dari JSON)
-window.kulinerData = [
-    {
-        name: 'Coto Makassar', price: 35000,
-        img: 'asset/img/wisata andalah/kuliner-1.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Coto Makassar asli dengan bumbu rempah pilihan.'
-    },
-    {
-        name: 'Pallubasa', price: 30000,
-        img: 'asset/img/wisata andalah/kuliner-2.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Pallubasa hangat dengan kuah kental dan daging empuk.'
-    },
-    {
-        name: 'Konro Bakar', price: 60000,
-        img: 'asset/img/wisata andalah/kuliner-3.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Iga sapi bakar dengan bumbu khas Makassar.'
-    },
-    {
-        name: 'Es Pisang Ijo', price: 15000,
-        img: 'asset/img/wisata andalah/kuliner-4.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Es pisang ijo segar dengan sirup dan santan.'
-    },
-    {
-        name: 'Mie Titi', price: 25000,
-        img: 'asset/img/wisata andalah/kuliner-5.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Mie kering renyah dengan kuah kental dan topping melimpah.'
-    },
-    {
-        name: 'Nasi Goreng Seafood', price: 40000,
-        img: 'asset/img/wisata andalah/kuliner-6.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Nasi goreng dengan aneka seafood segar.'
-    }
-];
-
-// Data dummy untuk sewa (sebaiknya dimuat dari JSON)
-window.sewaData = [
-    {
-        name: 'Sewa Motor Matic', price: 75000, unit: 'hari',
-        img: 'asset/img/wisata andalah/sewa-motor-1.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Sewa motor matic untuk menjelajahi desa dengan mudah.'
-    },
-    {
-        name: 'Sewa Mobil Avanza', price: 350000, unit: 'hari',
-        img: 'asset/img/wisata andalah/sewa-mobil-1.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Sewa mobil Avanza untuk perjalanan keluarga atau rombongan.'
-    },
-    {
-        name: 'Sewa Sepeda Gunung', price: 50000, unit: 'hari',
-        img: 'asset/img/wisata andalah/sewa-sepeda-1.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Sewa sepeda gunung untuk petualangan di alam bebas.'
-    },
-    {
-        name: 'Sewa Perahu Nelayan', price: 200000, unit: 'jam',
-        img: 'asset/img/wisata andalah/sewa-perahu-1.jpg', // Ganti dengan gambar yang sesuai
-        desc: 'Sewa perahu nelayan untuk memancing atau berkeliling pantai.'
-    }
-];
+// Data definitions moved to global.js to avoid conflicts
 
 // Nomor WhatsApp untuk atraksi (ganti dengan nomor tujuan)
 window.ATRAKSI_WHATSAPP_NUMBER = '6281234567890';
