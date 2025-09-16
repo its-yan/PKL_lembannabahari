@@ -1,0 +1,438 @@
+/* kuliner-enhancements.css
+   Borders + UI/UX improvements for Kuliner section without touching existing large stylesheet.
+   This file is safe to remove independently and only overrides/extends styles via more specific selectors.
+*/
+
+/* 1) Utilize left space with a vertical ribbon label (hidden on small screens) */
+.kuliner-section{
+  position: relative;
+}
+.kuliner-section::before{
+  content: "Kuliner Khas Lembanna";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left top;
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: #92400e;
+  background: linear-gradient(135deg, #fffdf5 0%, #fff7e5 100%);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 10px 24px rgba(180, 83, 9, 0.18), inset 0 1px 0 rgba(255,255,255,.8);
+  z-index: 6;
+}
+@media (max-width: 1024px){
+  .kuliner-section::before{ display: none; }
+}
+
+/* 2) Section heading enhancement with a bordered descriptor pill */
+.kuliner-title{ position: relative; }
+.kuliner-title::after{
+  content: "Cita rasa bahari — manis • gurih • pedas";
+  display: inline-flex;               /* better vertical centering */
+  align-items: center;
+  gap: 8px;                           /* spacing if we add icon later */
+  margin-left: 12px;
+  transform: translateY(-4px);        /* subtle elevation, less jumpy */
+  font-family: 'Karma', serif;
+  font-weight: 700;                    /* crisper label */
+  letter-spacing: .2px;
+  font-size: clamp(.82rem, 1.6vw, .95rem);
+  line-height: 1;
+  color: #7c2d12;                      /* slightly darker for contrast */
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #f59e0b, #d97706) border-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
+  box-shadow: 0 6px 16px rgba(245,158,11,.18);
+}
+.kuliner-title:hover::after{          /* subtle hover polish */
+  filter: brightness(1.03) saturate(1.02);
+  box-shadow: 0 8px 18px rgba(245,158,11,.22);
+}
+@media (max-width: 900px){           /* responsive spacing tune */
+  .kuliner-title::after{ margin-left: 10px; padding: 6px 10px; }
+}
+@media (max-width: 640px){
+  .kuliner-title::after{ display:none; }
+}
+
+/* 3) Frame the kuliner viewport with an extra inner outline */
+.kuliner-viewport{
+  box-shadow: 0 10px 30px rgba(19, 62, 135, 0.08),
+              inset 0 0 0 2px rgba(245,158,11,0.25);
+}
+
+/* 4) Add a tasteful dashed inner border inside the scrolling area */
+.kuliner-track{ position: relative; }
+.kuliner-track::before{
+  content: "";
+  position: absolute;
+  inset: 12px 20px; /* leave space for arrows */
+  border: 2px dashed rgba(245,158,11,0.35);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 1; /* sits above background but below cards */
+}
+
+/* 5) Use more available width for the card grid per page */
+.kuliner-viewport .kuliner-page .cards-grid-kuliner{
+  max-width: 1080px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@media (max-width: 900px){
+  .kuliner-viewport .kuliner-page .cards-grid-kuliner{ max-width: 98vw; }
+}
+
+/* 6) Filter chips: gradient borders, active states, better affordance */
+.kuliner-search{ gap: 18px; }
+.kuliner-search-filters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: linear-gradient(#ffffffcc,#ffffffcc) padding-box,
+              linear-gradient(135deg, #f59e0b, #d97706, #b45309) border-box;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(245,158,11,.12);
+}
+.filter-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #f59e0b, #d97706) border-box;
+  border: 2px solid transparent;
+  color: #92400e;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.filter-chip:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(245,158,11,.18); }
+.filter-chip:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(245,158,11,.35); }
+.filter-chip.active{
+  background: linear-gradient(#fffaf3,#fffaf3) padding-box,
+              linear-gradient(135deg, #d97706, #b45309) border-box;
+  color: #7c2d12;
+  filter: saturate(1.1);
+  box-shadow: 0 8px 18px rgba(245,158,11,.22), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.filter-icon{ font-size: 1rem; }
+
+/* 7) Card: subtle extra inner outline for crisper borders */
+.card-kuliner{
+  box-shadow: 0 10px 28px rgba(245,158,11,0.16),
+              0 4px 12px rgba(0,0,0,0.08),
+              inset 0 0 0 1px rgba(180,83,9,0.12);
+}
+.card-kuliner:hover{
+  box-shadow: 0 15px 40px rgba(245,158,11,0.22),
+              0 8px 20px rgba(0,0,0,0.15),
+              inset 0 0 0 1px rgba(180,83,9,0.18);
+}
+
+/* 8) Button: crisper focus ring */
+.btn-pesan-kuliner:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.35), 0 8px 25px rgba(245,158,11,0.5);
+}
+
+/* === Revert card shape/size/content to previous while keeping current border/background === */
+.kuliner-section .card-kuliner{
+  border-radius: 16px !important;
+  transform: none;
+}
+.kuliner-section .card-kuliner:hover{
+  transform: translateY(-4px);
+}
+.kuliner-section .card-kuliner::after{ content: none !important; }
+.kuliner-section .card-kuliner::before{ display: none !important; }
+.kuliner-section .card-kuliner.steam-effect::before{ display: none !important; }
+
+.kuliner-section .card-image-kuliner{
+  height: 180px;
+  border-radius: 16px 16px 0 0 !important;
+}
+.kuliner-section .card-image-kuliner::before{ display:none !important; }
+.kuliner-section .card-image-kuliner::after{ content:none !important; }
+
+.kuliner-section .card-kuliner h3{
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--primary-color) !important;
+  margin: 16px 16px 8px 16px;
+}
+.kuliner-section .card-kuliner p{ opacity: 1; }
+
+.kuliner-section .card-kuliner .popularity-badge,
+.kuliner-section .card-kuliner .spice-level{ display: none !important; }
+
+/* === Enforce 3x3 grid per page and 5:3 aspect ratio === */
+/* 3 columns on desktop, 2 on tablets, 1 on mobile */
+.kuliner-section .kuliner-page .cards-grid-kuliner{
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+}
+@media (max-width: 1024px){
+  .kuliner-section .kuliner-page .cards-grid-kuliner{ grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 640px){
+  .kuliner-section .kuliner-page .cards-grid-kuliner{ grid-template-columns: 1fr !important; }
+}
+/* Reset card span so each occupies one grid cell */
+.kuliner-section .cards-grid-kuliner > .card-kuliner{ grid-column: auto !important; }
+
+/* Apply 5:3 aspect ratio to the image area for consistent card look */
+.kuliner-section .card-image-kuliner{
+  height: auto !important;
+  aspect-ratio: 5 / 3;
+}
+.kuliner-section .card-image-kuliner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* === Remove Kuliner slider navigation buttons visually and from focus === */
+.kuliner-section .kuliner-prev,
+.kuliner-section .kuliner-next,
+.kuliner-viewport .kuliner-prev,
+.kuliner-viewport .kuliner-next{
+  display: none !important;
+}
+
+/* 9) Atraksi viewport premium frame and inner outline */
+.atraksi-viewport{
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(243,243,224,0.85)) padding-box,
+              linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
+  overflow: hidden; /* contain inner outline */
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 56px; /* space for inner arrows */
+}
+.atraksi-viewport::before{
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 14px;
+  border: 1px dashed rgba(19,62,135,0.25);
+  pointer-events: none;
+  z-index: 1;
+}
+.atraksi-viewport::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(19,62,135,0.06), rgba(96,139,193,0.12), rgba(19,62,135,0.06));
+  pointer-events: none;
+  z-index: 1;
+}
+.atraksi-viewport .atraksi-track{ position: relative; z-index: 2; }
+@media (max-width: 900px){
+  .atraksi-viewport{ border-radius: 16px; padding: 0 24px; }
+  .atraksi-viewport::before{ inset: 8px; }
+}
+
+/* 10) Use the left area with a compact taste legend (desktop only) */
+.kuliner-section::after{
+  content: "🔥 Pedas  •  🍯 Manis  •  🧂 Gurih";
+  position: absolute;
+  left: 14px;
+  bottom: 12%;
+  transform: rotate(-90deg) translateY(50%);
+  transform-origin: left bottom;
+  font-family: 'Karma', serif;
+  font-weight: 700;
+  font-size: .9rem;
+  color: #7c2d12;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, #f59e0b, #d97706) border-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
+  box-shadow: 0 8px 20px rgba(245,158,11,.18);
+  letter-spacing: .3px;
+  z-index: 6;
+}
+@media (max-width: 1200px){
+  .kuliner-section::after{ display: none; }
+}
+
+/* 11) Atraksi — Polished layout, search, arrows, grid, and cards */
+/* Search UI */
+.atraksi-section .atraksi-search{
+  margin: 14px auto 22px;
+  gap: 12px;
+}
+.atraksi-section .atraksi-search input{
+  height: 46px;
+  width: min(560px, 88%);
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box;
+  box-shadow: 0 8px 16px rgba(2,6,23,.06);
+}
+.atraksi-section .atraksi-search button{
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(19,62,135,.22);
+}
+
+/* Align arrows with the viewport edges on desktop */
+.atraksi-prev, .atraksi-next{
+  width: 44px; height: 44px;
+}
+.atraksi-prev{ left: calc(50% - 580px + 8px) !important; }
+.atraksi-next{ right: calc(50% - 580px + 8px) !important; }
+@media (max-width: 1200px){
+  .atraksi-prev{ left: 16px !important; }
+  .atraksi-next{ right: 16px !important; }
+}
+
+/* Grid tightening for consistent 3x2 layout on wide screens */
+.atraksi-section .atraksi-page .atraksi-grid{
+  max-width: 1160px;
+  margin-inline: auto;
+  grid-template-columns: repeat(3, minmax(320px, 1fr)) !important;
+  gap: 24px !important;
+  justify-items: stretch;
+  align-items: stretch;
+}
+@media (max-width: 1100px){
+  .atraksi-section .atraksi-page .atraksi-grid{ grid-template-columns: repeat(2, minmax(280px, 1fr)) !important; }
+}
+@media (max-width: 680px){
+  .atraksi-section .atraksi-page .atraksi-grid{ grid-template-columns: 1fr !important; gap: 16px !important; }
+}
+
+/* Card polish: cleaner border, subtle inner outline, consistent height */
+.atraksi-section .atraksi-card{
+  border-radius: 16px !important;
+  height: 320px !important;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box !important;
+  border: 2px solid transparent;
+  box-shadow: 0 12px 28px rgba(2,6,23,.12), inset 0 0 0 1px rgba(96,139,193,.10);
+}
+.atraksi-section .atraksi-card:hover{
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 40px rgba(2,6,23,.16), inset 0 0 0 1px rgba(96,139,193,.16);
+}
+.atraksi-section .atraksi-card .image-container{ border-radius: 16px; overflow: hidden; }
+
+/* Overlay tidy */
+.atraksi-section .atraksi-info{
+  padding: 14px 14px 64px;
+  background: linear-gradient(to top, rgba(4,36,86,.95), rgba(4,36,86,.65), rgba(4,36,86,0));
+}
+.atraksi-section .atraksi-name{
+  letter-spacing: .2px;
+  background: rgba(255,255,255,.12);
+  border-radius: 8px;
+}
+.atraksi-section .atraksi-overlay{ gap: 12px; }
+.atraksi-section .atraksi-price{
+  padding: 6px 10px;
+  background: rgba(255,255,255,.95);
+  color: var(--primary-color);
+}
+.atraksi-section .atraksi-actions .btn-detail,
+.atraksi-section .atraksi-actions .btn-pesan{
+  height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 999px !important;
+}
+.atraksi-section .atraksi-actions .btn-detail{ background: #fff !important; color: var(--primary-color) !important; }
+.atraksi-section .atraksi-actions .btn-pesan{
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)) !important;
+  color: #fff !important;
+}
+.atraksi-section .atraksi-card:focus-within{
+  outline: none; box-shadow: 0 0 0 3px rgba(19,62,135,.25), 0 10px 24px rgba(2,6,23,.12) !important;
+}
+
+/* ===== Atraksi — Inset Frame (solid border) & clean card placement ===== */
+/* Simplify viewport: solid border, rounded, subtle inner shadow */
+.atraksi-viewport{
+  background: #fff !important;
+  border: 2px solid rgba(19,62,135,0.20) !important;
+  border-radius: 18px !important;
+  box-shadow: inset 0 0 0 1px rgba(19,62,135,0.06), 0 10px 24px rgba(2,6,23,0.06) !important;
+  padding: 20px !important; /* uniform inner space for cards */
+}
+/* Remove decorative dashed and top accent for simpler concept */
+.atraksi-viewport::before,
+.atraksi-viewport::after{ display: none !important; }
+
+/* Keep content slightly inset from the frame */
+.atraksi-viewport .atraksi-track{ padding: 4px !important; }
+
+/* Grid spacing inside frame */
+.atraksi-section .atraksi-page .atraksi-grid{ gap: 20px !important; }
+
+/* Cards: solid borders, lighter shadows, clean hover */
+.atraksi-section .atraksi-card{
+  background: #fff !important;
+  border: 1.5px solid rgba(19,62,135,0.18) !important;
+  box-shadow: 0 8px 18px rgba(2,6,23,0.08) !important;
+}
+.atraksi-section .atraksi-card:hover{
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 28px rgba(2,6,23,0.12) !important;
+}
+.atraksi-section .atraksi-card .image-container{ border-radius: 12px !important; }
+
+/* Arrows sit subtly inside the frame edges */
+.atraksi-prev{ left: 18px !important; }
+.atraksi-next{ right: 18px !important; }
+
+/* ===== Simplified Section Titles (flat, no effects) ===== */
+.objek-wisata-title,
+.atraksi-title,
+.kuliner-title,
+.sewa-title{
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
+  margin: 12px auto 28px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--primary-color);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.atraksi-title > span,
+.kuliner-title > span,
+.sewa-title > span{ padding: 0; }
+/* Allow decorative lines defined in wisata.css */
+/* Removed rules that forced content: none on title pseudo-elements */
+@media (prefers-reduced-motion: reduce){ }

@@ -19,13 +19,378 @@
     --light-color: #F3F3E0;
     --white-color: #FFFFFF;
     --primary-transparent: #133e8782;
+
+    /* UI tokens for card polish */
+    --card-radius: 16px;
+    --card-shadow: 0 12px 32px rgba(19,62,135,0.15);
+    --card-shadow-hover: 0 20px 50px rgba(0,0,0,0.20);
+    --card-border-gradient: linear-gradient(135deg, var(--third-color), var(--secondary-color));
+    --card-border-gradient-hover: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    --focus-ring: 0 0 0 3px rgba(19,62,135,0.18);
 }
 
-@media (max-width: 600px) {
+/* Enhanced Mobile Responsive Design for Sewa Cards */
+@media (max-width: 768px) {
+    .cards-grid-sewa {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 0 12px;
+    }
+    
+    .card-sewa {
+        border-radius: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .card-sewa:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+    
+    .card-image-sewa {
+        height: 180px;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .card-sewa h3 {
+        font-size: 1.2rem;
+        margin: 12px 12px 6px 12px;
+    }
+    
+    .card-sewa p {
+        font-size: 0.9rem;
+        margin: 0 12px 10px 12px;
+    }
+    
+    .price-tag {
+        margin: 6px 12px 10px 12px;
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+    
+    .card-features {
+        margin: 8px 12px;
+    }
+    
+    .feature-tag {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+    
+    .btn-pesan-sewa {
+        margin: 12px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .availability-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-grid-sewa {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 8px;
+    }
+    
+    .card-sewa {
+        border-radius: 12px;
+    }
+    
+    .card-image-sewa {
+        height: 160px;
+    }
+    
+    .card-sewa h3 {
+        font-size: 1.1rem;
+        margin: 10px 10px 4px 10px;
+    }
+    
+    .card-sewa p {
+        font-size: 0.85rem;
+        margin: 0 10px 8px 10px;
+    }
+    
+    .price-tag {
+        margin: 4px 10px 8px 10px;
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .btn-pesan-sewa {
+        margin: 10px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .sewa-viewport {
+        min-height: 300px;
+    }
+    
+    .sewa-prev, .sewa-next {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .sewa-prev { left: 5px; }
+    .sewa-next { right: 5px; }
+}
+
+/* Enhanced Mobile Responsive Design for Kuliner Cards */
+@media (max-width: 768px) {
+    .cards-grid-kuliner {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 0 12px;
+    }
+    
+    .card-kuliner {
+        border-radius: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .card-kuliner:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+    
+    .card-image-kuliner {
+        height: 180px;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .card-kuliner h3 {
+        font-size: 1.2rem;
+        margin: 16px 12px 6px 12px;
+    }
+    
+    .card-kuliner p {
+        font-size: 0.9rem;
+        margin: 0 12px 10px 12px;
+    }
+    
+    .card-kuliner .price-tag {
+        margin: 6px 12px 10px 12px;
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    
+    .card-kuliner .spice-level {
+        margin: 6px 12px;
+    }
+    
+    .spice-indicator {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .spice-label {
+        font-size: 0.75rem;
+    }
+    
+    .btn-pesan-kuliner {
+        margin: 12px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .popularity-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-grid-kuliner {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 8px;
+    }
+    
+    .card-kuliner {
+        border-radius: 16px;
+    }
+    
+    .card-image-kuliner {
+        height: 160px;
+    }
+    
+    .card-kuliner h3 {
+        font-size: 1.1rem;
+        margin: 12px 10px 4px 10px;
+    }
+    
+    .card-kuliner p {
+        font-size: 0.85rem;
+        margin: 0 10px 8px 10px;
+    }
+    
+    .card-kuliner .price-tag {
+        margin: 4px 10px 8px 10px;
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+    
+    .btn-pesan-kuliner {
+        margin: 10px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .kuliner-viewport {
+        min-height: 300px;
+    }
+    
+    .kuliner-prev, .kuliner-next {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .kuliner-prev { left: 5px; }
+    .kuliner-next { right: 5px; }
+}
+
+/* Enhanced Mobile Responsive Design for Kuliner Search */
+@media (max-width: 768px) {
+    .kuliner-search {
+        margin: 20px 0;
+        padding: 0 12px;
+    }
+    
+    .kuliner-search-container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        border-radius: 20px;
+    }
+    
+    .kuliner-search input[type="text"] {
+        min-width: 100%;
+        height: 45px;
+        padding: 0 16px 0 45px;
+        font-size: 0.95rem;
+    }
+    
+    .kuliner-search .search-icon {
+        left: 15px;
+        font-size: 1.1rem;
+    }
+    
+    .kuliner-search-btn {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .kuliner-search-filters {
+        gap: 6px;
+        margin-top: 12px;
+    }
+    
+    .filter-chip {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .kuliner-search-suggestions,
+    .kuliner-search-history {
+        border-radius: 0 0 16px 16px;
+    }
+    
+    .suggestion-item,
+    .history-item {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .kuliner-search {
+        margin: 16px 0;
+        padding: 0 8px;
+    }
+    
+    .kuliner-search-container {
+        padding: 12px;
+        border-radius: 16px;
+    }
+    
+    .kuliner-search input[type="text"] {
+        height: 42px;
+        padding: 0 14px 0 40px;
+        font-size: 0.9rem;
+    }
+    
+    .kuliner-search .search-icon {
+        left: 12px;
+        font-size: 1rem;
+    }
+    
+    .kuliner-search-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .kuliner-search-filters {
+        gap: 4px;
+        margin-top: 10px;
+    }
+    
+    .filter-chip {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .filter-chip .filter-icon {
+        font-size: 0.8rem;
+    }
+    
+    .suggestion-item,
+    .history-item {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .history-item .history-time {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cards-grid {
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .atraksi-grid {
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .grid-akomodasi {
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .cards-grid-kuliner, .cards-grid-sewa {
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    h1, h2, h3 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
     .menu-wisata svg{
         width: 40px;
         height: 40px;
-
     }
     .menu-wisata ul {
         flex-wrap: wrap;
@@ -36,5 +401,90 @@
     }
     .menu-wisata li:nth-child(n+6) {
         width: 45%;
+    }
+    .cta-waves { height: 100px; }
+    .cta-wave svg { height: 100px; }
+}
+
+@media (max-width: 480px) {
+    .cards-grid {
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 0 12px;
+    }
+    .atraksi-grid {
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 0 12px;
+    }
+    .grid-akomodasi {
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 0 12px;
+    }
+    .cards-grid-kuliner, .cards-grid-sewa {
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 0 12px;
+    }
+    h1, h2, h3 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+    }
+    p, li {
+        font-size: 0.9rem;
+    }
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    .cta-waves { height: 80px; }
+    .cta-wave svg { height: 80px; }
+}
+
+/* Accessible focus rings for interactive cards */
+.wisata-section .card:focus-visible,
+.atraksi-card:focus-visible,
+.card-akomodasi:focus-visible,
+.card-kuliner:focus-visible,
+.card-sewa:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* Image rotation animations for mobile */
+@media (max-width: 768px) {
+    .wisata-section .card-image .rotating-image,
+    .atraksi-card .rotating-image,
+    .card-image-akomodasi .rotating-image,
+    .card-image-kuliner .rotating-image,
+    .card-image-sewa .rotating-image {
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    
+    .wisata-section .card-image .rotating-image.entering,
+    .atraksi-card .rotating-image.entering,
+    .card-image-akomodasi .rotating-image.entering,
+    .card-image-kuliner .rotating-image.entering,
+    .card-image-sewa .rotating-image.entering {
+        animation: imageSlideIn 0.4s ease-out forwards;
+    }
+    
+    .wisata-section .card-image .rotating-image.exiting,
+    .atraksi-card .rotating-image.exiting,
+    .card-image-akomodasi .rotating-image.exiting,
+    .card-image-kuliner .rotating-image.exiting,
+    .card-image-sewa .rotating-image.exiting {
+        animation: imageSlideOut 0.4s ease-in forwards;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wisata-section .card,
+    .atraksi-card,
+    .card-akomodasi,
+    .card-kuliner,
+    .card-sewa {
+        transition: none !important;
     }
 }

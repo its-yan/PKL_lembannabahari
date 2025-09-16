@@ -424,7 +424,7 @@
     position: fixed;
     bottom: 0;
     display: block;
-    max-width: 400px;
+    max-width: 500px;
   }
 
   .mobile-nav-container {
@@ -455,7 +455,7 @@
     to { transform: rotate(360deg); }
   }
 
-  .mobile-nav-item {
+  .mobile--item {
     position: relative;
     display: flex;
     flex-direction: column;
