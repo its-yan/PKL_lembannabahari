@@ -25,9 +25,50 @@ document.addEventListener('DOMContentLoaded', function () {
         threshold: 0.2
     });
 
+    // Observe timeline rows
     document.querySelectorAll('.timeline-row').forEach(function(row) {
         observer.observe(row);
     });
+
+    // Reveal Sejarah title on scroll similar to Data Desa title
+    const sejarahTitle = document.querySelector('.sejarah-header h2');
+    if (sejarahTitle) {
+        sejarahTitle.classList.add('reveal');
+        observer.observe(sejarahTitle);
+    }
+
+    // Reveal Data Desa elements (title and boxes)
+    const revealEls = document.querySelectorAll('.data-desa-section .data-desa-title, .data-desa-section .data-desa-box');
+    revealEls.forEach(el => {
+        el.classList.add('reveal'); // start hidden and gently slide up on show
+        observer.observe(el);
+    });
+
+    // Reveal VISI & MISI elements with unique motion
+    const vmmEls = document.querySelectorAll('.visi-misi-section .visi-title, .visi-misi-section .visi-desc, .visi-misi-section .misi-title, .visi-misi-section .misi-list');
+    vmmEls.forEach(el => {
+        el.classList.add('vmm-reveal');
+        observer.observe(el);
+    });
+
+    // Struktur reveal animations (menu, content, title)
+    const strukturTitle = document.querySelector('.struktur-section .struktur-title');
+    const strukturMenu = document.querySelector('.struktur-section .struktur-menu');
+    const strukturContent = document.querySelector('.struktur-section .struktur-content');
+
+    [strukturTitle, strukturMenu, strukturContent].forEach(el => {
+        if (el) {
+            el.classList.add('str-reveal');
+            observer.observe(el);
+        }
+    });
+
+    // Stagger reveal inside struktur-content
+    if (strukturContent) {
+        strukturContent.classList.add('str-reveal-stagger');
+        const innerItems = strukturContent.querySelectorAll('.struktur-org-title, .struktur-list li, .struktur-pdf-btn, .struktur-org-img-wrapper');
+        innerItems.forEach(item => observer.observe(item));
+    }
 
     // Navbar floating logic
     const nav = document.querySelector('.profil-nav');
@@ -37,42 +78,29 @@ document.addEventListener('DOMContentLoaded', function () {
         .map(link => document.querySelector(link.getAttribute('href')))
         .filter(Boolean);
 
-    // Add transition for smooth effect
-    nav.style.transition = 'all 0.3s ease-in-out';
-    let isFixed = false;
+    // Toggle floating state: dock nav to top as soon as header is mostly out OR when reaching Data Desa
+    function updateNavFloating() {
+        if (!nav) return;
+        const headerH = headerBg ? headerBg.offsetHeight : 0;
+        const dataDesa = document.getElementById('data-desa');
+        const dataDesaTop = dataDesa ? dataDesa.offsetTop : Number.POSITIVE_INFINITY;
+        // Dock point: earlier of (header mostly out) or (nearing Data Desa top)
+        const headerThreshold = headerH > 0 ? headerH - 120 : 0; // buffer to dock a bit earlier
+        const dataDesaThreshold = isFinite(dataDesaTop) ? (dataDesaTop - nav.offsetHeight - 16) : Number.POSITIVE_INFINITY;
+        const dockPoint = Math.min(headerThreshold, dataDesaThreshold);
 
-    function updateNavPosition() {
-        const headerBottom = headerBg.offsetTop + headerBg.offsetHeight;
-        const shouldBeFixed = window.scrollY >= headerBottom - nav.offsetHeight;
-        
-        if (shouldBeFixed !== isFixed) {
-            isFixed = shouldBeFixed;
-            
-            if (isFixed) {
-                nav.style.position = 'fixed';
-                nav.style.top = '20px';
-                nav.style.left = '50%';
-                nav.style.transform = 'translateX(-50%)';
-                nav.style.width = 'auto';
-                nav.style.zIndex = '100';
-                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-                nav.style.borderRadius = '50px';
-            } else {
-                nav.style.position = 'absolute';
-                nav.style.top = '470px';
-                nav.style.left = '50%';
-                nav.style.transform = 'translateX(-50%)';
-                nav.style.width = '';
-                nav.style.zIndex = '100';
-                nav.style.boxShadow = 'none';
-                nav.style.borderRadius = '50px';
-            }
+        if (window.scrollY >= dockPoint) {
+            if (!nav.classList.contains('floating')) nav.classList.add('floating');
+            document.body.classList.add('profil-nav-floating');
+        } else {
+            nav.classList.remove('floating');
+            document.body.classList.remove('profil-nav-floating');
         }
     }
 
-    window.addEventListener('scroll', updateNavPosition);
-    window.addEventListener('resize', updateNavPosition);
-    updateNavPosition();
+    window.addEventListener('scroll', updateNavFloating);
+    window.addEventListener('resize', updateNavFloating);
+    updateNavFloating();
 
     // Scrollspy highlight
     function onScroll() {
@@ -120,6 +148,94 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    // Awards gallery data (grouped by gallery id)
+    const awardsGalleries = {
+        'awards-unesco': [
+            'asset/img/profil-desa/penghargaan-unesco.png'
+        ],
+        'awards-adwi': [
+            'asset/img/profil-desa/pssti.jpg',
+            'asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (5).jpeg',
+            'asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (4).jpeg'
+        ]
+    };
+
+    // Awards Modal logic (open/close + slider)
+    const awardsModal = document.getElementById('awardsModal');
+    const awardsSlider = document.getElementById('awardsSlider');
+    const awardsCounter = document.getElementById('awardsCounter');
+    const awardsClose = document.getElementById('awardsClose');
+    const awardsPrev = document.getElementById('awardsPrev');
+    const awardsNext = document.getElementById('awardsNext');
+    let currentGallery = [];
+    let currentIndex = 0;
+    let startX = 0;
+    let isDragging = false;
+
+    function openAwards(galleryId) {
+        const imgs = awardsGalleries[galleryId];
+        if (!imgs || !imgs.length) return;
+        currentGallery = imgs;
+        currentIndex = 0;
+        awardsSlider.innerHTML = imgs.map(src => `<div class="awards-slide"><img src="${src}" alt="award"></div>`).join('');
+        updateAwardsSlider();
+        awardsModal.classList.add('open');
+        awardsModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeAwards() {
+        awardsModal.classList.remove('open');
+        awardsModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+    function updateAwardsSlider() {
+        const offset = -currentIndex * 100;
+        awardsSlider.style.transform = `translateX(${offset}%)`;
+        awardsCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+    }
+    function nextAwards() { currentIndex = (currentIndex + 1) % currentGallery.length; updateAwardsSlider(); }
+    function prevAwards() { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; updateAwardsSlider(); }
+
+    // Open handlers (buttons and card click/Enter)
+    document.querySelectorAll('.award-view, .award-card').forEach(el => {
+        el.addEventListener('click', () => {
+            const gid = el.getAttribute('data-gallery') || el.querySelector('[data-gallery]')?.getAttribute('data-gallery');
+            if (gid) openAwards(gid);
+        });
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const gid = el.getAttribute('data-gallery') || el.querySelector('[data-gallery]')?.getAttribute('data-gallery');
+                if (gid) openAwards(gid);
+            }
+        });
+    });
+
+    // Close and nav buttons
+    if (awardsClose) awardsClose.addEventListener('click', closeAwards);
+    if (awardsPrev) awardsPrev.addEventListener('click', prevAwards);
+    if (awardsNext) awardsNext.addEventListener('click', nextAwards);
+    awardsModal?.addEventListener('click', e => { if (e.target === awardsModal) closeAwards(); });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!awardsModal || !awardsModal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeAwards();
+        if (e.key === 'ArrowRight') nextAwards();
+        if (e.key === 'ArrowLeft') prevAwards();
+    });
+
+    // Touch swipe
+    awardsSlider?.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, {passive:true});
+    awardsSlider?.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const diff = e.touches[0].clientX - startX;
+        if (Math.abs(diff) > 50) {
+            diff < 0 ? nextAwards() : prevAwards();
+            isDragging = false;
+        }
+    }, {passive:true});
+    awardsSlider?.addEventListener('touchend', () => { isDragging = false; });
 
     // Show/hide BPD PDF
     const openBpdPdfBtn = document.getElementById('openBpdPdf');
@@ -218,4 +334,65 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // =====================
+    // PETA: Tabs, Reveal, Modal
+    // =====================
+    (function(){
+        const tabPeta = document.getElementById('tabPeta');
+        const tabEv = document.getElementById('tabEvakuasi');
+        const panelPeta = document.getElementById('panelPeta');
+        const panelEv = document.getElementById('panelEvakuasi');
+
+        function activate(tab){
+            if(!tab || !tabPeta || !tabEv || !panelPeta || !panelEv) return;
+            const isPeta = tab === tabPeta;
+            tabPeta.classList.toggle('active', isPeta);
+            tabEv.classList.toggle('active', !isPeta);
+            tabPeta.setAttribute('aria-selected', isPeta);
+            tabEv.setAttribute('aria-selected', !isPeta);
+            panelPeta.hidden = !isPeta;
+            panelEv.hidden = isPeta;
+            panelPeta.classList.toggle('active', isPeta);
+            panelEv.classList.toggle('active', !isPeta);
+        }
+        tabPeta && tabPeta.addEventListener('click', ()=>activate(tabPeta));
+        tabEv && tabEv.addEventListener('click', ()=>activate(tabEv));
+
+        // Reveal on scroll khusus peta
+        const ioPeta = new IntersectionObserver((entries)=>{
+            entries.forEach(e=>{ if(e.isIntersecting) { e.target.classList.add('in'); ioPeta.unobserve(e.target);} });
+        }, { threshold:.15 });
+        document.querySelectorAll('#peta .reveal').forEach(el=>ioPeta.observe(el));
+
+        // Modal gallery untuk peta
+        const images = [
+            'asset/img/profil-desa/peta.jpeg',
+            'asset/img/profil-desa/Jalur-evakuasi.jpg'
+        ];
+        const modal = document.getElementById('mapModal');
+        const stage = document.getElementById('mapStageImg');
+        const counter = document.getElementById('mapCounter');
+        const closeBtn = document.getElementById('mapClose');
+        const prevBtn = document.getElementById('mapPrev');
+        const nextBtn = document.getElementById('mapNext');
+        let idx = 0;
+        function update(){ if(stage && counter){ stage.src = images[idx]; counter.textContent = (idx+1)+' / '+images.length; } }
+        function open(i){ if(!modal) return; idx = i; update(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+        function close(){ if(!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+        function prev(){ idx = (idx-1+images.length)%images.length; update(); }
+        function next(){ idx = (idx+1)%images.length; update(); }
+        document.querySelectorAll('#peta .peta-view-btn, #peta .peta-figure').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const i = Number(btn.getAttribute('data-index')) || 0;
+                open(i);
+            })
+        });
+        closeBtn && closeBtn.addEventListener('click', close);
+        prevBtn && prevBtn.addEventListener('click', prev);
+        nextBtn && nextBtn.addEventListener('click', next);
+        modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
+        document.addEventListener('keydown', (e)=>{ if(!modal || !modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+    })();
+
 });
