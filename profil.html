@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,8 @@
     <script src="asset/js/profil.js"></script>
     <script src="asset/js/responsive.js"></script>
     <script src="asset2/js/script.js"></script>
+    <style>
+    </style>
 </head>
 <body>
     <div class="nav-atas">
@@ -26,42 +28,20 @@
         </div>
         <nav class="main-nav" id="mainNav">
             <ul class="menu-list">
-                <li class="has-submenu beranda">
-                <a href="beranda.html">Beranda</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="berandaSubmenu">
-                    <li><a href="#welcome">Selamat Datang</a></li>
-                    <li><a href="#news">Berita Terbaru</a></li>
-                    <li><a href="#announcements">Pengumuman</a></li>
-                    <li><a href="#gallery">Galeri Foto</a></li>
-                </ul>
+                <li class="has-submenu">
+                    <a href="index.html">Beranda</a>
                 </li>
                 <li class="has-submenu">
-                <a href="profil.html" id="profilMenuToggle">Profil Desa</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="profilSubmenu">
-                    <li><a href="#data-desa">Data Desa</a></li>
-                    <li><a href="#sejarah">Sejarah</a></li>
-                    <li><a href="#visi-misi">Visi Misi</a></li>
-                    <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
-                </ul>
+                    <a href="tentang.html">Wisata</a>
                 </li>
                 <li class="has-submenu">
-                <a href="wisata.html">Wisata</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="wisataSubmenu">
-                    <li><a href="#objek-wisata">Objek Wisata</a></li>
-                    <li><a href="#paket-wisata">Paket Wisata</a></li>
-                    <li><a href="#akomodasi">Akomodasi</a></li>
-                    <li><a href="#kuliner">Kuliner Khas</a></li>
-                    <li><a href="#sewa-kendaraan">Sewa Kendaraan</a></li>
-                </ul>
+                    <a href="event.html">Informasi</a>
                 </li>
                 <li class="has-submenu">
-                <a href="layanan.html">Layanan</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="layananSubmenu">
-                    <li><a href="#pelayanan-publik">Pelayanan Publik</a></li>
-                    <li><a href="#administrasi">Administrasi</a></li>
-                    <li><a href="#surat-menyurat">Surat Menyurat</a></li>
-                    <li><a href="#fasilitas-umum">Fasilitas Umum</a></li>
-                </ul>
+                    <a href="berita.html">Layanan</a>
+                </li>
+                <li class="has-submenu active">
+                    <a href="kontak.html">Profil Desa</a>
                 </li>
             </ul>
             <ul class="mobile-menu-list">
@@ -69,12 +49,13 @@
                 <li><a href="#sejarah">Sejarah</a></li>
                 <li><a href="#visi-misi">Visi Misi</a></li>
                 <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+                <li><a href="#peta">Peta</a></li>
             </ul>
         </nav>
     </div>
     <header class="profil-header">
         <div class="header-bg">
-            <img src="asset/img/profil-desa/bg-profil-2.jpeg" alt="Desa Background" class="header-img">
+            <img src="asset/img/profil-desa/profil-bg-3.jpeg" alt="Desa Background" class="header-img">
             <h1 class="profil-title">Profil Desa</h1>
         </div>
         <div class="profil-nav" id="profil-nav">
@@ -83,6 +64,7 @@
                 <li><a href="#sejarah">SEJARAH</a></li>
                 <li><a href="#visi-misi">VISI MISI</a></li>
                 <li><a href="#struktur-organisasi">STRUKTUR ORGANISASI</a></li>
+                <li><a href="#peta">PETA</a></li>
             </ul>
         </div>
     </header>
@@ -483,6 +465,200 @@
                 </div>
             </div>
         </section>
+
+        <section class="peta-section" id="peta" aria-labelledby="petaTitle">
+            <div class="peta-title" id="petaTitle">PETA</div>
+
+            <!-- Modern Map Tabs -->
+            <div class="peta-tabs" role="tablist" aria-label="Peta dan Jalur Evakuasi">
+                <button class="peta-tab-btn active" role="tab" aria-selected="true" aria-controls="panelPeta" id="tabPeta">Peta Desa</button>
+                <button class="peta-tab-btn" role="tab" aria-selected="false" aria-controls="panelEvakuasi" id="tabEvakuasi">Jalur Evakuasi</button>
+            </div>
+
+            <div class="peta-wrapper">
+                <!-- Panel: Peta Desa -->
+                <div class="peta-panel active reveal" id="panelPeta" role="tabpanel" aria-labelledby="tabPeta">
+                    <div class="peta-media">
+                        <figure class="peta-figure" tabindex="0" aria-label="Buka detail Peta Desa">
+                            <img src="asset/img/profil-desa/peta.jpeg" alt="Peta Desa Wisata Andalan" class="peta-img" loading="lazy">
+                            <figcaption class="peta-caption">Peta Desa Wisata Andalan</figcaption>
+                            <button class="peta-view-btn" data-index="0" aria-label="Lihat peta lebih jelas">Lihat Detail</button>
+                        </figure>
+                    </div>
+                    <div class="peta-desc">
+                        <h3>Gambaran Umum Peta Desa</h3>
+                        <p>
+                            Peta menampilkan tata letak Desa Wisata Andalan beserta area pemukiman, jalur utama menuju Pantai Mandala Ria, dan lokasi fasilitas penting.
+                            Visual dibuat jelas untuk memudahkan navigasi wisatawan maupun warga.
+                        </p>
+                        <ul class="peta-badges" aria-label="Legend Peta">
+                            <li class="badge">Akses Utama</li>
+                            <li class="badge">Pantai</li>
+                            <li class="badge">Fasilitas Umum</li>
+                            <li class="badge">Area Wisata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Panel: Jalur Evakuasi -->
+                <div class="peta-panel reveal" id="panelEvakuasi" role="tabpanel" aria-labelledby="tabEvakuasi" hidden>
+                    <div class="peta-media">
+                        <figure class="peta-figure" tabindex="0" aria-label="Buka detail Jalur Evakuasi">
+                            <img src="asset/img/profil-desa/Jalur-evakuasi.jpg" alt="Peta Jalur Evakuasi Desa Wisata Andalan" class="peta-img" loading="lazy">
+                            <figcaption class="peta-caption">Peta Jalur Evakuasi</figcaption>
+                            <button class="peta-view-btn" data-index="1" aria-label="Lihat jalur evakuasi lebih jelas">Lihat Detail</button>
+                        </figure>
+                    </div>
+                    <div class="peta-desc">
+                        <h3>Jalur Evakuasi dan Titik Kumpul</h3>
+                        <p>
+                            Jalur evakuasi ini merupakan panduan saat keadaan darurat. Ikuti rute yang ditandai menuju titik kumpul terdekat dan
+                            ikuti arahan petugas. Pastikan Anda mengenali jalur utama dan alternatif.
+                        </p>
+                        <ul class="peta-badges" aria-label="Legend Evakuasi">
+                            <li class="badge badge-warn">Rute Evakuasi</li>
+                            <li class="badge">Titik Kumpul</li>
+                            <li class="badge">Fasilitas Kesehatan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal interaktif untuk melihat gambar detail -->
+            <div class="map-modal" id="mapModal" aria-hidden="true" role="dialog" aria-label="Pratinjau Peta">
+                <div class="map-modal-content" role="document">
+                    <button class="map-close" id="mapClose" aria-label="Tutup">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="map-prev" id="mapPrev" aria-label="Sebelumnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="map-next" id="mapNext" aria-label="Berikutnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="map-stage">
+                        <img id="mapStageImg" alt="Pratinjau gambar" />
+                    </div>
+                    <div class="map-counter" id="mapCounter">1 / 2</div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <section id="informasi" class="map-section">
+            <div class="map-container">
+                <div class="map-pane">
+                    <div class="map-image">
+                        <!-- Map Markers -->
+                    </div>
+                </div>
+                <aside class="facilities-pane">
+                    <header class="facilities-header">
+                        <h2>Fasilitas</h2>
+                        <p>Informasi fasilitas yang tersedia di Desa Lembanna berdasarkan kategori.</p>
+                    </header>
+                    <div class="facility-grid">
+                        <!-- Pendidikan -->
+                        <article class="facility-card facility-education">
+                            <h3 class="facility-title">Pendidikan</h3>
+                            <ul class="facility-list">
+                                <li data-marker="11">
+                                    <span class="facility-marker" data-type="education">11</span>
+                                    <span class="facility-name">TK Mamampang</span>
+                                </li>
+                                <li data-marker="20">
+                                    <span class="facility-marker" data-type="education">20</span>
+                                    <span class="facility-name">TK Purnita Lopi</span>
+                                </li>
+                                <li data-marker="14">
+                                    <span class="facility-marker" data-type="education">14</span>
+                                    <span class="facility-name">SD 219</span>
+                                </li>
+                                <li data-marker="15">
+                                    <span class="facility-marker" data-type="education">15</span>
+                                    <span class="facility-name">SMP 33 Bulukumba</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Tempat Ibadah -->
+                        <article class="facility-card facility-worship">
+                            <h3 class="facility-title">Tempat Ibadah</h3>
+                            <ul class="facility-list">
+                                <li data-marker="10">
+                                    <span class="facility-marker" data-type="worship">10</span>
+                                    <span class="facility-name">Masjid Raya Nurul Wathan</span>
+                                </li>
+                                <li data-marker="16">
+                                    <span class="facility-marker" data-type="worship">16</span>
+                                    <span class="facility-name">Masjid Nurul Ilmi</span>
+                                </li>
+                                <li data-marker="17">
+                                    <span class="facility-marker" data-type="worship">17</span>
+                                    <span class="facility-name">Masjid Jabbal Nur</span>
+                                </li>
+                                <li data-marker="18">
+                                    <span class="facility-marker" data-type="worship">18</span>
+                                    <span class="facility-name">Masjid Nurul Iman</span>
+                                </li>
+                                <li>
+                                    <span class="facility-marker" data-type="worship">-</span>
+                                    <span class="facility-name">Masjid Hasanatuk Jannah</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Wisata -->
+                        <article class="facility-card facility-tourism">
+                            <h3 class="facility-title">Wisata</h3>
+                            <ul class="facility-list">
+                                <li class="is-cave" data-marker="5">
+                                    <span class="facility-marker" data-type="tourism">5</span>
+                                    <span class="facility-name">Goa Passea</span>
+                                </li>
+                                <li class="is-cave" data-marker="12">
+                                    <span class="facility-marker" data-type="tourism">12</span>
+                                    <span class="facility-name">Goa Liang Lajaya</span>
+                                </li>
+                                <li data-marker="6">
+                                    <span class="facility-marker" data-type="tourism">6</span>
+                                    <span class="facility-name">Kawasan Wisata Batu Tongkaraya</span>
+                                </li>
+                                <li data-marker="7">
+                                    <span class="facility-marker" data-type="tourism">7</span>
+                                    <span class="facility-name">Kawasan Wisata Pantai Mandala Ria</span>
+                                </li>
+                                <li data-marker="19">
+                                    <span class="facility-marker" data-type="tourism">19</span>
+                                    <span class="facility-name">Tebing Mattoanging</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Fasilitas Umum -->
+                        <article class="facility-card facility-public">
+                            <h3 class="facility-title">Fasilitas Umum</h3>
+                            <ul class="facility-list">
+                                <li data-marker="1">
+                                    <span class="facility-marker" data-type="government">1</span>
+                                    <span class="facility-name">Kantor Desa</span>
+                                </li>
+                                <li data-marker="9">
+                                    <span class="facility-marker" data-type="market">9</span>
+                                    <span class="facility-name">Pasar</span>
+                                </li>
+                                <li data-marker="3">
+                                    <span class="facility-marker" data-type="bank">3</span>
+                                    <span class="facility-name">ATM/Fasilitas Perbankan</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
         </main>
    
 
