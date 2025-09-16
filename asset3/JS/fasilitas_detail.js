@@ -93,3 +93,54 @@ function createSlideshow() {
 }
 
 document.addEventListener('DOMContentLoaded', createSlideshow);
+
+// Mobile nav toggle for fasilitas detail pages
+document.addEventListener('DOMContentLoaded', function() {
+	const navToggle = document.getElementById('navToggle');
+	const navMenu = document.querySelector('.nav-menu');
+
+	// create overlay element if not present
+	let overlay = document.getElementById('navOverlay');
+	if (!overlay) {
+		overlay = document.createElement('div');
+		overlay.id = 'navOverlay';
+		document.body.appendChild(overlay);
+	}
+
+	function openMenu() {
+		navMenu && navMenu.classList.add('active');
+		navToggle && navToggle.classList.add('active');
+		overlay.classList.add('show');
+		document.body.classList.add('menu-open');
+	}
+
+	function closeMenu() {
+		navMenu && navMenu.classList.remove('active');
+		navToggle && navToggle.classList.remove('active');
+		overlay.classList.remove('show');
+		document.body.classList.remove('menu-open');
+	}
+
+	if (navToggle) {
+		navToggle.addEventListener('click', function() {
+			if (navMenu.classList.contains('active')) closeMenu();
+			else openMenu();
+		});
+	}
+
+	// Close when clicking overlay
+	overlay.addEventListener('click', closeMenu);
+
+	// Close when clicking any nav link
+	document.querySelectorAll('.nav-menu .nav-link').forEach(link => {
+		link.addEventListener('click', () => {
+			// if it's an internal anchor, allow smooth scroll; otherwise, close immediately
+			closeMenu();
+		});
+	});
+
+	// Close on Escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeMenu();
+	});
+});
