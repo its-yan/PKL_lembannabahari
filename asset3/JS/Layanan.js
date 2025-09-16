@@ -164,25 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scrolling for navigation links (only anchors) and close menu on click
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            const isAnchor = href && href.startsWith('#');
-            if (isAnchor) {
-                e.preventDefault();
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-            // Always close mobile menu after navigating
-            if (typeof closeMenu === 'function') closeMenu();
-        });
-    });
-
+   
     // Scroll to top button
     const scrollToTopBtn = document.createElement('button');
     scrollToTopBtn.innerHTML = ''; // Empty, we'll use CSS ::after for the arrow
@@ -190,6 +172,57 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
     scrollToTopBtn.setAttribute('title', 'Kembali ke atas');
     document.body.appendChild(scrollToTopBtn);
+
+        // Make the header scroll indicator clickable and keyboard accessible
+        (function makeScrollIndicatorInteractive(){
+            const indicator = document.querySelector('.scroll-indicator');
+            if (!indicator) return;
+
+            // make focusable for keyboard users
+            indicator.setAttribute('tabindex', '0');
+            indicator.setAttribute('role', 'button');
+            indicator.setAttribute('aria-label', 'Jelajahi lebih lanjut');
+
+            // create ripple element for feedback
+            let ripple = indicator.querySelector('.ripple');
+            if (!ripple) {
+                ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                indicator.appendChild(ripple);
+            }
+
+            const scrollToMain = (ev) => {
+                // small visual ripple
+                ripple.style.opacity = '1';
+                ripple.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                setTimeout(() => {
+                    ripple.style.opacity = '0';
+                    ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+                }, 300);
+
+                const main = document.querySelector('.main-content');
+                if (main) {
+                    main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    // fallback to window scroll
+                    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                }
+            };
+
+            // click handler
+            indicator.addEventListener('click', (e) => {
+                e.preventDefault();
+                scrollToMain(e);
+            });
+
+            // keyboard handler for Enter / Space
+            indicator.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    scrollToMain(e);
+                }
+            });
+        })();
 
     // Throttled scroll listener for better performance
     let scrollThrottleTimeout;
@@ -236,205 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hamburger menu + overlay + sticky nav
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-links');
-    const navWrapper = document.querySelector('.nav-wrapper');
-
-    // Create overlay if not exists
-    let navOverlay = document.getElementById('navOverlay');
-    if (!navOverlay) {
-        navOverlay = document.createElement('div');
-        navOverlay.id = 'navOverlay';
-        document.body.appendChild(navOverlay);
-    }
-
-    function toggleMenu() {
-        const isOpen = navMenu.classList.toggle('nav-active');
-        hamburger.classList.toggle('toggle', isOpen);
-        document.body.classList.toggle('menu-open', isOpen);
-        navOverlay.classList.toggle('show', isOpen);
-        hamburger.setAttribute('aria-expanded', String(isOpen));
-        navMenu.setAttribute('aria-hidden', String(!isOpen));
-    }
-
-    function closeMenu() {
-        navMenu.classList.remove('nav-active');
-        hamburger.classList.remove('toggle');
-        document.body.classList.remove('menu-open');
-        navOverlay.classList.remove('show');
-        hamburger.setAttribute('aria-expanded', 'false');
-        navMenu.setAttribute('aria-hidden', 'true');
-    }
-
-    // Init ARIA
-    hamburger.setAttribute('role', 'button');
-    hamburger.setAttribute('aria-controls', 'primary-navigation');
-    hamburger.setAttribute('aria-expanded', 'false');
-    navMenu.id = navMenu.id || 'primary-navigation';
-    navMenu.setAttribute('aria-hidden', 'true');
-
-    hamburger.addEventListener('click', toggleMenu);
-    hamburger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
-        }
-    });
-    navOverlay.addEventListener('click', closeMenu);
-
-    // Close menu when resizing to desktop
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            closeMenu();
-        }
-    });
-
-    // Enhanced sticky nav on scroll with smooth following effect
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    let isNavbarSticky = false;
-    let scrollDirection = 'down';
-    
-    const updateSticky = () => {
-        const headerHeight = headerContainer ? headerContainer.offsetHeight : 0;
-        const currentScrollY = window.scrollY;
-        const scrollThreshold = Math.max(10, headerHeight - 80);
-        const scrollDelta = currentScrollY - lastScrollY;
-        
-        // Determine scroll direction
-        if (Math.abs(scrollDelta) > 5) { // Only update direction if significant scroll
-            scrollDirection = scrollDelta > 0 ? 'down' : 'up';
-        }
-        
-        if (currentScrollY > scrollThreshold) {
-            if (!isNavbarSticky) {
-                // First time becoming sticky - add class and animate in
-                navWrapper && navWrapper.classList.add('nav-sticky');
-                isNavbarSticky = true;
-                
-                // Add entrance animation
-                navWrapper && navWrapper.style.transform = 'translateX(-50%) translateY(0)';
-                navWrapper && navWrapper.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
-                
-                // Add subtle bounce effect
-                setTimeout(() => {
-                    navWrapper && (navWrapper.style.transform = 'translateX(-50%) translateY(0)');
-                }, 50);
-            } else {
-                // Already sticky - add smooth following effects
-                if (scrollDirection === 'down' && currentScrollY > scrollThreshold + 150) {
-                    // Scrolling down fast - make navbar follow with slight delay
-                    const followOffset = Math.min(scrollDelta * 0.3, 10);
-                    navWrapper && (navWrapper.style.transform = `translateX(-50%) translateY(${followOffset}px)`);
-                    navWrapper && (navWrapper.style.transition = 'transform 0.2s ease-out');
-                    navWrapper && navWrapper.classList.add('following');
-                } else if (scrollDirection === 'up') {
-                    // Scrolling up - keep navbar at top with smooth return
-                    navWrapper && (navWrapper.style.transform = 'translateX(-50%) translateY(0)');
-                    navWrapper && (navWrapper.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)');
-                    navWrapper && navWrapper.classList.remove('following');
-                } else {
-                    // Normal position - remove following class
-                    navWrapper && navWrapper.classList.remove('following');
-                }
-            }
-        } else {
-            if (isNavbarSticky) {
-                // Remove sticky - animate out
-                navWrapper && navWrapper.style.transform = 'translateX(-50%) translateY(-20px)';
-                navWrapper && navWrapper.style.transition = 'all 0.3s ease-in';
-                
-                setTimeout(() => {
-                    navWrapper && navWrapper.classList.remove('nav-sticky');
-                    navWrapper && (navWrapper.style.transform = '');
-                    navWrapper && (navWrapper.style.transition = '');
-                    isNavbarSticky = false;
-                }, 300);
-            }
-        }
-        
-        lastScrollY = currentScrollY;
-        ticking = false;
-    };
-    
-    // Throttled scroll listener for better performance
-    const handleScroll = () => {
-        if (!ticking) {
-            requestAnimationFrame(updateSticky);
-            ticking = true;
-        }
-    };
-    
-    updateSticky();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Add hover effects for sticky navbar
-    if (navWrapper) {
-        navWrapper.addEventListener('mouseenter', () => {
-            if (isNavbarSticky) {
-                navWrapper.style.transform = 'translateX(-50%) translateY(-2px)';
-                navWrapper.style.transition = 'transform 0.2s ease-out';
-                navWrapper.classList.add('hovering');
-            }
-        });
-        
-        navWrapper.addEventListener('mouseleave', () => {
-            if (isNavbarSticky) {
-                navWrapper.style.transform = 'translateX(-50%) translateY(0)';
-                navWrapper.style.transition = 'transform 0.3s ease-out';
-                navWrapper.classList.remove('hovering');
-            }
-        });
-    }
-    
-    // Add smooth parallax effect for navbar content
-    const updateNavbarParallax = () => {
-        if (isNavbarSticky && navWrapper) {
-            const scrollY = window.scrollY;
-            const parallaxOffset = Math.sin(scrollY * 0.01) * 2; // Subtle sine wave effect
-            const navLinks = navWrapper.querySelector('.nav-links');
-            const logo = navWrapper.querySelector('.logo');
-            
-            if (navLinks) {
-                navLinks.style.transform = `translateY(${parallaxOffset}px)`;
-                navLinks.style.transition = 'transform 0.1s ease-out';
-            }
-            
-            if (logo) {
-                logo.style.transform = `translateY(${-parallaxOffset * 0.5}px)`;
-                logo.style.transition = 'transform 0.1s ease-out';
-            }
-        }
-    };
-    
-    // Add parallax effect to scroll listener
-    window.addEventListener('scroll', () => {
-        if (isNavbarSticky) {
-            requestAnimationFrame(updateNavbarParallax);
-        }
-    }, { passive: true });
-
-    // Active link highlighting on scroll
-    const sections = document.querySelectorAll('section');
-    const navLi = document.querySelectorAll('nav .nav-links li a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLi.forEach(a => {
-            a.classList.remove('active');
-            if (a.getAttribute('href').includes(current)) {
-                a.classList.add('active');
-            }
-        });
-    });
+    // Navigation/hamburger/sticky-navbar logic removed.
 
     // Scroll animations
     const observer = new IntersectionObserver((entries) => {
@@ -797,207 +632,9 @@ document.querySelectorAll('img').forEach(img => {
     });
 });
 
-// Add styles for the scroll to top button and enhanced sticky navbar
+    // Injected styles: navbar styles removed. Only keep styles needed for scroll-to-top button below.
 const style = document.createElement('style');
 style.innerHTML = `
-    /* Enhanced Sticky Navbar Styles */
-    .nav-wrapper {
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        will-change: transform, background-color, box-shadow, opacity;
-        transform-origin: center top;
-    }
-    
-    .nav-wrapper.nav-sticky {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%) translateY(0);
-        z-index: 300;
-        background: linear-gradient(135deg, rgba(19, 62, 135, 0.95) 0%, rgba(96, 139, 193, 0.95) 100%);
-        backdrop-filter: blur(20px) saturate(1.2);
-        -webkit-backdrop-filter: blur(20px) saturate(1.2);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            0 4px 16px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 0 1px rgba(255, 255, 255, 0.05);
-        border-radius: 25px;
-        padding: 12px 30px;
-        width: min(1200px, calc(100vw - 32px));
-        max-width: 90%;
-        opacity: 1;
-        animation: navbarSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    
-    /* Smooth following effect for navbar */
-    .nav-wrapper.nav-sticky.following {
-        transform: translateX(-50%) translateY(5px);
-        box-shadow: 
-            0 12px 40px rgba(0, 0, 0, 0.4),
-            0 6px 20px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Hover effect for sticky navbar */
-    .nav-wrapper.nav-sticky:hover,
-    .nav-wrapper.nav-sticky.hovering {
-        transform: translateX(-50%) translateY(-2px);
-        box-shadow: 
-            0 16px 48px rgba(0, 0, 0, 0.4),
-            0 8px 24px rgba(0, 0, 0, 0.3),
-            inset 0 2px 0 rgba(255, 255, 255, 0.2),
-            0 0 0 1px rgba(255, 255, 255, 0.15);
-        transition: all 0.2s ease-out;
-    }
-    
-    /* Following effect for smooth scroll following */
-    .nav-wrapper.nav-sticky.following {
-        transform: translateX(-50%) translateY(5px);
-        box-shadow: 
-            0 12px 40px rgba(0, 0, 0, 0.4),
-            0 6px 20px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-        transition: all 0.2s ease-out;
-    }
-    
-    /* Parallax effect for navbar content */
-    .nav-wrapper.nav-sticky .nav-links {
-        transition: transform 0.1s ease-out;
-    }
-    
-    .nav-wrapper.nav-sticky .logo {
-        transition: transform 0.1s ease-out;
-    }
-    
-    /* Enhanced animation for navbar entrance */
-    .nav-wrapper.nav-sticky {
-        animation: navbarSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    
-    @keyframes navbarSlideIn {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-30px) scale(0.95);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(-50%) translateY(-10px) scale(1.02);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0) scale(1);
-        }
-    }
-    
-    /* Smooth exit animation */
-    .nav-wrapper.nav-sticky.exiting {
-        animation: navbarSlideOut 0.3s ease-in forwards;
-    }
-    
-    @keyframes navbarSlideOut {
-        from {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0) scale(1);
-        }
-        to {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-20px) scale(0.95);
-        }
-    }
-    
-    .nav-wrapper.nav-sticky::before {
-        background: linear-gradient(135deg, rgba(19, 62, 135, 0.1) 0%, rgba(96, 139, 193, 0.1) 100%);
-        border-radius: 25px;
-    }
-    
-    .nav-wrapper.nav-sticky nav {
-        background: transparent;
-        box-shadow: none;
-        border: none;
-    }
-    
-    .nav-wrapper.nav-sticky .logo a {
-        color: var(--white-color);
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    
-    .nav-wrapper.nav-sticky .nav-links a {
-        color: var(--white-color);
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .nav-wrapper.nav-sticky .nav-links a:hover {
-        color: var(--white-color);
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-    }
-    
-    .nav-wrapper.nav-sticky .nav-links a.active {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Smooth scroll behavior for navbar following */
-    .nav-wrapper.nav-sticky {
-        animation: navbarSlideIn 0.3s ease-out;
-    }
-    
-    @keyframes navbarSlideIn {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-    }
-    
-    /* Mobile responsive for sticky navbar */
-    @media (max-width: 768px) {
-        .nav-wrapper.nav-sticky {
-            top: 10px;
-            width: calc(100vw - 20px);
-            max-width: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-        
-        .nav-wrapper.nav-sticky nav {
-            padding: 8px 12px;
-        }
-        
-        .nav-wrapper.nav-sticky .logo a {
-            font-size: 1.3em;
-        }
-        
-        .nav-wrapper.nav-sticky .nav-links a {
-            padding: 8px 12px;
-            font-size: 0.95em;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .nav-wrapper.nav-sticky {
-            top: 8px;
-            width: calc(100vw - 16px);
-            padding: 6px 12px;
-            border-radius: 18px;
-        }
-        
-        .nav-wrapper.nav-sticky .logo a {
-            font-size: 1.2em;
-        }
-        
-        .nav-wrapper.nav-sticky .nav-links a {
-            padding: 6px 10px;
-            font-size: 0.9em;
-        }
-    }
-
     /* Scroll to top button styles */
     #scrollToTopBtn {
         display: none;
