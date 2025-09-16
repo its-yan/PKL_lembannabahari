@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Desa</title>
     <link rel="stylesheet" href="asset/css/index.css">
     <link rel="stylesheet" href="asset/css/profil-responsive.css">
-    <script src="asset/js/index.js"></script>
     <script src="asset/js/profil.js"></script>
     <script src="asset/js/responsive.js"></script>
+    <script src="asset2/js/script.js"></script>
+    <style>
+    </style>
 </head>
 <body>
     <div class="nav-atas">
@@ -26,42 +28,20 @@
         </div>
         <nav class="main-nav" id="mainNav">
             <ul class="menu-list">
-                <li class="has-submenu beranda">
-                <a href="beranda.html">Beranda</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="berandaSubmenu">
-                    <li><a href="#welcome">Selamat Datang</a></li>
-                    <li><a href="#news">Berita Terbaru</a></li>
-                    <li><a href="#announcements">Pengumuman</a></li>
-                    <li><a href="#gallery">Galeri Foto</a></li>
-                </ul>
+                <li class="has-submenu">
+                    <a href="index.html">Beranda</a>
                 </li>
                 <li class="has-submenu">
-                <a href="profil.html" id="profilMenuToggle">Profil Desa</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="profilSubmenu">
-                    <li><a href="#data-desa">Data Desa</a></li>
-                    <li><a href="#sejarah">Sejarah</a></li>
-                    <li><a href="#visi-misi">Visi Misi</a></li>
-                    <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
-                </ul>
+                    <a href="tentang.html">Wisata</a>
                 </li>
                 <li class="has-submenu">
-                <a href="wisata.html">Wisata</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="wisataSubmenu">
-                    <li><a href="#objek-wisata">Objek Wisata</a></li>
-                    <li><a href="#paket-wisata">Paket Wisata</a></li>
-                    <li><a href="#akomodasi">Akomodasi</a></li>
-                    <li><a href="#kuliner">Kuliner Khas</a></li>
-                    <li><a href="#sewa-kendaraan">Sewa Kendaraan</a></li>
-                </ul>
+                    <a href="event.html">Informasi</a>
                 </li>
                 <li class="has-submenu">
-                <a href="layanan.html">Layanan</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
-                <ul class="submenu" id="layananSubmenu">
-                    <li><a href="#pelayanan-publik">Pelayanan Publik</a></li>
-                    <li><a href="#administrasi">Administrasi</a></li>
-                    <li><a href="#surat-menyurat">Surat Menyurat</a></li>
-                    <li><a href="#fasilitas-umum">Fasilitas Umum</a></li>
-                </ul>
+                    <a href="berita.html">Layanan</a>
+                </li>
+                <li class="has-submenu active">
+                    <a href="kontak.html">Profil Desa</a>
                 </li>
             </ul>
             <ul class="mobile-menu-list">
@@ -69,12 +49,13 @@
                 <li><a href="#sejarah">Sejarah</a></li>
                 <li><a href="#visi-misi">Visi Misi</a></li>
                 <li><a href="#struktur-organisasi">Struktur Organisasi</a></li>
+                <li><a href="#peta">Peta</a></li>
             </ul>
         </nav>
     </div>
     <header class="profil-header">
         <div class="header-bg">
-            <img src="asset/img/profil-desa/profil-bg2.jpg" alt="Desa Background" class="header-img">
+            <img src="asset/img/profil-desa/profil-bg-3.jpeg" alt="Desa Background" class="header-img">
             <h1 class="profil-title">Profil Desa</h1>
         </div>
         <div class="profil-nav" id="profil-nav">
@@ -83,6 +64,7 @@
                 <li><a href="#sejarah">SEJARAH</a></li>
                 <li><a href="#visi-misi">VISI MISI</a></li>
                 <li><a href="#struktur-organisasi">STRUKTUR ORGANISASI</a></li>
+                <li><a href="#peta">PETA</a></li>
             </ul>
         </div>
     </header>
@@ -126,6 +108,86 @@
                         <li>ADWI 2023 - 75 besar</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+
+            <h3 class="awards-title">Penghargaan</h3>
+            <div class="data-desa-awards" id="awards">
+                <!-- Card 1: UNESCO -->
+                <div class="award-card" data-gallery="awards-unesco" tabindex="0" aria-label="Buka galeri penghargaan UNESCO">
+                    <div class="award-media">
+                        <img src="asset/img/profil-desa/penghargaan-unesco.png" alt="Penyerahan penghargaan budaya" class="award-img" loading="lazy">
+                        <span class="award-badge">UNESCO</span>
+                    </div>
+                    <div class="award-body">
+                        <h4>Warisan Budaya Takbenda</h4>
+                        <p>Penghargaan UNESCO terkait budaya Pinisi. Diterima oleh budayawan DRS. Muhannis.</p>
+                        <button class="award-view" data-gallery="awards-unesco">Lihat Galeri</button>
+                    </div>
+                </div>
+                <!-- Card 2: ADWI -->
+                <div class="award-card" data-gallery="awards-adwi" tabindex="0" aria-label="Buka galeri penghargaan ADWI">
+                    <div class="award-media">
+                        <img src="asset/img/profil-desa/pssti.jpg" alt="Pencapaian ADWI" class="award-img" loading="lazy">
+                        <span class="award-badge">ADWI</span>
+                    </div>
+                    <div class="award-body">
+                        <h4>ADWI 2023</h4>
+                        <p>Masuk 375 besar (2023). Capaian kebanggaan Desa Wisata Andalan.</p>
+                        <button class="award-view" data-gallery="awards-adwi">Lihat Galeri</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoped styles for awards to avoid affecting other pages -->
+            <style>
+                .awards-title{ text-align:center;color:#fff;font-family:'Playfair Display SC',serif;letter-spacing:2px;margin:40px 0 16px;font-size:1.8rem;text-shadow:0 3px 16px rgba(0,0,0,.25);}    
+                .data-desa-awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:1100px;margin:10px auto 40px;padding:0 16px;}
+                .award-card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.86) 0%, rgba(214,227,243,.95) 100%);border:1px solid rgba(255,255,255,.6);border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,.12);overflow:hidden;transition:transform .28s ease, box-shadow .28s ease;}
+                .award-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.20);}    
+                .award-media{position:relative;aspect-ratio:16/9;overflow:hidden;}
+                .award-img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.03);} 
+                .award-badge{position:absolute;left:12px;top:12px;background:linear-gradient(135deg,#133E87,#608BC1);color:#fff;font-weight:700;padding:6px 10px;border-radius:999px;font-size:.78rem;box-shadow:0 6px 16px rgba(0,0,0,.18);}    
+                .award-body{padding:14px 16px 18px;color:#254a8a;}
+                .award-body h4{margin:2px 0 6px;font-size:1.1rem;color:#133E87;}
+                .award-body p{margin:0 0 10px;font-size:.96rem;line-height:1.45;}
+                .award-view{appearance:none;border:none;border-radius:999px;padding:8px 14px;background:linear-gradient(135deg,#133E87,#608BC1);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.18);} 
+                .award-view:hover{filter:brightness(1.05);}    
+                /* Modal Gallery */
+                .awards-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
+                .awards-modal.open{display:flex;}
+                .awards-modal-content{position:relative;width:min(92vw,1080px);height:min(82vh,720px);background:#0b2657;border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,.5);overflow:hidden;border:1px solid rgba(255,255,255,.18);}    
+                .awards-slider{height:100%;display:flex;touch-action:pan-y;transition:transform .35s ease;position:relative;z-index:1;}
+                .awards-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0b2657;}
+                .awards-slide img{max-width:100%;max-height:100%;object-fit:contain;} 
+                .awards-close,.awards-prev,.awards-next{position:absolute;top:12px;width:40px;height:40px;border:none;border-radius:50%;background:rgba(255,255,255,.9);color:#133E87;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:2;} 
+                .awards-close{right:12px;}    
+                .awards-prev{left:12px;top:calc(50% - 20px);} 
+                .awards-next{right:12px;top:calc(50% - 20px);} 
+                .awards-counter{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;color:#fff;background:rgba(0,0,0,.35);padding:6px 10px;border-radius:999px;font-size:.85rem;} 
+                @media (max-width: 600px){ .award-body p{font-size:.9rem;} .awards-modal-content{height:80vh;} }
+            </style>
+
+            <!-- Awards Modal (scoped to awards, fixed overlay) -->
+            <div class="awards-modal" id="awardsModal" aria-hidden="true" role="dialog" aria-label="Galeri Penghargaan">
+                <div class="awards-modal-content" role="document">
+                    <button class="awards-close" id="awardsClose" aria-label="Tutup">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="awards-prev" id="awardsPrev" aria-label="Sebelumnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="awards-next" id="awardsNext" aria-label="Berikutnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="awards-slider" id="awardsSlider"></div>
+                    <div class="awards-counter" id="awardsCounter">1 / 1</div>
                 </div>
             </div>
         </section>
@@ -232,27 +294,33 @@
                         </li>
                     </ul>
                     <div class="struktur-pdf-wrapper" id="bpdPdfWrapper" style="display:none;">
-                        <iframe src="asset/img/profil-desa/SK POKDARWIS DESA LEMBANNA 2025 terbaru PAW.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
+                        <iframe src="asset/img/profil-desa/SK-BPD.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
                     </div>
-                    <button class="struktur-pdf-btn" id="openBpdPdf">Lihat PDF</button>
+                    <button class="struktur-pdf-btn" id="openBpdPdf">Lihat SK BPD</button>
                 </div>
                
                 <div class="struktur-org" id="org3" style="display:none;">
                     <div class="struktur-org-title">Bumdes</div>
                     <ul class="struktur-list struktur-list-img">
                         <h3>PENGAWAS</h3>
-                        <li>Ketua: H. Syahran, ST</li>
-                        <li>Wakil Ketua: H. Muh. Sayuti</li>
-                        <li>Sekretaris: Zakariah</li>
+                        <li><img src="asset/img/profil-desa/bundes-ketua.jpeg" alt="" class="struktur-img">
+                            Ketua: H. Syahran, ST</li>
+                        <li><img src="asset/img/profil-desa/" alt="" class="struktur-img">
+                            Wakil Ketua: H. Muh. Sayuti</li>
+                        <li><img src="asset/img/profil-desa/bundes-sekretaris.jpeg" alt="" class="struktur-img">
+                            Sekretaris: Zakariah</li>
                         <h3>PELAKSANA OPERASIONAL</h3>
-                        <li>Direktur: Arsandi, S.Pd</li>
-                        <li>Sekretaris: Nurjayadi, SE</li>
-                        <li>Bendahara: Israwi, S.Pd</li>
+                        <li><img src="asset/img/profil-desa/bundes-direktur.jpeg" alt="" class="struktur-img">
+                            Direktur: Arsandi, S.Pd</li>
+                        <li><img src="asset/img/profil-desa/bundes-sekretaris.jpeg" alt="" class="struktur-img">
+                            Sekretaris: Nurjayadi, SE</li>
+                        <li><img src="asset/img/profil-desa/bundes-bendahara.jpeg" alt="" class="struktur-img">
+                            Bendahara: Israwi, S.Pd</li>
                     </ul>
                     <div class="struktur-pdf-wrapper" id="bumdesPdfWrapper" style="display:none;">
                         <iframe src="asset/img/profil-desa/SK BUMDES MANDALA.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
                     </div>
-                    <button class="struktur-pdf-btn" id="openBumdesPdf">Lihat PDF</button>
+                    <button class="struktur-pdf-btn" id="openBumdesPdf">Lihat SK Bumdes</button>
                 </div>
                 <div class="struktur-org" id="org4" style="display:none;">
                     <div class="struktur-org-title">Karang Taruna</div>
@@ -344,16 +412,16 @@
                     <div class="struktur-pdf-wrapper" id="karangTarunaPdfWrapper" style="display:none;">
                         <iframe src="asset/img/profil-desa/SK KARANG TARUNA DESA LEMBANNA.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
                     </div>
-                    <button class="struktur-pdf-btn" id="openKarangTarunaPdf">Lihat PDF</button>
+                    <button class="struktur-pdf-btn" id="openKarangTarunaPdf">Lihat SK Karang Taruna</button>
                 </div>
                 <div class="struktur-org" id="org5" style="display:none;">
                     <div class="struktur-org-title">Pokdarwis</div>
                     <ul class="struktur-list struktur-list-img">
-                        <li> <img src="" alt="">
+                        <li> <img src="asset/img/profil-desa/pokdarwis-ketua.jpeg" alt="" class="struktur-img">
                             Ketua: Abdul Gaffar</li>
-                        <li><img src="" alt="">
+                        <li><img src="asset/img/profil-desa/pokdarwis-sekretaris.jpeg" alt="" class="struktur-img">
                             Sekretaris: Abdul Wahab, S,Pd</li>
-                        <li><img src="" alt="">
+                        <li><img src="asset/img/profil-desa/pokdarwis-bendahara.jpeg" alt="" class="struktur-img">
                             Bendahara: Andi Inar, S.Pd</li>
                         
                         <h3>Seksi</h3>
@@ -376,65 +444,293 @@
                     <div class="struktur-pdf-wrapper" id="pokdarwisPdfWrapper" style="display:none;">
                         <iframe src="asset/img/profil-desa/SK POKDARWIS DESA LEMBANNA 2025 terbaru PAW.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
                     </div>
-                    <button class="struktur-pdf-btn" id="openPokdarwisPdf">Lihat PDF</button>
+                    <button class="struktur-pdf-btn" id="openPokdarwisPdf">Lihat SK Pokdarwis</button>
                 </div>
                 <div class="struktur-org" id="org6" style="display:none;">
                     <div class="struktur-org-title">Sardes</div>
         
                     <ul class="struktur-list struktur-list-img">
-                        <li>RT 01: Pak Budi</li>
-                        <li>RT 02: Pak Joko</li>
-                        <li>RW 01: Pak Hasan</li>
-                        <li>RW 02: Pak Amir</li>
+                        <li> <img src="" alt="" class="struktur-img">
+                            Ketua: </li>
+                        <li><img src="" alt="" class="struktur-img">
+                            Sekretaris: </li>
+                        <li><img src="" alt="" class="struktur-img">
+                            Bendahara: </li>
+                        
                     </ul>
                      <div class="struktur-pdf-wrapper" id="sardesPdfWrapper" style="display:none;">
                         <iframe src="asset/img/profil-desa/SK PENGURUS SARDES 1,1.pdf" width="100%" height="400" style="border:1px solid #ccc; border-radius:8px;"></iframe>
                     </div>
-                    <button class="struktur-pdf-btn" id="openSardesPdf">Lihat PDF</button>
+                    <button class="struktur-pdf-btn" id="openSardesPdf">Lihat SK Sardes</button>
                 </div>
             </div>
         </section>
-    </main>
-    <footer class="main-footer">
-        <div class="footer-columns">
-            <div class="footer-col">
-                <div class="footer-title">Profil Desa</div>
-                <ul>
-                    <li>Data Desa</li>
-                    <li>Sejarah Desa</li>
-                    <li>Visi-Misi Desa</li>
-                    <li>Struktur Organisasi</li>
-                </ul>
+
+        <section class="peta-section" id="peta" aria-labelledby="petaTitle">
+            <div class="peta-title" id="petaTitle">PETA</div>
+
+            <!-- Modern Map Tabs -->
+            <div class="peta-tabs" role="tablist" aria-label="Peta dan Jalur Evakuasi">
+                <button class="peta-tab-btn active" role="tab" aria-selected="true" aria-controls="panelPeta" id="tabPeta">Peta Desa</button>
+                <button class="peta-tab-btn" role="tab" aria-selected="false" aria-controls="panelEvakuasi" id="tabEvakuasi">Jalur Evakuasi</button>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Wisata</div>
-                <ul>
-                    <li>Objek Wisata</li>
-                    <li>Atraksi Wisata</li>
-                    <li>Akomodasi</li>
-                    <li>Kuliner</li>
-                    <li>Sewa Mobil Motor</li>
-                </ul>
+
+            <div class="peta-wrapper">
+                <!-- Panel: Peta Desa -->
+                <div class="peta-panel active reveal" id="panelPeta" role="tabpanel" aria-labelledby="tabPeta">
+                    <div class="peta-media">
+                        <figure class="peta-figure" tabindex="0" aria-label="Buka detail Peta Desa">
+                            <img src="asset/img/profil-desa/peta.jpeg" alt="Peta Desa Wisata Andalan" class="peta-img" loading="lazy">
+                            <figcaption class="peta-caption">Peta Desa Wisata Andalan</figcaption>
+                            <button class="peta-view-btn" data-index="0" aria-label="Lihat peta lebih jelas">Lihat Detail</button>
+                        </figure>
+                    </div>
+                    <div class="peta-desc">
+                        <h3>Gambaran Umum Peta Desa</h3>
+                        <p>
+                            Peta menampilkan tata letak Desa Wisata Andalan beserta area pemukiman, jalur utama menuju Pantai Mandala Ria, dan lokasi fasilitas penting.
+                            Visual dibuat jelas untuk memudahkan navigasi wisatawan maupun warga.
+                        </p>
+                        <ul class="peta-badges" aria-label="Legend Peta">
+                            <li class="badge">Akses Utama</li>
+                            <li class="badge">Pantai</li>
+                            <li class="badge">Fasilitas Umum</li>
+                            <li class="badge">Area Wisata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Panel: Jalur Evakuasi -->
+                <div class="peta-panel reveal" id="panelEvakuasi" role="tabpanel" aria-labelledby="tabEvakuasi" hidden>
+                    <div class="peta-media">
+                        <figure class="peta-figure" tabindex="0" aria-label="Buka detail Jalur Evakuasi">
+                            <img src="asset/img/profil-desa/Jalur-evakuasi.jpg" alt="Peta Jalur Evakuasi Desa Wisata Andalan" class="peta-img" loading="lazy">
+                            <figcaption class="peta-caption">Peta Jalur Evakuasi</figcaption>
+                            <button class="peta-view-btn" data-index="1" aria-label="Lihat jalur evakuasi lebih jelas">Lihat Detail</button>
+                        </figure>
+                    </div>
+                    <div class="peta-desc">
+                        <h3>Jalur Evakuasi dan Titik Kumpul</h3>
+                        <p>
+                            Jalur evakuasi ini merupakan panduan saat keadaan darurat. Ikuti rute yang ditandai menuju titik kumpul terdekat dan
+                            ikuti arahan petugas. Pastikan Anda mengenali jalur utama dan alternatif.
+                        </p>
+                        <ul class="peta-badges" aria-label="Legend Evakuasi">
+                            <li class="badge badge-warn">Rute Evakuasi</li>
+                            <li class="badge">Titik Kumpul</li>
+                            <li class="badge">Fasilitas Kesehatan</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Informasi</div>
-                <ul>
-                    <li>Agenda</li>
-                    <li>Berita</li>
-                </ul>
+
+            <!-- Modal interaktif untuk melihat gambar detail -->
+            <div class="map-modal" id="mapModal" aria-hidden="true" role="dialog" aria-label="Pratinjau Peta">
+                <div class="map-modal-content" role="document">
+                    <button class="map-close" id="mapClose" aria-label="Tutup">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="map-prev" id="mapPrev" aria-label="Sebelumnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="map-next" id="mapNext" aria-label="Berikutnya">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="map-stage">
+                        <img id="mapStageImg" alt="Pratinjau gambar" />
+                    </div>
+                    <div class="map-counter" id="mapCounter">1 / 2</div>
+                </div>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Layanan</div>
-                <ul>
-                    <li>Fasilitas Umum</li>
-                    <li>Produk</li>
-                </ul>
+
+
+        </section>
+
+        <section id="informasi" class="map-section">
+            <div class="map-container">
+                <div class="map-pane">
+                    <div class="map-image">
+                        <!-- Map Markers -->
+                    </div>
+                </div>
+                <aside class="facilities-pane">
+                    <header class="facilities-header">
+                        <h2>Fasilitas</h2>
+                        <p>Informasi fasilitas yang tersedia di Desa Lembanna berdasarkan kategori.</p>
+                    </header>
+                    <div class="facility-grid">
+                        <!-- Pendidikan -->
+                        <article class="facility-card facility-education">
+                            <h3 class="facility-title">Pendidikan</h3>
+                            <ul class="facility-list">
+                                <li data-marker="11">
+                                    <span class="facility-marker" data-type="education">11</span>
+                                    <span class="facility-name">TK Mamampang</span>
+                                </li>
+                                <li data-marker="20">
+                                    <span class="facility-marker" data-type="education">20</span>
+                                    <span class="facility-name">TK Purnita Lopi</span>
+                                </li>
+                                <li data-marker="14">
+                                    <span class="facility-marker" data-type="education">14</span>
+                                    <span class="facility-name">SD 219</span>
+                                </li>
+                                <li data-marker="15">
+                                    <span class="facility-marker" data-type="education">15</span>
+                                    <span class="facility-name">SMP 33 Bulukumba</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Tempat Ibadah -->
+                        <article class="facility-card facility-worship">
+                            <h3 class="facility-title">Tempat Ibadah</h3>
+                            <ul class="facility-list">
+                                <li data-marker="10">
+                                    <span class="facility-marker" data-type="worship">10</span>
+                                    <span class="facility-name">Masjid Raya Nurul Wathan</span>
+                                </li>
+                                <li data-marker="16">
+                                    <span class="facility-marker" data-type="worship">16</span>
+                                    <span class="facility-name">Masjid Nurul Ilmi</span>
+                                </li>
+                                <li data-marker="17">
+                                    <span class="facility-marker" data-type="worship">17</span>
+                                    <span class="facility-name">Masjid Jabbal Nur</span>
+                                </li>
+                                <li data-marker="18">
+                                    <span class="facility-marker" data-type="worship">18</span>
+                                    <span class="facility-name">Masjid Nurul Iman</span>
+                                </li>
+                                <li>
+                                    <span class="facility-marker" data-type="worship">-</span>
+                                    <span class="facility-name">Masjid Hasanatuk Jannah</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Wisata -->
+                        <article class="facility-card facility-tourism">
+                            <h3 class="facility-title">Wisata</h3>
+                            <ul class="facility-list">
+                                <li class="is-cave" data-marker="5">
+                                    <span class="facility-marker" data-type="tourism">5</span>
+                                    <span class="facility-name">Goa Passea</span>
+                                </li>
+                                <li class="is-cave" data-marker="12">
+                                    <span class="facility-marker" data-type="tourism">12</span>
+                                    <span class="facility-name">Goa Liang Lajaya</span>
+                                </li>
+                                <li data-marker="6">
+                                    <span class="facility-marker" data-type="tourism">6</span>
+                                    <span class="facility-name">Kawasan Wisata Batu Tongkaraya</span>
+                                </li>
+                                <li data-marker="7">
+                                    <span class="facility-marker" data-type="tourism">7</span>
+                                    <span class="facility-name">Kawasan Wisata Pantai Mandala Ria</span>
+                                </li>
+                                <li data-marker="19">
+                                    <span class="facility-marker" data-type="tourism">19</span>
+                                    <span class="facility-name">Tebing Mattoanging</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Fasilitas Umum -->
+                        <article class="facility-card facility-public">
+                            <h3 class="facility-title">Fasilitas Umum</h3>
+                            <ul class="facility-list">
+                                <li data-marker="1">
+                                    <span class="facility-marker" data-type="government">1</span>
+                                    <span class="facility-name">Kantor Desa</span>
+                                </li>
+                                <li data-marker="9">
+                                    <span class="facility-marker" data-type="market">9</span>
+                                    <span class="facility-name">Pasar</span>
+                                </li>
+                                <li data-marker="3">
+                                    <span class="facility-marker" data-type="bank">3</span>
+                                    <span class="facility-name">ATM/Fasilitas Perbankan</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        </main>
+   
+
+    <div class="cta-waves">
+            <!-- Wave Layer 1 - Front wave -->
+            <div class="cta-wave wave-layer-1">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,120V46.29c47.79-22.2,103.59-32.17,158-28,70.36,5.37,136.33,33.31,206.8,37.5C438.64,87.57,512.34,66.33,583,47.95c69.27-18,138.3-24.88,209.4-13.08,36.15,6,69.85,17.84,104.45,29.34C989.49,95,1113,134.29,1200,67.53V120Z" fill="currentColor"></path>
+                </svg>
+            </div>
+            <!-- Wave Layer 2 - Middle wave -->
+            <div class="cta-wave wave-layer-2">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,120V104.19c13-21.11,27.64-41.05,47.69-56.24,51.72-39.22,117.31-39.49,176.89-20.07,31.15,10.15,60.09,26.07,89.67,39.8,40.92,19,84.73,46,130.83,49.67,36.26,2.85,70.9-9.42,98.6-31.56,31.77-25.39,62.32-62,103.63-73,40.44-10.79,81.35,6.69,119.13,24.28s75.16,39,116.92,43.05c59.73,5.85,113.28-22.88,168.9-38.84,30.2-8.66,59-6.17,87.09,7.5,22.43,10.89,48,26.93,60.65,49.24V120Z" opacity="0.7" fill="currentColor"></path>
+                </svg>
+            </div>
+            <!-- Wave Layer 3 - Back wave -->
+            <div class="cta-wave wave-layer-3">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,120V114.37c149.93-53.37,314.09-65.69,475.83-36.94,43,7.64,84.23,20.12,127.61,26.46,59,8.63,112.48-12.24,165.56-35.4C827.93,42.78,886,24.76,951.2,30c86.53,7,172.46,45.71,248.8,84.81V120Z" opacity="0.4" fill="currentColor"></path>
+                </svg>
             </div>
         </div>
-        <div class="footer-copyright">
-            Copyright
+
+    
+    <footer id="layanan" class="site-footer">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <!-- Column 1: Profil Desa -->
+                <div class="footer-column">
+                    <h3>Profil Desa</h3>
+                    <ul>
+                        <li><a href="#">Data Desa</a></li>
+                        <li><a href="#">Sejarah Desa</a></li>
+                        <li><a href="#">Visi-Misi Desa</a></li>
+                        <li><a href="#">Struktur Organisasi</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2: Wisata -->
+                <div class="footer-column">
+                    <h3>Wisata</h3>
+                    <ul>
+                        <li><a href="#">Objek Wisata</a></li>
+                        <li><a href="#">Atraksi Wisata</a></li>
+                        <li><a href="#">Akomodasi</a></li>
+                        <li><a href="#">Kuliner</a></li>
+                        <li><a href="#">Sewa Mobil Motor</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Informasi -->
+                <div class="footer-column">
+                    <h3>Informasi</h3>
+                    <ul>
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Berita</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4: Layanan -->
+                <div class="footer-column">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#">Layanan Desa</a></li>
+                        <li><a href="#">Produk</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 Desa Lembanna</p>
+            </div>
         </div>
     </footer>
+
     <div id="imgModal" class="img-modal">
         <span class="img-modal-close" id="imgModalClose">&times;</span>
         <img class="img-modal-content" id="imgModalContent" src="" alt="Struktur Organisasi BPD">
@@ -484,6 +780,8 @@
             </a>
         </div>
     </nav>
+
+    
 </body>
 </html>
 </html>
