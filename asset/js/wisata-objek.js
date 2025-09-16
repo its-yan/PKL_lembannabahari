@@ -6,6 +6,15 @@ const wisataData = {
         title: 'Pantai Mandala',
         location: 'Lembanabahari, Bulukumba',
         image: 'asset/img/wisata andalah/pantai-andalan-1.jpeg',
+        images: [
+            'asset/img/wisata andalah/pantai-andalan-1.jpeg',
+            'asset/img/wisata andalah/pantai-mandala-2.jpeg',
+            'asset/img/wisata andalah/pantai-mandala-3.jpeg',
+            'asset/img/wisata andalah/pantai-mandala-4.jpeg',
+            'asset/img/wisata andalah/pantai-mandala-5.webp',
+            'asset/img/wisata andalah/pantai-mandala-6.webp',
+            'asset/img/wisata andalah/pantai-mandala-7.webp'
+        ],
         description: 'Pantai Mandala adalah salah satu destinasi wisata unggulan di Desa Lembanna Bahari. Pantai ini menawarkan pemandangan laut yang memukau dengan pasir putih yang bersih dan air laut yang jernih. Pantai ini sangat cocok untuk berbagai aktivitas wisata bahari seperti berenang, snorkeling, dan menikmati sunset yang indah.',
         features: [
             'Pasir putih yang bersih',
@@ -21,6 +30,11 @@ const wisataData = {
         title: 'Gua Passea',
         location: 'Lembanabahari, Bulukumba',
         image: 'asset/img/wisata andalah/gua-passea-1.webp',
+        images: [
+            'asset/img/wisata andalah/gua-passea-1.webp',
+            'asset/img/wisata andalah/gua-passea-2.jpg',
+            'asset/img/wisata andalah/gua-passea-3.jpeg'
+        ],
         description: 'Gua Passea adalah gua alami yang memiliki keunikan tersendiri dengan stalaktit dan stalagmit yang indah. Gua ini menjadi daya tarik wisata alam yang menawarkan pengalaman petualangan yang menantang sekaligus edukatif tentang formasi geologi.',
         features: [
             'Formasi stalaktit dan stalagmit',
@@ -36,6 +50,12 @@ const wisataData = {
         title: 'Tebing Mattoanging',
         location: 'Lembanabahari, Bulukumba',
         image: 'asset/img/wisata andalah/tebing-mattoanging.webp',
+        images: [
+            'asset/img/wisata andalah/tebing-mattoanging.webp',
+            'asset/img/wisata andalah/tebing-mattoanging-2.webp',
+            'asset/img/wisata andalah/tebing-mattoanging-3.webp',
+            'asset/img/wisata andalah/tebing-mattoanging-4.jpg'
+        ],
         description: 'Tebing Mattoanging menawarkan pemandangan spektakuler dari ketinggian dengan view laut lepas yang menakjubkan. Tempat ini sangat populer untuk menikmati sunrise dan sunset, serta menjadi spot favorit para fotografer dan pecinta alam.',
         features: [
             'Pemandangan laut lepas',
@@ -51,6 +71,10 @@ const wisataData = {
         title: 'Tebing Tongkarayya',
         location: 'Lembanabahari, Bulukumba',
         image: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg',
+        images: [
+            'asset/img/wisata andalah/batu-tongkarayya-1.jpg',
+            'asset/img/wisata andalah/camping-ground-1.jpg'
+        ],
         description: 'Tebing Tongkarayya adalah destinasi wisata alam yang menawarkan panorama alam yang memukau. Dengan ketinggian yang cukup tinggi, pengunjung dapat menikmati pemandangan 360 derajat yang mencakup laut, hutan, dan perkampungan sekitar.',
         features: [
             'Panorama 360 derajat',
@@ -85,12 +109,34 @@ function initializeWisataObjek() {
                 card.click();
             }
         });
+
+        // Initialize image rotation on hover
+        initializeImageRotation(card);
     });
 
     // Event listener untuk tombol close modal wisata
     const closeBtn = document.getElementById('wisataModalCloseBtn');
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', () => {
+            // clear slideshow interval if present
+            const modal = document.getElementById('wisataModal');
+            if (modal && modal.dataset.slideInterval) {
+                try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+                delete modal.dataset.slideInterval;
+            }
+            closeModal();
+        });
+    }
+
+    // Also clear interval when clicking outside modal content
+    const modalEl = document.getElementById('wisataModal');
+    if (modalEl) {
+        modalEl.addEventListener('click', (e) => {
+            if (e.target === modalEl && modalEl.dataset.slideInterval) {
+                try { clearInterval(Number(modalEl.dataset.slideInterval)); } catch (e2) {}
+                delete modalEl.dataset.slideInterval;
+            }
+        });
     }
 
     // Inisialisasi animasi kartu saat masuk viewport
@@ -125,7 +171,15 @@ function openWisataModal(wisataKey) {
     }
 
     // Populate modal content
-    document.getElementById('modalImage').src = data.image;
+    const imageEl = document.getElementById('modalImage');
+    // Build up to 4 images for slideshow (duplicate if fewer)
+    let images = Array.isArray(data.images) && data.images.length ? data.images.slice(0, 4) : [data.image];
+    if (images.length < 4) {
+        const fill = [];
+        for (let i = 0; i < 4 - images.length; i++) fill.push(images[i % images.length]);
+        images = images.concat(fill);
+    }
+    imageEl.src = images[0];
     document.getElementById('modalTitle').textContent = data.title;
     document.getElementById('modalLocation').textContent = data.location;
     document.getElementById('modalDescription').textContent = data.description;
@@ -147,12 +201,152 @@ function openWisataModal(wisataKey) {
         sejarahEl.style.display = data.sejarah ? 'block' : 'none';
     }
 
+    // Clear previous slideshow if any
+    if (modal.dataset.slideInterval) {
+        try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+        delete modal.dataset.slideInterval;
+    }
+
+    // Start header slideshow (every 2s)
+    let idx = 0;
+    const intervalId = setInterval(() => {
+        idx = (idx + 1) % images.length;
+        // smooth fade: fade out, swap src, then fade in on load
+        imageEl.style.opacity = '0';
+        const nextSrc = images[idx];
+        // Use a slight delay so opacity transition begins before src change
+        setTimeout(() => {
+            const handleLoad = () => {
+                imageEl.removeEventListener('load', handleLoad);
+                requestAnimationFrame(() => {
+                    imageEl.style.opacity = '1';
+                });
+            };
+            imageEl.addEventListener('load', handleLoad);
+            imageEl.src = nextSrc;
+        }, 150);
+    }, 2000);
+    modal.dataset.slideInterval = String(intervalId);
+
     // Show modal with animation
     modal.style.display = 'block';
+    // Guard against immediate outside-click close right after opening
+    modal.dataset.openGuard = '1';
+    setTimeout(() => { try { delete modal.dataset.openGuard; } catch (e) {} }, 250);
     document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
     
     // Add entrance animation
     setTimeout(() => {
         modal.querySelector('.modal-content').style.animation = 'slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
     }, 10);
+}
+
+// Image rotation function for cards
+function initializeImageRotation(card) {
+    const cardImage = card.querySelector('.card-image');
+    if (!cardImage) return;
+
+    const wisataKey = card.dataset.wisataKey;
+    const data = wisataData[wisataKey];
+    if (!data || !data.images || data.images.length <= 1) return;
+
+    // Create rotating images
+    const images = data.images.slice(0, 4); // Use up to 4 images
+    if (images.length < 2) return;
+
+    // Save the existing card-overlay before clearing
+    const existingOverlay = cardImage.querySelector('.card-overlay');
+    
+    // Clear existing content but preserve overlay
+    const existingImg = cardImage.querySelector('img');
+    if (existingImg) {
+        existingImg.remove();
+    }
+
+    // Create rotating image elements
+    images.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = data.title + ' - Image ' + (index + 1);
+        img.className = 'rotating-image';
+        if (index === 0) img.classList.add('active');
+        cardImage.appendChild(img);
+    });
+
+    // Re-add the overlay if it existed
+    if (existingOverlay) {
+        cardImage.appendChild(existingOverlay);
+    }
+
+    let currentIndex = 0;
+    let rotationInterval = null;
+
+    // Start rotation on hover
+    card.addEventListener('mouseenter', () => {
+        if (rotationInterval) clearInterval(rotationInterval);
+        
+        // Change image immediately on hover
+        const images = cardImage.querySelectorAll('.rotating-image');
+        if (images.length > 1) {
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }
+        
+        // Start continuous rotation every second
+        rotationInterval = setInterval(() => {
+            const images = cardImage.querySelectorAll('.rotating-image');
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }, 1000); // Change every 1 second
+    });
+
+    // Stop rotation on mouse leave
+    card.addEventListener('mouseleave', () => {
+        if (rotationInterval) {
+            clearInterval(rotationInterval);
+            rotationInterval = null;
+        }
+
+        // Reset to first image
+        const images = cardImage.querySelectorAll('.rotating-image');
+        images.forEach((img, index) => {
+            img.classList.remove('active', 'entering', 'exiting', 'next');
+            if (index === 0) img.classList.add('active');
+        });
+        currentIndex = 0;
+    });
 }
