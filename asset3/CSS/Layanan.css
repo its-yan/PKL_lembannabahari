@@ -1110,3 +1110,92 @@ body {
   padding-top: 30px;
   border-top: 1px solid rgba(232, 232, 232, 0.15);
 }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+  }
+}
+/* Navbar responsive styles are now handled by asset2/styles.css */
+/* Responsive Design */
+@media (max-width: 400px) {
+
+  .layanan-page .header-title {
+    font-size: 2.5rem;
+  }
+
+  .layanan-page .header-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .layanan-page .header-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .layanan-page .products-grid,
+  .layanan-page .facilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .layanan-page .content-section {
+    padding: 2rem 1rem;
+  }
+
+  .layanan-page .footer-columns {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem 0;
+  }
+
+  .layanan-page .footer-copyright {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .layanan-page .hiasan-ship {
+    left: 35%;
+    top: 50%;
+    width: 140px;
+  }
+
+  .layanan-page .hiasan-kue {
+    left: 25%;
+    width: 90px;
+  }
+
+  .layanan-page .hiasan-bubble2 {
+    left: 25%;
+    width: 100px;
+  }
+
+  .layanan-page .hiasan-bubble1 {
+    left: 50%;
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .layanan-page .header-title {
+    font-size: 2rem;
+  }
+
+  .layanan-page .header-subtitle {
+    font-size: var(--fontM);
+  }
+
+  .layanan-page .section-title {
+    font-size: var(--fontB);
+  }
+
+  .layanan-page .product-card,
+  .layanan-page .facility-card {
+    margin: 0 0.5rem;
+  }
+}

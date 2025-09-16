@@ -904,3 +904,126 @@
         height: 60px;
     }
 }
+
+/* === Unified Bold Title Component (Informasi) === */
+.page-title{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    margin: 8px auto 12px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(#ffffff1a,#ffffff1a) padding-box,
+                linear-gradient(135deg, var(--secondary-color), var(--primary-color)) border-box;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.page-title::before{
+    content: "";
+    position: absolute;
+    left: -16px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff 0%, #fff 25%, var(--secondary-color) 26%, var(--primary-color) 100%);
+    box-shadow: 0 6px 14px rgba(0,0,0,.25);
+}
+.page-title::after{
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; bottom: -12px;
+    height: 4px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--third-color), var(--secondary-color), var(--third-color));
+    background-size: 200% 100%;
+    box-shadow: 0 8px 18px rgba(0,0,0,.25);
+    animation: infoTitleSlide 6s linear infinite;
+}
+@keyframes infoTitleSlide{ to{ background-position: 200% 0; } }
+
+/* Section titles in Informasi content */
+.section-header h2{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    margin: 8px 0 18px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    letter-spacing: .6px;
+    color: var(--primary-color);
+    background: linear-gradient(#ffffffcc,#ffffffcc) padding-box,
+                linear-gradient(135deg, var(--secondary-color), var(--third-color)) border-box;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(2,6,23,.12);
+}
+.section-header h2::before{
+    content: "";
+    position: absolute;
+    left: -12px; top: 50%; transform: translateY(-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff 0%, #fff 25%, var(--secondary-color) 26%, var(--third-color) 100%);
+    box-shadow: 0 4px 10px rgba(2,6,23,.25);
+}
+.section-header h2::after{
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; bottom: -10px;
+    height: 3px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--third-color), var(--secondary-color));
+    box-shadow: 0 6px 14px rgba(2,6,23,.12);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .page-title::after{ animation: none; }
+}
+
+/* ===== ULTRA-MODERN BOTTOM NAVIGATION (ported from profil-responsive.css) ===== */
+.mobile-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  width: 100%;
+  margin: 0;
+  z-index: 999;
+  transform: none;
+  box-sizing: border-box;
+}
+.mobile-nav-container {
+  background: linear-gradient(120deg, rgb(0, 24, 133), var(--secondary-color), var(--secondary-color), rgb(0, 24, 133));
+  backdrop-filter: blur(40px) saturate(200%);
+  box-shadow: 0 8px 32px rgba(33, 40, 129, 0.37);
+  padding: 0 0 env(safe-area-inset-bottom, 0px) 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 0;
+  position: relative; overflow: hidden; width: 100%;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+.mobile-nav-container::before {
+  content: ""; position: absolute; inset: 0;
+  background: conic-gradient(from 0deg, transparent, rgba(102,126,234,0.03), transparent, rgba(118,75,162,0.03), transparent);
+  animation: rotate 20s linear infinite; pointer-events: none;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+.mobile-nav-item { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 12px; text-decoration: none; color: rgba(255,255,255,0.8); transition: all .6s cubic-bezier(0.23,1,0.320,1); min-width: 70px; cursor: pointer; background: transparent; z-index: 2; overflow: hidden; }
+.mobile-nav-icon { width: 28px; height: 28px; margin-bottom: 6px; position: relative; transition: all .6s cubic-bezier(0.68,-0.55,0.265,1.55); }
+.mobile-nav-icon svg { width: 100%; height: 100%; fill: currentColor; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); transition: all .4s cubic-bezier(0.23,1,0.320,1); }
+.mobile-nav-label { font-size: .6rem; font-weight: 700; text-align: center; opacity: .95; transition: all .4s cubic-bezier(0.23,1,0.320,1); font-family: 'Karma', serif; line-height: 1.1; }
+.mobile-nav-item.active { color: #fff; transform: translateY(-6px) scale(1.08); }
+.mobile-nav-item.active::before { content: ""; position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: linear-gradient(135deg,#6d98ee 0%,#b5d2f6 100%); border-radius: 8px; transform: translate(-50%,-50%); z-index: -1; box-shadow: 0 0 20px rgba(102,126,234,0.6); animation: pulseGlow 2s ease-in-out infinite; }
+@keyframes pulseGlow { 0%,100%{ transform: translate(-50%,-50%) scale(1); box-shadow: 0 0 20px rgba(102,126,234,0.6);} 50%{ transform: translate(-50%,-50%) scale(1.1); box-shadow: 0 0 30px rgba(102,126,234,0.8);} }
+.mobile-nav-item.ripple::after { content: ""; position: absolute; top: 50%; left: 50%; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+@media (max-width: 600px) {
+  .mobile-bottom-nav { display: block; left: 0; right: 0; }
+  body { padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); margin: 0; }
+  html { margin: 0; padding: 0; }
+  .mobile-nav-container { margin: 0; width: 100%; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }

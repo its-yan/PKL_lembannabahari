@@ -334,4 +334,65 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // =====================
+    // PETA: Tabs, Reveal, Modal
+    // =====================
+    (function(){
+        const tabPeta = document.getElementById('tabPeta');
+        const tabEv = document.getElementById('tabEvakuasi');
+        const panelPeta = document.getElementById('panelPeta');
+        const panelEv = document.getElementById('panelEvakuasi');
+
+        function activate(tab){
+            if(!tab || !tabPeta || !tabEv || !panelPeta || !panelEv) return;
+            const isPeta = tab === tabPeta;
+            tabPeta.classList.toggle('active', isPeta);
+            tabEv.classList.toggle('active', !isPeta);
+            tabPeta.setAttribute('aria-selected', isPeta);
+            tabEv.setAttribute('aria-selected', !isPeta);
+            panelPeta.hidden = !isPeta;
+            panelEv.hidden = isPeta;
+            panelPeta.classList.toggle('active', isPeta);
+            panelEv.classList.toggle('active', !isPeta);
+        }
+        tabPeta && tabPeta.addEventListener('click', ()=>activate(tabPeta));
+        tabEv && tabEv.addEventListener('click', ()=>activate(tabEv));
+
+        // Reveal on scroll khusus peta
+        const ioPeta = new IntersectionObserver((entries)=>{
+            entries.forEach(e=>{ if(e.isIntersecting) { e.target.classList.add('in'); ioPeta.unobserve(e.target);} });
+        }, { threshold:.15 });
+        document.querySelectorAll('#peta .reveal').forEach(el=>ioPeta.observe(el));
+
+        // Modal gallery untuk peta
+        const images = [
+            'asset/img/profil-desa/peta.jpeg',
+            'asset/img/profil-desa/Jalur-evakuasi.jpg'
+        ];
+        const modal = document.getElementById('mapModal');
+        const stage = document.getElementById('mapStageImg');
+        const counter = document.getElementById('mapCounter');
+        const closeBtn = document.getElementById('mapClose');
+        const prevBtn = document.getElementById('mapPrev');
+        const nextBtn = document.getElementById('mapNext');
+        let idx = 0;
+        function update(){ if(stage && counter){ stage.src = images[idx]; counter.textContent = (idx+1)+' / '+images.length; } }
+        function open(i){ if(!modal) return; idx = i; update(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+        function close(){ if(!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+        function prev(){ idx = (idx-1+images.length)%images.length; update(); }
+        function next(){ idx = (idx+1)%images.length; update(); }
+        document.querySelectorAll('#peta .peta-view-btn, #peta .peta-figure').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const i = Number(btn.getAttribute('data-index')) || 0;
+                open(i);
+            })
+        });
+        closeBtn && closeBtn.addEventListener('click', close);
+        prevBtn && prevBtn.addEventListener('click', prev);
+        nextBtn && nextBtn.addEventListener('click', next);
+        modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
+        document.addEventListener('keydown', (e)=>{ if(!modal || !modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+    })();
+
 });

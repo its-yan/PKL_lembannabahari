@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAgendaCards();
     initMobileMenu();
     initScrollEffects();
+    initBottomNav();
 });
 
 // ===== TAB NAVIGATION =====
@@ -857,6 +858,52 @@ function initScrollEffects() {
             parallax.style.transform = `translateY(${speed}px)`;
         }
     });
+}
+
+// ===== BOTTOM NAV INITIALIZER =====
+function initBottomNav() {
+  const nav = document.querySelector('.mobile-bottom-nav');
+  if (!nav) return;
+  const items = nav.querySelectorAll('.mobile-nav-item');
+  // Determine current page key from URL (e.g., informasi, profil, wisata)
+  const current = (location.pathname.split('/').pop() || 'informasi.html').replace('.html','');
+
+  // Map route keys used in data-page to actual pages
+  const pageMap = {
+    beranda: 'index',
+    profil: 'profil',
+    wisata: 'wisata',
+    layanan: 'Layanan',
+    berita: 'informasi' // for informasi page
+  };
+
+  items.forEach(item => {
+    const page = item.dataset.page;
+    const key = pageMap[page] || page;
+    if (current === key) item.classList.add('active');
+
+    // Ripple + active update + navigation
+    item.addEventListener('click', (e) => {
+      // allow normal anchor navigation but give quick feedback
+      item.classList.add('ripple');
+      setTimeout(() => item.classList.remove('ripple'), 350);
+
+      // If already correct href, let default run; otherwise redirect explicitly
+      const href = item.getAttribute('href') || '#';
+      if (href === '#') e.preventDefault();
+      // Update active state visually
+      items.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      // Handle special case for berita/informasi
+      if (page === 'berita') {
+        e.preventDefault();
+        if (!/informasi\.html$/i.test(location.pathname)) {
+          window.location.href = 'informasi.html';
+        }
+      }
+    }, { passive: false });
+  });
 }
 
 // ===== UTILITY FUNCTIONS =====

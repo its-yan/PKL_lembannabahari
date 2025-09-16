@@ -9,13 +9,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="asset/css/profil-responsive.css">
     <link rel="stylesheet" href="asset/css/wisata-responsive.css">
+    <link rel="stylesheet" href="asset/css/kuliner-enhancements.css">
+    <link rel="stylesheet" href="asset/css/ak-sewa-enhancements.css">
+    <script src="asset/js/global.js"></script>
     <script src="asset/js/index.js"></script>
     <script src="asset/js/wisata-objek.js"></script>
     <script src="asset/js/atraksi.js"></script>
     <script src="asset/js/akomodasi.js"></script>
     <script src="asset/js/kuliner.js"></script>
     <script src="asset/js/sewa.js"></script>
-    <script src="asset/js/global.js"></script>
     <script src="https://kit.fontawesome.com/f80ebe0ec4.js" crossorigin="anonymous"></script>
 </head>
 <body id="wisata-page" onload="initWisata()">
@@ -164,7 +166,7 @@
 
           <div class="toolbar-akomodasi">
             <button id="filterAllBtn" data-type="all"><i class="fas fa-filter"></i> Semua</button>
-            <select id="filterSelect">
+            <select id="filterSelect" aria-label="Pilih Kategori Akomodasi">
               <option value="all">Pilih Kategori</option>
               <option value="villa">Villa</option>
               <option value="guesthouse">Homestay</option>
@@ -185,6 +187,80 @@
               </button>
             </div>
             <div id="noResults" style="display:none; text-align:center; padding:20px; color:var(--primary-color);">Tidak ada hasil ditemukan.</div>
+        </section>
+
+        <section class="kuliner-section" id="kuliner">
+            <h2 class="kuliner-title"><span>Kuliner</span></h2>
+            <div class="kuliner-search">
+                <div class="kuliner-search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="kulinerSearchInput" placeholder="Cari kuliner lezat..." aria-label="Cari kuliner" />
+                    <button type="button" id="kulinerSearchBtn" class="kuliner-search-btn">
+                        <span class="btn-text">Cari</span>
+                    </button>
+                    <div class="kuliner-search-loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <div class="kuliner-search-suggestions" id="kulinerSuggestions">
+                        <!-- Suggestions will be populated by JavaScript -->
+                    </div>
+                    <div class="kuliner-search-history" id="kulinerHistory">
+                        <!-- Search history will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="kuliner-search-filters">
+                    <div class="filter-chip" data-filter="all">
+                        <span class="filter-icon">🍽️</span>
+                        <span>Semua</span>
+                    </div>
+                    <div class="filter-chip" data-filter="popular">
+                        <span class="filter-icon">🔥</span>
+                        <span>Populer</span>
+                    </div>
+                    <div class="filter-chip" data-filter="spicy">
+                        <span class="filter-icon">🌶️</span>
+                        <span>Pedas</span>
+                    </div>
+                    <div class="filter-chip" data-filter="traditional">
+                        <span class="filter-icon">🏺</span>
+                        <span>Tradisional</span>
+                    </div>
+                    <div class="filter-chip" data-filter="dessert">
+                        <span class="filter-icon">🍰</span>
+                        <span>Dessert</span>
+                    </div>
+                </div>
+            </div>
+            <div class="kuliner-viewport">
+                <button class="kuliner-prev" aria-label="Sebelumnya" id="kulinerPrev">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
+                </button>
+                <div class="kuliner-track" id="kulinerTrack">
+                    <!-- Konten kuliner akan dibangun oleh JS -->
+                </div>
+                <button class="kuliner-next" aria-label="Berikutnya" id="kulinerNext">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="sewa" id="sewa">
+            <h2 class="sewa-title"><span>Sewa</span></h2>
+            <div class="sewa-search">
+                <input type="text" id="sewaSearchInput" placeholder="Cari sewa..." aria-label="Cari sewa" />
+                <button type="button" id="sewaSearchBtn">SEARCH</button>
+            </div>
+            <div class="sewa-viewport">
+                <button class="sewa-prev" aria-label="Sebelumnya" id="sewaPrev">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
+                </button>
+                <div class="sewa-track" id="sewaTrack">
+                    <!-- Konten sewa akan dibangun oleh JS -->
+                </div>
+                <button class="sewa-next" aria-label="Berikutnya" id="sewaNext">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
+                </button>
+            </div>
         </section>
         
     </main>
@@ -238,6 +314,30 @@
             <div class="modal-actions">
               <button class="btn-pesan-lg" id="atraksiPesanBtn">Pesan sekarang</button>
             </div>
+            <!-- Quick info to utilize remaining space -->
+            <div class="modal-quick">
+              <div class="quick-item">
+                <i class="fa-solid fa-shield-heart"></i>
+                <div class="qi-text">
+                  <div class="qi-title">Keamanan Terjaga</div>
+                  <div class="qi-sub">Pemandu & perlengkapan tersedia</div>
+                </div>
+              </div>
+              <div class="quick-item">
+                <i class="fa-solid fa-people-group"></i>
+                <div class="qi-text">
+                  <div class="qi-title">Ramah Keluarga</div>
+                  <div class="qi-sub">Cocok untuk semua usia</div>
+                </div>
+              </div>
+              <div class="quick-item">
+                <i class="fa-solid fa-clock"></i>
+                <div class="qi-text">
+                  <div class="qi-title">Fleksibel</div>
+                  <div class="qi-sub">Reservasi mudah & cepat</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -246,87 +346,77 @@
     <!-- Modal Akomodasi -->
     <div class="modal" id="akomodasiDetailModal" style="display:none;">
         <div class="modal-content">
-            <span class="close" id="akomodasiDetailModalCloseBtn">&times;</span>
+            <button class="close" id="akomodasiDetailModalCloseBtn" aria-label="Tutup modal">
+                <span class="close-icon"></span>
+            </button>
             <div id="akomodasiModalContent"></div>
         </div>
     </div>
 
-    <section class="kuliner-section" id="kuliner">
-        <h2 class="kuliner-title"><span>Kuliner</span></h2>
-        <div class="kuliner-search">
-            <input type="text" id="kulinerSearchInput" placeholder="Cari kuliner..." aria-label="Cari kuliner" />
-            <button type="button" id="kulinerSearchBtn">SEARCH</button>
-        </div>
-        <div class="kuliner-viewport">
-            <button class="kuliner-prev" aria-label="Sebelumnya" id="kulinerPrev">
-                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
-            </button>
-            <div class="kuliner-track" id="kulinerTrack">
-                <!-- Konten kuliner akan dibangun oleh JS -->
-            </div>
-            <button class="kuliner-next" aria-label="Berikutnya" id="kulinerNext">
-                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
-            </button>
-        </div>
-    </section>
 
-    <section class="sewa" id="sewa">
-        <h2 class="sewa-title"><span>Sewa</span></h2>
-        <div class="sewa-search">
-            <input type="text" id="sewaSearchInput" placeholder="Cari sewa..." aria-label="Cari sewa" />
-            <button type="button" id="sewaSearchBtn">SEARCH</button>
+    <!-- Wave Animation above footer -->
+    <div class="cta-waves">
+        <div class="cta-wave wave-layer-1">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,120V46.29c47.79-22.2,103.59-32.17,158-28,70.36,5.37,136.33,33.31,206.8,37.5C438.64,87.57,512.34,66.33,583,47.95c69.27-18,138.3-24.88,209.4-13.08,36.15,6,69.85,17.84,104.45,29.34C989.49,95,1113,134.29,1200,67.53V120Z" fill="currentColor"></path>
+            </svg>
         </div>
-        <div class="sewa-viewport">
-            <button class="sewa-prev" aria-label="Sebelumnya" id="sewaPrev">
-                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#133E87"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
-            </button>
-            <div class="sewa-track" id="sewaTrack">
-                <!-- Konten sewa akan dibangun oleh JS -->
-            </div>
-            <button class="sewa-next" aria-label="Berikutnya" id="sewaNext">
-                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="http://www.w3.org/2000/svg" width="30px" fill="#133E87"><path d="m400-240-40-40 200-200-200-200 40-40 240 240-240 240Z"/></svg>
-            </button>
+        <div class="cta-wave wave-layer-2">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,120V104.19c13-21.11,27.64-41.05,47.69-56.24,51.72-39.22,117.31-39.49,176.89-20.07,31.15,10.15,60.09,26.07,89.67,39.8,40.92,19,84.73,46,130.83,49.67,36.26,2.85,70.9-9.42,98.6-31.56,31.77-25.39,62.32-62,103.63-73,40.44-10.79,81.35,6.69,119.13,24.28s75.16,39,116.92,43.05c59.73,5.85,113.28-22.88,168.9-38.84,30.2-8.66,59-6.17,87.09,7.5,22.43,10.89,48,26.93,60.65,49.24V120Z" opacity="0.7" fill="currentColor"></path>
+            </svg>
         </div>
-    </section>
+        <div class="cta-wave wave-layer-3">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,120V114.37c149.93-53.37,314.09-65.69,475.83-36.94,43,7.64,84.23,20.12,127.61,26.46,59,8.63,112.48-12.24,165.56-35.4C827.93,42.78,886,24.76,951.2,30c86.53,7,172.46,45.71,248.8,84.81V120Z" opacity="0.4" fill="currentColor"></path>
+            </svg>
+        </div>
+    </div>
 
-    <footer class="main-footer">
-        <div class="footer-columns">
-            <div class="footer-col">
-                <div class="footer-title">Profil Desa</div>
-                <ul>
-                    <li>Data Desa</li>
-                    <li>Sejarah Desa</li>
-                    <li>Visi-Misi Desa</li>
-                    <li>Struktur Organisasi</li>
-                </ul>
+    <footer id="layanan" class="site-footer">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <!-- Column 1: Profil Desa -->
+                <div class="footer-column">
+                    <h3>Profil Desa</h3>
+                    <ul>
+                        <li><a href="#">Data Desa</a></li>
+                        <li><a href="#">Sejarah Desa</a></li>
+                        <li><a href="#">Visi-Misi Desa</a></li>
+                        <li><a href="#">Struktur Organisasi</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2: Wisata -->
+                <div class="footer-column">
+                    <h3>Wisata</h3>
+                    <ul>
+                        <li><a href="#">Objek Wisata</a></li>
+                        <li><a href="#">Atraksi Wisata</a></li>
+                        <li><a href="#">Akomodasi</a></li>
+                        <li><a href="#">Kuliner</a></li>
+                        <li><a href="#">Sewa Mobil Motor</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Informasi -->
+                <div class="footer-column">
+                    <h3>Informasi</h3>
+                    <ul>
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Berita</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4: Layanan -->
+                <div class="footer-column">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#">Layanan Desa</a></li>
+                        <li><a href="#">Produk</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Wisata</div>
-                <ul>
-                    <li>Objek Wisata</li>
-                    <li>Atraksi Wisata</li>
-                    <li>Akomodasi</li>
-                    <li>Kuliner</li>
-                    <li>Sewa Mobil Motor</li>
-                </ul>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 Desa Lembanna</p>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Informasi</div>
-                <ul>
-                    <li>Agenda</li>
-                    <li>Berita</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <div class="footer-title">Layanan</div>
-                <ul>
-                    <li>Fasilitas Umum</li>
-                    <li>Produk</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            Copyright
         </div>
     </footer>
 

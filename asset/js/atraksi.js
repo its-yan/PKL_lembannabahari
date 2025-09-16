@@ -51,7 +51,9 @@ function buildAtraksiCards(container) {
             card.dataset.atraksiUnit = data.unit;
 
             card.innerHTML = `
-                <img src="${data.img}" alt="${data.name}">
+                <div class="image-container">
+                    <img src="${data.img}" alt="${data.name}">
+                </div>
                 <div class="atraksi-info">
                     <h3 class="atraksi-name">${data.name}</h3>
                     <p class="atraksi-description">${data.desc}</p>
@@ -65,6 +67,9 @@ function buildAtraksiCards(container) {
                 </div>
             `;
             gridDiv.appendChild(card);
+
+            // Initialize smooth image rotation for this card
+            initializeAtraksiImageRotation(card, data);
         }
         pageDiv.appendChild(gridDiv);
         container.appendChild(pageDiv);
@@ -137,13 +142,53 @@ function ensureAtraksiModal() {
     // Tombol Kembali
     const backBtn = document.getElementById('atraksiBackBtn');
     if (backBtn) {
-        backBtn.addEventListener('click', closeModal);
+        backBtn.addEventListener('click', () => {
+            const modalEl = document.getElementById('atraksiDetailModal');
+            if (!modalEl) return closeModal();
+
+            // play smooth closing animations
+            modalEl.classList.add('is-closing');
+            const content = modalEl.querySelector('.atraksi-modal-content');
+            if (content) content.classList.add('is-closing');
+
+            // clear slideshow interval if present
+            if (modalEl.dataset.slideInterval) {
+                try { clearInterval(Number(modalEl.dataset.slideInterval)); } catch (e) {}
+                delete modalEl.dataset.slideInterval;
+            }
+
+            // wait for animation end, then close and cleanup
+            const onAnimEnd = () => {
+                modalEl.removeEventListener('animationend', onAnimEnd);
+                modalEl.classList.remove('is-closing');
+                if (content) content.classList.remove('is-closing');
+                closeModal();
+            };
+            modalEl.addEventListener('animationend', onAnimEnd);
+        });
     }
 
     // Tombol Tutup
     const closeBtn = document.getElementById('atraksiDetailModalCloseBtn');
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', () => {
+            // clear slideshow interval if present
+            if (modal && modal.dataset.slideInterval) {
+                try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+                delete modal.dataset.slideInterval;
+            }
+            // also animate close
+            modal.classList.add('is-closing');
+            const content = modal.querySelector('.atraksi-modal-content');
+            if (content) content.classList.add('is-closing');
+            const onAnimEnd = () => {
+                modal.removeEventListener('animationend', onAnimEnd);
+                modal.classList.remove('is-closing');
+                if (content) content.classList.remove('is-closing');
+                closeModal();
+            };
+            modal.addEventListener('animationend', onAnimEnd);
+        });
     }
 
     // Tombol Pesan sekarang di modal
@@ -156,6 +201,22 @@ function ensureAtraksiModal() {
                 openAtraksiWhatsapp(card);
             }
         });
+    }
+    // Bind a single overlay handler that stops propagation and handles outside-click
+    if (!modal.dataset.overlayHandlerBound) {
+        modal.addEventListener('click', (e) => {
+            // stop bubbling to document-level handler
+            e.stopPropagation();
+            if (modal.dataset && modal.dataset.openGuard === '1') return;
+            if (e.target === modal && getComputedStyle(modal).display !== 'none') {
+                if (modal.dataset.slideInterval) {
+                    try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e2) {}
+                    delete modal.dataset.slideInterval;
+                }
+                closeModal();
+            }
+        });
+        modal.dataset.overlayHandlerBound = '1';
     }
 }
 
@@ -183,6 +244,16 @@ function openAtraksiDetailModal(card) {
     imageGridContainer.innerHTML = '';
 
     if (images.length > 0) {
+        mainImage.style.opacity = '0';
+        const handleInitial = () => {
+            mainImage.removeEventListener('load', handleInitial);
+            mainImage.classList.remove('is-entering');
+            // trigger enter animation
+            void mainImage.offsetWidth;
+            mainImage.classList.add('is-entering');
+            requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
+        };
+        mainImage.addEventListener('load', handleInitial);
         mainImage.src = images[0];
         mainImage.alt = title + ' - Main Image';
     } else {
@@ -197,6 +268,15 @@ function openAtraksiDetailModal(card) {
         img.className = 'grid-image';
         img.loading = 'lazy';
         img.addEventListener('click', () => {
+            mainImage.style.opacity = '0';
+            const onLoad = () => {
+                mainImage.removeEventListener('load', onLoad);
+                mainImage.classList.remove('is-entering');
+                void mainImage.offsetWidth; // restart animation
+                mainImage.classList.add('is-entering');
+                requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
+            };
+            mainImage.addEventListener('load', onLoad);
             mainImage.src = src;
             mainImage.alt = `${title} image ${idx + 1}`;
             imageGridContainer.querySelectorAll('.grid-image').forEach(thumb => thumb.classList.remove('active'));
@@ -225,8 +305,46 @@ function openAtraksiDetailModal(card) {
     card.dataset.uid = uid;
     modal.dataset.activeCardId = uid;
 
+    // Clear previous slideshow if any
+    if (modal.dataset.slideInterval) {
+        try { clearInterval(Number(modal.dataset.slideInterval)); } catch (e) {}
+        delete modal.dataset.slideInterval;
+    }
+
+    // Auto-rotate main image every 2s with smooth fade
+    let idxImg = 0;
+    if (images.length > 1) {
+        const intervalId = setInterval(() => {
+            idxImg = (idxImg + 1) % images.length;
+            const nextSrc = images[idxImg];
+            mainImage.style.opacity = '0';
+            const onLoad = () => {
+                mainImage.removeEventListener('load', onLoad);
+                mainImage.classList.remove('is-entering');
+                void mainImage.offsetWidth;
+                mainImage.classList.add('is-entering');
+                requestAnimationFrame(() => { mainImage.style.opacity = '1'; });
+            };
+            mainImage.addEventListener('load', onLoad);
+            mainImage.src = nextSrc;
+            // update active thumb
+            const thumbs = Array.from(imageGridContainer.querySelectorAll('.grid-image'));
+            thumbs.forEach(t => t.classList.remove('active'));
+            const activeThumb = thumbs[idxImg];
+            if (activeThumb) activeThumb.classList.add('active');
+        }, 2000);
+        modal.dataset.slideInterval = String(intervalId);
+    }
+
+    // show modal
     modal.style.display = 'flex';
+    // Guard against immediate outside-click close right after opening
+    modal.dataset.openGuard = '1';
+    modal.dataset.justOpenedAt = String(Date.now());
+    setTimeout(() => { try { delete modal.dataset.openGuard; } catch (e) {} }, 500);
     document.body.style.overflow = 'hidden';
+
+    // Overlay click is handled in ensureAtraksiModal()
 }
 
 function openAtraksiWhatsapp(card) {
@@ -260,7 +378,7 @@ function bindAtraksiSearch() {
         }
 
         // Bangun ulang kartu atraksi yang difilter
-        container = atraksiTrack;
+        const container = atraksiTrack;
         container.innerHTML = '';
 
         const cardsPerPage = 6;
@@ -312,4 +430,121 @@ function bindAtraksiSearch() {
 
     input.addEventListener('input', performSearch);
     searchBtn.addEventListener('click', performSearch);
+}
+
+// Image rotation function for atraksi cards
+function initializeAtraksiImageRotation(card, data) {
+    const imageContainer = card.querySelector('.image-container');
+    if (!imageContainer || !data.images || data.images.length <= 1) return;
+
+    // Create rotating images
+    const images = data.images.slice(0, 4); // Use up to 4 images
+    if (images.length < 2) return;
+
+    // Save existing overlay elements before clearing
+    const atraksiInfo = card.querySelector('.atraksi-info');
+    const atraksiOverlay = card.querySelector('.atraksi-overlay');
+
+    // Clear only the image container content
+    const existingImg = imageContainer.querySelector('img');
+    if (existingImg) {
+        existingImg.remove();
+    }
+
+    // Add rotating images to container with preload for smoother transitions
+    images.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = data.name + ' - Image ' + (index + 1);
+        img.className = 'rotating-image';
+        img.loading = 'eager'; // Preload images for smoother transitions
+        if (index === 0) img.classList.add('active');
+        imageContainer.appendChild(img);
+        
+        // Preload next image for smoother transition
+        if (index < images.length - 1) {
+            const nextImg = new Image();
+            nextImg.src = images[index + 1];
+        }
+    });
+
+    // Re-add the overlay elements if they were removed
+    if (atraksiInfo && !card.querySelector('.atraksi-info')) {
+        card.appendChild(atraksiInfo);
+    }
+    if (atraksiOverlay && !card.querySelector('.atraksi-overlay')) {
+        card.appendChild(atraksiOverlay);
+    }
+
+    let currentIndex = 0;
+    let rotationInterval = null;
+
+    // Start rotation on hover
+    card.addEventListener('mouseenter', () => {
+        if (rotationInterval) clearInterval(rotationInterval);
+        
+        // Change image immediately on hover
+        const images = imageContainer.querySelectorAll('.rotating-image');
+        if (images.length > 1) {
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }
+        
+        // Start continuous rotation every second
+        rotationInterval = setInterval(() => {
+            const images = imageContainer.querySelectorAll('.rotating-image');
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }, 1000); // Change every 1 second
+    });
+
+    // Stop rotation on mouse leave
+    card.addEventListener('mouseleave', () => {
+        if (rotationInterval) {
+            clearInterval(rotationInterval);
+            rotationInterval = null;
+        }
+
+        // Reset to first image
+        const images = imageContainer.querySelectorAll('.rotating-image');
+        images.forEach((img, index) => {
+            img.classList.remove('active', 'entering', 'exiting', 'next');
+            if (index === 0) img.classList.add('active');
+        });
+        currentIndex = 0;
+    });
 }

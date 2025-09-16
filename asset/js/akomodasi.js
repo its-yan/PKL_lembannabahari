@@ -3,6 +3,16 @@
 
 const AKOMODASI_WHATSAPP_NUMBER = window.AKOMODASI_WHATSAPP_NUMBER || '6281234567891'; // Ambil dari global.js
 
+// Tentukan jumlah kartu per halaman secara responsif
+function getCardsPerPage() {
+    // Mobile kecil: 1 kolom x 2 baris
+    if (window.matchMedia('(max-width: 480px)').matches) return 2;
+    // Tablet: 2 kolom x 2 baris
+    if (window.matchMedia('(max-width: 768px)').matches) return 4;
+    // Desktop: ubah jadi 2 kolom x 2 baris agar selalu ada minimal 2 halaman jika data >=5
+    return 4;
+}
+
 function initializeAkomodasi() {
     const akTrack = document.getElementById('akTrack');
     if (!akTrack) {
@@ -21,12 +31,25 @@ function initializeAkomodasi() {
 
     // Inisialisasi modal
     ensureAkomodasiModal();
+
+    // Responsif: rebuild halaman ketika breakpoint berubah (cardsPerPage berubah)
+    let lastCards = String(akTrack.dataset.cardsPerPage || '');
+    function onAkomodasiResize() {
+        const current = String(getCardsPerPage());
+        if (current !== lastCards) {
+            buildAkomodasiCards(akTrack, window.akomodasiData);
+            setupAkomodasiSlider();
+            lastCards = String(akTrack.dataset.cardsPerPage || current);
+        }
+    }
+    window.addEventListener('resize', onAkomodasiResize);
 }
 
 function buildAkomodasiCards(container, dataArray) {
     container.innerHTML = ''; // Bersihkan konten lama
 
-    const cardsPerPage = 6; // 3 kolom x 2 baris
+    const cardsPerPage = getCardsPerPage(); // Dinamis: desktop=6, tablet=4, mobile=2
+    container.dataset.cardsPerPage = String(cardsPerPage);
     const totalPages = Math.ceil(dataArray.length / cardsPerPage);
 
     if (dataArray.length === 0) {
@@ -74,12 +97,31 @@ function buildAkomodasiCards(container, dataArray) {
                     </div>
                     <hr class="ak-panel-hr">
                     <p>${data.desc}</p>
+                    <div class="card-actions-ak">
+                        <button type="button" class="ak-cta ak-book-btn" aria-label="Book Now for ${data.name}">Book Now</button>
+                    </div>
                 </div>
             `;
+
+            // Initialize image rotation for this card
+            initializeAkomodasiImageRotation(card, data);
             gridDiv.appendChild(card);
 
             // Tambahkan event listener untuk membuka modal
             card.addEventListener('click', () => openAkomodasiDetailModal(data));
+
+            // Wire up Book Now button (stop modal open)
+            const waNumber = AKOMODASI_WHATSAPP_NUMBER;
+            const priceText = formatPrice(data.price);
+            const message = encodeURIComponent(`[Akomodasi] ${data.name}\nLokasi: ${data.location}\nHarga: ${priceText}\nSaya ingin memesan untuk tanggal ...`);
+            const url = waNumber ? `https://wa.me/${waNumber}?text=${message}` : `https://wa.me/?text=${message}`;
+            const bookBtn = card.querySelector('.ak-book-btn');
+            if (bookBtn) {
+                bookBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    window.open(url, '_blank');
+                });
+            }
         }
         pageDiv.appendChild(gridDiv);
         container.appendChild(pageDiv);
@@ -92,9 +134,20 @@ function setupAkomodasiSlider() {
     const nextBtn = document.getElementById('akNext');
     let currentPage = 0;
 
+    // Debug logging
+    console.log('Setting up akomodasi slider:', {
+        akTrack: !!akTrack,
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+        totalPages: akTrack ? akTrack.children.length : 0
+    });
+
     function updateSliderPosition() {
         const totalPages = akTrack.children.length;
-        akTrack.style.transform = `translateX(-${currentPage * 100}%)`;
+        const firstPage = akTrack.querySelector('.ak-page');
+        const pageWidth = firstPage ? firstPage.getBoundingClientRect().width : akTrack.getBoundingClientRect().width;
+        const offset = -(currentPage * pageWidth);
+        akTrack.style.transform = `translateX(${offset}px)`;
         prevBtn.disabled = currentPage === 0;
         nextBtn.disabled = currentPage === totalPages - 1;
     }
@@ -107,14 +160,20 @@ function setupAkomodasiSlider() {
     });
 
     nextBtn.addEventListener('click', () => {
+        console.log('Akomodasi next button clicked, currentPage:', currentPage);
         const totalPages = akTrack.children.length;
         if (currentPage < totalPages - 1) {
             currentPage++;
             updateSliderPosition();
+            console.log('Moved to page:', currentPage);
         }
     });
 
     updateSliderPosition(); // Inisialisasi posisi slider
+
+    // Recalculate position on resize to keep the current page in view
+    const onResizeRecalc = () => updateSliderPosition();
+    window.addEventListener('resize', onResizeRecalc);
 }
 
 function setupAkomodasiToolbar() {
@@ -173,7 +232,65 @@ function ensureAkomodasiModal() {
 
     const closeBtn = document.getElementById('akomodasiDetailModalCloseBtn');
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
+        // Tambahkan efek suara saat tombol ditekan (opsional)
+        closeBtn.addEventListener('mousedown', () => {
+            closeBtn.style.transform = 'scale(0.95)';
+        });
+        
+        closeBtn.addEventListener('mouseup', () => {
+            closeBtn.style.transform = '';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            // play close animation
+            modal.classList.add('is-closing');
+            const content = modal.querySelector('.modal-content');
+            if (content) content.classList.add('is-closing');
+            
+            // clear auto-rotate if any
+            if (modal.dataset.akSlideInterval) {
+                try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e) {}
+                delete modal.dataset.akSlideInterval;
+            }
+            
+            const onEnd = () => {
+                modal.removeEventListener('animationend', onEnd);
+                modal.classList.remove('is-closing');
+                if (content) content.classList.remove('is-closing');
+                closeModal();
+            };
+            
+            modal.addEventListener('animationend', onEnd);
+        });
+        
+        // Tambahkan akses keyboard
+        closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeBtn.click();
+            }
+        });
+    }
+
+    // Prevent clicks inside content from bubbling to overlay
+    const contentEl = modal.querySelector('.modal-content');
+    if (contentEl) contentEl.addEventListener('click', (e) => e.stopPropagation());
+
+    // Close on clicking outside content with guard (attach once)
+    if (!modal.dataset.overlayHandlerBound) {
+        modal.addEventListener('click', (e) => {
+            // stop bubbling to document-level handler
+            e.stopPropagation();
+            if (modal.dataset && modal.dataset.openGuard === '1') return;
+            if (e.target === modal && getComputedStyle(modal).display !== 'none') {
+                if (modal.dataset.akSlideInterval) {
+                    try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e2) {}
+                    delete modal.dataset.akSlideInterval;
+                }
+                closeModal();
+            }
+        });
+        modal.dataset.overlayHandlerBound = '1';
     }
 }
 
@@ -192,9 +309,36 @@ function openAkomodasiDetailModal(data) {
     const stayInfo = data.stayInfo || '1 malam, 2 dewasa';
 
     const facilitiesMap = {
-        hotel: ['WiFi Gratis','Kolam Renang','Restoran','Parkir','AC'],
-        villa: ['WiFi Gratis','Private Pool','Dapur','Parkir','AC'],
-        guesthouse: ['WiFi Gratis','Parkir','Dapur Umum','Kipas Angin','Air Panas']
+        hotel: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Kolam Renang', icon: 'fa-swimming-pool'},
+            {name: 'Restoran', icon: 'fa-utensils'},
+            {name: 'Parkir', icon: 'fa-parking'},
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'TV Kabel', icon: 'fa-tv'},
+            {name: '24 Jam Front Desk', icon: 'fa-clock'},
+            {name: 'Layanan Kamar', icon: 'fa-concierge-bell'}
+        ],
+        villa: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Private Pool', icon: 'fa-swimming-pool'},
+            {name: 'Dapur', icon: 'fa-utensils'},
+            {name: 'Parkir', icon: 'fa-parking'},
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'Teras Pribadi', icon: 'fa-umbrella-beach'},
+            {name: 'BBQ Area', icon: 'fa-fire'},
+            {name: 'Laundry', icon: 'fa-soap'}
+        ],
+        guesthouse: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Parkir', icon: 'fa-parking'},
+            {name: 'Dapur Umum', icon: 'fa-utensils'},
+            {name: 'Kipas Angin', icon: 'fa-fan'},
+            {name: 'Air Panas', icon: 'fa-hot-tub'},
+            {name: 'Taman', icon: 'fa-tree'},
+            {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
+            {name: 'Teras', icon: 'fa-umbrella-beach'}
+        ]
     };
     const facs = facilitiesMap[type] || ['WiFi Gratis','Parkir','AC'];
     const priceText = formatPrice(price);
@@ -231,7 +375,16 @@ function openAkomodasiDetailModal(data) {
 
             <div class="modal-facilities" id="akomodasiFacilities">
                 <h3>Fasilitas</h3>
-                ${facs.map(f => `<div>${f}</div>`).join('')}
+                <div class="facilities-grid">
+                    ${facs.map(f => `
+                        <div class="facility-item">
+                            <div class="facility-icon">
+                                <i class="fa-solid ${f.icon}"></i>
+                            </div>
+                            <div class="facility-name">${f.name}</div>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
 
             <button id="akBookNow" class="ak-cta">Book Now</button>
@@ -267,6 +420,7 @@ function openAkomodasiDetailModal(data) {
             if (!total) return;
             index = (i + total) % total;
             track.style.transform = `translateX(-${index * 100}%)`;
+            Array.from(track.children).forEach((slide, j) => slide.classList.toggle('active', j === index));
             dots.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('active', j === index));
         }
 
@@ -285,9 +439,29 @@ function openAkomodasiDetailModal(data) {
         }
 
         setIndex(0);
+
+        // Auto-rotate every 2s with smooth fade
+        if (track.children.length > 1) {
+            if (modal.dataset.akSlideInterval) {
+                try { clearInterval(Number(modal.dataset.akSlideInterval)); } catch (e) {}
+                delete modal.dataset.akSlideInterval;
+            }
+            const intervalId = setInterval(() => setIndex(index + 1), 2000);
+            modal.dataset.akSlideInterval = String(intervalId);
+        }
     })();
 
+    // Animate open
     modal.style.display = 'block';
+    // Guard against immediate outside-click close right after opening
+    modal.dataset.openGuard = '1';
+    modal.dataset.justOpenedAt = String(Date.now());
+    setTimeout(() => { try { delete modal.dataset.openGuard; } catch (e) {} }, 500);
+    modal.classList.remove('is-closing');
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.style.animation = 'modalIn .35s cubic-bezier(.2,.8,.2,1) both';
+    }
     document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
 
     // Book Now button
@@ -295,4 +469,98 @@ function openAkomodasiDetailModal(data) {
     const message = encodeURIComponent(`[Akomodasi] ${title}\nHarga: ${priceText}\nSaya ingin memesan untuk tanggal ...`);
     const url = waNumber ? `https://wa.me/${waNumber}?text=${message}` : `https://wa.me/?text=${message}`;
     document.getElementById('akBookNow')?.addEventListener('click', () => window.open(url, '_blank'));
+}
+
+// Image rotation function for akomodasi cards
+function initializeAkomodasiImageRotation(card, data) {
+    const cardImage = card.querySelector('.card-image-akomodasi');
+    if (!cardImage || !data.images || data.images.length <= 1) return;
+
+    // Create rotating images
+    const images = data.images.slice(0, 4); // Use up to 4 images
+    if (images.length < 2) return;
+
+    // Clear existing content and add rotating images
+    cardImage.innerHTML = '';
+
+    images.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = data.name + ' - Image ' + (index + 1);
+        img.className = 'rotating-image';
+        if (index === 0) img.classList.add('active');
+        cardImage.appendChild(img);
+    });
+
+    let currentIndex = 0;
+    let rotationInterval = null;
+
+    // Start rotation on hover
+    card.addEventListener('mouseenter', () => {
+        if (rotationInterval) clearInterval(rotationInterval);
+        
+        // Change image immediately on hover
+        const images = cardImage.querySelectorAll('.rotating-image');
+        if (images.length > 1) {
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }
+        
+        // Start continuous rotation every second
+        rotationInterval = setInterval(() => {
+            const images = cardImage.querySelectorAll('.rotating-image');
+            const currentImg = images[currentIndex];
+            const nextIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[nextIndex];
+
+            // Add exit animation to current image
+            currentImg.classList.add('exiting');
+            currentImg.classList.remove('active');
+
+            // Add enter animation to next image
+            nextImg.classList.add('entering', 'active');
+            nextImg.classList.remove('next');
+
+            // Clean up classes after animation
+            setTimeout(() => {
+                currentImg.classList.remove('exiting');
+                nextImg.classList.remove('entering');
+            }, 600);
+
+            currentIndex = nextIndex;
+        }, 1000); // Change every 1 second
+    });
+
+    // Stop rotation on mouse leave
+    card.addEventListener('mouseleave', () => {
+        if (rotationInterval) {
+            clearInterval(rotationInterval);
+            rotationInterval = null;
+        }
+
+        // Reset to first image
+        const images = cardImage.querySelectorAll('.rotating-image');
+        images.forEach((img, index) => {
+            img.classList.remove('active', 'entering', 'exiting', 'next');
+            if (index === 0) img.classList.add('active');
+        });
+        currentIndex = 0;
+    });
 }
