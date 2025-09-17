@@ -14,8 +14,18 @@
             <!-- Preload critical images -->
     <link rel="preload" as="image" href="asset2/Frame 1 (1).png">
     <link rel="preload" as="image" href="asset2/WhatsApp Image 2025-08-19 at 20.16.10_5e938fb9.jpg">
+<link rel="stylesheet" href="asset/css/profil-responsive.css">
+<style>
+/* Disable legacy hamburger on this page */
+.hamburger { display: none !important; }
+/* Prevent legacy overlay nav on mobile */
+@media (max-width: 900px){
+  .mobile-menu-list { display: none !important; }
+  .main-nav { display: none !important; }
+}
+</style>
 </head>
-<body>
+<body class="landing-page">
 
     <header class="header-container">
         <div class="header-overlay">
@@ -86,14 +96,28 @@
     <div class="nav-wrapper">
         <nav>
             <div class="logo">
-                <a href="#">Desa Wisata Andalan</a>
+                <img src="asset2/WhatsApp Image 2025-08-20 at 18.48.36.png" alt="Logo Desa Lembanna" loading="lazy" decoding="async">
+                <a href="index.html">Desa Wisata Andalan</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#wisata">WISATA</a></li>
-                <li><a href="informasi.html">INFORMASI</a></li>
-                <li><a href="#layanan">LAYANAN</a></li>
-                <li><a href="#profil-desa">PROFIL DESA</a></li>
-            </ul>
+            <div class="main-nav">
+                <ul class="nav-links">
+                    <li class="has-submenu">
+                        <a href="index.html">Beranda</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="profil.html">Profil Desa</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="wisata.html">Wisata</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="Layanan.html">Layanan</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="informasi.html">Informasi</a>
+                    </li>
+                </ul>
+            </div>
             <div class="hamburger">
                 <div class="line"></div>
                 <div class="line"></div>
@@ -396,6 +420,52 @@
         </div>
     </footer>
 
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-nav-container">
+            <a href="index.html" class="mobile-nav-item active" data-page="beranda">
+                <div class="mobile-nav-icon">
+                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M160-200v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H600q-17 0-28.5-11.5T560-160v-200q0-17-11.5-28.5T520-400h-80q-17 0-28.5 11.5T400-360v200q0 17-11.5 28.5T360-120H240q-33 0-56.5-23.5T160-200Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Beranda</span>
+            </a>
+
+            <a href="profil.html" class="mobile-nav-item" data-page="profil">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Profil Desa</span>
+            </a>
+
+            <a href="wisata.html" class="mobile-nav-item" data-page="wisata">
+                <div class="mobile-nav-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-80q-106 0-173-33.5T240-200q0-19 8.5-35t25.5-30q14-10 30.5-8t26.5 16q10 14 7.5 30.5T322-200q13 16 60 28t98 12q51 0 98-12t60-28q-14-10-16.5-26.5T629-257q10-14 26.5-16t30.5 8q17 14 25.5 30t8.5 35q0 53-67 86.5T480-80Zm0-139q-12 0-24-4t-22-12q-118-94-176-183.5T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 86-58 175.5T526-235q-10 8-22 12t-24 4Zm0-301q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Z"/></svg>
+                </div>
+                <span class="mobile-nav-label">Wisata</span>
+            </a>
+
+            <a href="Layanan.html" class="mobile-nav-item" data-page="layanan">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Layanan</span>
+            </a>
+
+            <a href="informasi.html" class="mobile-nav-item" data-page="berita">
+                <div class="mobile-nav-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <span class="mobile-nav-label">Informasi</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="asset/js/responsive.js"></script>
     <script src="asset2/js/script.js"></script>
 </body>
 </html>

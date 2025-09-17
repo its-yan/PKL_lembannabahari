@@ -561,23 +561,258 @@ body {
     position: relative;
     top: 0;
     z-index: 200;
-    transition: background-color 0.3s;
+    /* REVOLUTIONARY SMOOTH TRANSITION SYSTEM */
+    transition: 
+        transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+        background-color 0.4s ease,
+        padding 0.5s ease,
+        box-shadow 0.4s ease;
     transform: translateY(50%); /* Overlap top edge of main */
+    display: grid;
+    place-items: center;
+    height: auto;
+    /* Smooth width transition container */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .nav-wrapper.nav-sticky {
     position: sticky;
-    top: 20px;
-    transform: none;
+    top: 10px;
+    /* SMOOTH TRANSFORM TRANSITION */
+    transform: translateY(0) scale(1);
     z-index: 300;
+    /* Enhanced sticky state */
+    padding: 8px 20px;
+    background: linear-gradient(
+        135deg, 
+        rgba(15, 51, 111, 0.05) 0%, 
+        rgba(19, 62, 135, 0.08) 50%, 
+        rgba(96, 139, 193, 0.05) 100%
+    );
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.1),
+        0 1px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    margin: 0 auto;
+    max-width: calc(100% - 40px);
 }
 
 .nav-wrapper.nav-sticky nav {
-    width: 90%;
+    /* SMOOTH WIDTH TRANSITION */
+    width: auto;
+    min-width: max-content;
     border-radius: 25px;
-    padding: 0;
-    box-shadow: none; /* shadow applied via .nav-wrapper::before */
-    background: transparent;
+    padding: 12px 30px;
+    margin: 0 auto;
+    /* ENHANCED STICKY NAVBAR WITH SMOOTH TRANSITIONS */
+    background: linear-gradient(135deg, #0f336f 0%, #133E87 35%, #4f74b4 65%, #608BC1 100%);
+    box-shadow: 
+        /* Main drop shadows */
+        0 8px 25px rgba(0, 0, 0, 0.3), 
+        0 2px 10px rgba(0, 0, 0, 0.1),
+        /* Enhanced left side glow for sticky mode */
+        inset 18px 0 25px -12px rgba(255, 255, 255, 0.22),
+        inset 30px 0 40px -18px rgba(255, 255, 255, 0.1),
+        /* Enhanced right side glow for sticky mode */
+        inset -18px 0 25px -12px rgba(255, 255, 255, 0.22),
+        inset -30px 0 40px -18px rgba(255, 255, 255, 0.1),
+        /* Top/bottom enhancement for sticky */
+        inset 0 10px 18px -10px rgba(255, 255, 255, 0.12),
+        inset 0 -10px 18px -10px rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    position: relative;
+    overflow: visible;
+    /* SMOOTH TRANSFORM FOR STICKY STATE */
+    transform: scale(1) translateY(0);
+    transition: 
+        transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        width 0.5s ease,
+        padding 0.3s ease,
+        box-shadow 0.4s ease;
+}
+
+/* REVOLUTIONARY SMOOTH TRANSITION ENHANCEMENT */
+.nav-wrapper.nav-sticky nav:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.4),
+        0 4px 15px rgba(0, 0, 0, 0.15),
+        inset 20px 0 30px -15px rgba(255, 255, 255, 0.28),
+        inset 35px 0 45px -20px rgba(255, 255, 255, 0.15),
+        inset -20px 0 30px -15px rgba(255, 255, 255, 0.28),
+        inset -35px 0 45px -20px rgba(255, 255, 255, 0.15);
+}
+
+/* SMOOTH TRANSITION PRELOAD SYSTEM */
+.nav-wrapper {
+    /* Pre-load transitions to prevent jank */
+    will-change: transform, background-color, padding;
+    /* Override any previous transform conflicts */
+    transform-origin: center;
+}
+
+.nav-wrapper.nav-sticky {
+    /* Enhanced smooth scaling entrance */
+    animation: stickyNavEntrance 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    /* Override any inherited transition conflicts */
+    transition-delay: 0s !important;
+}
+
+@keyframes stickyNavEntrance {
+    0% {
+        transform: translateY(50%) scale(0.95);
+        opacity: 0.8;
+        backdrop-filter: blur(4px);
+    }
+    50% {
+        transform: translateY(25%) scale(0.98);
+        opacity: 0.9;
+        backdrop-filter: blur(6px);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+/* SMOOTH REVERSE ANIMATION FOR EXIT */
+.nav-wrapper:not(.nav-sticky) {
+    animation: stickyNavExit 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes stickyNavExit {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+    100% {
+        transform: translateY(50%) scale(0.98);
+        opacity: 1;
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* PERFORMANCE OPTIMIZATION & RESPONSIVE ENHANCEMENTS */
+@media (max-width: 900px) {
+    .nav-wrapper {
+        /* Mobile optimized transitions */
+        transition: 
+            transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+            background-color 0.3s ease,
+            padding 0.3s ease;
+        padding: 0 10px;
+    }
+    
+    .nav-wrapper.nav-sticky {
+        padding: 6px 15px;
+        max-width: calc(100% - 20px);
+        border-radius: 20px;
+    }
+    
+    @keyframes stickyNavEntrance {
+        0% {
+            transform: translateY(50%) scale(0.96);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+}
+
+/* ACCESSIBILITY: REDUCE MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+    .nav-wrapper,
+    .nav-wrapper.nav-sticky {
+        transition: background-color 0.2s ease;
+        animation: none;
+    }
+    
+    .nav-wrapper.nav-sticky nav {
+        transition: padding 0.2s ease;
+    }
+}
+
+/* HARDWARE ACCELERATION OPTIMIZATION */
+@supports (transform: translate3d(0,0,0)) {
+    .nav-wrapper {
+        transform: translateY(50%) translate3d(0,0,0);
+        will-change: transform;
+    }
+    
+    .nav-wrapper.nav-sticky {
+        transform: translateY(0) scale(1) translate3d(0,0,0);
+    }
+}
+
+/* Advanced Animated Side Glow System for Sticky Navbar */
+.nav-wrapper.nav-sticky nav::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: 
+        /* Extended dramatic side coverage */
+        radial-gradient(ellipse 120px 110% at 0% 50%, 
+            rgba(255,255,255,0.35) 0%, 
+            rgba(255,255,255,0.22) 20%, 
+            rgba(255,255,255,0.12) 40%, 
+            rgba(255,255,255,0.06) 65%, 
+            transparent 85%),
+        radial-gradient(ellipse 120px 110% at 100% 50%, 
+            rgba(255,255,255,0.35) 0%, 
+            rgba(255,255,255,0.22) 20%, 
+            rgba(255,255,255,0.12) 40%, 
+            rgba(255,255,255,0.06) 65%, 
+            transparent 85%),
+        /* Breathing base glow */
+        radial-gradient(ellipse 200px 100% at 50% 50%, 
+            transparent 0%, 
+            rgba(255,255,255,0.03) 60%, 
+            rgba(255,255,255,0.08) 85%, 
+            transparent 100%);
+    border-radius: 30px;
+    pointer-events: none;
+    z-index: 1;
+    animation: breathingGlow 4s ease-in-out infinite;
+    opacity: 0.9;
+}
+
+.nav-wrapper.nav-sticky nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Sharp edge highlights */
+        linear-gradient(90deg, 
+            rgba(255,255,255,0.35) 0%, 
+            rgba(255,255,255,0.18) 5%, 
+            rgba(255,255,255,0.08) 12%, 
+            transparent 30%),
+        linear-gradient(270deg, 
+            rgba(255,255,255,0.35) 0%, 
+            rgba(255,255,255,0.18) 5%, 
+            rgba(255,255,255,0.08) 12%, 
+            transparent 30%),
+        /* Corner accent glow */
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 25%),
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.15) 0%, transparent 25%),
+        radial-gradient(circle at 0% 100%, rgba(255,255,255,0.15) 0%, transparent 25%),
+        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 25%);
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: 2;
+    animation: edgePulse 3s ease-in-out infinite alternate;
 }
 
 .nav-wrapper.nav-sticky .logo a {
@@ -590,46 +825,222 @@ body {
 
 /* Full-width gradient background behind nav to prevent side clipping */
 .nav-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    width: min(1200px, calc(100vw - 32px));
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    border-radius: 25px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 0;
+    content: none;
 }
 
 nav {
-    display: flex;
-    justify-content: space-around;
+    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    width: 90%;
-    margin: auto;
-    background: transparent; /* gradient moved to .nav-wrapper::before to prevent side clipping */
+    width: max-content;
+    max-width: min(95vw, 1200px);
+    margin: 0 auto;
+    /* Base gradient background */
+    background: linear-gradient(135deg, #0f336f 0%, #133E87 35%, #4f74b4 65%, #608BC1 100%);
     border-radius: 25px;
-    padding: 0;
-    box-shadow: none;
+    padding: 12px 30px;
+    /* Enhanced multi-layer box-shadow for smooth side effects */
+    box-shadow: 
+        /* Main drop shadows */
+        0 8px 25px rgba(0, 0, 0, 0.3), 
+        0 2px 10px rgba(0, 0, 0, 0.1),
+        /* Left side glow enhancement */
+        inset 15px 0 20px -10px rgba(255, 255, 255, 0.18),
+        inset 25px 0 35px -15px rgba(255, 255, 255, 0.08),
+        /* Right side glow enhancement */
+        inset -15px 0 20px -10px rgba(255, 255, 255, 0.18),
+        inset -25px 0 35px -15px rgba(255, 255, 255, 0.08),
+        /* Top/bottom subtle enhancement */
+        inset 0 8px 15px -8px rgba(255, 255, 255, 0.1),
+        inset 0 -8px 15px -8px rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
     overflow: visible;
     z-index: 1;
 }
 
+/* Revolutionary Multi-Layer Interactive Side Glow System */
 nav::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: 
+        /* Extended smooth side coverage */
+        radial-gradient(ellipse 140px 105% at 0% 50%, 
+            rgba(255,255,255,0.28) 0%, 
+            rgba(255,255,255,0.18) 25%, 
+            rgba(255,255,255,0.10) 45%, 
+            rgba(255,255,255,0.05) 65%, 
+            transparent 85%),
+        radial-gradient(ellipse 140px 105% at 100% 50%, 
+            rgba(255,255,255,0.28) 0%, 
+            rgba(255,255,255,0.18) 25%, 
+            rgba(255,255,255,0.10) 45%, 
+            rgba(255,255,255,0.05) 65%, 
+            transparent 85%),
+        /* Ambient glow base */
+        radial-gradient(ellipse 180px 100% at 50% 50%, 
+            transparent 40%, 
+            rgba(255,255,255,0.04) 70%, 
+            rgba(255,255,255,0.06) 90%, 
+            transparent 100%),
+        /* Subtle texture enhancement */
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="navGrain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23navGrain)"/></svg>');
+    border-radius: 28px;
+    pointer-events: none;
+    z-index: 1;
+    animation: subtleBreathing 5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+/* Enhanced Interactive Edge Glow */
+nav::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="navGrain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23navGrain)"/></svg>');
-    opacity: 0.3;
+    background: 
+        /* Progressive edge highlights */
+        linear-gradient(90deg, 
+            rgba(255,255,255,0.32) 0%, 
+            rgba(255,255,255,0.20) 4%, 
+            rgba(255,255,255,0.12) 8%, 
+            rgba(255,255,255,0.06) 15%, 
+            transparent 35%),
+        linear-gradient(270deg, 
+            rgba(255,255,255,0.32) 0%, 
+            rgba(255,255,255,0.20) 4%, 
+            rgba(255,255,255,0.12) 8%, 
+            rgba(255,255,255,0.06) 15%, 
+            transparent 35%),
+        /* Corner accent enhancement */
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
+        radial-gradient(circle at 0% 100%, rgba(255,255,255,0.12) 0%, transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.12) 0%, transparent 30%);
+    border-radius: 25px;
     pointer-events: none;
+    z-index: 2;
+    animation: edgeShimmer 6s ease-in-out infinite;
+}
+
+/* Interactive hover enhancement for entire navbar */
+nav:hover::before {
+    animation-duration: 2s;
+    opacity: 1.2;
+    transform: scale(1.02);
+}
+
+nav:hover::after {
+    animation-duration: 2s;
+    opacity: 1.3;
+}
+
+/* Advanced Animation Keyframes */
+@keyframes breathingGlow {
+    0%, 100% { 
+        opacity: 0.9; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1.1; 
+        transform: scale(1.01); 
+    }
+}
+
+@keyframes subtleBreathing {
+    0%, 100% { 
+        opacity: 0.8; 
+        transform: scale(1) rotateZ(0deg); 
+    }
+    33% { 
+        opacity: 0.95; 
+        transform: scale(1.005) rotateZ(0.1deg); 
+    }
+    66% { 
+        opacity: 1.0; 
+        transform: scale(1.01) rotateZ(-0.1deg); 
+    }
+}
+
+@keyframes edgePulse {
+    0% { 
+        opacity: 0.7; 
+        transform: scale(1); 
+    }
+    100% { 
+        opacity: 1.0; 
+        transform: scale(1.005); 
+    }
+}
+
+@keyframes edgeShimmer {
+    0%, 100% { 
+        opacity: 0.8; 
+        filter: brightness(1); 
+    }
+    25% { 
+        opacity: 0.9; 
+        filter: brightness(1.05); 
+    }
+    50% { 
+        opacity: 1.0; 
+        filter: brightness(1.1); 
+    }
+    75% { 
+        opacity: 0.95; 
+        filter: brightness(1.03); 
+    }
+}
+
+/* Advanced CSS Custom Properties for Dynamic Overlay Control */
+:root {
+    --navbar-glow-intensity: 1;
+    --navbar-animation-speed: 1;
+    --navbar-hover-scale: 1.02;
+    --navbar-edge-brightness: 1.1;
+}
+
+/* Dynamic Media Query Adjustments for Responsive Glow */
+@media (max-width: 900px) {
+    :root {
+        --navbar-glow-intensity: 0.8;
+        --navbar-animation-speed: 1.2;
+        --navbar-hover-scale: 1.01;
+    }
+    
+    nav::before {
+        animation-duration: calc(5s / var(--navbar-animation-speed));
+        opacity: calc(0.8 * var(--navbar-glow-intensity));
+    }
+    
+    nav::after {
+        animation-duration: calc(6s / var(--navbar-animation-speed));
+        opacity: calc(0.8 * var(--navbar-glow-intensity));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    nav::before, nav::after,
+    .nav-wrapper.nav-sticky nav::before,
+    .nav-wrapper.nav-sticky nav::after {
+        animation: none;
+        opacity: calc(0.6 * var(--navbar-glow-intensity));
+    }
+}
+
+/* Performance optimized transform for modern browsers */
+@supports (transform: translate3d(0,0,0)) {
+    nav::before, nav::after {
+        transform: translate3d(0,0,0);
+        will-change: transform, opacity;
+    }
 }
 
 .logo a {
@@ -639,7 +1050,7 @@ nav::before {
     font-weight: bold;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     position: relative;
-    z-index: 2;
+    z-index: 10;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -650,9 +1061,12 @@ nav::before {
 
 .nav-links {
     display: flex;
-    justify-content: space-around;
-    width: 50%;
+    justify-content: center;
+    width: auto;
+    gap: 8px;
     list-style: none;
+    position: relative;
+    z-index: 10;
 }
 
 .nav-links a {
@@ -697,6 +1111,101 @@ nav::before {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ===== LOGO STYLING WITH IMAGE ===== */
+.nav-wrapper nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.nav-wrapper nav .logo::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 70%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 10%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0.3) 90%, 
+        transparent 100%
+    );
+    opacity: 0.7;
+}
+
+.nav-wrapper nav .logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    backdrop-filter: blur(1px);
+}
+
+.nav-wrapper nav .logo a {
+    font-weight: 600;
+    font-size: 1.1em;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.nav-wrapper nav .logo a:hover {
+    color: rgba(203, 220, 235, 0.9);
+}
+
+/* Adjust nav spacing for logo divider */
+.nav-wrapper nav {
+    gap: 40px;
+}
+
+/* ===== VERTICAL DIVIDERS FOR NAV-WRAPPER ===== */
+.nav-wrapper nav .main-nav .nav-links {
+    gap: 32px;
+}
+
+.nav-wrapper nav .main-nav .nav-links li {
+    position: relative;
+}
+
+/* Vertical dividers between menu items in nav-wrapper */
+.nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 10%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 90%, 
+        transparent 100%
+    );
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Enhanced divider on hover for nav-wrapper */
+.nav-wrapper nav .main-nav .nav-links li:not(:last-child):hover::after {
+    opacity: 1;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(203, 220, 235, 0.6) 10%, 
+        rgba(203, 220, 235, 0.9) 50%, 
+        rgba(203, 220, 235, 0.6) 90%, 
+        transparent 100%
+    );
 }
 
 .hamburger {
@@ -3066,4 +3575,122 @@ body.menu-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce){
     .header-content .main-title h1::after{ animation: none; }
+}
+
+/* Force remove ::before on main title (Home) */
+.header-content .main-title h1::before,
+.main-title h1::before{
+    content: none !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Force remove ::before for requested components */
+h2.section-title::before,
+.header-title::before{
+    content: none !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS FOR NAV-WRAPPER VERTICAL DIVIDERS ===== */
+
+/* Tablet responsive adjustments (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-wrapper nav .main-nav .nav-links {
+        gap: 24px;
+    }
+    
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after {
+        right: -12px;
+        height: 55%;
+    }
+    
+    /* Logo responsive adjustments */
+    .nav-wrapper nav {
+        gap: 32px;
+    }
+    
+    .nav-wrapper nav .logo::after {
+        right: -16px;
+        height: 65%;
+    }
+    
+    .nav-wrapper nav .logo img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .nav-wrapper nav .logo a {
+        font-size: 1.05em;
+    }
+}
+
+/* Small tablet responsive adjustments (769px - 900px) */
+@media (min-width: 769px) and (max-width: 900px) {
+    .nav-wrapper nav .main-nav .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after {
+        right: -10px;
+        height: 50%;
+        opacity: 0.7;
+    }
+    
+    /* Logo responsive adjustments for small tablet */
+    .nav-wrapper nav {
+        gap: 28px;
+    }
+    
+    .nav-wrapper nav .logo::after {
+        right: -14px;
+        height: 60%;
+        opacity: 0.6;
+    }
+    
+    .nav-wrapper nav .logo img {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .nav-wrapper nav .logo a {
+        font-size: 1em;
+    }
+}
+
+/* Hide dividers on mobile (768px and below) where hamburger menu is used */
+@media (max-width: 768px) {
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after {
+        display: none;
+    }
+    
+    /* Hide logo divider on mobile */
+    .nav-wrapper nav .logo::after {
+        display: none;
+    }
+    
+    /* Adjust logo for mobile */
+    .nav-wrapper nav .logo img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .nav-wrapper nav .logo a {
+        font-size: 0.95em;
+    }
+    
+    .nav-wrapper nav {
+        gap: 20px;
+    }
 }
