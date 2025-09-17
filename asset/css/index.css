@@ -254,6 +254,7 @@ body.profil-nav-floating .profil-main {
     justify-content: space-between;
     padding: 0 0 0 0;
     background: transparent; /* hilangkan background putih */
+    gap: 48px; /* Add spacing between logo and main-nav */
 }
 
 .nav-atas .logo {
@@ -261,6 +262,26 @@ body.profil-nav-floating .profil-main {
     align-items: center;
     gap: 24px;
     margin-left: 48px;
+    position: relative;
+}
+
+/* Add divider after logo in nav-atas */
+.nav-atas .logo::after {
+    content: '';
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 70%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 10%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0.3) 90%, 
+        transparent 100%
+    );
+    opacity: 0.7;
 }
 
 .nav-atas .logo-text {
@@ -295,7 +316,7 @@ body.profil-nav-floating .profil-main {
     margin-right: 0; /* mepet ke kanan */
 }
 
-.main-nav ul {
+.nav-links {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -306,8 +327,171 @@ body.profil-nav-floating .profil-main {
     gap: 32px;
 }
 
- .main-nav li {
+.nav-links li {
     margin: 0;
+    position: relative;
+}
+
+/* Vertical dividers between menu items */
+.nav-links li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 10%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 90%, 
+        transparent 100%
+    );
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Enhanced divider on hover */
+.nav-links li:not(:last-child):hover::after {
+    opacity: 1;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(203, 220, 235, 0.6) 10%, 
+        rgba(203, 220, 235, 0.9) 50%, 
+        rgba(203, 220, 235, 0.6) 90%, 
+        transparent 100%
+    );
+}
+
+/* ===== NAV-WRAPPER VERTICAL DIVIDERS (Layanan.html & Informasi.html) ===== */
+.nav-wrapper nav .main-nav .nav-links {
+    gap: 32px;
+}
+
+.nav-wrapper nav .main-nav .nav-links li {
+    position: relative;
+}
+
+/* Vertical dividers for nav-wrapper */
+.nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 10%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 90%, 
+        transparent 100%
+    );
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.nav-wrapper nav .main-nav .nav-links li:not(:last-child):hover::after {
+    opacity: 1;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(203, 220, 235, 0.6) 10%, 
+        rgba(203, 220, 235, 0.9) 50%, 
+        rgba(203, 220, 235, 0.6) 90%, 
+        transparent 100%
+    );
+}
+
+/* ===== PROFIL-NAV VERTICAL DIVIDERS (Profil.html) ===== */
+.profil-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 32px;
+}
+
+.profil-nav ul li {
+    position: relative;
+}
+
+/* Vertical dividers for profil-nav */
+.profil-nav ul li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 10%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 90%, 
+        transparent 100%
+    );
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.profil-nav ul li:not(:last-child):hover::after {
+    opacity: 1;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(203, 220, 235, 0.6) 10%, 
+        rgba(203, 220, 235, 0.9) 50%, 
+        rgba(203, 220, 235, 0.6) 90%, 
+        transparent 100%
+    );
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS FOR ALL NAVBAR DIVIDERS ===== */
+
+/* Tablet responsive adjustments (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-links,
+    .nav-wrapper nav .main-nav .nav-links,
+    .profil-nav ul {
+        gap: 24px;
+    }
+    
+    .nav-links li:not(:last-child)::after,
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after,
+    .profil-nav ul li:not(:last-child)::after {
+        right: -12px;
+        height: 55%;
+    }
+}
+
+/* Small tablet responsive adjustments (769px - 900px) */
+@media (min-width: 769px) and (max-width: 900px) {
+    .nav-links,
+    .nav-wrapper nav .main-nav .nav-links,
+    .profil-nav ul {
+        gap: 20px;
+    }
+    
+    .nav-links li:not(:last-child)::after,
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after,
+    .profil-nav ul li:not(:last-child)::after {
+        right: -10px;
+        height: 50%;
+        opacity: 0.7;
+    }
+}
+
+/* Hide dividers on mobile (768px and below) where hamburger menu is used */
+@media (max-width: 768px) {
+    .nav-links li:not(:last-child)::after,
+    .nav-wrapper nav .main-nav .nav-links li:not(:last-child)::after,
+    .profil-nav ul li:not(:last-child)::after {
+        display: none;
+    }
 }
 .submenu , .dropdown-toggle{
     display: none;
@@ -327,33 +511,77 @@ body.profil-nav-floating .profil-main {
     color: #CBDCEB;
 }
 
-/* Enhanced top menu: rounded gradient container with smooth hover */
+/* Enhanced top menu: rounded gradient container with creative side glow effects */
 .menu-list {
     /* override base ul styles for this specific list */
     padding: 10px 18px;
     gap: 10px;
+    /* Base gradient background */
     background: linear-gradient(135deg, rgba(19,62,135,0.72) 0%, rgba(96,139,193,0.72) 100%);
     border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
-    overflow: hidden; /* for gloss */
+    overflow: visible; /* Changed from hidden to visible for pseudo-elements */
     /* hanya sisi kiri yang membulat */
     border-top-left-radius: 999px;
     border-bottom-left-radius: 999px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    /* Enhanced multi-layer box-shadow for smooth side effects */
+    box-shadow: 
+        /* Main shadows */
+        0 8px 24px rgba(0,0,0,0.18),
+        /* Left side glow enhancement */
+        inset 12px 0 18px -8px rgba(255, 255, 255, 0.14),
+        inset 20px 0 30px -12px rgba(255, 255, 255, 0.05),
+        /* Right side glow enhancement */
+        inset -12px 0 18px -8px rgba(255, 255, 255, 0.14),
+        inset -20px 0 30px -12px rgba(255, 255, 255, 0.05),
+        /* Top/bottom subtle enhancement */
+        inset 0 6px 12px -6px rgba(255, 255, 255, 0.07),
+        inset 0 -6px 12px -6px rgba(255, 255, 255, 0.07);
 }
 
-/* soft gloss sweep */
-.nav-atas .main-nav .menu-list::before {
-    content: "";
+/* General menu-list creative overlays - only apply to .menu-list not in .nav-atas */
+.menu-list:not(.nav-atas .main-nav .menu-list)::before {
+    content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 140%; height: 260%;
-    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.16) 50%, transparent 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Left side dramatic glow */
+        radial-gradient(ellipse 60px 100% at 0% 50%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 35%, transparent 60%),
+        /* Right side dramatic glow */
+        radial-gradient(ellipse 60px 100% at 100% 50%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 35%, transparent 60%);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     pointer-events: none;
+    z-index: 1;
+}
+
+.menu-list:not(.nav-atas .main-nav .menu-list)::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background: 
+        /* Intense left edge glow */
+        linear-gradient(90deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 6%, transparent 15%),
+        /* Intense right edge glow */  
+        linear-gradient(270deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 6%, transparent 15%);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    pointer-events: none;
+    z-index: 2;
 }
 
 /* item styles */
@@ -366,6 +594,8 @@ body.profil-nav-floating .profil-main {
     line-height: 1;
     transition: color .25s ease, transform .25s ease, text-shadow .25s ease, background-color .25s ease, box-shadow .25s ease;
     white-space: nowrap;
+    position: relative;
+    z-index: 10;
 }
 
 /* hover/pill effect */
@@ -396,22 +626,181 @@ body.profil-nav-floating .profil-main {
     .nav-atas .main-nav .menu-list a { transition: none; }
 }
 
-/* Menu icons + active highlight — THEME gradient, no green */
+/* Menu icons + active highlight — Creative side glow effects */
 .nav-atas .main-nav .menu-list {
+    /* Base gradient background */
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-color: rgba(255,255,255,0.18);
     gap: 20px;
     padding: 8px 14px;
+    position: relative;
+    overflow: visible;
+    /* Enhanced multi-layer box-shadow for smooth side effects */
+    box-shadow: 
+        /* Main shadows */
+        0 8px 24px rgba(0,0,0,0.18),
+        /* Left side glow enhancement */
+        inset 12px 0 18px -8px rgba(255, 255, 255, 0.16),
+        inset 20px 0 30px -12px rgba(255, 255, 255, 0.06),
+        /* Right side glow enhancement */
+        inset -12px 0 18px -8px rgba(255, 255, 255, 0.16),
+        inset -20px 0 30px -12px rgba(255, 255, 255, 0.06),
+        /* Top/bottom subtle enhancement */
+        inset 0 6px 12px -6px rgba(255, 255, 255, 0.08),
+        inset 0 -6px 12px -6px rgba(255, 255, 255, 0.08);
 }
-.nav-atas .main-nav .menu-list a {
-    display: flex;
-    flex-direction: column; /* icon above text */
-    align-items: center;
-    gap: 4px;
-    padding: 6px 10px;
-    color: var(--white-color);
-    border-radius: 10px; /* rounded tile */
-    font-size: calc(var(--fontMM) * 0.9);
+
+/* Advanced Interactive Side Glow for Nav-Atas Menu */
+.nav-atas .main-nav .menu-list::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: 
+        /* Extended smooth side coverage */
+        radial-gradient(ellipse 90px 105% at 0% 50%, 
+            rgba(255,255,255,0.26) 0%, 
+            rgba(255,255,255,0.16) 20%, 
+            rgba(255,255,255,0.08) 40%, 
+            rgba(255,255,255,0.04) 65%, 
+            transparent 85%),
+        radial-gradient(ellipse 90px 105% at 100% 50%, 
+            rgba(255,255,255,0.26) 0%, 
+            rgba(255,255,255,0.16) 20%, 
+            rgba(255,255,255,0.08) 40%, 
+            rgba(255,255,255,0.04) 65%, 
+            transparent 85%),
+        /* Ambient base glow */
+        radial-gradient(ellipse 130px 100% at 50% 50%, 
+            transparent 50%, 
+            rgba(255,255,255,0.03) 75%, 
+            rgba(255,255,255,0.05) 90%, 
+            transparent 100%);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+    animation: navAtasBreathing 4.5s ease-in-out infinite;
+    opacity: 0.85;
+}
+
+/* Enhanced Interactive Edge System for Nav-Atas */
+.nav-atas .main-nav .menu-list::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Progressive edge enhancement */
+        linear-gradient(90deg, 
+            rgba(255,255,255,0.28) 0%, 
+            rgba(255,255,255,0.16) 3%, 
+            rgba(255,255,255,0.08) 8%, 
+            rgba(255,255,255,0.04) 18%, 
+            transparent 35%),
+        linear-gradient(270deg, 
+            rgba(255,255,255,0.28) 0%, 
+            rgba(255,255,255,0.16) 3%, 
+            rgba(255,255,255,0.08) 8%, 
+            rgba(255,255,255,0.04) 18%, 
+            transparent 35%),
+        /* Corner accent for rounded design */
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.10) 0%, transparent 35%),
+        radial-gradient(circle at 0% 100%, rgba(255,255,255,0.10) 0%, transparent 35%),
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 25%),
+        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.08) 0%, transparent 25%);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    pointer-events: none;
+    z-index: 2;
+    animation: navAtasShimmer 5s ease-in-out infinite;
+}
+
+/* Interactive hover effects for nav-atas */
+.nav-atas .main-nav .menu-list:hover::before {
+    animation-duration: 2.5s;
+    opacity: 1.0;
+    transform: scale(1.01);
+}
+
+.nav-atas .main-nav .menu-list:hover::after {
+    animation-duration: 2.5s;
+    opacity: 1.2;
+}
+
+/* Nav-Atas specific animations */
+@keyframes navAtasBreathing {
+    0%, 100% { 
+        opacity: 0.85; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1.0; 
+        transform: scale(1.008); 
+    }
+}
+
+@keyframes navAtasShimmer {
+    0%, 100% { 
+        opacity: 0.7; 
+        filter: brightness(1) saturate(1); 
+    }
+    33% { 
+        opacity: 0.85; 
+        filter: brightness(1.08) saturate(1.1); 
+    }
+    66% { 
+        opacity: 0.95; 
+        filter: brightness(1.12) saturate(1.15); 
+    }
+}
+
+/* Additional Advanced Customization Variables for Nav-Atas */
+.nav-atas {
+    --nav-atas-glow-intensity: 0.9;
+    --nav-atas-animation-speed: 1.1;
+    --nav-atas-hover-scale: 1.01;
+}
+
+/* Responsive adjustments for nav-atas */
+@media (max-width: 768px) {
+    .nav-atas {
+        --nav-atas-glow-intensity: 0.7;
+        --nav-atas-animation-speed: 1.3;
+    }
+    
+    .nav-atas .main-nav .menu-list::before {
+        animation-duration: calc(4.5s / var(--nav-atas-animation-speed));
+        opacity: calc(0.85 * var(--nav-atas-glow-intensity));
+    }
+    
+    .nav-atas .main-nav .menu-list::after {
+        animation-duration: calc(5s / var(--nav-atas-animation-speed));
+        opacity: calc(0.7 * var(--nav-atas-glow-intensity));
+    }
+}
+
+/* Performance optimizations for nav-atas */
+@supports (transform: translate3d(0,0,0)) {
+    .nav-atas .main-nav .menu-list::before,
+    .nav-atas .main-nav .menu-list::after {
+        transform: translate3d(0,0,0);
+        will-change: transform, opacity, filter;
+    }
+}
+
+/* Ensure general menu items also have proper z-index */
+.menu-list a {
+    position: relative;
+    z-index: 10;
 }
 .nav-atas .main-nav .menu-list a::before {
     content: "";

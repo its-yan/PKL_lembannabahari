@@ -44,6 +44,14 @@ body {
   background: transparent !important;
 }
 
+/* Reset list styles across Layanan page (headers, nav, and anywhere) */
+.layanan-page ul,
+.layanan-page ol {
+  list-style: none !important;
+  margin: 0;
+  padding-left: 0;
+}
+
 /* Header Section */
 .layanan-page .header {
   background: linear-gradient(var(--primary-color), rgba(0, 0, 0, 0.2)),
@@ -435,6 +443,7 @@ body {
 .layanan-page .section-header {
   text-align: center;
   margin-bottom: 3rem;
+  
 }
 
 .layanan-page .section-title {
@@ -446,6 +455,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  
 }
 
 .layanan-page .section-title i {
@@ -1205,3 +1215,18 @@ body {
   }
 }
 >>>>>>> d9319095896c4f9b0069d26cb435450fc886c447
+
+/* Force remove ::before for Layanan/UMKM page titles */
+h2.section-title::before,
+.layanan-page .section-title::before,
+.header-title::before,
+.layanan-page .header-title::before{
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

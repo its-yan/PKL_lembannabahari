@@ -291,17 +291,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Sticky nav on scroll
+    // ENHANCED SMOOTH STICKY NAV WITH TRANSITION STATES
+    let isTransitioning = false;
+    let ticking = false;
+    
     const updateSticky = () => {
+        if (isTransitioning) return; // Prevent rapid-fire transitions
+        
         const headerHeight = headerContainer ? headerContainer.offsetHeight : 0;
-        if (window.scrollY > Math.max(10, headerHeight - 80)) {
+        const scrollThreshold = Math.max(10, headerHeight - 80);
+        const shouldStick = window.scrollY > scrollThreshold;
+        const isCurrentlySticky = navWrapper && navWrapper.classList.contains('nav-sticky');
+        
+        if (shouldStick && !isCurrentlySticky) {
+            // SMOOTH ENTRANCE TO STICKY
+            isTransitioning = true;
             navWrapper && navWrapper.classList.add('nav-sticky');
-        } else {
+            
+            // Performance optimization: Use reduced motion duration on mobile
+            const duration = window.innerWidth <= 900 ? 400 : 600;
+            setTimeout(() => { isTransitioning = false; }, duration);
+            
+        } else if (!shouldStick && isCurrentlySticky) {
+            // SMOOTH EXIT FROM STICKY
+            isTransitioning = true;
             navWrapper && navWrapper.classList.remove('nav-sticky');
+            
+            // Performance optimization: Use reduced motion duration on mobile
+            const duration = window.innerWidth <= 900 ? 300 : 500;
+            setTimeout(() => { isTransitioning = false; }, duration);
+        }
+    };
+    
+    // PERFORMANCE OPTIMIZED SCROLL HANDLER
+    const requestStickyUpdate = () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateSticky();
+                ticking = false;
+            });
+            ticking = true;
         }
     };
     updateSticky();
-    window.addEventListener('scroll', updateSticky);
+    window.addEventListener('scroll', requestStickyUpdate);
 
     // Active link highlighting on scroll
     const sections = document.querySelectorAll('section');
