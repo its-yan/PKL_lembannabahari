@@ -116,7 +116,7 @@ body {
 }
 
 .header-title .desa-name {
-  font-size: 1.2em;
+  font-size: 0.8em;
   font-weight: bold;
   margin: 0;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
@@ -125,7 +125,7 @@ body {
 }
 
 .header-title .kabupaten-name {
-  font-size: 0.9em;
+  font-size: 0.6em;
   margin: 0;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   opacity: 0.95;
@@ -1182,13 +1182,6 @@ body {
   .layanan-page .header-btn {
     max-width: 260px;
   }
-
-.layanan-page .hiasan-kue {
-  position: absolute;
-  right: -94%;
-  bottom: -23%;
-
-}
 }
 
 @media (min-width: 1020px) {
