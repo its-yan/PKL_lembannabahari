@@ -406,6 +406,30 @@ document.addEventListener('DOMContentLoaded', function() {
         ctaObserver.observe(ctaSection);
     }
 
+    // Animate facility cards into view with a subtle stagger
+    (function animateFacilityCards(){
+        const cards = document.querySelectorAll('.facility-card');
+        if (!cards || cards.length === 0) return;
+
+        cards.forEach(card => card.classList.add('hidden'));
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    el.classList.add('show');
+                    el.classList.remove('hidden');
+                    // Stagger by index using dataset or computed index
+                    const idx = Array.from(cards).indexOf(el);
+                    el.style.transitionDelay = `${Math.min(idx * 80, 400)}ms`;
+                    obs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        cards.forEach(card => observer.observe(card));
+    })();
+
     // Carousel Modal
     const modal = document.getElementById('carousel-modal');
     const carouselInner = document.querySelector('.carousel-inner');
