@@ -395,4 +395,95 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('keydown', (e)=>{ if(!modal || !modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
     })();
 
+    // =====================
+    // GALERI: data + render + overlay popout
+    // =====================
+    (function(){
+        const items = [
+            // Pantai & pemandangan
+            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-6.webp', src: 'asset/img/wisata andalah/pantai-mandala-5.webp', title: 'Kegiatan Bersih Pantai', desc: 'Aksi bersih pantai Mandala Ria bersama warga & pengelola wisata.', tags: ['Lingkungan','Gotong Royong'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-7.webp', src: 'asset/img/wisata andalah/pantai-mandala-7.webp', title: 'Senja Mandala Ria', desc: 'Panorama senja di pantai Mandala Ria.', tags: ['Pantai','Senja'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-2.jpeg', src: 'asset/img/wisata andalah/pantai-mandala-3.jpeg', title: 'Garis Pantai', desc: 'Garis pantai yang panjang dengan pasir yang lembut.', tags: ['Pantai'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-andalan-1.jpeg', src: 'asset/img/wisata andalah/pantai-andalan-1.jpeg', title: 'Pantai Andalan', desc: 'Spot favorit wisatawan untuk swafoto.', tags: ['Pantai'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-4.jpeg', src: 'asset/img/wisata andalah/pantai-mandala-4.jpeg', title: 'Festival Kuliner Pesisir', desc: 'Promosi kuliner laut khas Ara oleh UMKM desa.', tags: ['Kuliner','UMKM'] },
+
+            // Tebing Mattoanging & batu
+            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging.webp', src: 'asset/img/wisata andalah/tebing-mattoanging.webp', title: 'Tebing Mattoanging', desc: 'Karst eksotis yang menjadi ikon jalur trekking.', tags: ['Tebing','Alam'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging-2.webp', src: 'asset/img/wisata andalah/tebing-mattoanging-3.webp', title: 'Kontur Tebing', desc: 'Formasi karst unik, aman untuk jalur hiking terpilih.', tags: ['Trekking'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging-4.jpg', src: 'asset/img/wisata andalah/tebing-mattoanging-4.jpg', title: 'Puncak Tebing', desc: 'Pemandangan dari ketinggian.', tags: ['Tebing'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg', src: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg', title: 'Batu Tongkarayya', desc: 'Batu besar dengan nilai budaya.', tags: ['Budaya'] },
+
+            // Gua Passea
+            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-1.webp', src: 'asset/img/wisata andalah/gua-passea-1.webp', title: 'Gua Passea', desc: 'Eksplorasi gua karst di kawasan Ara.', tags: ['Eksplorasi','Alam'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-2.jpg', src: 'asset/img/wisata andalah/gua-passea-2.jpg', title: 'Lorong Gua', desc: 'Lorong gua dengan permainan cahaya alami.', tags: ['Gua'] },
+            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-3.jpeg', src: 'asset/img/wisata andalah/gua-passea-3.jpeg', title: 'Celah Batu', desc: 'Celah sempit menuju chamber berikutnya.', tags: ['Gua'] },
+
+            // Camping ground & aktivitas
+            { type: 'image', thumb: 'asset/img/wisata andalah/camping-ground-1.jpg', src: 'asset/img/wisata andalah/camping-ground-1.jpg', title: 'Camping Ground', desc: 'Area perkemahan keluarga dan komunitas.', tags: ['Camping'] },
+
+            // UMKM & bengkel kriya
+            { type: 'video', thumb: 'asset3/IMG/Bengkel/souvenir-1.jpeg', src: 'asset3/IMG/Bengkel/bengkel kriya Desa Lembanna.mp4', title: 'Bengkel Kriya Miniatur Pinisi', desc: 'Proses pembuatan miniatur Pinisi oleh perajin lokal.', tags: ['UMKM','Kerajinan','Pinisi'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/Bengkel kria.jpg', src: 'asset3/IMG/Bengkel/Bengkel kria.jpg', title: 'Workshop Kriya', desc: 'Suasana kerja di bengkel kriya.', tags: ['UMKM'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/Bengkel Kria 2.jpg', src: 'asset3/IMG/Bengkel/Bengkel Kria 2.jpg', title: 'Karya Perajin', desc: 'Hasil karya yang dipamerkan.', tags: ['UMKM'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-2.jpeg', src: 'asset3/IMG/Bengkel/souvenir-2.jpeg', title: 'Souvenir Pinisi', desc: 'Souvenir khas desa: miniatur Pinisi.', tags: ['Souvenir'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-3.jpeg', src: 'asset3/IMG/Bengkel/souvenir-3.jpeg', title: 'Detail Kayu', desc: 'Detail pengerjaan kayu.', tags: ['Kerajinan'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-4.jpeg', src: 'asset3/IMG/Bengkel/souvenir-4.jpeg', title: 'Finishing', desc: 'Tahap finishing produk.', tags: ['UMKM'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-5.jpeg', src: 'asset3/IMG/Bengkel/souvenir-5.jpeg', title: 'Display Produk', desc: 'Display produk siap jual.', tags: ['UMKM'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-6.jpeg', src: 'asset3/IMG/Bengkel/souvenir-6.jpeg', title: 'Paket Souvenir', desc: 'Paket souvenir untuk wisatawan.', tags: ['Souvenir'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/Miniatur Pinisi.png', src: 'asset3/IMG/Bengkel/Miniatur Pinisi.png', title: 'Miniatur Pinisi', desc: 'Produk unggulan desa.', tags: ['Pinisi'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg', src: 'asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg', title: 'Miniatur Pinisi Andalan', desc: 'Edisi khusus andalan desa.', tags: ['Pinisi'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg', src: 'asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg', title: 'Souvenir Khas', desc: 'Miniatur Pinisi sebagai souvenir khas.', tags: ['Souvenir'] },
+            { type: 'image', thumb: 'asset3/IMG/Bengkel/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg', src: 'asset3/IMG/Bengkel/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg', title: 'Aktivitas Harian', desc: 'Dokumentasi keseharian perajin.', tags: ['UMKM'] },
+        ];
+
+        const grid = document.getElementById('galeriGrid');
+        const overlay = document.getElementById('galeriOverlay');
+        const media = document.getElementById('galeriMedia');
+        const desc = document.getElementById('galeriDesc');
+        const backBtn = document.getElementById('galeriBack');
+
+        if(!grid || !overlay || !media || !desc || !backBtn) return;
+
+        // Render grid cards (masonry-friendly, lazy images)
+        grid.innerHTML = items.map((it, i)=> `
+            <article class="galeri-item" data-index="${i}" tabindex="0" aria-label="Buka detail ${it.title}">
+                <span class="galeri-badge">${it.type === 'video' ? 'VIDEO' : 'FOTO'}</span>
+                <img class="galeri-thumb" src="${it.thumb}" alt="${it.title}" loading="lazy">
+                <div class="galeri-caption">${it.title}</div>
+            </article>
+        `).join('');
+        // Apply masonry layout class
+        grid.classList.add('masonry');
+
+        function open(i){
+            const it = items[i];
+            if(!it) return;
+            media.innerHTML = it.type === 'video'
+                ? `<video src="${it.src}" controls autoplay playsinline></video>`
+                : `<img src="${it.src}" alt="${it.title}">`;
+            desc.innerHTML = `
+                <h3>${it.title}</h3>
+                <div class="galeri-meta">${(it.tags||[]).map(t=>`<span class="galeri-tag">${t}</span>`).join('')}</div>
+                <p>${it.desc}</p>
+            `;
+            overlay.classList.add('open');
+            overlay.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+        }
+        function close(){
+            overlay.classList.remove('open');
+            overlay.setAttribute('aria-hidden','true');
+            media.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        grid.querySelectorAll('.galeri-item').forEach(card=>{
+            card.addEventListener('click', ()=>open(Number(card.getAttribute('data-index'))||0));
+            card.addEventListener('keydown', (e)=>{ if(e.key==='Enter') open(Number(card.getAttribute('data-index'))||0); });
+        });
+        backBtn.addEventListener('click', close);
+        overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
+        document.addEventListener('keydown', (e)=>{ if(overlay.classList.contains('open') && e.key==='Escape') close(); });
+    })();
+
 });
