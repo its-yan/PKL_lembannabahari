@@ -51,6 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(el);
     });
 
+    // Medsos smooth entrance (Instagram big card + tiles)
+    const medsosAnimEls = document.querySelectorAll('.ms-animate');
+    medsosAnimEls.forEach(el => observer.observe(el));
+
     // Struktur reveal animations (menu, content, title)
     const strukturTitle = document.querySelector('.struktur-section .struktur-title');
     const strukturMenu = document.querySelector('.struktur-section .struktur-menu');
@@ -441,19 +445,314 @@ document.addEventListener('DOMContentLoaded', function () {
         const media = document.getElementById('galeriMedia');
         const desc = document.getElementById('galeriDesc');
         const backBtn = document.getElementById('galeriBack');
+        // New: hero widgets
+        const chipsWrap = document.getElementById('galeriChips');
+        const scroll = document.getElementById('galeriScroll');
+        const prevBtn = document.getElementById('galeriPrev');
+        const nextBtn = document.getElementById('galeriNext');
+        const loadMoreBtn = document.getElementById('galeriLoad');
 
         if(!grid || !overlay || !media || !desc || !backBtn) return;
 
+        // tag each item with original index for reference
+        items.forEach((it, i)=> it._id = i);
+
+        // Build filter list (without chips UI)
+        const allTags = (()=>{
+            const set = new Set();
+            items.forEach(it => (it.tags||[]).forEach(t=> set.add(t)));
+            return ['Semua', ...Array.from(set)];
+        })();
+
+        let activeTag = 'Semua';
+        let filtered = items.slice();
+        let shown = 8; // initial items in grid
+
+        // chips UI removed
+
+        function applyFilter(tag){
+            activeTag = tag;
+            filtered = tag==='Semua' ? items.slice() : items.filter(it => (it.tags||[]).includes(tag));
+            shown = Math.min(8, filtered.length);
+            // chips UI dihapus; skip renderChips()
+            renderGrid();
+            renderScroll();
+        }
+
         // Render grid cards (masonry-friendly, lazy images)
-        grid.innerHTML = items.map((it, i)=> `
-            <article class="galeri-item" data-index="${i}" tabindex="0" aria-label="Buka detail ${it.title}">
-                <span class="galeri-badge">${it.type === 'video' ? 'VIDEO' : 'FOTO'}</span>
-                <img class="galeri-thumb" src="${it.thumb}" alt="${it.title}" loading="lazy">
-                <div class="galeri-caption">${it.title}</div>
-            </article>
-        `).join('');
-        // Apply masonry layout class
-        grid.classList.add('masonry');
+        function renderGrid(){
+            const slice = filtered.slice(0, shown);
+            grid.innerHTML = slice.map(it=> `
+                <article class="galeri-item" data-id="${it._id}" tabindex="0" aria-label="Buka detail ${it.title}">
+                    <span class="galeri-badge">${it.type === 'video' ? 'VIDEO' : 'FOTO'}</span>
+                    <img class="galeri-thumb" src="${it.thumb}" alt="${it.title}" loading="lazy">
+                    <div class="galeri-caption">${it.title}</div>
+                </article>
+            `).join('');
+            // Apply masonry layout class
+            grid.classList.add('masonry');
+            grid.querySelectorAll('.galeri-item').forEach(card=>{
+                const id = Number(card.getAttribute('data-id'));
+                card.addEventListener('click', ()=>open(id));
+                card.addEventListener('keydown', (e)=>{ if(e.key==='Enter') open(id); });
+            });
+            if(loadMoreBtn){ loadMoreBtn.hidden = shown >= filtered.length; }
+        }
+
+        // Horizontal scroller (hero)
+        function renderScroll(){
+            if(!scroll) return;
+            const subset = filtered.slice(0, Math.min(5, filtered.length));
+            scroll.innerHTML = subset.map(it=> `
+                <figure class="galeri-slide" data-id="${it._id}" tabindex="0">
+                    <img src="${it.src || it.thumb}" alt="${it.title}">
+                    ${it.type === 'video' ? '<span class="galeri-play" aria-hidden="true">▶︎</span>' : ''}
+                </figure>
+            `).join('');
+            updateActiveSlide();
+
+            // Helper to center a specific slide (rect-based; accounts for transforms)
+            function centerSlide(el){
+                if(!scroll || !el) return;
+                const scrollRect = scroll.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+                const delta = (elRect.left + elRect.width/2) - (scrollRect.left + scrollRect.width/2);
+                if (Math.abs(delta) > 1) {
+                    scroll.scrollBy({ left: delta, behavior: 'smooth' });
+                }
+                // After transform settles, re-center once more to be pixel-perfect
+                const onEnd = (evt)=>{
+                    if (evt && evt.propertyName !== 'transform') return;
+                    el.removeEventListener('transitionend', onEnd);
+                    const sr = scroll.getBoundingClientRect();
+                    const er = el.getBoundingClientRect();
+                    const d2 = (er.left + er.width/2) - (sr.left + sr.width/2);
+                    if (Math.abs(d2) > 0.5) {
+                        scroll.scrollBy({ left: d2, behavior: 'smooth' });
+                    }
+                };
+                el.addEventListener('transitionend', onEnd, { once: true });
+            }
+
+            scroll.querySelectorAll('.galeri-slide').forEach(slide=>{
+                const id = Number(slide.getAttribute('data-id'));
+                slide.addEventListener('click', (e)=>{
+                    e.preventDefault();
+                    // First click on side slide: center it and show 3D only
+                    if (!slide.classList.contains('is-active')) {
+                        centerSlide(slide);
+                        return;
+                    }
+                    // Second click on the centered slide: open pop-out
+                    open(id);
+                });
+                slide.addEventListener('keydown', (e)=>{
+                    if(e.key==='Enter'){
+                        if (!slide.classList.contains('is-active')) {
+                            centerSlide(slide);
+                        } else {
+                            open(id);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Debounce helper
+        let updateTimer = null;
+        function updateActiveSlide(immediate = false){
+            if(!scroll) return;
+            if (!immediate) {
+                if (updateTimer) clearTimeout(updateTimer);
+                updateTimer = setTimeout(() => updateActiveSlide(true), 16); // ~60fps
+                return;
+            }
+            const slides = [...scroll.querySelectorAll('.galeri-slide')];
+            if(!slides.length) return;
+            const scrollRect = scroll.getBoundingClientRect();
+            const center = scroll.scrollLeft + scroll.clientWidth/2;
+            let best = 0, bestDist = Infinity;
+            slides.forEach((el, i)=>{
+                const elRect = el.getBoundingClientRect();
+                const elCenter = el.offsetLeft + el.offsetWidth/2;
+                const dist = Math.abs(elCenter - center);
+                if(dist < bestDist){ bestDist = dist; best = i; }
+            });
+               // Apply 3D only to the center (best) slide; others stay subtle
+               const maxAngle = 30; // stronger side tilt for depth
+               slides.forEach((el, i)=>{
+                   const elCenter = el.offsetLeft + el.offsetWidth/2;
+                   const ratio = Math.max(-1, Math.min(1, (elCenter - center) / (scroll.clientWidth/2))); // -1..1
+                   if (i === best) {
+                       const angle = '0deg';
+                       const depth = '10px';
+                       const scale = '1.18';
+                       el.style.setProperty('--ry', angle);
+                       el.style.setProperty('--z', depth);
+                       el.style.setProperty('--s', scale);
+                       el.style.setProperty('--scale', scale);
+                       el.style.transform = `translateZ(${depth}) rotateY(${angle}) scale(${scale})`;
+                       el.style.zIndex = '3';
+                       el.style.filter = 'none';
+                   } else {
+                       const angle = ((-ratio) * maxAngle).toFixed(2) + 'deg';
+                       const depth = '0px';
+                       const scale = '0.88';
+                       el.style.setProperty('--ry', angle);
+                       el.style.setProperty('--z', depth);
+                       el.style.setProperty('--s', scale);
+                       el.style.setProperty('--scale', scale);
+                       el.style.transform = `translateZ(${depth}) rotateY(${angle}) scale(${scale})`;
+                       el.style.zIndex = '1';
+                       el.style.filter = 'brightness(0.96) saturate(0.94)';
+                   }
+                   el.classList.toggle('is-active', i===best);
+               });
+        }
+        scroll && scroll.addEventListener('scroll', ()=>{ window.requestAnimationFrame(updateActiveSlide); });
+        window.addEventListener('resize', ()=>{ window.requestAnimationFrame(updateActiveSlide); });
+        // Infinite-like wrap: when nearing ends, jump to the other side seamlessly
+        // Guard to avoid recursive scroll handling during loop adjustments
+        let _isLoopAdjust = false; let _suppressSnap = false;
+        function _getStep(){
+            const firstSlide = scroll && scroll.querySelector('.galeri-slide');
+            const baseW = firstSlide ? firstSlide.offsetWidth : 300; // stable, unaffected by CSS transforms
+            const cs = scroll ? getComputedStyle(scroll) : null;
+            const gapPx = cs ? parseFloat(cs.gap || cs.columnGap || '0') : 0;
+            return baseW + (isNaN(gapPx) ? 0 : gapPx);
+        }
+        function ensureLoop(direction){
+            if(!scroll || _isLoopAdjust) return;
+            const slides = scroll.querySelectorAll('.galeri-slide');
+            if(slides.length < 3) return; // not enough items to loop safely
+            const first = slides[0];
+            const last = slides[slides.length - 1];
+            const step = _getStep();
+            // If scrolled near left start and going left, move last to front
+            if(direction === 'left' && scroll.scrollLeft <= step/2){
+                _isLoopAdjust = true;
+                const prevBehavior = scroll.style.scrollBehavior;
+                scroll.style.scrollBehavior = 'auto';
+                scroll.insertBefore(last, first);
+                scroll.scrollLeft += step; // compensate DOM shift
+                scroll.style.scrollBehavior = prevBehavior;
+                // Delay update to allow DOM to settle
+                setTimeout(() => {
+                    updateActiveSlide(true);
+                    _isLoopAdjust = false;
+                }, 50);
+            }
+            // If scrolled near right end and going right, move first to end
+            if(direction === 'right' && scroll.scrollWidth - scroll.clientWidth - scroll.scrollLeft <= step/2){
+                _isLoopAdjust = true;
+                const prevBehavior = scroll.style.scrollBehavior;
+                scroll.style.scrollBehavior = 'auto';
+                scroll.appendChild(first);
+                scroll.scrollLeft -= step; // compensate DOM shift
+                scroll.style.scrollBehavior = prevBehavior;
+                // Delay update to allow DOM to settle
+                setTimeout(() => {
+                    updateActiveSlide(true);
+                    _isLoopAdjust = false;
+                }, 50);
+            }
+        }
+
+        // Center slide helper for button handlers (outer scope)
+        function _centerSlideBtn(el){
+            if(!scroll || !el) return;
+            const elCenter = el.offsetLeft + el.offsetWidth/2;
+            const targetLeft = elCenter - scroll.clientWidth/2;
+            scroll.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        }
+
+        prevBtn && prevBtn.addEventListener('click', ()=>{
+            if(!scroll || _isLoopAdjust) return;
+            _suppressSnap = true;
+            ensureLoop('left');
+            const slides = [...scroll.querySelectorAll('.galeri-slide')];
+            if(!slides.length) return;
+            const currentEl = _nearestSlideEl();
+            const activeIdx = Math.max(0, slides.indexOf(currentEl));
+            const targetIdx = (activeIdx - 1 + slides.length) % slides.length;
+            const target = slides[targetIdx];
+            _centerSlideBtn(target);
+            // Wait for scroll to settle, then re-enable snap
+            setTimeout(() => {
+                _suppressSnap = false;
+                updateActiveSlide(true);
+            }, 300);
+        });
+        nextBtn && nextBtn.addEventListener('click', ()=>{
+            if(!scroll || _isLoopAdjust) return;
+            _suppressSnap = true;
+            ensureLoop('right');
+            const slides = [...scroll.querySelectorAll('.galeri-slide')];
+            if(!slides.length) return;
+            const currentEl = _nearestSlideEl();
+            const activeIdx = Math.max(0, slides.indexOf(currentEl));
+            const targetIdx = (activeIdx + 1) % slides.length;
+            const target = slides[targetIdx];
+            _centerSlideBtn(target);
+            // Wait for scroll to settle, then re-enable snap
+            setTimeout(() => {
+                _suppressSnap = false;
+                updateActiveSlide(true);
+            }, 300);
+        });
+
+        // Also loop on manual scroll when reaching edges and add gentle snap-to-center
+        let _snapTimer = null;
+        function _nearestSlideEl(){
+            if(!scroll) return null;
+            const slides = [...scroll.querySelectorAll('.galeri-slide')];
+            if(!slides.length) return null;
+            const center = scroll.scrollLeft + scroll.clientWidth/2;
+            let best = slides[0];
+            let bestDist = Infinity;
+            slides.forEach(el => {
+                const elCenter = el.offsetLeft + el.offsetWidth/2;
+                const dist = Math.abs(elCenter - center);
+                if (dist < bestDist) { bestDist = dist; best = el; }
+            });
+            return best;
+        }
+        function _snapToNearest(immediate=false){
+            if (_isLoopAdjust) return; // Don't snap during loop adjustments
+            const el = _nearestSlideEl();
+            if (!el) return;
+            const elCenter = el.offsetLeft + el.offsetWidth/2;
+            const targetLeft = elCenter - scroll.clientWidth/2;
+            scroll.scrollTo({ left: targetLeft, behavior: immediate ? 'auto' : 'smooth' });
+        }
+        scroll && scroll.addEventListener('scroll', ()=>{
+            if (_isLoopAdjust) return; // Skip during loop adjustments
+            const prevLeft = scroll._prevLeft ?? scroll.scrollLeft;
+            const dir = scroll.scrollLeft < prevLeft ? 'left' : 'right';
+            scroll._prevLeft = scroll.scrollLeft;
+            ensureLoop(dir);
+            updateActiveSlide(); // Update transforms during scroll
+            // Skip auto-snap while button-driven scroll is running
+            if (_suppressSnap) return;
+            if (_snapTimer) clearTimeout(_snapTimer);
+            _snapTimer = setTimeout(()=>_snapToNearest(false), 100); // Increased delay for stability
+        }, {passive:true});
+        // Snap immediately after gesture ends, unless button-driven
+        scroll && scroll.addEventListener('touchend', ()=>{
+            if (_suppressSnap || _isLoopAdjust) return;
+            if (_snapTimer) clearTimeout(_snapTimer);
+            _snapTimer = setTimeout(()=>_snapToNearest(true), 50);
+        }, {passive:true});
+        scroll && scroll.addEventListener('wheel', ()=>{
+            if (_suppressSnap || _isLoopAdjust) return;
+            if (_snapTimer) clearTimeout(_snapTimer);
+            _snapTimer = setTimeout(()=>_snapToNearest(true), 100);
+        }, {passive:true});
+
+        loadMoreBtn && loadMoreBtn.addEventListener('click', ()=>{
+            shown = Math.min(shown + 8, filtered.length);
+            renderGrid();
+        });
 
         function open(i){
             const it = items[i];
@@ -477,13 +776,12 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.overflow = '';
         }
 
-        grid.querySelectorAll('.galeri-item').forEach(card=>{
-            card.addEventListener('click', ()=>open(Number(card.getAttribute('data-index'))||0));
-            card.addEventListener('keydown', (e)=>{ if(e.key==='Enter') open(Number(card.getAttribute('data-index'))||0); });
-        });
         backBtn.addEventListener('click', close);
         overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
         document.addEventListener('keydown', (e)=>{ if(overlay.classList.contains('open') && e.key==='Escape') close(); });
+
+        // init
+        applyFilter('Semua');
     })();
 
 });
