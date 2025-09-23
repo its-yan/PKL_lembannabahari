@@ -2488,12 +2488,6 @@ main::before {
         display: none;
     }
     
-    /* Wave responsive styles for mobile */
-    .cta-waves {
-        height: 100px; /* Good visibility on mobile */
-        bottom: -1px; /* Maintain footer connection */
-    }
-    
     .cta-wave svg {
         height: 100px;
         width: 200%; /* match desktop for seamless -50% loop */
