@@ -917,43 +917,7 @@ function hideLoading() {
     document.body.style.cursor = 'default';
 }
 
-// Toast notification
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-        <div class="toast-content">
-            <span>${message}</span>
-            <button onclick="this.parentElement.parentElement.remove()">×</button>
-        </div>
-    `;
-    
-    // Toast styles
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'error' ? '#ff4757' : type === 'success' ? '#2ed573' : '#3742fa'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        z-index: 1000;
-        animation: slideIn 0.3s ease;
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Auto remove after 3 seconds
-    setTimeout(() => {
-        if (document.body.contains(toast)) {
-            toast.remove();
-        }
-    }, 3000);
-}
-
 // Error handler
 window.addEventListener('error', (e) => {
     console.error('JavaScript Error:', e);
-    showToast('Terjadi kesalahan. Silakan refresh halaman.', 'error');
 });

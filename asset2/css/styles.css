@@ -2662,7 +2662,8 @@ main::before {
 
 /* Wave Container */
 .cta-waves {
-    position: relative;
+    position: absolute;
+    bottom: 0;
     left: 0;
     width: 100%;
     height: 120px; /* Increased height for better visibility */
@@ -2670,7 +2671,41 @@ main::before {
     line-height: 0;
     opacity: 1; /* Ensure waves are visible */
     transform: translateZ(0); /* Hardware acceleration */
-    background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .cta-waves {
+        top: 800px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 548px) {
+    .cta-waves {
+        top: 850px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 496px) {
+    .cta-waves {
+        top: 900px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-waves {
+        top: 730px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 375.9px) {
+    .cta-waves {
+        top: 780px;
+        height: 200px;
+    }
 }
 
 /* No animate-in dependency for waves */
@@ -3148,11 +3183,6 @@ main::before {
         display: none;
     }
     
-    /* Wave responsive styles for mobile */
-    .cta-waves {
-        height: 100px; /* Good visibility on mobile */
-        bottom: -1px; /* Maintain footer connection */
-    }
     
     .cta-wave svg {
         height: 100px;
@@ -3207,10 +3237,6 @@ main::before {
     .cta-image-grid {
         gap: 10px;
         max-width: 300px;
-    }
-    
-    .cta-waves {
-        height: 80px; /* Smaller but still visible on very small screens */
     }
     
     .cta-wave svg {
@@ -3692,5 +3718,20 @@ h2.section-title::before,
     
     .nav-wrapper nav {
         gap: 20px;
+    }
+}
+
+/* ===== MOBILE BOTTOM NAVIGATION ===== */
+/* Hide mobile bottom navigation on laptop/computer viewports */
+@media (min-width: 769px) {
+    .mobile-bottom-nav {
+        display: none !important;
+    }
+}
+
+/* Show mobile bottom navigation only on mobile devices */
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: block;
     }
 }
