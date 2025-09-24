@@ -4003,7 +4003,6 @@
     line-height: 0;
     opacity: 1; /* Ensure waves are visible on wisata page */
     transform: translateZ(0); /* Hardware acceleration */
-    background-color: var(--primary-color);
 }
 
 /* No animate-in dependency on wisata page */
