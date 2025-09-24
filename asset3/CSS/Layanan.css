@@ -124,7 +124,7 @@ body {
 }
 
 .header-title .desa-name {
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bold;
   margin: 0;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
@@ -133,7 +133,7 @@ body {
 }
 
 .header-title .kabupaten-name {
-  font-size: 0.6em;
+  font-size: 0.8em;
   margin: 0;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   opacity: 0.95;
@@ -240,25 +240,44 @@ body {
   }
 }
 .layanan-page .header-top {
-  padding: 8px 0 0 0;
+  padding: 16px 0 0 0;
 }
 .layanan-page .header-brand {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   width: fit-content;
 }
 .layanan-page .header-logo {
-  width: 32px;
-  height: 32px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 1.2px solid rgba(255, 255, 255, 0.85);
+  border: 1.6px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.13);
   object-fit: cover;
   backdrop-filter: blur(1px);
 }
 .layanan-page .header-title {
   line-height: 1.1;
+}
+
+/* Ensure the brand title stays stacked and slightly bigger on Layanan header */
+.layanan-page .header-top .header-brand .header-title {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 16px;
+}
+.layanan-page .header-top .header-brand .header-title .desa-name {
+  font-size: 1.05rem;
+}
+.layanan-page .header-top .header-brand .header-title .kabupaten-name {
+  font-size: 0.9rem;
+}
+.layanan-page .main-title {
+  top: 30%;
+  position: fixed;
 }
 .layanan-page .main-title h1 {
   font-size: 3.2rem;
@@ -452,6 +471,7 @@ body {
   letter-spacing: 3px;
   position: relative;
   z-index: 4;
+
   background: linear-gradient(
     135deg,
     #ffffff 0%,
@@ -488,7 +508,6 @@ body {
 .layanan-page .section-header {
   text-align: center;
   margin-bottom: 3rem;
-  
 }
 
 .layanan-page .section-title {
@@ -500,7 +519,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  
 }
 
 .layanan-page .section-title i {
@@ -627,10 +645,11 @@ body {
 /* Facilities Grid */
 .layanan-page .facilities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
   margin-top: 2rem;
   align-items: stretch;
+  width: 100%;
 }
 
 .layanan-page .facility-card {
@@ -762,22 +781,141 @@ body {
 
 /* Decorative Section */
 .layanan-page .hiasan {
+  --bubble-left: 38%;
+  --bubble-bottom: -19%;
+  --bubble-size: 120px;
+  --snack-size: 100px;
   position: relative;
+  background-color: orange; /* fallback if gradient not shown */
   width: 100vw;
   min-height: 300px;
   overflow: visible;
   margin-bottom: -60px;
   z-index: 50;
 }
+
+/* background gradient sunset */
+.sunset-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #0b1b2a 0%,
+    #2b3c6b 20%,
+    #ff9e6a 55%,
+    #ff6b3c 70%,
+    #30142a 100%
+  );
+  z-index: 1;
+}
+
+/* sun */
+.sun {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fff6d4 0%,
+    #ffd57a 25%,
+    #ff9e5b 55%,
+    rgba(255, 140, 60, 0.4) 80%
+  );
+  box-shadow: 0 0 80px 30px rgba(255, 140, 60, 0.25);
+  z-index: 2;
+}
+
+/* cloud layers */
+.clouds {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.cloud {
+  position: absolute;
+  background: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(240, 240, 240, 0.9)
+  );
+  border-radius: 50px;
+  height: 60px;
+  width: 180px;
+  filter: blur(0.6px);
+  opacity: 0.9;
+  animation: moveClouds 50s linear infinite;
+}
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
+.cloud::before {
+  top: -20px;
+  left: 10px;
+}
+.cloud::after {
+  top: -15px;
+  right: 15px;
+}
+
+/* animations */
+@keyframes moveClouds {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+.cloud.fast {
+  animation-duration: 25s;
+  opacity: 1;
+}
+.cloud.slow {
+  animation-duration: 70s;
+  opacity: 0.8;
+}
+
 .layanan-page .hiasan img {
   pointer-events: none;
   user-select: none;
   transition: transform 0.3s ease;
+  animation: moveClouds 20s, shipShake 3s ease-in-out infinite;
 }
 
+/* Ship shake keyframes */
+@keyframes shipShake {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(2px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
 .layanan-page .hiasan-ship {
   position: absolute;
-  left: 39%;
+  left: 42%;
   top: 90px;
   width: 200px;
   z-index: 50;
@@ -787,19 +925,20 @@ body {
 
 .layanan-page .hiasan-kue {
   position: absolute;
-  right: 54%;
-  bottom: -23%;
-  width: 100px;
-  z-index: 54;
+  /* Center the snack over bubble2 using variables */
+  left: 40%;
+  top: 90%;
+  width: var(--snack-size);
+  z-index: 54; /* above bubble */
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   animation: floatKue 6s ease-in-out infinite;
 }
 
 .layanan-page .hiasan-bubble2 {
   position: absolute;
-  left: 38%;
-  bottom: -19%;
-  width: 120px;
+  left: 40%;
+  bottom: var(--bubble-bottom);
+  width: var(--bubble-size);
   z-index: 30;
   opacity: 0.95;
   animation: floatBubble2 6s ease-in-out infinite;
@@ -1147,238 +1286,117 @@ body {
   border-top: 1px solid rgba(232, 232, 232, 0.15);
 }
 
-@media (min-width: 768px) {
-  /* Scroll indicator adjustments for tablet */
-  .layanan-page .scroll-indicator {
-    bottom: 36px;
-  }
-
-  .layanan-page .scroll-arrow span {
-    width: 28px;
-    height: 28px;
-    border-bottom-width: 3px;
-    border-right-width: 3px;
-    animation-duration: 1.6s;
-  }
-
-  .layanan-page .scroll-text {
-    font-size: 1rem;
-    opacity: 0.95;
-  }
-
-  /* Facilities grid: 2 columns on tablet */
-  .layanan-page .facilities-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  .layanan-page .facility-image {
-    height: 200px;
-  }
-
-  /* Footer columns -> 2 columns on medium screens */
-  .footer-columns {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-
-  /* Header and button adjustments */
-  .layanan-page .header-title {
-    font-size: 2.5rem;
-  }
-  .layanan-page .header-buttons {
-    flex-direction: row;
-  }
-  .layanan-page .header-btn {
-    max-width: 260px;
-  }
-}
-
-@media (min-width: 1020px) {
-  /* Scroll indicator adjustments for desktop */
-  .layanan-page .scroll-indicator {
-    bottom: 44px;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .layanan-page .scroll-arrow span {
-    width: 32px;
-    height: 32px;
-    border-bottom-width: 3.4px;
-    border-right-width: 3.4px;
-    animation-duration: 1.8s;
-  }
-
-  .layanan-page .scroll-text {
-    font-size: 1.05rem;
-    opacity: 0.97;
-  }
-
-  /* Slightly larger ripple on desktop for balance */
-  .scroll-indicator .ripple {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Facilities grid: 3 columns on desktop */
-  .layanan-page .facilities-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-  }
-
-  .layanan-page .facility-image {
-    height: 240px;
-  }
-
-  /* Footer: larger spacing */
-  .footer-columns {
-    gap: 30px;
-  }
-
-  /* Header typography upscaling */
-  .layanan-page .header-title {
-    font-size: 3rem;
-  }
-  .layanan-page .main-title h1 {
-    font-size: clamp(3.2rem, 5vw, 6rem);
-  }
-}
-
-/* Mobile-first small tweaks (under 768px) kept minimal here */
-@media (max-width: 767px) {
-  .layanan-page .facilities-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .layanan-page .facility-image {
-    height: 180px;
-  }
-  .layanan-page .header-title {
-    font-size: 2rem;
-  }
-  .layanan-page .header-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  .layanan-page .header-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-  .layanan-page .products-grid,
-  .layanan-page .facilities-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .layanan-page .content-section {
-    padding: 2rem 1rem;
-  }
-  .layanan-page .footer-columns {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 2rem 1rem 0;
-  }
-}
-<<<<<<< HEAD
-
-@media (max-width: 480px) {
-
-  .layanan-page .header-title {
-    font-size: 2rem;
-  }
-
-  .layanan-page .header-subtitle {
-    font-size: var(--fontM);
-  }
-
-  .layanan-page .section-title {
-    font-size: var(--fontB);
-  }
-
-<<<<<<< HEAD
-    .section-title {
-        font-size: var(--fontB);
-    }
-
-    .product-card,
-    .facility-card {
-        margin: 0 0.5rem;
-    }
-}
-
 /* === Unified Bold Title Component (Layanan/UMKM pages) === */
-.header-title{
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 18px;
-    margin: 6px 0 14px;
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: var(--primary-color);
-    background: linear-gradient(#ffffffcc,#ffffffcc) padding-box,
-                linear-gradient(135deg, var(--secondary-color), var(--primary-color)) border-box;
-    border: 2px solid transparent;
-    border-radius: 999px;
-    box-shadow: 0 10px 26px rgba(2,6,23,.12), inset 0 1px 0 rgba(255,255,255,.6);
+.header-title {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  margin: 6px 0 14px;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+  background: linear-gradient(#ffffffcc, #ffffffcc) padding-box,
+    linear-gradient(135deg, var(--secondary-color), var(--primary-color))
+      border-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
-.header-title::before{
-    content: "";
-    position: absolute;
-    left: -14px; top: 50%; transform: translateY(-50%);
-    width: 12px; height: 12px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fff 0%, #fff 25%, var(--secondary-color) 26%, var(--primary-color) 100%);
-    box-shadow: 0 6px 14px rgba(2,6,23,.25);
+.header-title::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fff 0%,
+    #fff 25%,
+    var(--secondary-color) 26%,
+    var(--primary-color) 100%
+  );
+  box-shadow: 0 6px 14px rgba(2, 6, 23, 0.25);
 }
-.header-title::after{
-    content: "";
-    position: absolute;
-    left: 12px; right: 12px; bottom: -10px;
-    height: 3px; border-radius: 999px;
-    background: linear-gradient(90deg, var(--third-color), var(--secondary-color));
-    background-size: 200% 100%;
-    box-shadow: 0 8px 18px rgba(2,6,23,.18);
-}
-
-.section-title{
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: linear-gradient(#ffffffcc,#ffffffcc) padding-box,
-                linear-gradient(135deg, var(--secondary-color), var(--third-color)) border-box;
-    border: 2px solid transparent;
-    box-shadow: 0 8px 20px rgba(2,6,23,.10);
-}
-.section-title::before{
-    content: ""; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
-    width: 10px; height: 10px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fff 0%, #fff 25%, var(--secondary-color) 26%, var(--third-color) 100%);
-}
-.section-title::after{
-    content: ""; position: absolute; left: 12px; right: 12px; bottom: -10px; height: 3px; border-radius: 999px;
-    background: linear-gradient(90deg, var(--third-color), var(--secondary-color));
+.header-title::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -10px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--third-color),
+    var(--secondary-color)
+  );
+  background-size: 200% 100%;
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.18);
 }
 
-@media (prefers-reduced-motion: reduce){
-    .header-title::after{ animation: none; }
+.section-title {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(#ffffffcc, #ffffffcc) padding-box,
+    linear-gradient(135deg, var(--secondary-color), var(--third-color))
+      border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.1);
 }
-=======
-  .layanan-page .product-card,
-  .layanan-page .facility-card {
-    margin: 0 0.5rem;
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fff 0%,
+    #fff 25%,
+    var(--secondary-color) 26%,
+    var(--third-color) 100%
+  );
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -10px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--third-color),
+    var(--secondary-color)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-title::after {
+    animation: none;
   }
 }
->>>>>>> d9319095896c4f9b0069d26cb435450fc886c447
 
 /* Force remove ::before for Layanan/UMKM page titles */
 h2.section-title::before,
 .layanan-page .section-title::before,
 .header-title::before,
-.layanan-page .header-title::before{
+.layanan-page .header-title::before {
   content: none !important;
   background: none !important;
   border: 0 !important;
@@ -1388,5 +1406,469 @@ h2.section-title::before,
   padding: 0 !important;
   margin: 0 !important;
 }
-=======
->>>>>>> db1b166a98c27ace7a73d2038851544ab08ce8dd
+/* 📱 Mobile-specific adjustments (max-width: 480px) */
+@media (max-width: 480px) {
+  .layanan-page .header-overlay {
+    padding: 10px 12px !important;
+  }
+
+  .layanan-page .header-brand {
+    gap: 4px !important;
+  }
+
+  .layanan-page .header-logo {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .layanan-page .header-title {
+    padding: 6px 10px !important;
+  }
+
+  .layanan-page .header-top .header-brand .header-title .desa-name {
+    font-size: 0.85rem !important;
+  }
+
+  .layanan-page .header-top .header-brand .header-title .kabupaten-name {
+    font-size: 0.7rem !important;
+  }
+
+  .layanan-page .main-title {
+    margin-top: -20vh !important;
+    height: auto !important;
+    min-height: fit-content !important;
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+    padding: 20px 16px !important;
+    max-width: 95% !important;
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    position: relative !important;
+    z-index: 10 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .layanan-page .main-title h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.3) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .layanan-page .header {
+    position: relative !important;
+  }
+
+  .layanan-page .header-overlay {
+    z-index: 1 !important;
+  }
+
+  .layanan-page .header-content {
+    z-index: 2 !important;
+    position: relative !important;
+  }
+
+  .layanan-page .hero-tagline {
+    font-size: 0.9rem !important;
+    padding: 8px 16px !important;
+    margin-top: 20px !important;
+    max-width: 95% !important;
+  }
+
+  .layanan-page .header-buttons {
+    gap: 0.5rem !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .layanan-page .header-btn {
+    padding: 8px 16px !important;
+    min-width: 140px !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+    max-width: 200px !important;
+  }
+
+  .layanan-page .content-section {
+    padding: 1.5rem 0.8rem !important;
+  }
+
+  .layanan-page .section-header {
+    margin-bottom: 2rem !important;
+  }
+
+  .layanan-page .section-title {
+    font-size: 1.3rem !important;
+    padding: 6px 12px !important;
+  }
+
+  .layanan-page .section-description {
+    font-size: 0.9rem !important;
+    padding: 0 10px !important;
+  }
+
+  .layanan-page .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .layanan-page .product-card {
+    margin: 0 auto !important;
+    max-width: 300px !important;
+  }
+
+  .layanan-page .product-image {
+    height: 180px !important;
+  }
+
+  .layanan-page .product-content {
+    padding: 1rem !important;
+  }
+
+  .layanan-page .product-title {
+    font-size: 1.1rem !important;
+  }
+
+  .layanan-page .product-description {
+    font-size: 0.9rem !important;
+  }
+
+  .layanan-page .facilities-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .layanan-page .facility-card {
+    margin: 0 auto !important;
+    max-width: 300px !important;
+  }
+
+  .layanan-page .facility-image {
+    height: 160px !important;
+  }
+
+  .layanan-page .facility-content {
+    padding: 1rem !important;
+  }
+
+  .layanan-page .facility-title {
+    font-size: 1.1rem !important;
+  }
+
+  .layanan-page .facility-description {
+    font-size: 0.9rem !important;
+  }
+
+  .layanan-page .hiasan {
+    min-height: 200px !important;
+    margin-bottom: -40px !important;
+  }
+
+  .layanan-page .hiasan-ship {
+    width: 120px !important;
+    top: 60px !important;
+    left: 38% !important;
+  }
+
+  .layanan-page .hiasan-kue {
+    width: 50px !important;
+    left: 38% !important;
+  }
+
+  .layanan-page .hiasan-bubble2 {
+    width: 70px !important;
+    left: 38% !important;
+  }
+
+  .layanan-page .sun {
+    width: 80px !important;
+    height: 80px !important;
+    bottom: 8% !important;
+  }
+
+  .layanan-page .cloud {
+    height: 40px !important;
+    width: 120px !important;
+  }
+
+  .layanan-page .cta-waves {
+    height: 80px !important;
+  }
+
+  .layanan-page .cta-wave svg {
+    height: 80px !important;
+  }
+
+  .layanan-page .scroll-indicator {
+    bottom: 20px !important;
+  }
+
+  .layanan-page .scroll-arrow span {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .layanan-page .scroll-text {
+    font-size: 0.8rem !important;
+  }
+
+  .layanan-page .back-to-top {
+    width: 40px !important;
+    height: 40px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    border-radius: 8px !important;
+  }
+
+  .layanan-page .footer-container {
+    padding: 0 12px !important;
+  }
+
+  .layanan-page .footer-columns {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .layanan-page .footer-column h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .layanan-page .footer-column a {
+    font-size: 0.95rem !important;
+  }
+
+  .layanan-page .footer-bottom {
+    font-size: 0.8rem !important;
+    padding-top: 15px !important;
+    text-align: center !important;
+  }
+
+  /* Header content layout for very small screens */
+  .header-content {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 20px 0 !important;
+  }
+
+  /* Ensure text doesn't overflow on very small screens */
+  .layanan-page .main-title h1 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Adjust font sizes for better readability */
+  .layanan-page body {
+    font-size: 14px;
+  }
+
+  /* Improve touch targets */
+  .layanan-page .header-btn,
+  .layanan-page .product-card,
+  .layanan-page .facility-card {
+    min-height: 44px; /* Minimum touch target size */
+  }
+}
+
+/* Additional ultra-small screen adjustments (max-width: 360px) */
+@media (max-width: 360px) {
+  .layanan-page .main-title h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .layanan-page .header-btn {
+    min-width: 120px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .layanan-page .products-grid,
+  .layanan-page .facilities-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .layanan-page .product-card,
+  .layanan-page .facility-card {
+    max-width: 260px !important;
+  }
+}
+/* 📱 Responsive adjustments for phones (max 600px) */
+@media (max-width: 768px) {
+  .layanan-page .header-overlay {
+    padding: 12px 14px;
+  }
+  .layanan-page .header-brand {
+    gap: 6px;
+  }
+  .layanan-page .header-logo {
+    width: 56px;
+    height: 56px;
+  }
+  .layanan-page .header-title {
+    padding: 8px 12px;
+  }
+  .layanan-page .header-top .header-brand .header-title .desa-name {
+    font-size: 0.95rem;
+  }
+  .layanan-page .header-top .header-brand .header-title .kabupaten-name {
+    font-size: 0.8rem;
+  }
+
+  .layanan-page .content-section {
+    padding: 2rem 1rem;
+  }
+  .layanan-page .section-title {
+    font-size: 1.2rem;
+  }
+  .layanan-page .section-description {
+    font-size: 0.95rem;
+  }
+
+  .layanan-page .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.7rem;
+  }
+  .layanan-page .product-image {
+    height: 140px;
+  }
+  .layanan-page .facilities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .layanan-page .header-btn {
+    padding: 8px 10px;
+    min-width: 100px;
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  .layanan-page .footer-container {
+    padding: 0 8px;
+  }
+  .layanan-page .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .layanan-page .footer-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .layanan-page .footer-column li {
+    margin-bottom: 8px;
+  }
+  .layanan-page .footer-column a {
+    font-size: 1.05rem;
+  }
+  .layanan-page .footer-bottom {
+    text-align: center;
+    font-size: 0.85rem;
+    padding-top: 10px;
+  }
+
+  /* Hiasan (bubble/snack) */
+  .layanan-page .hiasan {
+    --bubble-size: 84px;
+    --snack-size: 68px;
+    --bubble-left: calc(50% - (var(--bubble-size) / 2));
+    --bubble-bottom: -8%;
+  }
+}
+
+/* 💻 Responsive adjustments for tablets (max 992px) */
+@media (max-width: 992px) {
+  .layanan-page .header-overlay {
+    padding: 16px 20px;
+  }
+  .layanan-page .header-brand {
+    gap: 8px;
+  }
+  .layanan-page .header-logo {
+    width: 64px;
+    height: 64px;
+  }
+  .layanan-page .header-title {
+    padding: 10px 14px;
+  }
+  .layanan-page .header-top .header-brand .header-title .desa-name {
+    font-size: 1rem;
+  }
+  .layanan-page .header-top .header-brand .header-title .kabupaten-name {
+    font-size: 0.85rem;
+  }
+
+  .layanan-page .main-title {
+    align-items: center;
+    text-align: center;
+    max-width: 90%;
+    margin-top: 5vh;
+    padding: 18px 20px;
+  }
+  .layanan-page .content-section {
+    padding: 3rem 1.25rem;
+  }
+  .layanan-page .section-title {
+    font-size: 1.6rem;
+  }
+  .layanan-page .section-description {
+    font-size: 1rem;
+  }
+
+  .layanan-page .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .layanan-page .product-image {
+    height: 220px;
+  }
+  .layanan-page .facilities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .layanan-page .header-btn {
+    padding: 10px 18px;
+    min-width: 140px;
+  }
+
+  /* Footer */
+  .layanan-page .footer-container {
+    padding: 0 24px;
+  }
+  .layanan-page .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .layanan-page .footer-column h3 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .layanan-page .footer-bottom {
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  /* Hiasan size for tablet */
+  .layanan-page .hiasan {
+    --bubble-left: 42%;
+    --bubble-bottom: -14%;
+    --bubble-size: 110px;
+    --snack-size: 90px;
+  }
+}
