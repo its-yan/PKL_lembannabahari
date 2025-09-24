@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Agenda - Desa Wisata Lembanna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+        :root {
+            --fontXL: 4rem;
+            --fontL: 2rem;
+            --fontB: 1.5rem;
+            --fontMM: 1.2rem;
+            --fontM: 1rem;
+            --fontS: 0.85rem;
+            --primary-color: #133E87;
+            --secondary-color: #608BC1;
+            --third-color: #CBDCEB;
+            --light-color: #F3F3E0;
+            --white-color: #FFFFFF;
+            --primary-transparent: #133e8782;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Karma', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, var(--third-color) 0%, var(--light-color) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white-color);
+            color: var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--fontM);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px var(--primary-transparent);
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: var(--white-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-transparent);
+        }
+
+        .agenda-detail-card {
+            background: var(--white-color);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--primary-transparent);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .agenda-hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .agenda-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .agenda-hero img:hover {
+            transform: scale(1.05);
+        }
+
+        .agenda-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white-color);
+            padding: 40px 30px 30px;
+        }
+
+        .agenda-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: var(--fontXL);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .agenda-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--light-color);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .meta-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-color);
+            font-size: var(--fontMM);
+        }
+
+        .meta-content h4 {
+            font-size: var(--fontS);
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .meta-content p {
+            font-size: var(--fontMM);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .agenda-description {
+            padding: 30px;
+            border-top: 1px solid var(--third-color);
+        }
+
+        .agenda-description h3 {
+            font-family: 'Playfair Display SC', serif;
+            font-size: var(--fontB);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .agenda-description p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .sidebar {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .sidebar-section {
+            background: var(--white-color);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: var(--fontMM);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-card {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--third-color);
+        }
+
+        .sidebar-card:hover {
+            background: var(--light-color);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-card-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-card-content h4 {
+            font-size: var(--fontM);
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .sidebar-card-date {
+            font-size: var(--fontS);
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-card-time {
+            font-size: var(--fontS);
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .sidebar-card-location {
+            font-size: var(--fontS);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .agenda-title {
+                font-size: var(--fontL);
+            }
+
+            .agenda-meta {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .agenda-description {
+                padding: 20px;
+            }
+
+            .sidebar-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .sidebar-card-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .back-button {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 40px;
+                align-items: start;
+            }
+        }
+
+        .event-status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: var(--white-color);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .event-status.upcoming {
+            background: var(--secondary-color);
+        }
+
+        .event-status.past {
+            background: var(--third-color);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="informasi.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Kembali ke Informasi
+        </a>
+
+        <div class="main-content">
+            <div class="content">
+                <div class="agenda-detail-card">
+                    <div class="agenda-hero">
+                        <img id="agenda-image" src="" alt="" onclick="openModal()">
+                        <div class="agenda-overlay">
+                            <h1 class="agenda-title" id="agenda-title"></h1>
+                            <span class="event-status" id="event-status">Akan Datang</span>
+                        </div>
+                    </div>
+
+                    <div class="agenda-meta">
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h4>Tanggal</h4>
+                                <p id="agenda-date"></p>
+                            </div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h4>Waktu</h4>
+                                <p id="agenda-time"></p>
+                            </div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="meta-content">
+                                <h4>Lokasi</h4>
+                                <p id="agenda-location"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agenda-description">
+                        <h3><i class="fas fa-info-circle"></i>Detail Kegiatan</h3>
+                        <p id="agenda-description-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-calendar-check"></i>
+                        Agenda Mendatang
+                    </h3>
+                    <div id="sidebar-agenda-content"></div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-newspaper"></i>
+                        Berita Terbaru
+                    </h3>
+                    <div id="sidebar-news-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for image viewing -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Agenda Data
+        const agendaData = {
+            1: {
+                title: 'Gotong Royong Bersih Pantai',
+                date: '25 Januari 2025',
+                time: '08:00 - 12:00 WITA',
+                location: 'Pantai Mandala Ria',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 20.16.10_5e938fb9.jpg',
+                description: 'Kegiatan bersama masyarakat untuk menjaga kebersihan dan kelestarian pantai wisata. Acara ini melibatkan seluruh elemen masyarakat dalam upaya pelestarian lingkungan pantai yang menjadi daya tarik utama wisata Desa Lembanna. Peserta akan dibekali dengan alat-alat kebersihan dan akan ada refreshment untuk semua peserta.'
+            },
+            2: {
+                title: 'Rapat Koordinasi BUMDes',
+                date: '30 Januari 2025',
+                time: '09:00 - 11:00 WITA',
+                location: 'Kantor Desa',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 20.16.22_adb04622.jpg',
+                description: 'Evaluasi dan perencanaan program BUMDes untuk pengembangan sektor pariwisata dan ekonomi kreatif. Rapat ini akan membahas strategi pengembangan usaha desa, alokasi dana untuk program-program prioritas, dan koordinasi dengan berbagai stakeholder untuk kemajuan desa wisata.'
+            },
+            3: {
+                title: 'Festival Kuliner Bahari',
+                date: '5 Februari 2025',
+                time: '16:00 - 21:00 WITA',
+                location: 'Pantai Mandala Ria',
+                image: 'asset2/WhatsApp Image 2025-08-20 at 12.39.02.jpeg',
+                description: 'Festival kuliner yang menampilkan hidangan khas hasil laut dengan cita rasa tradisional. Event ini akan menampilkan berbagai menu olahan seafood khas Sulawesi Selatan, demo memasak oleh chef lokal, dan kompetisi kuliner antar UMKM. Pengunjung dapat menikmati suasana pantai sambil menikmati kuliner autentik.'
+            },
+            4: {
+                title: 'Workshop Fotografi Wisata',
+                date: '10 Februari 2025',
+                time: '09:00 - 15:00 WITA',
+                location: 'Tebing Mattoanging',
+                image: 'asset2/WhatsApp Image 2025-08-20 at 12.40.15.jpeg',
+                description: 'Pelatihan fotografi untuk mengabadikan keindahan alam dan budaya desa wisata. Workshop ini akan dipandu oleh fotografer profesional dan akan mengajarkan teknik dasar fotografi landscape, portrait, dan dokumentasi budaya. Peserta akan diajak praktik langsung di lokasi-lokasi fotogenik di sekitar desa.'
+            },
+            5: {
+                title: 'Pasar Malam UMKM',
+                date: '15 Februari 2025',
+                time: '18:00 - 22:00 WITA',
+                location: 'Lapangan Desa',
+                image: 'asset2/WhatsApp Image 2025-08-20 at 12.40.59.jpeg',
+                description: 'Pameran dan penjualan produk UMKM lokal dengan suasana pasar malam yang meriah. Event ini akan menampilkan berbagai produk kerajinan tangan, makanan tradisional, dan souvenir khas Lembanna. Ada juga hiburan musik tradisional dan modern untuk memeriahkan acara.'
+            }
+        };
+
+        // News Data for sidebar
+        const newsData = {
+            1: {
+                title: 'Festival Pinisi XV Tahun 2025',
+                date: '23-25 Oktober 2025',
+                category: 'Festival',
+                image: 'asset2/WhatsApp-Image-2025-09-22-at-14.32.36.jpeg',
+                excerpt: 'Festival Pinisi ke-15 kembali diselenggarakan dengan tema "Kolaborasi Budaya untuk Pariwisata Berkelanjutan" di Pantai Merpati, Ujung Bulu, Bulukumba...'
+            },
+            2: {
+                title: '10 Potret Pantai Mandala Ria di Bulukumba, Ada Kapal Pinisi!',
+                date: '19 Agustus 2022',
+                category: 'Pemandangan',
+                image: 'asset2/271118471-478620510526145-5872794765977441776-n-da8d38c789b465218f295612fb813f37-a9b54e8976e54a683aff85ccc323c106.webp',
+                excerpt: 'Mengunjungi Kabupaten Bulukumba, Sulawesi Selatan, gak bakal lengkap kalau tidak mengunjungi destinasi pantainya...'
+            },
+            3: {
+                title: 'Atraksi Pariwisata di Kabupaten Bulukumba',
+                date: '-',
+                category: 'Atraksi',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 21.18.00.jpeg',
+                excerpt: 'Profil Daya Tarik Pariwisata Sekitar...'
+            },
+            4: {
+                title: 'Festival Pinisi XV Diundur ke 23-25 Oktober 2025 Untuk Kolaborasi Budaya dan Ekonomi',
+                date: '-',
+                category: 'Pengumuman',
+                image: 'asset2/WhatsApp Image 2025-09-23 at 22.09.13_e24e07ee.jpg',
+                excerpt: 'Bulukumba, - Pemerintah Kabupaten Bulukumba melalui Dinas Pariwisata, Pemuda, dan Olahraga (Disparpora) mengumumkan...'
+            }
+        };
+
+        // Get agenda ID from URL parameters
+        function getAgendaIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || '1';
+        }
+
+        // Load agenda details
+        function loadAgendaDetails() {
+            const agendaId = getAgendaIdFromUrl();
+            const agenda = agendaData[agendaId];
+
+            if (!agenda) {
+                document.getElementById('agenda-title').textContent = 'Agenda tidak ditemukan';
+                return;
+            }
+
+            document.getElementById('agenda-title').textContent = agenda.title;
+            document.getElementById('agenda-date').textContent = agenda.date;
+            document.getElementById('agenda-time').textContent = agenda.time;
+            document.getElementById('agenda-location').textContent = agenda.location;
+            document.getElementById('agenda-description-text').textContent = agenda.description;
+            document.getElementById('agenda-image').src = agenda.image;
+            document.getElementById('agenda-image').alt = agenda.title;
+
+            // Set document title
+            document.title = `${agenda.title} - Desa Wisata Lembanna`;
+
+            // Load sidebar content
+            loadSidebarAgenda(agendaId);
+            loadSidebarNews();
+        }
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Load sidebar agenda
+        function loadSidebarAgenda(currentAgendaId) {
+            const otherAgenda = Object.entries(agendaData)
+                .filter(([id, data]) => id != currentAgendaId);
+            
+            // Randomize the agenda order
+            const randomizedAgenda = shuffleArray(otherAgenda).slice(0, 3);
+
+            const sidebarContent = randomizedAgenda.map(([id, agenda]) => `
+                <div class="sidebar-card" onclick="openAgendaDetail('${id}')" data-agenda-id="${id}">
+                    <img src="${agenda.image}" alt="${agenda.title}" class="sidebar-card-image">
+                    <div class="sidebar-card-content">
+                        <div class="sidebar-card-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${agenda.date}
+                        </div>
+                        <h4>${agenda.title}</h4>
+                        <div class="sidebar-card-time">
+                            <i class="fas fa-clock"></i>
+                            ${agenda.time}
+                        </div>
+                        <div class="sidebar-card-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${agenda.location}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('sidebar-agenda-content').innerHTML = sidebarContent;
+        }
+
+        // Load sidebar news
+        function loadSidebarNews() {
+            const recentNews = Object.entries(newsData).slice(0, 4);
+
+            const sidebarContent = recentNews.map(([id, news]) => `
+                <div class="sidebar-card" onclick="openNewsDetail('${id}')" data-news-id="${id}">
+                    <img src="${news.image}" alt="${news.title}" class="sidebar-card-image">
+                    <div class="sidebar-card-content">
+                        <div class="sidebar-card-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${news.date}
+                        </div>
+                        <h4>${news.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('sidebar-news-content').innerHTML = sidebarContent;
+        }
+
+        // Navigation functions
+        function openAgendaDetail(agendaId) {
+            window.location.href = `agenda_detail.html?id=${agendaId}`;
+        }
+
+        function openNewsDetail(newsId) {
+            if (newsId === '1') {
+                window.location.href = 'https://disparpora.bulukumbakab.go.id/event/festival-pinisi-tahun-2025/?fbclid=IwQ0xDSwM9_-9jbGNrAz3_ymV4dG4DYWVtAjExAAEek1hZFMAQdHvyKZAniEbfcUfkXK4-Y1jXVYyVNtHY0nqEw9j1TCf2oYbIcao_aem_KWWAICtUYzcE6wZ9XzaScA&sfnsn=wiwspwa';
+            } else if (newsId === '2') {
+                window.location.href = 'https://share.google/nWoC0ioadHOqHeDQ8';
+            } else if (newsId === '3') {
+                window.location.href = 'https://share.google/e5dUDnVxxfpRZCwZZ';
+            } else {
+                window.location.href = `berita_detail.html?id=${newsId}`;
+            }
+        }
+
+        // Modal functions
+        function openModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modal-image');
+            const agendaImg = document.getElementById('agenda-image');
+            
+            modal.style.display = 'block';
+            modalImg.src = agendaImg.src;
+            modalImg.alt = agendaImg.alt;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAgendaDetails();
+        });
+    </script>
+</body>
+</html>
