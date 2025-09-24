@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Berita - Desa Wisata Andalan Lembanna</title>
+    <link rel="stylesheet" href="asset2/css/styles.css">
+    <link rel="stylesheet" href="asset2/css/informasi-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .detail-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            background: #133E87;
+        }
+
+        .detail-container { 
+            background: white; 
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .detail-header { 
+            background: linear-gradient(135deg, #133E87, #608BC1); 
+            color: white; 
+            padding: 2rem; 
+            text-align: center;
+        }
+
+        .detail-header h1 { 
+            font-size: 2rem; 
+            margin-bottom: 1rem; 
+            font-weight: 700;
+        }
+
+        .detail-meta { 
+            display: flex; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .detail-category { 
+            background: rgba(255,255,255,0.2); 
+            padding: 0.5rem 1rem; 
+            border-radius: 20px; 
+            font-weight: 600;
+        }
+
+        .detail-content { 
+            padding: 2rem; 
+        }
+
+        .featured-image { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .featured-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .detail-content h3 {
+            color: #133E87;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .detail-content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .detail-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            background: #133E87;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #608BC1;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            height: fit-content;
+        }
+
+        .sidebar-header {
+            color: #133E87;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-card-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .sidebar-card-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-card-excerpt {
+            font-size: 0.8rem;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        .sidebar-card-category {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Modal Styles */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .image-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .detail-wrapper {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .detail-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .detail-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-wrapper">
+        <nav>
+            <div class="logo">
+                <img src="asset2/WhatsApp Image 2025-08-20 at 18.48.36.png" alt="Logo Desa Lembanna" loading="lazy" decoding="async">
+                <a href="index.html">Desa Lembanna</a>
+            </div>
+            <div class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="profil.html">Profil Desa</a></li>
+                    <li><a href="wisata.html">Wisata</a></li>
+                    <li><a href="Layanan.html">Layanan</a></li>
+                    <li><a href="informasi.html">Informasi</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="detail-wrapper">
+        <!-- Left Sidebar - Related News -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-newspaper"></i>
+                Berita Lainnya
+            </div>
+            <div id="sidebarNews"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="detail-container">
+            <div class="detail-header">
+                <div class="detail-meta">
+                    <span id="newsDate">📅 Loading...</span>
+                    <span class="detail-category" id="newsCategory">Loading...</span>
+                </div>
+                <h1 id="newsTitle">Loading...</h1>
+            </div>
+            <div class="detail-content">
+                <img id="featuredImage" class="featured-image" alt="Loading...">
+                <div id="newsContent">Loading...</div>
+                <button class="back-btn" onclick="window.location.href='informasi.html'">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - Agenda -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-calendar-check"></i>
+                Agenda Terkini
+            </div>
+            <div id="sidebarAgenda"></div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <img id="modalImage" class="modal-image" alt="Modal Image">
+        </div>
+    </div>
+
+    <script>
+        // News data
+        const newsData = {
+            1: {
+                title: 'Festival Pinisi XV Tahun 2025',
+                date: '23-25 Oktober 2025',
+                category: 'Festival',
+                image: 'asset2/WhatsApp-Image-2025-09-22-at-14.32.36.jpeg',
+                excerpt: 'Festival budaya maritim terbesar tahun 2025 yang mengusung tema "Kolaborasi Budaya untuk Pariwisata Berkelanjutan"...',
+                content: `
+                    <p>Festival Pinisi XV akan kembali diselenggarakan pada tanggal 23-25 Oktober 2025 di Pantai Merpati, Terang-Terang, Ujung Bulu, Bulukumba, Sulawesi Selatan. Festival ini mengusung tema "Kolaborasi Budaya untuk Pariwisata Berkelanjutan" dan akan berlangsung setiap hari mulai pukul 08.00 WITA hingga 17.00 WITA.</p>
+                    
+                    <h3>Program Acara Festival</h3>
+                    <ul>
+                        <li>Songkabala Ri Bantilang - Atraksi budaya tradisional Bugis</li>
+                        <li>Annyorong Lopi - Kompetisi perahu tradisional Pinisi</li>
+                        <li>Pameran dan bazar UMKM lokal</li>
+                        <li>Kompetisi fotografi dan video</li>
+                        <li>Pertunjukan musik dan tari tradisional</li>
+                        <li>Pinisi Sailing - Pelayaran dengan perahu tradisional</li>
+                        <li>Festival kuliner khas Bulukumba</li>
+                        <li>Workshop kerajinan tangan tradisional</li>
+                    </ul>
+                    
+                    <p>Festival Pinisi XV diorganisir oleh Disparpora Bulukumba bekerja sama dengan Dee Management, dengan dukungan dari Pemerintah Provinsi Sulawesi Selatan dan Kementerian Pariwisata. Acara ini diharapkan dapat mempromosikan warisan budaya maritim Bugis-Makassar sekaligus mendukung pariwisata berkelanjutan di Kabupaten Bulukumba.</p>
+                    
+                    <p>Seluruh masyarakat diundang untuk berpartisipasi dalam festival yang memadukan unsur budaya, pariwisata, dan ekonomi kreatif ini. Festival Pinisi merupakan salah satu agenda tahunan yang menjadi kebanggaan masyarakat Sulawesi Selatan dalam melestarikan tradisi maritim Nusantara.</p>
+                `
+            },
+            2: {
+                title: '10 Potret Pantai Mandala Ria di Bulukumba, Ada Kapal Pinisi!',
+                date: '19 Agustus 2022',
+                category: 'Pemandangan',
+                image: 'asset2/271118471-478620510526145-5872794765977441776-n-da8d38c789b465218f295612fb813f37-a9b54e8976e54a683aff85ccc323c106.webp',
+                excerpt: 'Mengunjungi Kabupaten Bulukumba, Sulawesi Selatan, gak bakal lengkap kalau tidak mengunjungi destinasi pantainya...',
+                content: `
+                    <p>Mengunjungi Kabupaten Bulukumba, Sulawesi Selatan, gak bakal lengkap kalau tidak mengunjungi destinasi pantainya. Salah satu pantai yang paling terkenal dan wajib dikunjungi adalah Pantai Mandala Ria yang berada di Desa Lembanna.</p>
+                    
+                    <h3>Daya Tarik Utama</h3>
+                    <ul>
+                        <li>Pemandangan kapal Pinisi yang ikonik berlabuh di pantai</li>
+                        <li>Pasir putih yang bersih dan air laut yang jernih</li>
+                        <li>Sunset yang memukau di sore hari</li>
+                        <li>Spot fotografi yang instagramable</li>
+                        <li>Aktivitas wisata bahari yang menyenangkan</li>
+                    </ul>
+                    
+                    <p>Pantai Mandala Ria menjadi daya tarik utama karena keindahan alamnya yang masih alami dan pemandangan kapal Pinisi tradisional yang menjadi ciri khas Sulawesi Selatan. Pengunjung dapat menikmati berbagai aktivitas mulai dari berenang, snorkeling, hingga naik perahu Pinisi.</p>
+                    
+                    <p>Fasilitas yang tersedia cukup lengkap termasuk area parkir, warung makan, toilet, dan gazebo untuk bersantai. Pantai ini sangat cocok untuk wisata keluarga maupun solo traveler yang ingin menikmati keindahan alam pesisir Sulawesi Selatan.</p>
+                `
+            },
+            3: {
+                title: 'Atraksi Pariwisata di Kabupaten Bulukumba',
+                date: 'Berita Terbaru',
+                category: 'Atraksi',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 21.18.00.jpeg',
+                excerpt: 'Profil Daya Tarik Pariwisata Sekitar Kabupaten Bulukumba yang menawarkan berbagai destinasi menarik...',
+                content: `
+                    <p>Kabupaten Bulukumba memiliki potensi pariwisata yang sangat beragam dan menarik untuk dijelajahi. Dari wisata alam, budaya, hingga wisata bahari, semua tersedia di kabupaten yang terletak di ujung selatan Sulawesi Selatan ini.</p>
+                    
+                    <h3>Atraksi Unggulan</h3>
+                    <ul>
+                        <li>Pantai Mandala Ria - Pantai dengan pemandangan kapal Pinisi</li>
+                        <li>Tebing Mattoanging - Spot sunset terbaik di Bulukumba</li>
+                        <li>Pantai Bira - Pantai pasir putih yang memukau</li>
+                        <li>Pulau Liukang Loe - Surga tersembunyi di laut selatan</li>
+                        <li>Desa Tanah Beru - Pusat pembuatan kapal Pinisi</li>
+                        <li>Air Terjun Bissappu - Keindahan alam pegunungan</li>
+                    </ul>
+                    
+                    <p>Setiap destinasi menawarkan keunikan tersendiri. Pantai-pantai di Bulukumba terkenal dengan pasir putihnya yang halus dan air laut yang jernih. Sementara untuk wisata budaya, pengunjung dapat menyaksikan langsung proses pembuatan kapal Pinisi tradisional yang terkenal di dunia.</p>
+                    
+                    <p>Akses menuju berbagai destinasi wisata semakin diperbaiki oleh pemerintah daerah untuk memberikan kenyamanan maksimal bagi wisatawan. Bulukumba siap menjadi destinasi wisata unggulan di Sulawesi Selatan.</p>
+                `
+            },
+            4: {
+                title: 'Festival Pinisi XV Diundur ke 23-25 Oktober 2025 Untuk Kolaborasi Budaya dan Ekonomi',
+                date: '23-25 Oktober 2025',
+                category: 'Pengumuman',
+                image: 'asset2/WhatsApp Image 2025-09-23 at 22.09.13_e24e07ee.jpg',
+                excerpt: 'Perubahan jadwal pelaksanaan Festival Pinisi XV Tahun 2025 menjadi 23-25 Oktober 2025 untuk kolaborasi budaya dan ekonomi.',
+                content: `
+                    <p><strong>Disparpora Bulukumba</strong></p>
+                    
+                    <h3>Festival Pinisi XV Diundur ke 23-25 Oktober 2025 Untuk Kolaborasi Budaya dan Ekonomi</h3>
+                    
+                    <p><strong>Bulukumba,</strong> - Pemerintah Kabupaten Bulukumba melalui Dinas Pariwisata, Pemuda, dan Olahraga (Disparpora) mengumumkan perubahan jadwal pelaksanaan Festival Pinisi XV Tahun 2025.</p>
+                    
+                    <p>Dari rencana awal dijadwalkan pada 11-13 September 2025, acara tahunan kebanggaan masyarakat Bulukumba ini diundur menjadi 23-25 Oktober 2025. Menurut Pejabat Pelaksana Teknis Kegiatan (PPTK) Festival Pinisi, Muh. Taufik Rachman, perubahan ini merupakan tindak lanjut dari usulan Pemerintah Provinsi (Pemprov) Sulawesi Selatan.</p>
+                    <br>
+                    <p>"Pemprov Sulsel ingin Festival Pinisi kali ini punya gaung yang lebih besar, dengan menggabungkan agenda budaya maritim dan ekonomi kreatif," jelas Taufik.</p>
+                    
+                    <p>Dikatakan, Festival Pinisi XV akan dirangkaikan dengan Expo Dekranasda tingkat Provinsi Sulawesi Selatan, yang rencananya akan dipusatkan di Kabupaten Bulukumba.</p>
+                    <br>
+                    <p>Diharapkan event ini tidak hanya mempromosikan warisan budaya pembuatan kapal Pinisi, tetapi juga menjadi ajang untuk memasarkan produk UMKM dari berbagai daerah di Sulsel.</p>
+                    
+                    <p>Dengan penyesuaian jadwal ini, panitia memiliki waktu lebih panjang untuk mematangkan persiapan, yang diharapkan dapat memberikan dampak ekonomi lebih luas bagi masyarakat Bulukumba, khususnya para pelaku UMKM.</p>
+                    <br>
+                    <p>Sebagai salah satu agenda pariwisata unggulan Sulawesi Selatan yang masuk dalam Kharisma Event Nusantara (KEN), Festival Pinisi tahun ini akan menampilkan parade Pinisi, atraksi budaya, serta rangkaian pameran ekonomi kreatif berskala provinsi.</p>
+                    
+                    <p>"Kami berharap masyarakat Bulukumba dan wisatawan dari berbagai daerah dapat hadir dan memeriahkan Festival Pinisi XV. Ini akan menjadi perhelatan yang lebih besar dari biasanya," ungkap Taufik.</p>
+                    <br>
+                    <p>Tidak terasa, kurang dari sebulan lagi Festival Pinisi XV akan segera digelar. Panitia mengundang seluruh masyarakat dan wisatawan dari berbagai daerah untuk datang dan memeriahkan acara ini. Saksikan langsung keindahan perahu Pinisi yang melegenda, nikmati pertunjukan budaya, dan dukung produk-produk terbaik UMKM Sulawesi Selatan.</p>
+                `
+            }
+        };
+
+        const agendaData = {
+            1: {
+                title: 'Gotong Royong Bersih Pantai',
+                date: '25 Januari 2025',
+                time: '08:00 - 12:00 WITA',
+                location: 'Pantai Mandala Ria',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 20.16.10_5e938fb9.jpg',
+                description: 'Kegiatan bersama masyarakat untuk menjaga kebersihan dan kelestarian pantai wisata'
+            },
+            2: {
+                title: 'Rapat Koordinasi BUMDes',
+                date: '30 Januari 2025',
+                time: '09:00 - 11:00 WITA',
+                location: 'Kantor Desa',
+                image: 'asset2/WhatsApp Image 2025-08-19 at 20.16.22_adb04622.jpg',
+                description: 'Evaluasi dan perencanaan program BUMDes untuk pengembangan sektor pariwisata dan ekonomi kreatif'
+            }
+        };
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNewsDetail();
+            initImageModal();
+        });
+
+        function loadNewsDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+            
+            if (newsId && newsData[newsId]) {
+                const news = newsData[newsId];
+                
+                // Update page content
+                document.getElementById('newsTitle').textContent = news.title;
+                document.getElementById('newsDate').textContent = `📅 ${news.date}`;
+                document.getElementById('newsCategory').textContent = news.category;
+                document.getElementById('featuredImage').src = news.image;
+                document.getElementById('featuredImage').alt = news.title;
+                document.getElementById('newsContent').innerHTML = news.content;
+                
+                // Update page title
+                document.title = `${news.title} - Desa Lembanna`;
+                
+                // Load sidebars
+                loadSidebarNews(newsId);
+                loadSidebarAgenda();
+            } else {
+                // Redirect to informasi.html if no valid ID
+                window.location.href = 'informasi.html';
+            }
+        }
+
+        function loadSidebarNews(currentNewsId) {
+            const otherNews = Object.entries(newsData)
+                .filter(([id, data]) => id != currentNewsId)
+                .sort((a, b) => new Date(b[1].date) - new Date(a[1].date))
+                .slice(0, 3);
+            
+            const sidebarHtml = otherNews.map(([id, news]) => `
+                <div class="sidebar-card" onclick="openNewsOrExternal('${id}')" data-news-id="${id}">
+                    <img src="${news.image}" alt="${news.title}" class="sidebar-card-image">
+                    <div class="sidebar-card-content">
+                        <div class="sidebar-card-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${news.date}
+                        </div>
+                        <h3 class="sidebar-card-title">${news.title}</h3>
+                        <p class="sidebar-card-excerpt">${news.excerpt}</p>
+                        <span class="sidebar-card-category">${news.category}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('sidebarNews').innerHTML = sidebarHtml;
+        }
+
+        function loadSidebarAgenda() {
+            const upcomingAgenda = Object.entries(agendaData)
+                .sort((a, b) => new Date(a[1].date) - new Date(b[1].date))
+                .slice(0, 2);
+            
+            const sidebarHtml = upcomingAgenda.map(([id, agenda]) => `
+                <div class="sidebar-card" onclick="openAgendaDetail('${id}')" data-agenda-id="${id}" role="button" tabindex="0">
+                    <img src="${agenda.image}" alt="${agenda.title}" class="sidebar-card-image">
+                    <div class="sidebar-card-content">
+                        <div class="sidebar-card-date">
+                            <i class="fas fa-clock"></i>
+                            ${agenda.date}
+                        </div>
+                        <h3 class="sidebar-card-title">${agenda.title}</h3>
+                        <p class="sidebar-card-excerpt">${agenda.description}</p>
+                        <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+                            <div><i class="fas fa-clock"></i> ${agenda.time}</div>
+                            <div><i class="fas fa-map-marker-alt"></i> ${agenda.location}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('sidebarAgenda').innerHTML = sidebarHtml;
+        }
+
+        function openNewsDetail(newsId) {
+            window.location.href = `berita_detail.html?id=${newsId}`;
+        }
+
+        function openNewsOrExternal(newsId) {
+            if (newsId === '1') {
+                window.location.href = 'https://disparpora.bulukumbakab.go.id/event/festival-pinisi-tahun-2025/?fbclid=IwQ0xDSwM9_-9jbGNrAz3_ymV4dG4DYWVtAjExAAEek1hZFMAQdHvyKZAniEbfcUfkXK4-Y1jXVYyVNtHY0nqEw9j1TCf2oYbIcao_aem_KWWAICtUYzcE6wZ9XzaScA&sfnsn=wiwspwa';
+            } else if (newsId === '2') {
+                window.location.href = 'https://share.google/nWoC0ioadHOqHeDQ8';
+            } else if (newsId === '3') {
+                window.location.href = 'https://share.google/e5dUDnVxxfpRZCwZZ';
+            } else {
+                openNewsDetail(newsId);
+            }
+        }
+
+        function openAgendaDetail(agendaId) {
+            window.location.href = `agenda_detail.html?id=${agendaId}`;
+        }
+
+        function initImageModal() {
+            const featuredImage = document.getElementById('featuredImage');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+
+            featuredImage.addEventListener('click', function() {
+                modalImage.src = this.src;
+                modal.classList.add('active');
+            });
+
+            closeModal.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
