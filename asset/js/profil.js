@@ -1,3 +1,155 @@
+// Gallery 3D Carousel
+class Gallery3D {
+    constructor() {
+        this.track = document.getElementById('galeriScroll');
+        this.slides = Array.from(this.track.children);
+        this.prevBtn = document.getElementById('galeriPrev');
+        this.nextBtn = document.getElementById('galeriNext');
+        this.currentIndex = 0;
+        this.totalSlides = this.slides.length;
+
+        this.init();
+    }
+
+    init() {
+        this.prevBtn.addEventListener('click', () => this.goToPrevious());
+        this.nextBtn.addEventListener('click', () => this.goToNext());
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.goToPrevious();
+            if (e.key === 'ArrowRight') this.goToNext();
+        });
+
+        // Touch/swipe support
+        let startX = 0;
+        let endX = 0;
+
+        this.track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        this.track.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) this.goToNext();
+            if (endX - startX > 50) this.goToPrevious();
+        });
+
+        // Mouse drag support
+        let isDragging = false;
+        let dragStartX = 0;
+
+        this.track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            dragStartX = e.clientX;
+            this.track.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            this.track.style.cursor = 'grab';
+
+            const dragEndX = e.clientX;
+            const diff = dragStartX - dragEndX;
+
+            if (diff > 50) this.goToNext();
+            if (diff < -50) this.goToPrevious();
+        });
+
+        // Auto-play (optional)
+        setInterval(() => this.goToNext(), 5000);
+
+        // Click to open modal for slides
+        this.slides.forEach(slide => {
+            slide.style.cursor = 'pointer';
+            slide.addEventListener('click', () => {
+                const img = slide.querySelector('img');
+                if (img) {
+                    openImageModal(img.src, img.alt || 'Gallery Image', 'Explore our beautiful gallery');
+                }
+            });
+        });
+    }
+
+    updatePositions() {
+        this.slides.forEach((slide, index) => {
+            const relativeIndex = (index - this.currentIndex + this.totalSlides) % this.totalSlides;
+
+            slide.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            switch(relativeIndex) {
+                case 0: // Center
+                    slide.style.transform = 'translateX(0px) translateZ(0px) rotateY(0deg)';
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '3';
+                    break;
+                case 1: // Right 1
+                    slide.style.transform = 'translateX(200px) translateZ(-100px) rotateY(-15deg)';
+                    slide.style.opacity = '0.8';
+                    slide.style.zIndex = '2';
+                    break;
+                case 2: // Right 2
+                    slide.style.transform = 'translateX(400px) translateZ(-200px) rotateY(-25deg)';
+                    slide.style.opacity = '0.6';
+                    slide.style.zIndex = '1';
+                    break;
+                case this.totalSlides - 1: // Left 1
+                    slide.style.transform = 'translateX(-200px) translateZ(-100px) rotateY(15deg)';
+                    slide.style.opacity = '0.8';
+                    slide.style.zIndex = '2';
+                    break;
+                case this.totalSlides - 2: // Left 2
+                    slide.style.transform = 'translateX(-400px) translateZ(-200px) rotateY(25deg)';
+                    slide.style.opacity = '0.6';
+                    slide.style.zIndex = '1';
+                    break;
+                default: // Hidden slides
+                    slide.style.transform = 'translateX(600px) translateZ(-300px) rotateY(-30deg)';
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '0';
+                    break;
+            }
+        });
+    }
+
+    goToNext() {
+        this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+        this.updatePositions();
+    }
+
+    goToPrevious() {
+        this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+        this.updatePositions();
+    }
+}
+
+// Global function to open image modal
+function openImageModal(src, title, description) {
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+
+    if (imageModal && modalImage && modalTitle && modalDescription) {
+        modalImage.src = src;
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+
+        imageModal.style.display = 'block';
+        setTimeout(() => {
+            imageModal.classList.add('show');
+        }, 10);
+
+        document.body.style.overflow = 'hidden';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Ensure akomodasi modal lives under body (avoid being inside grid)
     const akModal = document.getElementById('modal');
@@ -54,6 +206,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Medsos smooth entrance (Instagram big card + tiles)
     const medsosAnimEls = document.querySelectorAll('.ms-animate');
     medsosAnimEls.forEach(el => observer.observe(el));
+
+    // Person in Charge smooth entrance
+    const personAnimEls = document.querySelectorAll('.person-in-charge-title, .person-card');
+    personAnimEls.forEach(el => {
+        el.classList.add('person-animate');
+        observer.observe(el);
+    });
 
     // Struktur reveal animations (menu, content, title)
     const strukturTitle = document.querySelector('.struktur-section .struktur-title');
@@ -160,8 +319,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         'awards-adwi': [
             'asset/img/profil-desa/pssti.jpg',
+            'asset/img/profil-desa/piagam.jpeg',
             'asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (5).jpeg',
             'asset/img/profil-desa/WhatsApp Image 2025-09-13 at 09.48.45 (4).jpeg'
+        ], 
+        'awards-adwi22' : [
+            'asset/img/profil-desa/piagam-2022.jpeg'
         ]
     };
 
@@ -248,10 +411,10 @@ document.addEventListener('DOMContentLoaded', function () {
         openBpdPdfBtn.addEventListener('click', function() {
             if (bpdPdfWrapper.style.display === 'none' || bpdPdfWrapper.style.display === '') {
                 bpdPdfWrapper.style.display = 'block';
-                openBpdPdfBtn.textContent = 'Tutup PDF';
+                openBpdPdfBtn.textContent = 'Tutup SK BPD';
             } else {
                 bpdPdfWrapper.style.display = 'none';
-                openBpdPdfBtn.textContent = 'Lihat PDF';
+                openBpdPdfBtn.textContent = 'Lihat SK BPD';
             }
         });
     }
@@ -263,10 +426,10 @@ document.addEventListener('DOMContentLoaded', function () {
         openBumdesPdfBtn.addEventListener('click', function() {
             if (bumdesPdfWrapper.style.display === 'none' || bumdesPdfWrapper.style.display === '') {
                 bumdesPdfWrapper.style.display = 'block';
-                openBumdesPdfBtn.textContent = 'Tutup PDF';
+                openBumdesPdfBtn.textContent = 'Tutup SK BUMDES';
             } else {
                 bumdesPdfWrapper.style.display = 'none';
-                openBumdesPdfBtn.textContent = 'Lihat PDF';
+                openBumdesPdfBtn.textContent = 'Lihat SK BUMBES';
             }
         });
     }
@@ -278,10 +441,10 @@ document.addEventListener('DOMContentLoaded', function () {
         openKarangTarunaPdfBtn.addEventListener('click', function() {
             if (karangTarunaPdfWrapper.style.display === 'none' || karangTarunaPdfWrapper.style.display === '') {
                 karangTarunaPdfWrapper.style.display = 'block';
-                openKarangTarunaPdfBtn.textContent = 'Tutup PDF';
+                openKarangTarunaPdfBtn.textContent = 'Tutup SK KARANG TARUNA';
             } else {
                 karangTarunaPdfWrapper.style.display = 'none';
-                openKarangTarunaPdfBtn.textContent = 'Lihat PDF';
+                openKarangTarunaPdfBtn.textContent = 'Lihat SK KARANG TARUNA';
             }
         });
     }
@@ -293,10 +456,10 @@ document.addEventListener('DOMContentLoaded', function () {
         openPokdarwisPdfBtn.addEventListener('click', function() {
             if (pokdarwisPdfWrapper.style.display === 'none' || pokdarwisPdfWrapper.style.display === '') {
                 pokdarwisPdfWrapper.style.display = 'block';
-                openPokdarwisPdfBtn.textContent = 'Tutup PDF';
+                openPokdarwisPdfBtn.textContent = 'Tutup SK POKDARWIS';
             } else {
                 pokdarwisPdfWrapper.style.display = 'none';
-                openPokdarwisPdfBtn.textContent = 'Lihat PDF';
+                openPokdarwisPdfBtn.textContent = 'Lihat SK POKDARWIS';
             }
         });
     }
@@ -308,10 +471,10 @@ document.addEventListener('DOMContentLoaded', function () {
         openSardesPdfBtn.addEventListener('click', function() {
             if (sardesPdfWrapper.style.display === 'none' || sardesPdfWrapper.style.display === '') {
                 sardesPdfWrapper.style.display = 'block';
-                openSardesPdfBtn.textContent = 'Tutup PDF';
+                openSardesPdfBtn.textContent = 'Tutup SK SARDES';
             } else {
                 sardesPdfWrapper.style.display = 'none';
-                openSardesPdfBtn.textContent = 'Lihat PDF';
+                openSardesPdfBtn.textContent = 'Lihat SK SARDES';
             }
         });
     }
@@ -345,23 +508,44 @@ document.addEventListener('DOMContentLoaded', function () {
     (function(){
         const tabPeta = document.getElementById('tabPeta');
         const tabEv = document.getElementById('tabEvakuasi');
+        const tabTs = document.getElementById('tabTsunami');
         const panelPeta = document.getElementById('panelPeta');
         const panelEv = document.getElementById('panelEvakuasi');
+        const panelTs = document.getElementById('panelTsunami');
 
         function activate(tab){
-            if(!tab || !tabPeta || !tabEv || !panelPeta || !panelEv) return;
-            const isPeta = tab === tabPeta;
-            tabPeta.classList.toggle('active', isPeta);
-            tabEv.classList.toggle('active', !isPeta);
-            tabPeta.setAttribute('aria-selected', isPeta);
-            tabEv.setAttribute('aria-selected', !isPeta);
-            panelPeta.hidden = !isPeta;
-            panelEv.hidden = isPeta;
-            panelPeta.classList.toggle('active', isPeta);
-            panelEv.classList.toggle('active', !isPeta);
+            if(!tab) return;
+            // Deactivate all
+            [tabPeta, tabEv, tabTs].forEach(t => {
+                if(t) {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                }
+            });
+            [panelPeta, panelEv, panelTs].forEach(p => {
+                if(p) {
+                    p.hidden = true;
+                    p.classList.remove('active');
+                    p.classList.remove('in');
+                }
+            });
+            // Activate selected
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            let panel;
+            if(tab === tabPeta) panel = panelPeta;
+            else if(tab === tabEv) panel = panelEv;
+            else if(tab === tabTs) panel = panelTs;
+            if(panel) {
+                panel.hidden = false;
+                panel.classList.add('active');
+                // Add 'in' after a short delay to ensure reveal animation triggers
+                setTimeout(() => panel.classList.add('in'), 10);
+            }
         }
         tabPeta && tabPeta.addEventListener('click', ()=>activate(tabPeta));
         tabEv && tabEv.addEventListener('click', ()=>activate(tabEv));
+        tabTs && tabTs.addEventListener('click', ()=>activate(tabTs));
 
         // Reveal on scroll khusus peta
         const ioPeta = new IntersectionObserver((entries)=>{
@@ -369,23 +553,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold:.15 });
         document.querySelectorAll('#peta .reveal').forEach(el=>ioPeta.observe(el));
 
-        // Modal gallery untuk peta
-        const images = [
-            'asset/img/profil-desa/peta.jpeg',
-            'asset/img/profil-desa/Jalur-evakuasi.jpg'
-        ];
+        // Modal gallery untuk peta - per panel
+        const imagesPeta = ['asset/img/profil-desa/peta.jpeg'];
+        const imagesEvakuasi = ['asset/img/profil-desa/jalur-evakuasi.jpeg' , 'asset/img/profil-desa/Jalur-evakuasi.jpg'];
+        const imagesTsunami = ['asset/img/profil-desa/tsunami.jpeg'];
         const modal = document.getElementById('mapModal');
         const stage = document.getElementById('mapStageImg');
         const counter = document.getElementById('mapCounter');
         const closeBtn = document.getElementById('mapClose');
         const prevBtn = document.getElementById('mapPrev');
         const nextBtn = document.getElementById('mapNext');
+        let currentImages = [];
         let idx = 0;
-        function update(){ if(stage && counter){ stage.src = images[idx]; counter.textContent = (idx+1)+' / '+images.length; } }
-        function open(i){ if(!modal) return; idx = i; update(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+        function update(){ if(stage && counter && currentImages.length){ stage.src = currentImages[idx]; counter.textContent = (idx+1)+' / '+currentImages.length; } }
+        function open(panelIndex){ if(!modal) return;
+            if(panelIndex === 0) currentImages = imagesPeta;
+            else if(panelIndex === 1) currentImages = imagesEvakuasi;
+            else if(panelIndex === 2) currentImages = imagesTsunami;
+            idx = 0; update(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+        }
         function close(){ if(!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-        function prev(){ idx = (idx-1+images.length)%images.length; update(); }
-        function next(){ idx = (idx+1)%images.length; update(); }
+        function prev(){ if(currentImages.length > 1){ idx = (idx-1+currentImages.length)%currentImages.length; update(); } }
+        function next(){ if(currentImages.length > 1){ idx = (idx+1)%currentImages.length; update(); } }
         document.querySelectorAll('#peta .peta-view-btn, #peta .peta-figure').forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 const i = Number(btn.getAttribute('data-index')) || 0;
@@ -397,391 +586,225 @@ document.addEventListener('DOMContentLoaded', function () {
         nextBtn && nextBtn.addEventListener('click', next);
         modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
         document.addEventListener('keydown', (e)=>{ if(!modal || !modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+
     })();
 
-    // =====================
-    // GALERI: data + render + overlay popout
-    // =====================
-    (function(){
-        const items = [
-            // Pantai & pemandangan
-            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-6.webp', src: 'asset/img/wisata andalah/pantai-mandala-5.webp', title: 'Kegiatan Bersih Pantai', desc: 'Aksi bersih pantai Mandala Ria bersama warga & pengelola wisata.', tags: ['Lingkungan','Gotong Royong'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-7.webp', src: 'asset/img/wisata andalah/pantai-mandala-7.webp', title: 'Senja Mandala Ria', desc: 'Panorama senja di pantai Mandala Ria.', tags: ['Pantai','Senja'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-2.jpeg', src: 'asset/img/wisata andalah/pantai-mandala-3.jpeg', title: 'Garis Pantai', desc: 'Garis pantai yang panjang dengan pasir yang lembut.', tags: ['Pantai'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-andalan-1.jpeg', src: 'asset/img/wisata andalah/pantai-andalan-1.jpeg', title: 'Pantai Andalan', desc: 'Spot favorit wisatawan untuk swafoto.', tags: ['Pantai'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/pantai-mandala-4.jpeg', src: 'asset/img/wisata andalah/pantai-mandala-4.jpeg', title: 'Festival Kuliner Pesisir', desc: 'Promosi kuliner laut khas Ara oleh UMKM desa.', tags: ['Kuliner','UMKM'] },
 
-            // Tebing Mattoanging & batu
-            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging.webp', src: 'asset/img/wisata andalah/tebing-mattoanging.webp', title: 'Tebing Mattoanging', desc: 'Karst eksotis yang menjadi ikon jalur trekking.', tags: ['Tebing','Alam'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging-2.webp', src: 'asset/img/wisata andalah/tebing-mattoanging-3.webp', title: 'Kontur Tebing', desc: 'Formasi karst unik, aman untuk jalur hiking terpilih.', tags: ['Trekking'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/tebing-mattoanging-4.jpg', src: 'asset/img/wisata andalah/tebing-mattoanging-4.jpg', title: 'Puncak Tebing', desc: 'Pemandangan dari ketinggian.', tags: ['Tebing'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg', src: 'asset/img/wisata andalah/batu-tongkarayya-1.jpg', title: 'Batu Tongkarayya', desc: 'Batu besar dengan nilai budaya.', tags: ['Budaya'] },
+    // Initialize carousel when page loads
+    new Gallery3D();
 
-            // Gua Passea
-            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-1.webp', src: 'asset/img/wisata andalah/gua-passea-1.webp', title: 'Gua Passea', desc: 'Eksplorasi gua karst di kawasan Ara.', tags: ['Eksplorasi','Alam'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-2.jpg', src: 'asset/img/wisata andalah/gua-passea-2.jpg', title: 'Lorong Gua', desc: 'Lorong gua dengan permainan cahaya alami.', tags: ['Gua'] },
-            { type: 'image', thumb: 'asset/img/wisata andalah/gua-passea-3.jpeg', src: 'asset/img/wisata andalah/gua-passea-3.jpeg', title: 'Celah Batu', desc: 'Celah sempit menuju chamber berikutnya.', tags: ['Gua'] },
+});
 
-            // Camping ground & aktivitas
-            { type: 'image', thumb: 'asset/img/wisata andalah/camping-ground-1.jpg', src: 'asset/img/wisata andalah/camping-ground-1.jpg', title: 'Camping Ground', desc: 'Area perkemahan keluarga dan komunitas.', tags: ['Camping'] },
-
-            // UMKM & bengkel kriya
-            { type: 'video', thumb: 'asset3/IMG/Bengkel/souvenir-1.jpeg', src: 'asset3/IMG/Bengkel/bengkel kriya Desa Lembanna.mp4', title: 'Bengkel Kriya Miniatur Pinisi', desc: 'Proses pembuatan miniatur Pinisi oleh perajin lokal.', tags: ['UMKM','Kerajinan','Pinisi'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/Bengkel kria.jpg', src: 'asset3/IMG/Bengkel/Bengkel kria.jpg', title: 'Workshop Kriya', desc: 'Suasana kerja di bengkel kriya.', tags: ['UMKM'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/Bengkel Kria 2.jpg', src: 'asset3/IMG/Bengkel/Bengkel Kria 2.jpg', title: 'Karya Perajin', desc: 'Hasil karya yang dipamerkan.', tags: ['UMKM'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-2.jpeg', src: 'asset3/IMG/Bengkel/souvenir-2.jpeg', title: 'Souvenir Pinisi', desc: 'Souvenir khas desa: miniatur Pinisi.', tags: ['Souvenir'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-3.jpeg', src: 'asset3/IMG/Bengkel/souvenir-3.jpeg', title: 'Detail Kayu', desc: 'Detail pengerjaan kayu.', tags: ['Kerajinan'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-4.jpeg', src: 'asset3/IMG/Bengkel/souvenir-4.jpeg', title: 'Finishing', desc: 'Tahap finishing produk.', tags: ['UMKM'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-5.jpeg', src: 'asset3/IMG/Bengkel/souvenir-5.jpeg', title: 'Display Produk', desc: 'Display produk siap jual.', tags: ['UMKM'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/souvenir-6.jpeg', src: 'asset3/IMG/Bengkel/souvenir-6.jpeg', title: 'Paket Souvenir', desc: 'Paket souvenir untuk wisatawan.', tags: ['Souvenir'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/Miniatur Pinisi.png', src: 'asset3/IMG/Bengkel/Miniatur Pinisi.png', title: 'Miniatur Pinisi', desc: 'Produk unggulan desa.', tags: ['Pinisi'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg', src: 'asset3/IMG/Bengkel/miniatur pinisi andalan souvenir khas kami.jpg', title: 'Miniatur Pinisi Andalan', desc: 'Edisi khusus andalan desa.', tags: ['Pinisi'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg', src: 'asset3/IMG/Bengkel/Miniatur Pinisi sbg souvenir khas desa kami.jpg', title: 'Souvenir Khas', desc: 'Miniatur Pinisi sebagai souvenir khas.', tags: ['Souvenir'] },
-            { type: 'image', thumb: 'asset3/IMG/Bengkel/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg', src: 'asset3/IMG/Bengkel/WhatsApp Image 2025-08-20 at 4.51.18 PM.jpeg', title: 'Aktivitas Harian', desc: 'Dokumentasi keseharian perajin.', tags: ['UMKM'] },
-        ];
-
-        const grid = document.getElementById('galeriGrid');
-        const overlay = document.getElementById('galeriOverlay');
-        const media = document.getElementById('galeriMedia');
-        const desc = document.getElementById('galeriDesc');
-        const backBtn = document.getElementById('galeriBack');
-        // New: hero widgets
-        const chipsWrap = document.getElementById('galeriChips');
-        const scroll = document.getElementById('galeriScroll');
-        const prevBtn = document.getElementById('galeriPrev');
-        const nextBtn = document.getElementById('galeriNext');
-        const loadMoreBtn = document.getElementById('galeriLoad');
-
-        if(!grid || !overlay || !media || !desc || !backBtn) return;
-
-        // tag each item with original index for reference
-        items.forEach((it, i)=> it._id = i);
-
-        // Build filter list (without chips UI)
-        const allTags = (()=>{
-            const set = new Set();
-            items.forEach(it => (it.tags||[]).forEach(t=> set.add(t)));
-            return ['Semua', ...Array.from(set)];
-        })();
-
-        let activeTag = 'Semua';
-        let filtered = items.slice();
-        let shown = 8; // initial items in grid
-
-        // chips UI removed
-
-        function applyFilter(tag){
-            activeTag = tag;
-            filtered = tag==='Semua' ? items.slice() : items.filter(it => (it.tags||[]).includes(tag));
-            shown = Math.min(8, filtered.length);
-            // chips UI dihapus; skip renderChips()
-            renderGrid();
-            renderScroll();
+// Image Grid Gallery functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Grid items data with descriptions
+    const gridItemsData = [
+        {
+            id: 1,
+            title: "Technology",
+            description: "Advanced technology solutions powering modern infrastructure. Our cutting-edge systems provide reliable and efficient performance for all your technological needs."
+        },
+        {
+            id: 2,
+            title: "Collaboration",
+            description: "Teams working together to achieve common goals. Effective collaboration leads to innovative solutions and improved productivity across all departments."
+        },
+        {
+            id: 3,
+            title: "Workspace",
+            description: "Modern office environments designed for productivity. Our workspaces combine functionality with comfort to create the ideal setting for professional excellence."
+        },
+        {
+            id: 4,
+            title: "Connectivity",
+            description: "Seamless network infrastructure connecting people and devices. Our connectivity solutions ensure reliable and secure communication across all platforms."
+        },
+        {
+            id: 5,
+            title: "Remote Work",
+            description: "Flexible work arrangements for the modern professional. Remote work capabilities allow for productivity from any location while maintaining team cohesion."
+        },
+        {
+            id: 6,
+            title: "Development",
+            description: "Software development and coding expertise. Our development team creates robust and scalable solutions tailored to specific business requirements."
+        },
+        {
+            id: 7,
+            title: "Global Network",
+            description: "Worldwide connections linking communities and businesses. Our global network provides comprehensive coverage and reliable service across international boundaries."
         }
+    ];
 
-        // Render grid cards (masonry-friendly, lazy images)
-        function renderGrid(){
-            const slice = filtered.slice(0, shown);
-            grid.innerHTML = slice.map(it=> `
-                <article class="galeri-item" data-id="${it._id}" tabindex="0" aria-label="Buka detail ${it.title}">
-                    <span class="galeri-badge">${it.type === 'video' ? 'VIDEO' : 'FOTO'}</span>
-                    <img class="galeri-thumb" src="${it.thumb}" alt="${it.title}" loading="lazy">
-                    <div class="galeri-caption">${it.title}</div>
-                </article>
-            `).join('');
-            // Apply masonry layout class
-            grid.classList.add('masonry');
-            grid.querySelectorAll('.galeri-item').forEach(card=>{
-                const id = Number(card.getAttribute('data-id'));
-                card.addEventListener('click', ()=>open(id));
-                card.addEventListener('keydown', (e)=>{ if(e.key==='Enter') open(id); });
-            });
-            if(loadMoreBtn){ loadMoreBtn.hidden = shown >= filtered.length; }
+    // Additional items for "Load More" functionality
+    const additionalItems = [
+        {
+            id: 8,
+            size: "medium",
+            imgSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+            title: "Cloud Computing",
+            description: "Scalable cloud solutions for businesses of all sizes. Our cloud computing services offer flexibility, security, and performance to meet evolving technological demands."
+        },
+        {
+            id: 9,
+            size: "medium",
+            imgSrc: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop",
+            title: "Data Analysis",
+            description: "Comprehensive data analysis and visualization tools. Our analytical capabilities transform raw data into actionable insights for informed decision-making."
+        },
+        {
+            id: 10,
+            size: "medium",
+            imgSrc: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
+            title: "Cybersecurity",
+            description: "Advanced security measures protecting digital assets. Our cybersecurity protocols ensure comprehensive protection against evolving threats in the digital landscape."
         }
+    ];
 
-        // Horizontal scroller (hero)
-        function renderScroll(){
-            if(!scroll) return;
-            const subset = filtered.slice(0, Math.min(5, filtered.length));
-            scroll.innerHTML = subset.map(it=> `
-                <figure class="galeri-slide" data-id="${it._id}" tabindex="0">
-                    <img src="${it.src || it.thumb}" alt="${it.title}">
-                    ${it.type === 'video' ? '<span class="galeri-play" aria-hidden="true">▶︎</span>' : ''}
-                </figure>
-            `).join('');
-            updateActiveSlide();
+    // Get DOM elements
+    const imageGrid = document.querySelector('.image-grid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const seeLessBtn = document.getElementById('seeLessBtn');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalClose = document.querySelector('.image-modal-close');
 
-            // Helper to center a specific slide (rect-based; accounts for transforms)
-            function centerSlide(el){
-                if(!scroll || !el) return;
-                const scrollRect = scroll.getBoundingClientRect();
-                const elRect = el.getBoundingClientRect();
-                const delta = (elRect.left + elRect.width/2) - (scrollRect.left + scrollRect.width/2);
-                if (Math.abs(delta) > 1) {
-                    scroll.scrollBy({ left: delta, behavior: 'smooth' });
-                }
-                // After transform settles, re-center once more to be pixel-perfect
-                const onEnd = (evt)=>{
-                    if (evt && evt.propertyName !== 'transform') return;
-                    el.removeEventListener('transitionend', onEnd);
-                    const sr = scroll.getBoundingClientRect();
-                    const er = el.getBoundingClientRect();
-                    const d2 = (er.left + er.width/2) - (sr.left + sr.width/2);
-                    if (Math.abs(d2) > 0.5) {
-                        scroll.scrollBy({ left: d2, behavior: 'smooth' });
-                    }
-                };
-                el.addEventListener('transitionend', onEnd, { once: true });
-            }
+    // Skip if elements don't exist (in case this script runs on other pages)
+    if (!imageGrid || !loadMoreBtn || !seeLessBtn || !imageModal) return;
 
-            scroll.querySelectorAll('.galeri-slide').forEach(slide=>{
-                const id = Number(slide.getAttribute('data-id'));
-                slide.addEventListener('click', (e)=>{
-                    e.preventDefault();
-                    // First click on side slide: center it and show 3D only
-                    if (!slide.classList.contains('is-active')) {
-                        centerSlide(slide);
-                        return;
-                    }
-                    // Second click on the centered slide: open pop-out
-                    open(id);
-                });
-                slide.addEventListener('keydown', (e)=>{
-                    if(e.key==='Enter'){
-                        if (!slide.classList.contains('is-active')) {
-                            centerSlide(slide);
-                        } else {
-                            open(id);
-                        }
-                    }
-                });
-            });
-        }
+    // Flag to track if additional items are loaded
+    let additionalItemsLoaded = false;
 
-        // Debounce helper
-        let updateTimer = null;
-        function updateActiveSlide(immediate = false){
-            if(!scroll) return;
-            if (!immediate) {
-                if (updateTimer) clearTimeout(updateTimer);
-                updateTimer = setTimeout(() => updateActiveSlide(true), 16); // ~60fps
-                return;
-            }
-            const slides = [...scroll.querySelectorAll('.galeri-slide')];
-            if(!slides.length) return;
-            const scrollRect = scroll.getBoundingClientRect();
-            const center = scroll.scrollLeft + scroll.clientWidth/2;
-            let best = 0, bestDist = Infinity;
-            slides.forEach((el, i)=>{
-                const elRect = el.getBoundingClientRect();
-                const elCenter = el.offsetLeft + el.offsetWidth/2;
-                const dist = Math.abs(elCenter - center);
-                if(dist < bestDist){ bestDist = dist; best = i; }
-            });
-               // Apply 3D only to the center (best) slide; others stay subtle
-               const maxAngle = 30; // stronger side tilt for depth
-               slides.forEach((el, i)=>{
-                   const elCenter = el.offsetLeft + el.offsetWidth/2;
-                   const ratio = Math.max(-1, Math.min(1, (elCenter - center) / (scroll.clientWidth/2))); // -1..1
-                   if (i === best) {
-                       const angle = '0deg';
-                       const depth = '10px';
-                       const scale = '1.18';
-                       el.style.setProperty('--ry', angle);
-                       el.style.setProperty('--z', depth);
-                       el.style.setProperty('--s', scale);
-                       el.style.setProperty('--scale', scale);
-                       el.style.transform = `translateZ(${depth}) rotateY(${angle}) scale(${scale})`;
-                       el.style.zIndex = '3';
-                       el.style.filter = 'none';
-                   } else {
-                       const angle = ((-ratio) * maxAngle).toFixed(2) + 'deg';
-                       const depth = '0px';
-                       const scale = '0.88';
-                       el.style.setProperty('--ry', angle);
-                       el.style.setProperty('--z', depth);
-                       el.style.setProperty('--s', scale);
-                       el.style.setProperty('--scale', scale);
-                       el.style.transform = `translateZ(${depth}) rotateY(${angle}) scale(${scale})`;
-                       el.style.zIndex = '1';
-                       el.style.filter = 'brightness(0.96) saturate(0.94)';
-                   }
-                   el.classList.toggle('is-active', i===best);
-               });
-        }
-        scroll && scroll.addEventListener('scroll', ()=>{ window.requestAnimationFrame(updateActiveSlide); });
-        window.addEventListener('resize', ()=>{ window.requestAnimationFrame(updateActiveSlide); });
-        // Infinite-like wrap: when nearing ends, jump to the other side seamlessly
-        // Guard to avoid recursive scroll handling during loop adjustments
-        let _isLoopAdjust = false; let _suppressSnap = false;
-        function _getStep(){
-            const firstSlide = scroll && scroll.querySelector('.galeri-slide');
-            const baseW = firstSlide ? firstSlide.offsetWidth : 300; // stable, unaffected by CSS transforms
-            const cs = scroll ? getComputedStyle(scroll) : null;
-            const gapPx = cs ? parseFloat(cs.gap || cs.columnGap || '0') : 0;
-            return baseW + (isNaN(gapPx) ? 0 : gapPx);
-        }
-        function ensureLoop(direction){
-            if(!scroll || _isLoopAdjust) return;
-            const slides = scroll.querySelectorAll('.galeri-slide');
-            if(slides.length < 3) return; // not enough items to loop safely
-            const first = slides[0];
-            const last = slides[slides.length - 1];
-            const step = _getStep();
-            // If scrolled near left start and going left, move last to front
-            if(direction === 'left' && scroll.scrollLeft <= step/2){
-                _isLoopAdjust = true;
-                const prevBehavior = scroll.style.scrollBehavior;
-                scroll.style.scrollBehavior = 'auto';
-                scroll.insertBefore(last, first);
-                scroll.scrollLeft += step; // compensate DOM shift
-                scroll.style.scrollBehavior = prevBehavior;
-                // Delay update to allow DOM to settle
+    // Open modal when clicking on a grid item
+    imageGrid.addEventListener('click', function(e) {
+        const gridItem = e.target.closest('.grid-item');
+        if (gridItem) {
+            const itemId = parseInt(gridItem.dataset.id);
+            const itemData = [...gridItemsData, ...additionalItems].find(item => item.id === itemId);
+            
+            if (itemData) {
+                modalImage.src = gridItem.querySelector('img').src;
+                modalTitle.textContent = itemData.title;
+                modalDescription.textContent = itemData.description;
+                
+                imageModal.style.display = 'block';
                 setTimeout(() => {
-                    updateActiveSlide(true);
-                    _isLoopAdjust = false;
-                }, 50);
-            }
-            // If scrolled near right end and going right, move first to end
-            if(direction === 'right' && scroll.scrollWidth - scroll.clientWidth - scroll.scrollLeft <= step/2){
-                _isLoopAdjust = true;
-                const prevBehavior = scroll.style.scrollBehavior;
-                scroll.style.scrollBehavior = 'auto';
-                scroll.appendChild(first);
-                scroll.scrollLeft -= step; // compensate DOM shift
-                scroll.style.scrollBehavior = prevBehavior;
-                // Delay update to allow DOM to settle
-                setTimeout(() => {
-                    updateActiveSlide(true);
-                    _isLoopAdjust = false;
-                }, 50);
+                    imageModal.classList.add('show');
+                }, 10);
+                
+                document.body.style.overflow = 'hidden';
             }
         }
+    });
 
-        // Center slide helper for button handlers (outer scope)
-        function _centerSlideBtn(el){
-            if(!scroll || !el) return;
-            const elCenter = el.offsetLeft + el.offsetWidth/2;
-            const targetLeft = elCenter - scroll.clientWidth/2;
-            scroll.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    // Close modal
+    modalClose.addEventListener('click', closeModal);
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            closeModal();
         }
+    });
 
-        prevBtn && prevBtn.addEventListener('click', ()=>{
-            if(!scroll || _isLoopAdjust) return;
-            _suppressSnap = true;
-            ensureLoop('left');
-            const slides = [...scroll.querySelectorAll('.galeri-slide')];
-            if(!slides.length) return;
-            const currentEl = _nearestSlideEl();
-            const activeIdx = Math.max(0, slides.indexOf(currentEl));
-            const targetIdx = (activeIdx - 1 + slides.length) % slides.length;
-            const target = slides[targetIdx];
-            _centerSlideBtn(target);
-            // Wait for scroll to settle, then re-enable snap
-            setTimeout(() => {
-                _suppressSnap = false;
-                updateActiveSlide(true);
-            }, 300);
-        });
-        nextBtn && nextBtn.addEventListener('click', ()=>{
-            if(!scroll || _isLoopAdjust) return;
-            _suppressSnap = true;
-            ensureLoop('right');
-            const slides = [...scroll.querySelectorAll('.galeri-slide')];
-            if(!slides.length) return;
-            const currentEl = _nearestSlideEl();
-            const activeIdx = Math.max(0, slides.indexOf(currentEl));
-            const targetIdx = (activeIdx + 1) % slides.length;
-            const target = slides[targetIdx];
-            _centerSlideBtn(target);
-            // Wait for scroll to settle, then re-enable snap
-            setTimeout(() => {
-                _suppressSnap = false;
-                updateActiveSlide(true);
-            }, 300);
-        });
-
-        // Also loop on manual scroll when reaching edges and add gentle snap-to-center
-        let _snapTimer = null;
-        function _nearestSlideEl(){
-            if(!scroll) return null;
-            const slides = [...scroll.querySelectorAll('.galeri-slide')];
-            if(!slides.length) return null;
-            const center = scroll.scrollLeft + scroll.clientWidth/2;
-            let best = slides[0];
-            let bestDist = Infinity;
-            slides.forEach(el => {
-                const elCenter = el.offsetLeft + el.offsetWidth/2;
-                const dist = Math.abs(elCenter - center);
-                if (dist < bestDist) { bestDist = dist; best = el; }
-            });
-            return best;
-        }
-        function _snapToNearest(immediate=false){
-            if (_isLoopAdjust) return; // Don't snap during loop adjustments
-            const el = _nearestSlideEl();
-            if (!el) return;
-            const elCenter = el.offsetLeft + el.offsetWidth/2;
-            const targetLeft = elCenter - scroll.clientWidth/2;
-            scroll.scrollTo({ left: targetLeft, behavior: immediate ? 'auto' : 'smooth' });
-        }
-        scroll && scroll.addEventListener('scroll', ()=>{
-            if (_isLoopAdjust) return; // Skip during loop adjustments
-            const prevLeft = scroll._prevLeft ?? scroll.scrollLeft;
-            const dir = scroll.scrollLeft < prevLeft ? 'left' : 'right';
-            scroll._prevLeft = scroll.scrollLeft;
-            ensureLoop(dir);
-            updateActiveSlide(); // Update transforms during scroll
-            // Skip auto-snap while button-driven scroll is running
-            if (_suppressSnap) return;
-            if (_snapTimer) clearTimeout(_snapTimer);
-            _snapTimer = setTimeout(()=>_snapToNearest(false), 100); // Increased delay for stability
-        }, {passive:true});
-        // Snap immediately after gesture ends, unless button-driven
-        scroll && scroll.addEventListener('touchend', ()=>{
-            if (_suppressSnap || _isLoopAdjust) return;
-            if (_snapTimer) clearTimeout(_snapTimer);
-            _snapTimer = setTimeout(()=>_snapToNearest(true), 50);
-        }, {passive:true});
-        scroll && scroll.addEventListener('wheel', ()=>{
-            if (_suppressSnap || _isLoopAdjust) return;
-            if (_snapTimer) clearTimeout(_snapTimer);
-            _snapTimer = setTimeout(()=>_snapToNearest(true), 100);
-        }, {passive:true});
-
-        loadMoreBtn && loadMoreBtn.addEventListener('click', ()=>{
-            shown = Math.min(shown + 8, filtered.length);
-            renderGrid();
-        });
-
-        function open(i){
-            const it = items[i];
-            if(!it) return;
-            media.innerHTML = it.type === 'video'
-                ? `<video src="${it.src}" controls autoplay playsinline></video>`
-                : `<img src="${it.src}" alt="${it.title}">`;
-            desc.innerHTML = `
-                <h3>${it.title}</h3>
-                <div class="galeri-meta">${(it.tags||[]).map(t=>`<span class="galeri-tag">${t}</span>`).join('')}</div>
-                <p>${it.desc}</p>
-            `;
-            overlay.classList.add('open');
-            overlay.setAttribute('aria-hidden','false');
-            document.body.style.overflow = 'hidden';
-        }
-        function close(){
-            overlay.classList.remove('open');
-            overlay.setAttribute('aria-hidden','true');
-            media.innerHTML = '';
+    function closeModal() {
+        imageModal.classList.remove('show');
+        setTimeout(() => {
+            imageModal.style.display = 'none';
             document.body.style.overflow = '';
+        }, 300);
+    }
+
+    // Load more items
+    loadMoreBtn.addEventListener('click', function() {
+        if (!additionalItemsLoaded) {
+            additionalItems.forEach(item => {
+                const gridItem = document.createElement('div');
+                gridItem.className = `grid-item ${item.size}`;
+                gridItem.dataset.id = item.id;
+                
+                gridItem.innerHTML = `
+                    <img src="${item.imgSrc}" alt="${item.title}">
+                    <div class="grid-item-overlay">
+                        <h3>${item.title}</h3>
+                        <p>Click to view details</p>
+                    </div>
+                `;
+                
+                imageGrid.appendChild(gridItem);
+            });
+            
+            additionalItemsLoaded = true;
+            loadMoreBtn.style.display = 'none';
+            seeLessBtn.style.display = 'block';
         }
+    });
 
-        backBtn.addEventListener('click', close);
-        overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
-        document.addEventListener('keydown', (e)=>{ if(overlay.classList.contains('open') && e.key==='Escape') close(); });
+    // See less (remove additional items)
+    seeLessBtn.addEventListener('click', function() {
+        if (additionalItemsLoaded) {
+            const items = imageGrid.querySelectorAll('.grid-item');
+            for (let i = items.length - 1; i >= items.length - additionalItems.length; i--) {
+                items[i].remove();
+            }
+            
+            additionalItemsLoaded = false;
+            seeLessBtn.style.display = 'none';
+            loadMoreBtn.style.display = 'block';
+        }
+    });
 
-        // init
-        applyFilter('Semua');
-    })();
+    // Keyboard navigation for modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && imageModal.style.display === 'block') {
+            closeModal();
+        }
+    });
 
+    // Video Modal logic
+    const videoModal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoClose = document.getElementById('videoClose');
+    const openVideoModalBtn = document.getElementById('openVideoModal');
+
+    function openVideoModal() {
+        videoModal.classList.add('open');
+        videoModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        videoPlayer.play();
+    }
+
+    function closeVideoModal() {
+        videoModal.classList.remove('open');
+        videoModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        videoPlayer.pause();
+        videoPlayer.currentTime = 0;
+    }
+
+    if (openVideoModalBtn) {
+        openVideoModalBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openVideoModal();
+        });
+    }
+
+    if (videoClose) {
+        videoClose.addEventListener('click', closeVideoModal);
+    }
+
+    if (videoModal) {
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+            closeVideoModal();
+        }
+    });
 });
