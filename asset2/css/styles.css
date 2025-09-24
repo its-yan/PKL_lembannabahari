@@ -3343,6 +3343,12 @@ body.menu-open { overflow: hidden; }
         min-height: 560px;
         background-attachment: scroll;
     }
+    .layanan-page .main-title {
+    margin-top: 50vh;
+    padding: 14px 10px;
+    max-width: 100%;
+    text-align: center;
+  }
 
     .main-title h1 {
         font-size: 4em;
