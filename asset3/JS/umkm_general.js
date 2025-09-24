@@ -6,6 +6,9 @@ const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
+const contactBtn = document.getElementById('contactBtn');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.querySelector('.nav-menu');
 
 let currentImageIndex = 0;
 const images = Array.from(thumbItems).map(item => item.dataset.src);
@@ -32,98 +35,116 @@ thumbItems.forEach((item, index) => {
 });
 
 // Open lightbox
-zoomBtn.addEventListener('click', () => {
-    lightbox.classList.add('active');
-    updateLightboxImage(images[currentImageIndex]);
-    document.body.style.overflow = 'hidden';
-    resetZoom();
-});
+if (zoomBtn && lightbox && lightboxImage && images.length) {
+    zoomBtn.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        updateLightboxImage(images[currentImageIndex]);
+        document.body.style.overflow = 'hidden';
+        resetZoom();
+    });
+}
 
 // Close lightbox
-lightboxClose.addEventListener('click', () => {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    resetZoom();
-});
+if (lightboxClose && lightbox) {
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        resetZoom();
+    });
+}
 
 // Next/Prev
-lightboxNext.addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    updateLightboxImage(images[currentImageIndex]);
-    updateThumbnail(currentImageIndex);
-    resetZoom();
-});
-lightboxPrev.addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    updateLightboxImage(images[currentImageIndex]);
-    updateThumbnail(currentImageIndex);
-    resetZoom();
-});
+if (lightboxNext && images.length) {
+    lightboxNext.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        updateLightboxImage(images[currentImageIndex]);
+        updateThumbnail(currentImageIndex);
+        resetZoom();
+    });
+}
+if (lightboxPrev && images.length) {
+    lightboxPrev.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        updateLightboxImage(images[currentImageIndex]);
+        updateThumbnail(currentImageIndex);
+        resetZoom();
+    });
+}
 
 // Zoom on image click
 let isZoomed = false;
 function resetZoom() {
     isZoomed = false;
-    lightboxImage.classList.remove('zoomed');
+    if (lightboxImage) lightboxImage.classList.remove('zoomed');
 }
-lightboxImage.addEventListener('click', () => {
-    isZoomed = !isZoomed;
-    if (isZoomed) {
-        lightboxImage.classList.add('zoomed');
-    } else {
-        lightboxImage.classList.remove('zoomed');
-    }
-});
+if (lightboxImage) {
+    lightboxImage.addEventListener('click', () => {
+        isZoomed = !isZoomed;
+        if (isZoomed) {
+            lightboxImage.classList.add('zoomed');
+        } else {
+            lightboxImage.classList.remove('zoomed');
+        }
+    });
+}
 
 // Close lightbox on background click
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        resetZoom();
-    }
-});
+if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetZoom();
+        }
+    });
+}
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    if (lightbox.classList.contains('active')) {
-        if (e.key === 'Escape') lightboxClose.click();
-        if (e.key === 'ArrowRight') lightboxNext.click();
-        if (e.key === 'ArrowLeft') lightboxPrev.click();
+    if (lightbox && lightbox.classList.contains('active')) {
+        if (e.key === 'Escape' && lightboxClose) lightboxClose.click();
+        if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
+        if (e.key === 'ArrowLeft' && lightboxPrev) lightboxPrev.click();
     }
 });
 // Contact button
-contactBtn.addEventListener('click', () => {
-    window.open('https://wa.me/6281234567890?text=Halo, saya tertarik dengan produk Makanan Tradisional Desa', '_blank');
-});
+if (typeof contactBtn !== 'undefined' && contactBtn) {
+    contactBtn.addEventListener('click', () => {
+        window.open('https://wa.me/6285399075151?text=Halo,%20saya%20tertarik%20dengan%20produk%20Keripik%20Pisang', '_blank');
+    });
+}
 
 // Mobile navigation
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    
-    // Animate hamburger menu
-    const bars = navToggle.querySelectorAll('.bar');
-    bars.forEach((bar, index) => {
-        if (navMenu.classList.contains('active')) {
-            if (index === 0) bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
-            if (index === 1) bar.style.opacity = '0';
-            if (index === 2) bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            bar.style.transform = 'none';
-            bar.style.opacity = '1';
-        }
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        
+        // Animate hamburger menu
+        const bars = navToggle.querySelectorAll('.bar');
+        bars.forEach((bar, index) => {
+            if (navMenu.classList.contains('active')) {
+                if (index === 0) bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                if (index === 1) bar.style.opacity = '0';
+                if (index === 2) bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                bar.style.transform = 'none';
+                bar.style.opacity = '1';
+            }
+        });
     });
-});
+}
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        const bars = navToggle.querySelectorAll('.bar');
-        bars.forEach(bar => {
-            bar.style.transform = 'none';
-            bar.style.opacity = '1';
-        });
+        if (navMenu) navMenu.classList.remove('active');
+        if (navToggle) {
+            const bars = navToggle.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                bar.style.transform = 'none';
+                bar.style.opacity = '1';
+            });
+        }
     });
 });
 
@@ -164,24 +185,26 @@ document.querySelectorAll('.variant-btn, .qty-btn, .btn-primary, .btn-secondary'
 let touchStartX = 0;
 let touchEndX = 0;
 
-lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-});
+if (lightbox) {
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
 
-lightbox.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+}
 
 function handleSwipe() {
     const swipeThreshold = 50;
     const diff = touchStartX - touchEndX;
-    
+
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
-            showNextImage();
+            if (lightboxNext) lightboxNext.click();
         } else {
-            showPrevImage();
+            if (lightboxPrev) lightboxPrev.click();
         }
     }
 }
@@ -209,7 +232,9 @@ function doSearch(q){
 searchInput?.addEventListener('input', e=> doSearch(e.target.value));
 searchBtn?.addEventListener('click', ()=> doSearch(searchInput.value));
 document.addEventListener('click', e=>{
-  if(searchResults && !searchResults.contains(e.target) && !searchInput.contains(e.target)) searchResults.classList.remove('active');
+  if (searchResults && !searchResults.contains(e.target) && (!searchInput || !searchInput.contains(e.target))) {
+    searchResults.classList.remove('active');
+  }
 });
 
 // Utility: set map iframe src jika ada data-loc
