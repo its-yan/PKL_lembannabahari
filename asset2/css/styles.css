@@ -3738,6 +3738,6 @@ h2.section-title::before,
 /* Show mobile bottom navigation only on mobile devices */
 @media (max-width: 768px) {
     .mobile-bottom-nav {
-        display: block;
+        display: none;
     }
 }

@@ -1642,7 +1642,8 @@ h2.section-title::before,
 
   .layanan-page .cta-waves {
   position: relative;   
-  z-index: 0;        
+  z-index: 0;      
+      top: 90px !important;  
  }
  .cta-waves svg{
     margin-top: -7px !important;
@@ -1816,7 +1817,8 @@ h2.section-title::before,
     padding-top: 10px;
   }
   .layanan-page .cta-waves {
-    top: 26vh !important;
+    z-index: 5;
+    top: 180px;
   }
 
   /* Hiasan (bubble/snack) */

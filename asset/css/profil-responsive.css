@@ -115,7 +115,7 @@
 /* =============================================
    MOBILE BREAKPOINT (max-width: 600px)
    ============================================= */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   
   /* Header Section */
   .profil-header {
@@ -633,7 +633,7 @@
   }
 
   /* Show on mobile only */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .mobile-bottom-nav { 
       display: flex !important;
       justify-content: center !important;
