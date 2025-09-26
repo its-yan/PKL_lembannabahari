@@ -1044,7 +1044,8 @@ body {
     margin-top: 64px;
   }
   .back-btn {
-    display: none;
+    margin-left: 10%;
+    margin-top: -7%;
   }
 
   .main-image {
