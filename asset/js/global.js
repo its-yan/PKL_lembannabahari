@@ -13,13 +13,11 @@ window.atraksiData = [
     {
         name: "Snorkeling",
         desc: "Jelajahi keindahan bawah laut dengan pemandangan terumbu karang yang menakjubkan",
-        img: "asset/img/wisata andalah/pantai-andalan-1.jpeg",
+        img: "asset/img/wisata andalah",
         price: 50000,
         unit: "orang",
         images: [
-            "asset/img/wisata andalah/pantai-andalan-1.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-2.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-3.jpeg"
+            "asset/img/wisata andalah/Snorkeling.jpg",
         ],
         facilities: ["Perlengkapan snorkeling", "Pemandu profesional", "Asuransi", "Makan siang"]
     },
