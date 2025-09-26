@@ -393,14 +393,14 @@
         height: 40px;
     }
     .menu-wisata ul {
-        flex-wrap: wrap;
-        gap: 2px;
+  
+        gap: 10px;
     }
     .menu-wisata li {
         width: 30%;
     }
     .menu-wisata li:nth-child(n+6) {
-        width: 45%;
+        width: 30%;
     }
     .cta-waves { height: 100px; }
     .cta-wave svg { height: 100px; }
