@@ -193,7 +193,7 @@ body.profil-nav-floating .profil-main {
 /* Main Navigation */
 .nav-atas {
     position: absolute;
-    top: 0; /* mepet ke atas */
+    top: 5px; /* mepet ke atas */
     left: 0;
     width: 100%;
     z-index: 10; /* pastikan lebih tinggi dari .header-img */
@@ -260,6 +260,8 @@ body.profil-nav-floating .profil-main {
 }
 
  .main-nav {
+    position: absolute;
+    right: 20px;
     margin-left: auto;
     margin-right: 0; /* mepet ke kanan */
 }
