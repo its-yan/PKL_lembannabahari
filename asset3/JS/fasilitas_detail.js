@@ -143,4 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape') closeMenu();
 	});
+	// Contact button
+if (typeof contactBtn !== 'undefined' && contactBtn) {
+    contactBtn.addEventListener('click', () => {
+        window.open('https://wa.me/6285230786055?text=Halo,%20saya%20tertarik%20dengan%20produk%20kapalpinisi', '_blank');
+    });
+}
+
 });

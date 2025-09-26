@@ -54,7 +54,7 @@ body {
 
 /* Header Section */
 .layanan-page .header {
-  background: linear-gradient(var(--primary-color), rgba(0, 0, 0, 0.2)),
+  background: linear-gradient(var(--light-color), rgba(0, 0, 0, 0.2)),
     url("../IMG/Layanan.jpeg");
   background-size: cover;
   background-position: center center;
@@ -62,14 +62,11 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
   width: 100vw;
-  margin: 0;
-  padding: 0;
+  opacity: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--white-color);
-  text-align: center;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -801,18 +798,55 @@ body {
   background: linear-gradient(
     180deg,
     #0b1b2a 0%,
-    #2b3c6b 20%,
+    #2b3c6b 10%,
     #ff9e6a 55%,
     #ff6b3c 70%,
     #30142a 100%
   );
   z-index: 1;
+  overflow: hidden;
 }
+
+/* Stars */
+.sunset-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out ;
+  box-shadow: 
+    50px 80px white,
+    120px 200px white,
+    300px 150px white,
+    400px 50px white,
+    600px 180px white,
+    700px 120px white,
+    850px 220px white,
+    950px 90px white,
+    1100px 160px white,
+    1250px 70px white;
+  
+  /* repeat with many values for more stars */
+  z-index: 2;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.sunset-bg::before {
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
 
 /* sun */
 .sun {
   position: absolute;
-  bottom: 12%;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
@@ -946,7 +980,7 @@ body {
 /* Wave Container */
 .layanan-page .cta-waves {
   position: absolute;
-  bottom: -1px;
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 130px;
@@ -1607,11 +1641,11 @@ h2.section-title::before,
   }
 
   .layanan-page .cta-waves {
-    height: 80px !important;
-  }
-
-  .layanan-page .cta-wave svg {
-    height: 80px !important;
+  position: relative;   
+  z-index: 0;        
+ }
+ .cta-waves svg{
+    margin-top: -7px !important;
   }
 
   .layanan-page .scroll-indicator {
@@ -1780,6 +1814,9 @@ h2.section-title::before,
     text-align: center;
     font-size: 0.85rem;
     padding-top: 10px;
+  }
+  .layanan-page .cta-waves {
+    top: 26vh !important;
   }
 
   /* Hiasan (bubble/snack) */
