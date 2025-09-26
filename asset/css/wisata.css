@@ -145,6 +145,7 @@
 }
 
 .objek-wisata-title,
+.aktivitas-wisata-title,
 .atraksi-title,
 .kuliner-title,
 .sewa-title {
@@ -165,10 +166,12 @@
 
 /* Decorative horizontal lines flanking the titles */
 .objek-wisata-title::before,
+.aktivitas-wisata-title::before,
 .atraksi-title::before,
 .kuliner-title::before,
 .sewa-title::before,
 .objek-wisata-title::after,
+.aktivitas-wisata-title::after,
 .atraksi-title::after,
 .kuliner-title::after,
 .sewa-title::after {
@@ -182,6 +185,7 @@
 
 /* Ensure the inner span is clean and centered */
 .objek-wisata-title span,
+.aktivitas-wisata-title span,
 .atraksi-title span,
 .kuliner-title span,
 .sewa-title span {
@@ -198,6 +202,240 @@
 .sewa-title span::before, .sewa-title span::after { content: none !important; }
 /* Ensure sewa side lines are visible */
 .sewa-title::before, .sewa-title::after { opacity: .5; min-width: 80px; max-width: 160px; }
+
+/* Aktivitas Wisata Section Styles */
+.aktivitas-wisata-section {
+    width: 100%;
+    padding: 50px 0;
+    background: linear-gradient(135deg, 
+        rgba(19, 62, 135, 0.05) 0%, 
+        rgba(96, 139, 193, 0.03) 50%, 
+        rgba(243, 243, 224, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.aktivitas-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.aktivitas-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    perspective: 1000px;
+}
+
+/* 3D Card Styles */
+.aktivitas-card {
+    width: 320px;
+    height: 450px;
+    perspective: 1500px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.aktivitas-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.aktivitas-card:hover .aktivitas-card-inner {
+    transform: rotateY(180deg);
+}
+
+.aktivitas-card-front, .aktivitas-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.aktivitas-card-front {
+    background-color: var(--light-color);
+}
+
+.aktivitas-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.aktivitas-card:hover .aktivitas-card-front img {
+    transform: scale(1.1);
+}
+
+.aktivitas-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(19, 62, 135, 0.9), transparent);
+    padding: 20px;
+    color: var(--light-color);
+    text-align: center;
+}
+
+.aktivitas-card-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.aktivitas-card-back {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-color);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.aktivitas-card-content {
+    padding: 20px;
+}
+
+.aktivitas-card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--light-color);
+}
+
+.aktivitas-card-content p {
+    font-family: 'Karma', serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: var(--third-color);
+}
+
+.aktivitas-card-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.info-text {
+    font-family: 'Karma', serif;
+    font-size: 0.9rem;
+    color: var(--third-color);
+}
+
+.aktivitas-card-btn {
+    background-color: var(--third-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Karma', serif;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.aktivitas-card-btn:hover {
+    background-color: var(--light-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for cards */
+@keyframes cardFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-in animation for cards when section enters viewport */
+.aktivitas-card {
+    opacity: 0;
+}
+
+.aktivitas-card.visible {
+    animation: cardFadeInUp 0.8s ease-out forwards;
+}
+
+.aktivitas-card.visible:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.aktivitas-card.visible:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.aktivitas-card.visible:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.aktivitas-card.visible:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .aktivitas-cards {
+        gap: 20px;
+    }
+    
+    .aktivitas-card {
+        width: 280px;
+        height: 400px;
+    }
+    
+    .aktivitas-card-overlay h3,
+    .aktivitas-card-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .aktivitas-card-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .aktivitas-card {
+        width: 100%;
+        max-width: 320px;
+        height: 380px;
+    }
+}
 
 /* Remove decorative glow around titles */
 /* (previous ::before and keyframes removed for flat look) */
