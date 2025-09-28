@@ -185,16 +185,34 @@ window.kulinerData = [
         price: 45000
     },
     {
-        name: "Kopi ",
-        desc: "Kopi khas Makassar yang disajikan dengan cara tradisional",
-        img: "asset3/IMG/Camping_ground/Camping Ground-3.jpeg",
-        price: 5000 - 10000
+        name: "Coto Makassar",
+        desc: "Sup daging sapi khas Makassar dengan bumbu rempah",
+        img: "asset/img/wisata andalah/pantai-mandala-2.jpeg",
+        price: 25000
     },
     {
-        name: "Pisang kering",
-        desc: "Pisang yang dikeringkan dengan gula merah dan digoreng",
-        img: "asset3/IMG/UMKM Andalan/WhatsApp Image 2025-08-24 at 12.06.48 PM.jpeg",
-        price: 10000
+        name: "Pisang Epe",
+        desc: "Pisang yang dibakar dengan gula merah dan santan",
+        img: "asset/img/wisata andalah/pantai-mandala-3.jpeg",
+        price: 15000
+    },
+    {
+        name: "Es Pisang Ijo",
+        desc: "Minuman segar dengan pisang hijau dan santan",
+        img: "asset/img/wisata andalah/pantai-mandala-4.jpeg",
+        price: 12000
+    },
+    {
+        name: "Nasi Kuning",
+        desc: "Nasi kuning dengan lauk pauk khas Sulawesi Selatan",
+        img: "asset/img/wisata andalah/pantai-mandala-5.webp",
+        price: 20000
+    },
+    {
+        name: "Sop Konro",
+        desc: "Sup iga sapi dengan bumbu khas yang menggugah selera",
+        img: "asset/img/wisata andalah/pantai-mandala-6.webp",
+        price: 30000
     }
 
 ];
