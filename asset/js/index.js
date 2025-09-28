@@ -57,7 +57,6 @@ document.addEventListener('keydown', function(e) {
     });
 });
 
-// Data dummy untuk atraksi (sebaiknya dimuat dari JSON)
 window.atraksiData = [
     {
         name: 'Camping Ground', price: 50000, unit: 'orang',
@@ -71,7 +70,7 @@ window.atraksiData = [
         facilities: ['Area tenda pribadi', 'Toilet umum', 'Air bersih', 'Area BBQ', 'Pemandu wisata', 'Spot sunset']
     },
     {
-        name: 'Wisata Gua Passea', price: 75000, unit: 'orang',
+        name: 'Wisata Gua Passea', price: 10000, unit: 'orang',
         img: 'asset/img/wisata andalah/gua-passea-1.webp',
         images: [
             'asset/img/wisata andalah/gua-passea-1.webp',
@@ -104,7 +103,7 @@ window.atraksiData = [
         facilities: ['Perahu', 'Pelampung', 'Pemandu', 'Asuransi']
     },
     {
-        name: 'Panjat Tebing', price: 200000, unit: 'paket',
+        name: 'Panjat Tebing', price: 150000, unit: 'paket',
         img: 'asset/img/wisata andalah/Batu Tongkarayya.jpg',
         images: [
             'asset/img/wisata andalah/Batu Tongkarayya.jpg',
@@ -115,7 +114,7 @@ window.atraksiData = [
         facilities: ['Peralatan panjat', 'Instruktur', 'Asuransi']
     },
     {
-        name: 'Trekking Bukit', price: 90000, unit: 'orang',
+        name: 'Trekking Bukit/Hutan', price: 150000, unit: 'orang',
         img: 'asset/img/wisata andalah/tebing-mattoanging-2.webp',
         images: [
             'asset/img/wisata andalah/tebing-mattoanging-2.webp',
@@ -130,6 +129,7 @@ window.atraksiData = [
 
 // Nomor WhatsApp untuk atraksi (ganti dengan nomor tujuan)
 window.ATRAKSI_WHATSAPP_NUMBER = '6281234567890';
+
 // Nomor WhatsApp untuk akomodasi (ganti dengan nomor tujuan)
 window.AKOMODASI_WHATSAPP_NUMBER = '6281234567891';
 // Nomor WhatsApp untuk kuliner (ganti dengan nomor tujuan)
