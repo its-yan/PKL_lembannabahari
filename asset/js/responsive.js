@@ -107,10 +107,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle panel hamburger
   hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+
+    // Toggle main-nav active class
+    const mainNav = document.querySelector('.main-nav');
+    if (mainNav) {
+      mainNav.classList.toggle('active');
+    }
+
+    // Toggle show-menu for dropdown initialization
     navAtas.classList.toggle('show-menu');
-    
+
+    // Toggle body scroll
+    if (mainNav && mainNav.classList.contains('active')) {
+      document.body.classList.add('no-scroll');
+      document.documentElement.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
+    }
+
     // Initialize dropdowns when menu is opened
-    if (navAtas.classList.contains('show-menu') && isMobileTabletView()) {
+    if (mainNav && mainNav.classList.contains('active') && isMobileTabletView()) {
       setTimeout(() => {
         initializeDropdowns();
         // Ensure all menu items are visible
@@ -120,12 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, 10);
     }
-    
+
     // Close all submenus when panel is closed
-    if (!navAtas.classList.contains('show-menu')) {
+    if (mainNav && !mainNav.classList.contains('active')) {
+      navAtas.classList.remove('show-menu');
       document
         .querySelectorAll('.menu-list > li.open')
         .forEach(li => li.classList.remove('open'));
+      document.body.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
     }
   });
 
@@ -134,11 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const a = e.target.closest('a');
     if (!a) return;
 
-    // Only handle clicks inside the hamburger menu when it is open
-    if (!navAtas.classList.contains('show-menu')) return;
+    const mainNav = document.querySelector('.main-nav');
+    // Only handle clicks when the hamburger menu is open
+    if (!mainNav || !mainNav.classList.contains('active')) return;
 
     // Close the hamburger menu
     navAtas.classList.remove('show-menu');
+    hamburger.classList.remove('active');
+    mainNav.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    document.documentElement.classList.remove('no-scroll');
   };
 
   menuList.addEventListener('click', closeMenuOnClick);
@@ -146,7 +172,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Also handle mobile menu list
   const mobileMenuList = document.querySelector('.mobile-menu-list');
   if (mobileMenuList) {
-    mobileMenuList.addEventListener('click', closeMenuOnClick);
+    // Attach click handler to each link in mobile menu
+    const mobileLinks = mobileMenuList.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Close the menu immediately
+        navAtas.classList.remove('show-menu');
+        hamburger.classList.remove('active');
+        const mainNav = document.querySelector('.main-nav');
+        if (mainNav) {
+          mainNav.classList.remove('active');
+        }
+        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('no-scroll');
+      });
+    });
   }
 
   // Delegation: toggle submenu (mobile/tablet and desktop)
@@ -232,11 +272,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Click outside nav: close panel + submenus
   document.addEventListener('click', (e) => {
-    if (!navAtas.contains(e.target)) {
+    const mainNav = document.querySelector('.main-nav');
+    if (!navAtas.contains(e.target) && mainNav && mainNav.classList.contains('active')) {
       navAtas.classList.remove('show-menu');
+      mainNav.classList.remove('active');
+      hamburger.classList.remove('active');
       document
         .querySelectorAll('.menu-list > li.open')
         .forEach(li => li.classList.remove('open'));
+      document.body.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
     }
   });
 
@@ -252,9 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset states when switching to desktop
       if (!isMobileTabletView()) {
         navAtas.classList.remove('show-menu');
+        hamburger.classList.remove('active');
+        const mainNav = document.querySelector('.main-nav');
+        if (mainNav) {
+          mainNav.classList.remove('active');
+        }
         document
           .querySelectorAll('.menu-list > li.open')
           .forEach(li => li.classList.remove('open'));
+        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('no-scroll');
       }
     }, 150);
   });

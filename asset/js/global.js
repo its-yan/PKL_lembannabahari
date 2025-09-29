@@ -90,90 +90,243 @@ window.atraksiData = [
 // Data untuk Akomodasi
 window.akomodasiData = [
     {
-        name: "Villa Mandala Ria",
-        desc: "Villa mewah dengan pemandangan laut langsung dan fasilitas lengkap",
-        img: "asset/img/wisata andalah/pantai-andalan-1.jpeg",
+        name: "Mandala Homestay",
+        desc_short: "Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.",
+        desc_full: ["Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.", 
+                   "Untuk harga, tersedia beberapa pilihan sesuai kebutuhan:",
+                   "- Rp350.000/kamar (dengan kipas angin)",
+                   "- Rp500.000/kamar (dengan AC)",
+                   "- Paket villa mulai dari Rp750.000 - Rp1.000.000"],
+        img: "",
         price: 500000,
-        type: "villa",
-        location: "Pantai Mandala",
-        rating: 5,
-        stayInfo: "1 malam, 4 dewasa",
-        images: [
-            "asset/img/wisata andalah/pantai-andalan-1.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-2.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-3.jpeg"
-        ]
-    },
-    {
-        name: "Homestay Lembanna",
-        desc: "Penginapan nyaman dengan suasana lokal yang autentik",
-        img: "asset/img/wisata andalah/pantai-mandala-4.jpeg",
-        price: 150000,
         type: "guesthouse",
-        location: "Desa Lembanna",
-        rating: 4,
+        location: "",
+        rating: 5,
         stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'Kipas Angin', icon: 'fa-fan'},
+            {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
+            {name: 'Dapur Umum', icon: 'fa-utensils'},
+            {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
+            {name: 'Parkir', icon: 'fa-parking'}
+        ],
         images: [
-            "asset/img/wisata andalah/pantai-mandala-4.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-5.webp",
-            "asset/img/wisata andalah/pantai-mandala-6.webp"
+            "",
+            "",
+            ""
         ]
     },
     {
-        name: "Resort Pantai Andalan",
-        desc: "Resort dengan kolam renang dan akses langsung ke pantai",
-        img: "asset/img/wisata andalah/pantai-mandala-7.webp",
+        name: "SegARA Resort dan resto",
+        desc: "",
+        img: "",
+        price: 150000,
+        type: "resort",
+        location: "",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Kolam Renang', icon: 'fa-swimming-pool'},
+            {name: 'Restoran', icon: 'fa-utensils'},
+            {name: 'Spa', icon: 'fa-spa'},
+            {name: 'Pantai Pribadi', icon: 'fa-umbrella-beach'}
+        ],
+        images: [
+            "",
+            "",
+            ""
+        ]
+    },
+    {
+        name: "Villa Mata Kacici",
+        desc: "",
+        img: "",
         price: 300000,
         type: "villa",
-        location: "Pantai Andalan",
-        rating: 4,
+        location: "",
+        rating: 5,
         stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Private Pool', icon: 'fa-swimming-pool'},
+            {name: 'Dapur', icon: 'fa-utensils'},
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'Pemandangan Laut', icon: 'fa-water'}
+        ],
         images: [
-            "asset/img/wisata andalah/pantai-mandala-7.webp",
-            "asset/img/wisata andalah/pantai-andalan-1.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-2.jpeg"
+            "",
+            "",
+            ""
         ]
     },
     {
-        name: "Guesthouse Passea",
-        desc: "Penginapan sederhana dekat dengan Gua Passea",
-        img: "asset/img/wisata andalah/gua-passea-1.webp",
+        name: "Villa Mandala",
+       desc_short: "Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.",
+        desc_full: ["Villa Mandala merupakan penginapan yang terletak tepat di tepi pantai, sehingga menghadirkan suasana yang tenang dengan panorama laut yang indah.", 
+                   "Untuk harga, tersedia beberapa pilihan sesuai kebutuhan:",
+                   "- Rp350.000/kamar (dengan kipas angin)",
+                   "- Rp500.000/kamar (dengan AC)",
+                   "- Paket villa mulai dari Rp750.000 - Rp1.000.000"],
+        img: "asset/img/wisata andalah/akomodasi/villa-mandala/01.jpeg",
+        price: 350000,
+        type: "villa",
+        location: "Tepi pantai",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'AC', icon: 'fa-snowflake'},
+            {name: 'Kipas Angin', icon: 'fa-fan'},
+            {name: 'Ruang Pertemuan', icon: 'fa-couch'},
+            {name: 'Akses Langsung ke Pantai', icon: 'fa-water'},
+            {name: 'Café', icon: 'fa-utensils'},
+            {name: 'Parkir', icon: 'fa-parking'}
+        ],
+        images: [
+            "asset/img/wisata andalah/akomodasi/villa-mandala/01.jpeg",
+            "asset/img/wisata andalah/akomodasi/villa-mandala/02.jpeg",
+            "asset/img/wisata andalah/akomodasi/villa-mandala/04.jpeg",
+            "asset/img/wisata andalah/akomodasi/villa-mandala/05.png",
+            "asset/img/wisata andalah/akomodasi/villa-mandala/06.png"
+        ]
+    },
+    {
+        name: "Bantilang Pinisi Boatel (Boat Hotel)",
+        desc: "",
+        img: "",
         price: 100000,
-        type: "guesthouse",
-        location: "Dekat Gua Passea",
-        rating: 3,
+        type: "hotel",
+        location: "",
+        rating: 5,
         stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'Pengalaman Unik', icon: 'fa-ship'},
+            {name: 'Pemandangan 360°', icon: 'fa-compass'},
+            {name: 'Makanan Laut', icon: 'fa-fish'},
+            {name: 'Aktivitas Air', icon: 'fa-water'},
+            {name: 'Sunset View', icon: 'fa-sun'}
+        ],
         images: [
-            "asset/img/wisata andalah/gua-passea-1.webp",
-            "asset/img/wisata andalah/gua-passea-2.jpg"
+            " ",
+            " "
         ]
     },
-    {
-        name: "Villa Tebing Mattoanging",
-        desc: "Villa dengan pemandangan tebing dan laut yang spektakuler",
-        img: "asset/img/wisata andalah/tebing-mattoanging.webp",
+    {   
+        name: "Villa Sibara Beach",
+        desc: "",
+        img: "",
         price: 400000,
         type: "villa",
-        location: "Tebing Mattoanging",
+        location: "",
         rating: 5,
         stayInfo: "1 malam, 4 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Private Pool', icon: 'fa-swimming-pool'},
+            {name: 'Dapur Lengkap', icon: 'fa-utensils'},
+            {name: 'Karaoke', icon: 'fa-music'},
+            {name: 'Teras Rooftop', icon: 'fa-home'}
+        ],
         images: [
-            "asset/img/wisata andalah/tebing-mattoanging.webp",
-            "asset/img/wisata andalah/tebing-mattoanging-2.webp"
+            "",
+            ""
         ]
     },
     {
-        name: "Bungalow Tongkarayya",
-        desc: "Bungalow nyaman dengan pemandangan alam yang menakjubkan",
-        img: "asset/img/wisata andalah/batu-tongkarayya-1.jpg",
+        name: "Pajokka Beach House",
+        desc: "",
+        img: "",
         price: 200000,
-        type: "guesthouse",
-        location: "Tebing Tongkarayya",
-        rating: 4,
+        type: "homestay", 
+        location: "",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        facilities: [
+            {name: 'WiFi Gratis', icon: 'fa-wifi'},
+            {name: 'Sarapan', icon: 'fa-coffee'},
+            {name: 'Teras', icon: 'fa-umbrella-beach'},
+            {name: 'Kipas Angin', icon: 'fa-fan'},
+            {name: 'Pemandangan Pantai', icon: 'fa-water'}
+        ],
+        images: [
+            "",
+            ""
+        ]
+    },
+    {
+        name: "Villa Teras Sunrise",
+        desc: "",
+        img: "",
+        price: 550000,
+        type: "villa",
+        location: "",
+        rating: 5,
         stayInfo: "1 malam, 2 dewasa",
         images: [
-            "asset/img/wisata andalah/batu-tongkarayya-1.jpg",
-            "asset/img/wisata andalah/camping-ground-1.jpg"
+            "",
+            "",
+            ""
+        ]
+    },
+    {
+        name: "Villa Padaidi",
+        desc: "Cottage dengan pemandangan bukit dan lembah yang menawan",
+        img: "asset/img/wisata andalah/pan  tai-mandala-4.jpeg",
+        price: 250000,
+        type: "villa",
+        location: "Bukit L  embanna",
+        rating: 5,
+        stayInfo: "",
+        images: [
+            "",
+            "",
+            ""
+        ]
+    },
+    {
+        name: "Villa Mattoanging",
+        desc: "",
+        img: "",
+        price: 350000,
+        type: "villa",
+        location: "",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        images: [
+            "   ",
+            "",
+            ""
+        ]
+    },
+    {
+        name: "xx",
+        desc: "",
+        img: "",
+        price: 100000,
+        type: "",
+        location: "",
+        rating: 5,
+        stayInfo: "1 malam, 2 dewasa",
+        images: [
+            "",
+            ""
+        ]
+    },
+    {
+        name: "xxx",
+        desc: " ",
+        img: "",
+        price: 600000,
+        type: "",
+            location: "",
+        rating: 5,
+        stayInfo: "1 malam, x dewasa",
+        images: [
+            "",
+            ""
         ]
     }
 ];

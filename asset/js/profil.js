@@ -21,21 +21,39 @@ class Gallery3D {
             if (e.key === 'ArrowRight') this.goToNext();
         });
 
-        // Touch/swipe support
+        // Touch/swipe support - Improved
         let startX = 0;
-        let endX = 0;
+        let startY = 0;
 
         this.track.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-        });
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        this.track.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevent page scrolling when swiping gallery
+        }, { passive: false });
 
         this.track.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) this.goToNext();
-            if (endX - startX > 50) this.goToPrevious();
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            
+            // Calculate horizontal and vertical distance
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // Only register as swipe if horizontal movement is greater than vertical
+            // and greater than minimum threshold (30px)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                if (diffX > 0) {
+                    this.goToNext();
+                } else {
+                    this.goToPrevious();
+                }
+            }
         });
 
-        // Mouse drag support
+        // Mouse drag support - Improved
         let isDragging = false;
         let dragStartX = 0;
 
@@ -43,6 +61,7 @@ class Gallery3D {
             isDragging = true;
             dragStartX = e.clientX;
             this.track.style.cursor = 'grabbing';
+            e.preventDefault(); // Prevent text selection during drag
         });
 
         document.addEventListener('mousemove', (e) => {
@@ -58,8 +77,14 @@ class Gallery3D {
             const dragEndX = e.clientX;
             const diff = dragStartX - dragEndX;
 
-            if (diff > 50) this.goToNext();
-            if (diff < -50) this.goToPrevious();
+            // Only register as drag if movement is greater than minimum threshold (30px)
+            if (Math.abs(diff) > 30) {
+                if (diff > 0) {
+                    this.goToNext();
+                } else {
+                    this.goToPrevious();
+                }
+            }
         });
 
         // Auto-play (optional)
@@ -601,38 +626,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const gridItemsData = [
         {
             id: 1,
-            title: "Technology",
-            description: "Advanced technology solutions powering modern infrastructure. Our cutting-edge systems provide reliable and efficient performance for all your technological needs."
+            imgSrc: "asset2/WhatsApp Image 2025-08-19 at 20.18.00_be7aa69c.jpg",
+            title: "Pantai Mandala Ria",
+            description: " "
         },
         {
             id: 2,
-            title: "Collaboration",
-            description: "Teams working together to achieve common goals. Effective collaboration leads to innovative solutions and improved productivity across all departments."
+            title: "Batu Tongkarraya",
+            description: " "
         },
         {
             id: 3,
-            title: "Workspace",
-            description: "Modern office environments designed for productivity. Our workspaces combine functionality with comfort to create the ideal setting for professional excellence."
+            title: "Laut Mandala Ria",
+            description: " "
         },
         {
             id: 4,
-            title: "Connectivity",
-            description: "Seamless network infrastructure connecting people and devices. Our connectivity solutions ensure reliable and secure communication across all platforms."
+            title: "Tebing Mattoanging",
+            description: " "
         },
         {
             id: 5,
-            title: "Remote Work",
-            description: "Flexible work arrangements for the modern professional. Remote work capabilities allow for productivity from any location while maintaining team cohesion."
+            title: "Pantai Mandala Ria",
+            description: " "
         },
         {
             id: 6,
-            title: "Development",
-            description: "Software development and coding expertise. Our development team creates robust and scalable solutions tailored to specific business requirements."
+            title: "Gua Passea",
+            description: " "
         },
         {
             id: 7,
-            title: "Global Network",
-            description: "Worldwide connections linking communities and businesses. Our global network provides comprehensive coverage and reliable service across international boundaries."
+            title: "Pantai Mandala Ria",
+            description: ""
         }
     ];
 
@@ -641,23 +667,23 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             id: 8,
             size: "medium",
-            imgSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
-            title: "Cloud Computing",
-            description: "Scalable cloud solutions for businesses of all sizes. Our cloud computing services offer flexibility, security, and performance to meet evolving technological demands."
+            imgSrc: "asset/img/wisata andalah/gua-passea-2.jpg",
+            title: "Gua Passea",
+            description: " "
         },
         {
             id: 9,
-            size: "medium",
-            imgSrc: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop",
-            title: "Data Analysis",
-            description: "Comprehensive data analysis and visualization tools. Our analytical capabilities transform raw data into actionable insights for informed decision-making."
+            size: "wide",
+            imgSrc: "",
+            title: "Tebing Mattoanging",
+            description: " "
         },
         {
             id: 10,
             size: "medium",
-            imgSrc: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
-            title: "Cybersecurity",
-            description: "Advanced security measures protecting digital assets. Our cybersecurity protocols ensure comprehensive protection against evolving threats in the digital landscape."
+            imgSrc: "asset2/WhatsApp Image 2025-08-20 at 12.39.02.jpeg",
+            title: " ",
+            description: " "
         }
     ];
 

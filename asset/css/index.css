@@ -8,7 +8,10 @@
     scroll-behavior: smooth;
     scroll-margin-top: 5rem;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(rgba(0, 39, 193, 0.19)) transparent;
 }
+
 html, body {
     margin: 0;
     padding: 0;
@@ -114,14 +117,14 @@ html, body {
     background: linear-gradient(135deg, rgba(19,62,135,0.92) 0%, rgba(96,139,193,0.88) 100%);
     border: 1px solid rgba(255,255,255,0.18);
     border-radius: 50px;
-    width: min(1280px, 98vw);
+    width: min(1500px, 98vw);
     max-width: none;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
     transition: top 0.6s ease, transform 0.6s ease, bottom 0.6s ease, box-shadow .25s ease, background .25s ease, filter .25s ease;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     overflow: hidden; 
-    height: 6vh; 
+    height: 5vh; 
 }
 .profil-nav::before {
     content: "";
@@ -138,7 +141,7 @@ html, body {
     left: 50%;
     bottom: auto; 
     transform: translateX(-50%);
-    width: min(1280px, 98vw);
+    width: min(1500px, 98vw);
     max-width: none;
 }
 body.profil-nav-floating .profil-main {
@@ -195,12 +198,7 @@ body.profil-nav-floating .profil-main {
     align-items: center;
     justify-content: space-between;
     padding: 0 0 0 0;
-<<<<<<< Updated upstream
-    background: transparent; /* hilangkan background putih */
-    gap: 48px; /* Add spacing between logo and main-nav */
-=======
     background: transparent; 
->>>>>>> Stashed changes
 }
 
 .nav-atas .logo {
@@ -457,10 +455,6 @@ body.profil-nav-floating .profil-main {
     color: #CBDCEB;
 }
 
-<<<<<<< Updated upstream
-/* Enhanced top menu: rounded gradient container with creative side glow effects */
-=======
->>>>>>> Stashed changes
 .menu-list {
     padding: 10px 18px;
     gap: 10px;
@@ -470,39 +464,14 @@ body.profil-nav-floating .profil-main {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
-<<<<<<< Updated upstream
-    overflow: visible; /* Changed from hidden to visible for pseudo-elements */
-    /* hanya sisi kiri yang membulat */
-=======
     overflow: hidden; 
->>>>>>> Stashed changes
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    /* Enhanced multi-layer box-shadow for smooth side effects */
-    box-shadow: 
-        /* Main shadows */
-        0 8px 24px rgba(0,0,0,0.18),
-        /* Left side glow enhancement */
-        inset 12px 0 18px -8px rgba(255, 255, 255, 0.14),
-        inset 20px 0 30px -12px rgba(255, 255, 255, 0.05),
-        /* Right side glow enhancement */
-        inset -12px 0 18px -8px rgba(255, 255, 255, 0.14),
-        inset -20px 0 30px -12px rgba(255, 255, 255, 0.05),
-        /* Top/bottom subtle enhancement */
-        inset 0 6px 12px -6px rgba(255, 255, 255, 0.07),
-        inset 0 -6px 12px -6px rgba(255, 255, 255, 0.07);
 }
-<<<<<<< Updated upstream
-
-/* General menu-list creative overlays - only apply to .menu-list not in .nav-atas */
-.menu-list:not(.nav-atas .main-nav .menu-list)::before {
-    content: '';
-=======
 .nav-atas .main-nav .menu-list::before {
     content: "";
->>>>>>> Stashed changes
     position: absolute;
     top: 0;
     left: 0;
@@ -519,26 +488,6 @@ body.profil-nav-floating .profil-main {
     border-bottom-right-radius: 0;
     pointer-events: none;
     z-index: 1;
-}
-
-.menu-list:not(.nav-atas .main-nav .menu-list)::after {
-    content: '';
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
-    background: 
-        /* Intense left edge glow */
-        linear-gradient(90deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 6%, transparent 15%),
-        /* Intense right edge glow */  
-        linear-gradient(270deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 6%, transparent 15%);
-    border-top-left-radius: 999px;
-    border-bottom-left-radius: 999px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    pointer-events: none;
-    z-index: 2;
 }
 .nav-atas .main-nav .menu-list a {
     color: var(--white-color);
@@ -600,7 +549,6 @@ body.profil-nav-floating .profil-main {
         inset 0 6px 12px -6px rgba(255, 255, 255, 0.08),
         inset 0 -6px 12px -6px rgba(255, 255, 255, 0.08);
 }
-<<<<<<< Updated upstream
 
 /* Advanced Interactive Side Glow for Nav-Atas Menu */
 .nav-atas .main-nav .menu-list::before {
@@ -753,17 +701,6 @@ body.profil-nav-floating .profil-main {
 .menu-list a {
     position: relative;
     z-index: 10;
-=======
-.nav-atas .main-nav .menu-list a {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 4px;
-    padding: 6px 10px;
-    color: var(--white-color);
-    border-radius: 10px; 
-    font-size: calc(var(--fontMM) * 0.9);
->>>>>>> Stashed changes
 }
 .nav-atas .main-nav .menu-list a::before {
     content: "";
@@ -1224,7 +1161,7 @@ body.profil-nav-floating .profil-main {
 .visi-misi-section {
     position: relative;
     background: radial-gradient(1100px circle at 85% -20%, rgba(255,255,255,0.18), transparent 60%),
-                linear-gradient(to bottom,  rgb(101, 131, 184) 10%, #f3f3e0 80%);
+                linear-gradient(to bottom,  rgb(101, 131, 184) 10%, var(--third-color) 80%);
     color: #254a8a;
     width: 100%;
     padding: 60px 0 80px 0;
@@ -1259,9 +1196,9 @@ body.profil-nav-floating .profil-main {
     font-family: 'Playfair Display SC', serif;
     font-weight: 800;
     margin-bottom: 16px;
-    color: var(--primary-color);
+    color: var(--white-color);
     letter-spacing: 1px;
-    text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.83);
+    text-shadow: 0 3px 16px rgba(0,0,0,0.25);
 }
 .visi-title::after {
     content: "";
@@ -1270,7 +1207,7 @@ body.profil-nav-floating .profil-main {
     height: 4px;
     border-radius: 4px;
     margin: 14px auto 0;
-    background: linear-gradient(90deg, rgba(37,74,138,1) 0%, rgba(156,198,230,1) 100%);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,220,235,1) 100%);
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
 
@@ -1280,9 +1217,9 @@ body.profil-nav-floating .profil-main {
     font-family: 'Playfair Display SC', serif;
     font-weight: 800;
     margin: 26px 0 18px;
-    color: #254a8a;
+    color: var(--white-color);
     letter-spacing: 1px;
-    text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.83);
+     text-shadow: 0 3px 16px rgba(0,0,0,0.25);
 }
 .misi-title::after {
     content: "";
@@ -1378,7 +1315,7 @@ body.profil-nav-floating .profil-main {
 .struktur-section {
     position: relative;
     background: radial-gradient(1100px circle at 85% -20%, rgba(255,255,255,0.18), transparent 60%),
-                linear-gradient(to bottom, #f3f3e0 10%, rgb(101, 131, 184) 80%);
+                linear-gradient(to bottom, var(--third-color) 0%, rgb(101, 131, 184) 80%);
     width: 100%;
     padding: 48px 0 60px 0;
     display: flex;
@@ -1404,9 +1341,10 @@ body.profil-nav-floating .profil-main {
     font-size: 2.2rem;
     font-family: 'Playfair Display SC', serif;
     font-weight: 800;
-    color: #254a8a;
+    color: var(--primary-color);
     margin-bottom: 28px;
     letter-spacing: 2px;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.25);
 }
 .struktur-title::after {
     content: "";
@@ -1509,7 +1447,7 @@ body.profil-nav-floating .profil-main {
     font-size: 1.3rem;
     font-family: 'Playfair Display SC', serif;
     font-weight: 700;
-    color: #254a8a;
+    color: var(--white-color);
     margin-bottom: 16px;
     text-align: center;
 }
@@ -2063,7 +2001,8 @@ body.profil-nav-floating .profil-main {
 
 /* Map + Facilities side-by-side */
 .map-section {
-    background: linear-gradient(135deg, #D7E4F2 0%, #c5d6ef 50%, #D7E4F2 100%);
+    background: radial-gradient(1100px circle at 85% -20%, rgba(255,255,255,0.18), transparent 60%),
+                linear-gradient(to bottom, var(--primary-color) 0%, rgb(101, 131, 184) 80%);
 }
 .map-container {
     width: 100%;
@@ -2129,7 +2068,7 @@ body.profil-nav-floating .profil-main {
 .facilities-pane .facility-title { 
     margin-bottom: 12px; 
     font-size: 1.1rem;
-    color: var(--primary-color);
+    color: var(--white-color);
     position: relative;
     padding-bottom: 8px;
 }
@@ -2560,6 +2499,7 @@ body.profil-nav-floating .profil-main {
 
 .top-bar, .bottom-bar {
     width: 100%;
+
     height: 12px;
     background: linear-gradient(90deg, #5B85BB 0%, var(--secondary-color) 50%, #5B85BB 100%);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -2712,14 +2652,17 @@ body.profil-nav-floating .profil-main {
     margin-bottom: 0;
 }
 /* Peta section styles */
-.peta-section{padding:50px 16px 36px;background:linear-gradient(180deg,rgba(11,38,87,.04),rgba(96,139,193,.08));}
+.peta-section{
+    padding:50px 16px 36px;
+     background: linear-gradient(to bottom, rgb(101, 131, 184) 0%, var(--primary-color) 80%);
+}
 .peta-title{ 
    position: relative;
     text-align: center;
     font-size: 2.2rem;
     font-family: 'Playfair Display SC', serif;
     font-weight: 800;
-    color: #254a8a;
+    color: var(--white-color);
     margin-bottom: 28px;
     letter-spacing: 2px;
 }    
@@ -2730,7 +2673,7 @@ body.profil-nav-floating .profil-main {
     height: 4px;
     border-radius: 4px;
     margin: 14px auto 0;
-    background: linear-gradient(90deg, rgba(37,74,138,1) 0%, rgba(156,198,230,1) 100%);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,220,235,1) 100%);
     box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 .peta-tabs{display:flex;gap:10px;justify-content:center;margin:10px 0 26px;}
@@ -2796,7 +2739,9 @@ body.profil-nav-floating .profil-main {
         --g-dark:#0b1c3a;
         --g-accent:#133E87;
         --g-shadow:0 12px 40px rgba(16,32,96,.18);
-        --g-shadow-strong:0 22px 70px rgba(16,32,96,.28)
+        --g-shadow-strong:0 22px 70px rgba(16,32,96,.28);
+    background: linear-gradient(to bottom, rgb(101, 131, 184) 0%, var(--third-color) 80%);
+
 }
 /* Hero (atas) */
 .galeri-hero{ 
@@ -2807,35 +2752,43 @@ body.profil-nav-floating .profil-main {
     padding:8px 40px 0;
     box-sizing:border-box;
 }
-.galeri-eyebrow{ 
-    text-transform:uppercase; 
-    letter-spacing:.2em; 
-    font-weight:700; 
-    margin:0 0 6px; 
-    font-size:.8rem; 
-    color:rgba(11,28,58,.7);
-   
+.title-galeri{ 
+    text-align: center;
+    font-size: 2.2rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 800;
+    color: var(--white-color);
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+}
+.title-galeri::after{
+    content: "";
+    display: block;
+    width: 140px;
+    height: 4px;
+    border-radius: 4px;
+    margin: 14px auto 0;
+     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,220,235,1) 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 .galeri-title{ 
     font-size:2.2rem; 
     margin:0 0 6px; 
     letter-spacing:.5px; 
-     font-family:'Playfair Display SC',serif;
-    color:var(--g-dark);
+    font-family:'Playfair Display SC',serif;
+    color: var(--white-color);
 }
-.galeri-subtitle{ color:#254a8a; opacity:.9; margin:0 0 16px; font-family:'Karma', serif; }
+.galeri-subtitle{  color: var(--white-color); opacity:.9; margin:0 0 16px; font-family:'Karma', serif; }
 
-
- 
 .galeri-scroller {
             position: relative;
-            width: 100%;
+            max-width: 1800px;
             height: 600px;
             perspective: 1400px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--g-bg);
+             background-color: var(--g-bg);
             border-radius: 20px ;
             border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: var(--g-shadow);
@@ -2911,12 +2864,12 @@ body.profil-nav-floating .profil-main {
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(to top, rgba(3, 0, 36, 0.8), transparent);
             color: white;
             padding: 20px;
             box-sizing: border-box;
             transform: translateY(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.6s ease;
             z-index: 2;
         }
 
@@ -2937,6 +2890,7 @@ body.profil-nav-floating .profil-main {
             text-align: center;
             max-width: 90%;
             line-height: 1.4;
+            font-size: 'Karma', serif;
         }
 
         /* Positioning untuk 5 slides */
@@ -3068,7 +3022,25 @@ body.profil-nav-floating .profil-main {
    MEDSOS (Profil)
 ===================== */
 .medsos-section{ padding:60px 16px 80px; max-width:1200px; margin:0 auto;}
-.medsos-title{ text-align:center; color:#133E87; font-size:2.2rem; margin:0 0 10px; letter-spacing:.5px; font-weight:800;}
+.medsos-title{ 
+   text-align: center;
+    font-size: 2.2rem;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+}
+.medsos-title::after{
+    content: "";
+    display: block;
+    width: 140px;
+    height: 4px;
+    border-radius: 4px;
+    margin: 14px auto 0;
+    background: linear-gradient(90deg, rgba(37,74,138,1) 0%, rgba(156,198,230,1) 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
 .medsos-subtitle{ text-align:center; color:#254a8a; opacity:.9; margin-bottom:28px; font-family:'Karma', serif;}
 
 /* Smooth entrance */
@@ -3080,7 +3052,7 @@ body.profil-nav-floating .profil-main {
 
 /* Grid (3 tiles on desktop) */
 .medsos-grid{ display:grid; gap:22px; grid-template-columns: 1fr;}
-@media (min-width: 900px){ .medsos-grid{ grid-template-columns: 1fr 1fr 1fr; align-items:start; } }
+@media (min-width: 900px){ .medsos-grid{ grid-template-columns: 1fr 1fr; align-items:start; } }
 
 /* Instagram tile default (light) */
 .ms-tile{ position:relative; background:#eef4ff; }
@@ -3106,11 +3078,6 @@ body.profil-nav-floating .profil-main {
 .ms-tile--instagram:hover .ms-tile__handle{ color:#fff; opacity:.95; }
 .ms-tile--instagram:hover .ms-tile__watermark{ display:block; position:absolute; left:24px; bottom:18px; font-size:2.2rem; font-weight:800; color:rgba(255,255,255,.18); letter-spacing:1px; }
 
-/* TikTok */
-.ms-tile--tiktok:hover{ background:linear-gradient(135deg, #25F4EE, #FE2C55); color:#fff; box-shadow:0 18px 44px rgba(0,0,0,.22); }
-.ms-tile--tiktok:hover .ms-tile__icon, .ms-tile--tiktok:hover .ms-tile__arrow{ background:rgba(255,255,255,.14); color:#fff; }
-.ms-tile--tiktok:hover .ms-tile__title{ font-size:1.6rem; }
-.ms-tile--tiktok:hover .ms-tile__watermark{ display:block; position:absolute; left:24px; bottom:18px; font-size:2.2rem; font-weight:800; color:rgba(255,255,255,.18); letter-spacing:1px; }
 
 /* Facebook */
 .ms-tile--facebook:hover{ background:linear-gradient(135deg, #1877F2, #3B82F6); color:#fff; box-shadow:0 18px 44px rgba(0,0,0,.22); }
@@ -3139,13 +3106,23 @@ body.profil-nav-floating .profil-main {
 }
 
 .person-in-charge-title {
-    color: #133E87;
+    color: var(--primary-color);
     font-size: 2.2rem;
     margin: 0 0 40px;
     letter-spacing: 0.5px;
     font-weight: 800;
 }
+.person-in-charge-title::after{
+    content: "";
+    display: block;
+    width: 140px;
+    height: 4px;
+    border-radius: 4px;
+    margin: 14px auto 0;
+    background: linear-gradient(90deg, rgba(37,74,138,1) 0%, rgba(156,198,230,1) 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 
+}
 .person-card {
     display: flex;
     flex-direction: column;
@@ -3218,14 +3195,14 @@ body.profil-nav-floating .profil-main {
 
 /* Image Grid Gallery */
 .image-grid-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    max-width: 1700px;
+    margin: 45px auto;
+    padding: 0 40px;
 }
 
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(20, 1fr);
     grid-auto-rows: 200px;
     gap: 16px;
     margin-bottom: 30px;
@@ -3287,16 +3264,20 @@ body.profil-nav-floating .profil-main {
 
 /* Grid item sizes */
 .grid-item.large {
-    grid-column: span 4;
+    grid-column: span 5;
     grid-row: span 2;
 }
 
 .grid-item.medium {
-    grid-column: span 4;
+    grid-column: span 5;
     grid-row: span 1;
 }
 
 .grid-item.wide {
+    grid-column: span 7;
+    grid-row: span 1;
+}
+.grid-item.wide-a {
     grid-column: span 8;
     grid-row: span 1;
 }

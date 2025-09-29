@@ -9,8 +9,8 @@ function getCardsPerPage() {
     if (window.matchMedia('(max-width: 480px)').matches) return 2;
     // Tablet: 2 kolom x 2 baris
     if (window.matchMedia('(max-width: 768px)').matches) return 4;
-    // Desktop: ubah jadi 2 kolom x 2 baris agar selalu ada minimal 2 halaman jika data >=5
-    return 4;
+    // Desktop: ubah jadi 3 kolom x 2 baris (6 kartu per slide)
+    return 6;
 }
 
 function initializeAkomodasi() {
@@ -96,7 +96,7 @@ function buildAkomodasiCards(container, dataArray) {
                         </div>
                     </div>
                     <hr class="ak-panel-hr">
-                    <p>${data.desc}</p>
+                    <p>${data.desc_short || ''}</p>
                     <div class="card-actions-ak">
                         <button type="button" class="ak-cta ak-book-btn" aria-label="Book Now for ${data.name}">Book Now</button>
                     </div>
@@ -301,46 +301,53 @@ function openAkomodasiDetailModal(data) {
 
     const title = data.name || 'Detail Akomodasi';
     const price = data.price || 0;
-    const desc = data.desc || '';
+    const desc_full = data.desc_full || [];
     const images = data.images || [];
     const type = data.type || '';
     const location = data.location || '';
     const rating = data.rating || 0;
     const stayInfo = data.stayInfo || '1 malam, 2 dewasa';
 
-    const facilitiesMap = {
-        hotel: [
-            {name: 'WiFi Gratis', icon: 'fa-wifi'},
-            {name: 'Kolam Renang', icon: 'fa-swimming-pool'},
-            {name: 'Restoran', icon: 'fa-utensils'},
-            {name: 'Parkir', icon: 'fa-parking'},
-            {name: 'AC', icon: 'fa-snowflake'},
-            {name: 'TV Kabel', icon: 'fa-tv'},
-            {name: '24 Jam Front Desk', icon: 'fa-clock'},
-            {name: 'Layanan Kamar', icon: 'fa-concierge-bell'}
-        ],
-        villa: [
-            {name: 'WiFi Gratis', icon: 'fa-wifi'},
-            {name: 'Private Pool', icon: 'fa-swimming-pool'},
-            {name: 'Dapur', icon: 'fa-utensils'},
-            {name: 'Parkir', icon: 'fa-parking'},
-            {name: 'AC', icon: 'fa-snowflake'},
-            {name: 'Teras Pribadi', icon: 'fa-umbrella-beach'},
-            {name: 'BBQ Area', icon: 'fa-fire'},
-            {name: 'Laundry', icon: 'fa-soap'}
-        ],
-        guesthouse: [
-            {name: 'WiFi Gratis', icon: 'fa-wifi'},
-            {name: 'Parkir', icon: 'fa-parking'},
-            {name: 'Dapur Umum', icon: 'fa-utensils'},
-            {name: 'Kipas Angin', icon: 'fa-fan'},
-            {name: 'Air Panas', icon: 'fa-hot-tub'},
-            {name: 'Taman', icon: 'fa-tree'},
-            {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
-            {name: 'Teras', icon: 'fa-umbrella-beach'}
-        ]
-    };
-    const facs = facilitiesMap[type] || ['WiFi Gratis','Parkir','AC'];
+    // Gunakan fasilitas dari data akomodasi jika tersedia, jika tidak gunakan default berdasarkan tipe
+    let facilities = data.facilities || [];
+    
+    // Jika fasilitas tidak tersedia, gunakan default dari facilitiesMap
+    if (!facilities || facilities.length === 0) {
+        const facilitiesMap = {
+            hotel: [
+                {name: 'WiFi Gratis', icon: 'fa-wifi'},
+                {name: 'Kolam Renang', icon: 'fa-swimming-pool'},
+                {name: 'Restoran', icon: 'fa-utensils'},
+                {name: 'Parkir', icon: 'fa-parking'},
+                {name: 'AC', icon: 'fa-snowflake'},
+                {name: 'TV Kabel', icon: 'fa-tv'},
+                {name: '24 Jam Front Desk', icon: 'fa-clock'},
+                {name: 'Layanan Kamar', icon: 'fa-concierge-bell'}
+            ],
+            villa: [
+                {name: 'WiFi Gratis', icon: 'fa-wifi'},
+                {name: 'Private Pool', icon: 'fa-swimming-pool'},
+                {name: 'Dapur', icon: 'fa-utensils'},
+                {name: 'Parkir', icon: 'fa-parking'},
+                {name: 'AC', icon: 'fa-snowflake'},
+                {name: 'Teras Pribadi', icon: 'fa-umbrella-beach'},
+                {name: 'BBQ Area', icon: 'fa-fire'},
+                {name: 'Laundry', icon: 'fa-soap'}
+            ],
+            guesthouse: [
+                {name: 'WiFi Gratis', icon: 'fa-wifi'},
+                {name: 'Parkir', icon: 'fa-parking'},
+                {name: 'Dapur Umum', icon: 'fa-utensils'},
+                {name: 'Kipas Angin', icon: 'fa-fan'},
+                {name: 'Air Panas', icon: 'fa-hot-tub'},
+                {name: 'Taman', icon: 'fa-tree'},
+                {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
+                {name: 'Teras', icon: 'fa-umbrella-beach'}
+            ]
+        };
+        facilities = facilitiesMap[type] || [{name: 'WiFi Gratis', icon: 'fa-wifi'}, {name: 'Parkir', icon: 'fa-parking'}, {name: 'AC', icon: 'fa-snowflake'}];
+    }
+    
     const priceText = formatPrice(price);
 
     content.innerHTML = `
@@ -371,12 +378,14 @@ function openAkomodasiDetailModal(data) {
 
             <hr class="ak-modal-divider" />
 
-            <p class="ak-desc">${desc}</p>
+            <div class="ak-desc">
+                ${desc_full.map(paragraph => `<p>${paragraph}</p>`).join('')}
+            </div>
 
             <div class="modal-facilities" id="akomodasiFacilities">
                 <h3>Fasilitas</h3>
                 <div class="facilities-grid">
-                    ${facs.map(f => `
+                    ${facilities.map(f => `
                         <div class="facility-item">
                             <div class="facility-icon">
                                 <i class="fa-solid ${f.icon}"></i>
@@ -477,7 +486,7 @@ function initializeAkomodasiImageRotation(card, data) {
     if (!cardImage || !data.images || data.images.length <= 1) return;
 
     // Create rotating images
-    const images = data.images.slice(0, 4); // Use up to 4 images
+    const images = data.images; // Use all available images
     if (images.length < 2) return;
 
     // Clear existing content and add rotating images
