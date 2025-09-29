@@ -38,11 +38,15 @@
 .menu-wisata ul {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .menu-wisata li {
@@ -107,19 +111,148 @@
     .menu-wisata ul {
         gap: 15px;
     }
-    
+
     .menu-wisata li {
-        width: 120px;
+        width: 150px;
     }
-    
+
     .menu-wisata svg {
-        width: 50px;
-        height: 50px;
+        width: 125px;
+        height: 125px;
         padding: 12px;
     }
-    
+
     .menu-wisata li a { /* Sesuaikan font size untuk tautan di mobile */
-        font-size: 0.8rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-wisata-section {
+        position: relative;
+        padding: 30px 0;
+    }
+
+    .menu-wisata {
+        position: relative;
+        padding: 0 10px;
+    }
+
+    .menu-wisata::before,
+    .menu-wisata::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(135deg, var(--light-color), rgba(243, 243, 224, 0.8), var(--light-color));
+        z-index: 5;
+    }
+
+    .menu-wisata::before {
+        left: 0;
+    }
+
+    .menu-wisata::after {
+        right: 0;
+    }
+
+    .menu-wisata ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        height: 75px;
+        margin: 0;
+        position: relative;
+        z-index: 10;
+    }
+
+    .menu-wisata li {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--light-color), rgba(243, 243, 224, 0.9));
+        border: 1px solid rgba(243, 243, 224, 0.3);
+        box-shadow: 0 2px 8px rgba(19, 62, 135, 0.1);
+        position: relative;
+    }
+
+    .menu-wisata li:hover {
+        transform: translateY(-2px) scale(1.05);
+        background: linear-gradient(135deg, rgba(243, 243, 224, 0.95), var(--light-color));
+        box-shadow: 0 4px 12px rgba(19, 62, 135, 0.15);
+    }
+
+    .menu-wisata svg {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border-radius: 0;
+        background: none;
+        fill: var(--primary-color);
+        margin: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-wisata li:hover svg {
+        background: none;
+        fill: var(--secondary-color);
+        transform: scale(1.1);
+    }
+
+    .menu-wisata li a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: transparent;
+        font-size: 0;
+        text-decoration: none;
+        z-index: 15;
+        pointer-events: none;
+    }
+
+    .menu-wisata li a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+    }
+
+    .menu-wisata li:hover a::after {
+        width: 80%;
+    }
+
+    .menu-wisata li.active {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: 1px solid var(--primary-color);
+        box-shadow: 0 4px 12px rgba(19, 62, 135, 0.2);
+    }
+
+    .menu-wisata li.active svg {
+        fill: var(--light-color);
+    }
+
+    .menu-wisata li.active a::after {
+        width: 80%;
+        background: var(--light-color);
     }
 }
 
@@ -145,6 +278,7 @@
 }
 
 .objek-wisata-title,
+.aktivitas-wisata-title,
 .atraksi-title,
 .kuliner-title,
 .sewa-title {
@@ -165,10 +299,12 @@
 
 /* Decorative horizontal lines flanking the titles */
 .objek-wisata-title::before,
+.aktivitas-wisata-title::before,
 .atraksi-title::before,
 .kuliner-title::before,
 .sewa-title::before,
 .objek-wisata-title::after,
+.aktivitas-wisata-title::after,
 .atraksi-title::after,
 .kuliner-title::after,
 .sewa-title::after {
@@ -182,6 +318,7 @@
 
 /* Ensure the inner span is clean and centered */
 .objek-wisata-title span,
+.aktivitas-wisata-title span,
 .atraksi-title span,
 .kuliner-title span,
 .sewa-title span {
@@ -198,6 +335,240 @@
 .sewa-title span::before, .sewa-title span::after { content: none !important; }
 /* Ensure sewa side lines are visible */
 .sewa-title::before, .sewa-title::after { opacity: .5; min-width: 80px; max-width: 160px; }
+
+/* Aktivitas Wisata Section Styles */
+.aktivitas-wisata-section {
+    width: 100%;
+    padding: 50px 0;
+    background: linear-gradient(135deg, 
+        rgba(19, 62, 135, 0.05) 0%, 
+        rgba(96, 139, 193, 0.03) 50%, 
+        rgba(243, 243, 224, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.aktivitas-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.aktivitas-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    perspective: 1000px;
+}
+
+/* 3D Card Styles */
+.aktivitas-card {
+    width: 320px;
+    height: 450px;
+    perspective: 1500px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.aktivitas-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.aktivitas-card:hover .aktivitas-card-inner {
+    transform: rotateY(180deg);
+}
+
+.aktivitas-card-front, .aktivitas-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.aktivitas-card-front {
+    background-color: var(--light-color);
+}
+
+.aktivitas-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.aktivitas-card:hover .aktivitas-card-front img {
+    transform: scale(1.1);
+}
+
+.aktivitas-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(19, 62, 135, 0.9), transparent);
+    padding: 20px;
+    color: var(--light-color);
+    text-align: center;
+}
+
+.aktivitas-card-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.aktivitas-card-back {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-color);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.aktivitas-card-content {
+    padding: 20px;
+}
+
+.aktivitas-card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--light-color);
+}
+
+.aktivitas-card-content p {
+    font-family: 'Karma', serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: var(--third-color);
+}
+
+.aktivitas-card-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.info-text {
+    font-family: 'Karma', serif;
+    font-size: 0.9rem;
+    color: var(--third-color);
+}
+
+.aktivitas-card-btn {
+    background-color: var(--third-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Karma', serif;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.aktivitas-card-btn:hover {
+    background-color: var(--light-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for cards */
+@keyframes cardFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-in animation for cards when section enters viewport */
+.aktivitas-card {
+    opacity: 0;
+}
+
+.aktivitas-card.visible {
+    animation: cardFadeInUp 0.8s ease-out forwards;
+}
+
+.aktivitas-card.visible:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.aktivitas-card.visible:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.aktivitas-card.visible:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.aktivitas-card.visible:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .aktivitas-cards {
+        gap: 20px;
+    }
+    
+    .aktivitas-card {
+        width: 280px;
+        height: 400px;
+    }
+    
+    .aktivitas-card-overlay h3,
+    .aktivitas-card-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .aktivitas-card-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .aktivitas-card {
+        width: 100%;
+        max-width: 320px;
+        height: 380px;
+    }
+}
 
 /* Remove decorative glow around titles */
 /* (previous ::before and keyframes removed for flat look) */
@@ -258,7 +629,6 @@
                 background .3s ease;
     transform: translateY(0);
     border: 2px solid transparent;
-    animation: cardEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes cardEntrance {
@@ -1616,7 +1986,7 @@
 /* Modal (akomodasi) */
 .modal{ display:none; position:fixed; inset:0; background:rgba(2,6,23,.55); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); z-index:1000; }
 .modal .modal-content{ background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96)) padding-box, linear-gradient(135deg, var(--third-color), var(--secondary-color)) border-box; border: 2px solid transparent; max-width: 960px; width:92%; margin:60px auto; border-radius: 16px; overflow:hidden; position:relative; box-shadow: 0 24px 72px rgba(2,6,23,.35); }
-.modal .close { position: absolute; top: 20px; right: 20px; z-index: 1002; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border: 1px solid rgba(19, 62, 135, 0.15); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); } .modal .close:hover { background: rgba(255, 255, 255, 0.95); transform: scale(1.08) rotate(90deg); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); } .modal .close:active { transform: scale(0.95); } .modal .close::before, .modal .close::after { content: ""; position: absolute; height: 18px; width: 2px; background: var(--primary-color); border-radius: 2px; } .modal .close::before { transform: rotate(45deg); } .modal .close::after { transform: rotate(-45deg); } @media (max-width: 768px) { .modal .close { top: 16px; right: 16px; width: 36px; height: 36px; } .modal .close::before, .modal .close::after { height: 14px; } }
+.modal .close { position: absolute; top: 20px; right: 20px; z-index: 1002; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border: 1px solid rgba(19, 62, 135, 0.15); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); } .modal .close:hover { background: rgba(255, 255, 255, 0.95); transform: scale(1.08) rotate(90deg); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); } .modal .close:active { transform: scale(0.95); } .modal .close::before, .modal .close::after { content: ""; position: absolute; height: 18px; width: 2px; border-radius: 2px; } .modal .close::before { transform: rotate(45deg); } .modal .close::after { transform: rotate(-45deg); } @media (max-width: 768px) { .modal .close { top: 16px; right: 16px; width: 36px; height: 36px; } .modal .close::before, .modal .close::after { height: 14px; } }
 .modal .modal-content #akomodasiModalContent{
     max-height: 85vh;
     overflow-y: auto;
@@ -3994,10 +4364,7 @@
 .atraksi-card,
 .card-akomodasi,
 .card-kuliner,
-.card-sewa {
-    animation: cardStaggerEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    opacity: 0;
-}
+
 
 .wisata-section .card:nth-child(1) { animation-delay: 0.1s; }
 .wisata-section .card:nth-child(2) { animation-delay: 0.2s; }

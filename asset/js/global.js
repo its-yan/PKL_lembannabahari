@@ -13,13 +13,11 @@ window.atraksiData = [
     {
         name: "Snorkeling",
         desc: "Jelajahi keindahan bawah laut dengan pemandangan terumbu karang yang menakjubkan",
-        img: "asset/img/wisata andalah/pantai-andalan-1.jpeg",
+        img: "asset/img/wisata andalah",
         price: 50000,
         unit: "orang",
         images: [
-            "asset/img/wisata andalah/pantai-andalan-1.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-2.jpeg",
-            "asset/img/wisata andalah/pantai-mandala-3.jpeg"
+            "asset/img/wisata andalah/Snorkeling.jpg",
         ],
         facilities: ["Perlengkapan snorkeling", "Pemandu profesional", "Asuransi", "Makan siang"]
     },
@@ -369,6 +367,7 @@ window.kulinerData = [
         img: "asset/img/wisata andalah/pantai-mandala-6.webp",
         price: 30000
     }
+
 ];
 
 // Data untuk Sewa
@@ -376,42 +375,42 @@ window.sewaData = [
     {
         name: "Motor Honda Beat",
         desc: "Motor matic yang nyaman untuk berkeliling wisata",
-        img: "asset/img/wisata andalah/pantai-mandala-7.webp",
+        img: "asset/img/wisata andalah/Motor Beat.jpeg",
         price: 75000,
         unit: "hari"
     },
     {
         name: "Mobil Avanza",
         desc: "Mobil keluarga yang nyaman untuk perjalanan wisata",
-        img: "asset/img/wisata andalah/gua-passea-1.webp",
+        img: "asset/img/wisata andalah/Toyota Avanza.jpeg",
         price: 300000,
         unit: "hari"
     },
     {
         name: "Sepeda Gunung",
         desc: "Sepeda untuk menjelajahi jalur off-road dan pantai",
-        img: "asset/img/wisata andalah/gua-passea-2.jpg",
+        img: "asset/img/wisata andalah/Motor gunung.jpeg",
         price: 50000,
         unit: "hari"
     },
     {
         name: "Perahu Nelayan",
         desc: "Perahu tradisional untuk aktivitas memancing dan wisata laut",
-        img: "asset/img/wisata andalah/gua-passea-3.jpeg",
+        img: "asset2/WhatsApp Image 2025-08-20 at 12.40.15.jpeg",
         price: 200000,
         unit: "hari"
     },
     {
         name: "Motor Scoopy",
         desc: "Motor retro yang stylish untuk berkeliling",
-        img: "asset/img/wisata andalah/tebing-mattoanging.webp",
+        img: "asset/img/wisata andalah/Motor scoopy.jpeg",
         price: 80000,
         unit: "hari"
     },
     {
         name: "Mobil Innova",
         desc: "Mobil besar yang cocok untuk rombongan wisata",
-        img: "asset/img/wisata andalah/tebing-mattoanging-2.webp",
+        img: "asset/img/wisata andalah/Mobil innova.jpeg",
         price: 400000,
         unit: "hari"
     }

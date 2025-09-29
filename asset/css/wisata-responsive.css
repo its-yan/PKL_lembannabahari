@@ -411,14 +411,14 @@
         height: 40px;
     }
     .menu-wisata ul {
-        flex-wrap: wrap;
-        gap: 2px;
+  
+        gap: 10px;
     }
     .menu-wisata li {
         width: 30%;
     }
     .menu-wisata li:nth-child(n+6) {
-        width: 45%;
+        width: 30%;
     }
     .cta-waves { height: 100px; }
     .cta-wave svg { height: 100px; }
@@ -598,9 +598,52 @@
 @media (prefers-reduced-motion: reduce) {
     .wisata-section .card,
     .atraksi-card,
+    .aktivitas-card,
     .card-akomodasi,
     .card-kuliner,
     .card-sewa {
         transition: none !important;
+        animation: none !important;
+    }
+    
+    .aktivitas-card {
+        opacity: 1 !important;
+    }
+}
+
+/* Enhanced Mobile Responsive Design for Aktivitas Cards */
+@media (max-width: 768px) {
+    .aktivitas-cards {
+        gap: 20px;
+    }
+    
+    .aktivitas-card {
+        width: 280px;
+        height: 400px;
+    }
+    
+    .aktivitas-card-overlay h3 {
+        font-size: 1.5rem;
+    }
+    
+    .aktivitas-card-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .aktivitas-card-content p {
+        font-size: 0.9rem;
+    }
+    
+    .info-icon {
+        font-size: 1.3rem;
+    }
+    
+    .info-text {
+        font-size: 0.8rem;
+    }
+    
+    .aktivitas-card-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
     }
 }

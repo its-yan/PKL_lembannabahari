@@ -14,6 +14,7 @@
     <script src="asset/js/global.js"></script>
     <script src="asset/js/index.js"></script>
     <script src="asset/js/wisata-objek.js"></script>
+    <script src="asset/js/aktivitas.js"></script>
     <script src="asset/js/atraksi.js"></script>
     <script src="asset/js/akomodasi.js"></script>
     <script src="asset/js/kuliner.js"></script>
@@ -52,11 +53,12 @@
                 <li class="has-submenu active">
                 <a href="wisata.html">Wisata</a><button class="dropdown-toggle" aria-label="Toggle submenu"></button>
                 <ul class="submenu" id="wisataSubmenu">
-                    <li><a href="#objek-wisata">Objek Wisata</a></li>
-                    <li><a href="#paket-wisata">Paket Wisata</a></li>
+                    <li><a href="#objekwisata">Objek Wisata</a></li>
+                    <li><a href="#aktivitas-wisata">Aktivitas Wisata</a></li>
+                    <li><a href="#atraksi-wisata">Atraksi Wisata</a></li>
                     <li><a href="#akomodasi">Akomodasi</a></li>
                     <li><a href="#kuliner">Kuliner Khas</a></li>
-                    <li><a href="#sewa-kendaraan">Sewa Kendaraan</a></li>
+                    <li><a href="#sewa">Sewa Kendaraan</a></li>
                 </ul>
                 </li>
                 <li class="has-submenu">
@@ -81,7 +83,7 @@
     <header class="profil-header">
         <div class="header-bg">
             <img src="asset/img/profil-desa/profil-bg.jpeg" alt="Desa Background" class="header-img">
-            <h1 class="profil-title">Wisata Andalan</h1>
+            <h1 class="profil-title">Desa Wisata Andalan</h1>
         </div>
         <div class="profil-nav" id="profil-nav">
             <ul>
@@ -94,6 +96,7 @@
             <div class="menu-wisata">
                 <ul>
                     <li><a href="#objekwisata"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" ><path d="M0 0h24v24H0z" fill="none"/><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>Objek Wisata</a></li>
+                    <li><a href="#aktivitas-wisata"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>Aktivitas Wisata</a></li>
                     <li><a href="#atraksi-wisata"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 20 20" height="48px" viewBox="0 0 20 20" width="48px"><g><rect fill="none" height="20" width="20"/></g><g><g><path d="M16,10c0-0.57-0.08-1.12-0.23-1.64c0.51-0.46,0.65-1.24,0.29-1.86c-0.36-0.62-1.1-0.89-1.76-0.68 C14.04,5.03,13.06,4.46,11.96,4.19C11.32,3.51,10.72,3,10,3S8.68,3.51,8.53,4.19C7.44,4.46,6.46,5.04,5.7,5.82 C5.04,5.61,4.3,5.88,3.94,6.5C3.58,7.12,3.72,7.9,4.23,8.36C4.08,8.88,4,9.43,4,10c0,0.57,0.08,1.12,0.23,1.64 c-0.51,0.46-0.65,1.24-0.29,1.86c0.36,0.62,1.1,0.89,1.76,0.68C6,14.49,6.33,14.76,6.69,15l-0.87,2h1.09l0.66-1.52 c0.31,0.14,0.63,0.24,0.96,0.33C8.68,16.49,9.28,17,10,17s1.32-0.51,1.47-1.19c0.33-0.08,0.65-0.19,0.96-0.33L13.09,17h1.09 l-0.87-2c0.36-0.24,0.69-0.52,0.99-0.83c0.66,0.21,1.4-0.05,1.76-0.68c0.36-0.62,0.22-1.4-0.29-1.86C15.92,11.12,16,10.57,16,10z M11.32,14.8C11.07,14.33,10.57,14,10,14s-1.07,0.33-1.32,0.8c-0.24-0.07-0.48-0.14-0.71-0.24l1.2-2.75C9.42,11.93,9.7,12,10,12 s0.58-0.07,0.83-0.18l1.2,2.75C11.8,14.66,11.56,14.73,11.32,14.8z M11.63,11.15C11.86,10.83,12,10.43,12,10c0-1.1-0.9-2-2-2 s-2,0.9-2,2c0,0.43,0.14,0.83,0.37,1.15L7.1,14.06c-0.21-0.15-0.42-0.32-0.61-0.5C6.79,13.1,6.83,12.5,6.54,12 c-0.29-0.5-0.82-0.76-1.36-0.74C5.07,10.85,5,10.44,5,10s0.07-0.85,0.18-1.26C5.72,8.76,6.25,8.5,6.54,8 c0.29-0.5,0.25-1.1-0.04-1.56c0.6-0.59,1.35-1.01,2.19-1.24C8.93,5.67,9.43,6,10,6s1.07-0.33,1.32-0.8 c0.83,0.23,1.59,0.65,2.19,1.24C13.21,6.9,13.17,7.5,13.46,8c0.29,0.5,0.82,0.76,1.36,0.74C14.93,9.15,15,9.56,15,10 s-0.07,0.85-0.18,1.26c-0.54-0.02-1.07,0.24-1.36,0.74c-0.29,0.5-0.25,1.1,0.04,1.56c-0.19,0.18-0.39,0.35-0.61,0.5L11.63,11.15z"/></g></g></svg>Atraksi Wisata</a></li>
                     <li><a href="#akomodasi"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Akomodasi</a></li>
                     <li><a href="#kuliner"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0z" fill="none"/><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>Kuliner</a></li>
@@ -138,6 +141,100 @@
                             <div class="card-overlay">
                                 <div class="card-title">Tebing Tongkarayya</div>
                                 <div class="card-location">Lembanabahari, Bulukumba</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="aktivitas-wisata-section" id="aktivitas-wisata">
+            <h2 class="aktivitas-wisata-title"><span>Aktivitas Wisata</span></h2>
+            <div class="aktivitas-container">
+                <div class="aktivitas-cards">
+                    <!-- 3D Card 1 -->
+                    <div class="aktivitas-card">
+                        <div class="aktivitas-card-inner">
+                            <div class="aktivitas-card-front">
+                                <img src="asset/img/wisata andalah/Snorkeling.jpg" alt="Snorkeling">
+                                <div class="aktivitas-card-overlay">
+                                    <h3>Snorkeling</h3>
+                                </div>
+                            </div>
+                            <div class="aktivitas-card-back">
+                                <div class="aktivitas-card-content">
+                                    <h3>Snorkeling</h3>
+                                    <p>Jelajahi keindahan bawah laut dengan snorkeling di perairan jernih Pantai Mandala. Lihat beragam ikan warna-warni dan terumbu karang yang memukau.</p>
+                                    <div class="aktivitas-card-info">
+                                        <div class="info-item">
+                                            <span class="info-icon">⏱️</span>
+                                            <span class="info-text">2-3 jam</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-icon">💰</span>
+                                            <span class="info-text">Rp 150.000</span>
+                                        </div>
+                                    </div>
+                                    <button class="aktivitas-card-btn">Pesan Sekarang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Card 2 -->
+                    <div class="aktivitas-card">
+                        <div class="aktivitas-card-inner">
+                            <div class="aktivitas-card-front">
+                                <img src="asset/img/wisata andalah/tebing-mattoanging.webp" alt="Hiking">
+                                <div class="aktivitas-card-overlay">
+                                    <h3>Hiking</h3>
+                                </div>
+                            </div>
+                            <div class="aktivitas-card-back">
+                                <div class="aktivitas-card-content">
+                                    <h3>Hiking</h3>
+                                    <p>Nikmati petualangan hiking di Tebing Mattoanging dengan pemandangan spektakuler dari ketinggian. Jalur yang menantang dengan panorama alam yang menakjubkan.</p>
+                                    <div class="aktivitas-card-info">
+                                        <div class="info-item">
+                                            <span class="info-icon">⏱️</span>
+                                            <span class="info-text">4-5 jam</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-icon">💰</span>
+                                            <span class="info-text">Rp 100.000</span>
+                                        </div>
+                                    </div>
+                                    <button class="aktivitas-card-btn">Pesan Sekarang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Card 3 -->
+                    <div class="aktivitas-card">
+                        <div class="aktivitas-card-inner">
+                            <div class="aktivitas-card-front">
+                                <img src="asset/img/wisata andalah/gua-passea-1.webp" alt="Caving">
+                                <div class="aktivitas-card-overlay">
+                                    <h3>Caving</h3>
+                                </div>
+                            </div>
+                            <div class="aktivitas-card-back">
+                                <div class="aktivitas-card-content">
+                                    <h3>Caving</h3>
+                                    <p>Jelajahi keajaiban bawah tanah di Gua Passea dengan stalaktit dan stalagmit yang menakjubkan. Petualangan seru dengan pemandu berpengalaman.</p>
+                                    <div class="aktivitas-card-info">
+                                        <div class="info-item">
+                                            <span class="info-icon">⏱️</span>
+                                            <span class="info-text">3-4 jam</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-icon">💰</span>
+                                            <span class="info-text">Rp 125.000</span>
+                                        </div>
+                                    </div>
+                                    <button class="aktivitas-card-btn">Pesan Sekarang</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -275,7 +372,7 @@
     <!-- Modal Wisata (Objek Wisata) -->
     <div id="wisataModal" class="modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
-            <button class="close" id="wisataModalCloseBtn" type="button" aria-label="Tutup">&times;</button>
+            <button class="close" id="wisataModalCloseBtn" type="button" aria-label="Tutup" style="position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; font-size: 24px; color: #fff; background: rgba(0,0,0,0.5); border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1050;">×</button>
             <div class="modal-header">
                 <img id="modalImage" src="" alt="Gambar destinasi" loading="lazy">
                 <div class="modal-header-overlay">
@@ -397,11 +494,12 @@
                 <div class="footer-column">
                     <h3>Wisata</h3>
                     <ul>
-                        <li><a href="#">Objek Wisata</a></li>
-                        <li><a href="#">Atraksi Wisata</a></li>
-                        <li><a href="#">Akomodasi</a></li>
-                        <li><a href="#">Kuliner</a></li>
-                        <li><a href="#">Sewa Mobil Motor</a></li>
+                        <li><a href="#objekwisata">Objek Wisata</a></li>
+                        <li><a href="#aktivitas-wisata">Aktivitas Wisata</a></li>
+                        <li><a href="#atraksi-wisata">Atraksi Wisata</a></li>
+                        <li><a href="#akomodasi">Akomodasi</a></li>
+                        <li><a href="#kuliner">Kuliner</a></li>
+                        <li><a href="#sewa">Sewa Mobil Motor</a></li>
                     </ul>
                 </div>
                 <!-- Column 3: Informasi -->
