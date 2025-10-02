@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', function() {
             size: "wide",
             imgSrc: "asset/img/wisata andalah/gua-passea-2.jpg",
             title: "Gua Passea",
-            description: "ini"
+            description: " "
         },
         {
             id: 11,
