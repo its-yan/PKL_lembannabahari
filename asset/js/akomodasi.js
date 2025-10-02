@@ -89,16 +89,11 @@ function buildAkomodasiCards(container, dataArray) {
                             <div class="location-akomodasi"><i class="fa-solid fa-location-dot"></i> ${data.location}</div>
                             <div class="rating-akomodasi"><span class="stars">${'★'.repeat(data.rating)}${'☆'.repeat(5 - data.rating)}</span></div>
                         </div>
-                        <div class="right">
-                            <div class="price-label-akomodasi">Mulai dari</div>
-                            <div class="price-akomodasi">${formatPrice(data.price)}</div>
-                            <div class="price-sub-akomodasi">${data.stayInfo}</div>
-                        </div>
                     </div>
                     <hr class="ak-panel-hr">
                     <p>${data.desc_short || ''}</p>
                     <div class="card-actions-ak">
-                        <button type="button" class="ak-cta ak-book-btn" aria-label="Book Now for ${data.name}">Book Now</button>
+                        <button type="button" class="ak-cta ak-book-btn" aria-label="Pesan Sekarang for ${data.name}">Pesan Sekarang</button>
                     </div>
                 </div>
             `;
@@ -369,11 +364,6 @@ function openAkomodasiDetailModal(data) {
                     ${location ? `<div class="location"><i class="fa-solid fa-location-dot"></i> ${location}</div>` : ''}
                     <div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>
                 </div>
-                <div class="right">
-                    <div class="price-label">Mulai dari</div>
-                    <div class="price">${priceText}</div>
-                    <div class="price-sub">${stayInfo}</div>
-                </div>
             </div>
 
             <hr class="ak-modal-divider" />
@@ -396,7 +386,7 @@ function openAkomodasiDetailModal(data) {
                 </div>
             </div>
 
-            <button id="akBookNow" class="ak-cta">Book Now</button>
+            <button id="akBookNow" class="ak-cta">Pesan Sekarang</button>
         </div>
     `;
 
@@ -474,7 +464,7 @@ function openAkomodasiDetailModal(data) {
     document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
 
     // Book Now button
-    const waNumber = AKOMODASI_WHATSAPP_NUMBER;
+    const waNumber = data.whatsapp || AKOMODASI_WHATSAPP_NUMBER;
     const message = encodeURIComponent(`[Akomodasi] ${title}\nHarga: ${priceText}\nSaya ingin memesan untuk tanggal ...`);
     const url = waNumber ? `https://wa.me/${waNumber}?text=${message}` : `https://wa.me/?text=${message}`;
     document.getElementById('akBookNow')?.addEventListener('click', () => window.open(url, '_blank'));

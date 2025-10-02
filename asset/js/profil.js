@@ -659,29 +659,60 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 7,
             title: "Pantai Mandala Ria",
             description: ""
+        },
+        {
+            id: 8,
+            title: "Tebing Mattoanging",
+            description: " "
+        },
+        {
+            id: 9,
+            title: "Tebing Mattoanging",
+            description: ""
         }
     ];
 
     // Additional items for "Load More" functionality
     const additionalItems = [
         {
-            id: 8,
-            size: "medium",
+            id: 10,
+            size: "wide",
             imgSrc: "asset/img/wisata andalah/gua-passea-2.jpg",
             title: "Gua Passea",
             description: " "
         },
         {
-            id: 9,
-            size: "wide",
-            imgSrc: "",
-            title: "Tebing Mattoanging",
+            id: 11,
+            size: "wide-a",
+            imgSrc: "asset/img/wisata andalah/pantai-mandala-8.jpg",
+            title: "Pantai Mandala",
             description: " "
         },
         {
-            id: 10,
+            id: 12,
+            size: "large",
+            imgSrc: "asset/img/wisata andalah/batu-tongkarayya-2.jpg",
+            title: "Batu Tongkarayya",
+            description: ""
+        },
+        {
+            id: 13,
             size: "medium",
-            imgSrc: "asset2/WhatsApp Image 2025-08-20 at 12.39.02.jpeg",
+            imgSrc: "asset/img/wisata andalah/pantai-mandala-9.jpeg",
+            title: " ",
+            description: " "
+        },
+        {
+            id: 14,
+            size: "medium",
+            imgSrc: "asset/img/wisata andalah/pantai-mandala-6.webp",
+            title: " ",
+            description: " "
+        },
+        {
+            id: 15,
+            size: "medium",
+            imgSrc: "",
             title: " ",
             description: " "
         }
