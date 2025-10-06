@@ -255,6 +255,27 @@
     
     .kuliner-prev { left: 5px; }
     .kuliner-next { right: 5px; }
+<<<<<<< HEAD
+=======
+    
+    /* Grid layout for akomodasi on mobile */
+    .grid-akomodasi {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 8px;
+    }
+    
+    .card-akomodasi {
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .card-image-akomodasi {
+        height: 160px;
+        border-radius: 12px 12px 0 0;
+    }
+>>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 /* Enhanced Mobile Responsive Design for Kuliner Search */
@@ -439,6 +460,107 @@
     }
     .cta-waves { height: 80px; }
     .cta-wave svg { height: 80px; }
+<<<<<<< HEAD
+=======
+    
+    /* Akomodasi mobile grid layout - 2x2 grid */
+    .ak-viewport {
+        position: relative;
+        overflow: visible;
+        margin: 0;
+        padding: 2px;
+    }
+    
+    .ak-track {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: 3px;
+        width: 100%;
+        padding: 0;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    
+    .ak-card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #999;
+        background-color: #fff;
+        overflow: hidden;
+        width: 100%;
+        max-width: 80px;
+        margin: 0 auto;
+        border-radius: 0;
+    }
+    
+    .ak-card-image {
+        width: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #999;
+        height: 60px;
+    }
+    
+    .ak-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Placeholder X styling for empty images */
+    .ak-card-image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .ak-card-image-placeholder::before,
+    .ak-card-image-placeholder::after {
+        content: '';
+        position: absolute;
+        background-color: #666;
+        width: 80%;
+        height: 2px;
+    }
+    
+    .ak-card-image-placeholder::before {
+        transform: rotate(45deg);
+    }
+    
+    .ak-card-image-placeholder::after {
+        transform: rotate(-45deg);
+    }
+    
+    .ak-card-content {
+        padding: 2px;
+        text-align: left;
+    }
+    
+    .ak-card-title {
+        font-size: 8px;
+        font-weight: normal;
+        margin-bottom: 1px;
+        line-height: 1.1;
+    }
+    
+    .ak-card-price {
+        font-size: 8px;
+        font-weight: normal;
+        color: #000;
+        margin: 0;
+    }
+    
+    /* Hide navigation buttons on mobile */
+    .ak-prev, .ak-next {
+        display: none;
+    }
+>>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 /* Accessible focus rings for interactive cards */

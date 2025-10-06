@@ -701,10 +701,13 @@ style.innerHTML = `
             font-size: 18px;
         }
     }
+<<<<<<< HEAD
         @media (max-width: 768px) {
         #scrollToTopBtn {
             top: 475px;
         }
     }
+=======
+>>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 `;
 document.head.appendChild(style);

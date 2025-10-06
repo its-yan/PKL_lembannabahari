@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToTopBtn.id = 'scrollToTopBtn';
     scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
     scrollToTopBtn.setAttribute('title', 'Kembali ke atas');
+<<<<<<< HEAD
 
     const mobileNavContainer = document.querySelector('.mobile-bottom-nav .mobile-nav-container');
     if (mobileNavContainer) {
@@ -178,6 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         document.body.appendChild(scrollToTopBtn);
     }
+=======
+    document.body.appendChild(scrollToTopBtn);
+>>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 
         // Make the header scroll indicator clickable and keyboard accessible
         (function makeScrollIndicatorInteractive(){
