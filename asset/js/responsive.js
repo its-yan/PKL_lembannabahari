@@ -299,14 +299,16 @@ class ModernBottomNav {
   }
 
   getCurrentPage() {
-    const path = window.location.pathname.split('/').pop() || 'profil.html';
-    return path.replace('.html', '');
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    const page = path.replace('.html', '');
+    // Map index to beranda for consistency
+    return page === 'index' ? 'beranda' : page;
   }
 
   setActiveState() {
     this.navItems.forEach(item => {
       const page = item.dataset.page;
-      if (page === this.currentPage || (this.currentPage === '' && page === 'profil')) {
+      if (page === this.currentPage) {
         item.classList.add('active');
       } else {
         item.classList.remove('active');
@@ -363,22 +365,18 @@ class ModernBottomNav {
 
   navigateToPage(page) {
     const routes = {
-      'beranda': '#',
+      'beranda': 'index.html',
       'profil': 'profil.html',
       'wisata': 'wisata.html',
       'layanan': 'Layanan.html',
-      'berita': '#'
+      'berita': 'informasi.html'
     };
 
-    if (page === 'berita') {
-      this.showMoreMenu();
-    } else if (routes[page]) {
+    if (routes[page]) {
       // Smooth page transition
       document.body.style.opacity = '0.7';
       setTimeout(() => {
-        if (routes[page] !== '#') {
-          window.location.href = routes[page];
-        }
+        window.location.href = routes[page];
       }, 200);
     }
   }

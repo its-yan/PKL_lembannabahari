@@ -101,10 +101,10 @@
 /* Tab Navigation */
 .info-nav-section {
     padding: 0.25rem 0; /* reduced vertical spacing */
-    position: sticky;
     top: 0;
     z-index: 20;
     height: 60px;
+
 }
 
 .info-nav-section .container {
@@ -114,7 +114,7 @@
 
 /* Reduce gap between the tabs and the first content section below */
 .info-nav-section + .content-section {
-    padding-top: 2rem;
+    padding-top: 0;
 }
 
 .info-nav-tabs {
@@ -139,7 +139,7 @@
     font-weight: 600;
     font-size: 1.1rem;
     font-family: 'Inter', sans-serif;
-    transform: translateY(10px);
+    transform: translateY(-50px);
 }
 
 .tab-button i {
@@ -156,7 +156,6 @@
 /* Content Sections */
 .content-section {
     display: none;
-    padding: 4rem 0;
     min-height: 70vh;
 }
 
@@ -907,6 +906,32 @@
     }
 }
 
+@media (max-width: 400px) {
+    .hamburger { display: flex; }
+    /* Ensure hamburger lines are visible on dark navbar */
+    .nav-wrapper .hamburger .line { background: #fff; }
+
+    .info-main .container { max-width: 100%; padding: 0 12px; }
+
+    .news-card { flex-direction: column; height: 400px; }
+    .news-image { min-height: 160px; }
+    .news-content { padding: 1.5rem; }
+    .news-title { font-size: 1rem; }
+.carousel-btn { width: 30px; height: 30px; font-size: 1.2rem; }
+.news-excerpt {
+font-size: 0.8rem;
+}
+.section-header h2 {
+    font-size: 1.5rem;
+}
+.section-header{
+    margin-bottom: 2rem;
+}
+.section-header p {
+    font-size: 0.9rem;
+    margin-top: ;
+}
+}
 /* === Unified Bold Title Component (Informasi) === */
 .page-title{
     position: relative;

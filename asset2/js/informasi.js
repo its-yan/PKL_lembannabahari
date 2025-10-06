@@ -125,6 +125,10 @@ function initNewsCarousel() {
                 window.location.href = 'https://share.google/nWoC0ioadHOqHeDQ8';
             } else if (newsId === '3') {
                 window.location.href = 'https://share.google/e5dUDnVxxfpRZCwZZ';
+            } else if (newsId === '5') {
+                window.location.href = 'https://www.facebook.com/SemuaTentangDesaAraLembanna/videos/566958107788829/?rdid=hrgIq9KTtkBiCEMA#';
+            } else if (newsId === '6') {
+                window.location.href = 'https://www.facebook.com/share/r/1DJxEEMgrD/';
             } else {
                 openNewsDetail(newsId);
             }
