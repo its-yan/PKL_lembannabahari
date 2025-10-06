@@ -175,12 +175,99 @@ function openImageModal(src, title, description) {
     }
 }
 
+// Hamburger menu functionality - executed immediately and robustly
+function initializeHamburgerMenu() {
+  const hamburger = document.getElementById('hamburgerMenu');
+  const navAtas = document.querySelector('.nav-atas');
+  const mainNav = document.querySelector('.main-nav');
+  
+  // Function to close the mobile menu
+  function closeMobileMenu() {
+    if (navAtas) navAtas.classList.remove('show-menu');
+    if (hamburger) hamburger.classList.remove('active');
+    if (mainNav) mainNav.classList.remove('show-menu');
+    // Re-enable body scroll
+    document.body.style.overflow = '';
+  }
+
+  // Function to open the mobile menu
+  function openMobileMenu() {
+    if (navAtas) navAtas.classList.add('show-menu');
+    if (hamburger) hamburger.classList.add('active');
+    if (mainNav) mainNav.classList.add('show-menu');
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  if (hamburger && navAtas) {
+    // Remove existing event listeners if any
+    hamburger.replaceWith(hamburger.cloneNode(true));
+    const freshHamburger = document.getElementById('hamburgerMenu');
+    
+    // Hamburger click handler
+    freshHamburger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const isMenuOpen = navAtas.classList.contains('show-menu');
+      
+      if (isMenuOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Click outside to close menu
+    document.addEventListener('click', function(e) {
+      const isClickInsideNav = navAtas.contains(e.target);
+      const isMenuOpen = navAtas.classList.contains('show-menu');
+      
+      if (!isClickInsideNav && isMenuOpen) {
+        closeMobileMenu();
+      }
+    });
+
+    // Escape key to close menu
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navAtas.classList.contains('show-menu')) {
+        closeMobileMenu();
+      }
+    });
+    
+    // Close menu when mobile links are clicked (anchor links)
+    function attachMobileLinksHandlers() {
+      const mobileLinks = document.querySelectorAll('.mobile-menu-list a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Small delay to allow smooth scrolling before closing menu
+          setTimeout(() => {
+            closeMobileMenu();
+          }, 300);
+        });
+      });
+    }
+    
+    // Attach mobile links handlers
+    attachMobileLinksHandlers();
+    
+    console.log('Hamburger menu initialized successfully');
+  }
+}
+
+// Initialize hamburger menu when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeHamburgerMenu);
+} else {
+  initializeHamburgerMenu();
+}
+
+// Backup initialization after a short delay in case DOMContentLoaded fails
+setTimeout(initializeHamburgerMenu, 500);
+
 document.addEventListener('DOMContentLoaded', function () {
     // Ensure akomodasi modal lives under body (avoid being inside grid)
     const akModal = document.getElementById('modal');
-    if (akModal && akModal.parentElement !== document.body) {
-        document.body.appendChild(akModal);
-    }
     // Highlight timeline row on hover
     document.querySelectorAll('.timeline-row').forEach(function(row) {
         row.addEventListener('mouseenter', function() {
@@ -740,18 +827,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (gridItem) {
             const itemId = parseInt(gridItem.dataset.id);
             const itemData = [...gridItemsData, ...additionalItems].find(item => item.id === itemId);
-            
+
             if (itemData) {
-                modalImage.src = gridItem.querySelector('img').src;
-                modalTitle.textContent = itemData.title;
-                modalDescription.textContent = itemData.description;
-                
-                imageModal.style.display = 'block';
-                setTimeout(() => {
-                    imageModal.classList.add('show');
-                }, 10);
-                
-                document.body.style.overflow = 'hidden';
+                const img = gridItem.querySelector('img');
+                if (img) {
+                    // Open image modal
+                    modalImage.src = img.src;
+                    modalTitle.textContent = itemData.title;
+                    modalDescription.textContent = itemData.description;
+
+                    imageModal.style.display = 'block';
+                    setTimeout(() => {
+                        imageModal.classList.add('show');
+                    }, 10);
+
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    const video = gridItem.querySelector('video');
+                    if (video) {
+                        // Open video modal
+                        videoPlayer.src = video.src;
+                        openVideoModal();
+                    }
+                }
             }
         }
     });
@@ -837,6 +935,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
         videoPlayer.pause();
         videoPlayer.currentTime = 0;
+        videoPlayer.src = '';
     }
 
     if (openVideoModalBtn) {
