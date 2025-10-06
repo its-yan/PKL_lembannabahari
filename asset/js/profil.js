@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             id: 15,
             size: "medium",
-            imgSrc: "",
+            imgSrc: "asset2/WhatsApp Image 2025-08-20 at 12.40.59.jpeg",
             title: " ",
             description: " "
         }
