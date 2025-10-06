@@ -498,7 +498,6 @@ window.sewaData = [
         name: "Mobil Avanza",
         desc: "Mobil keluarga yang nyaman untuk perjalanan wisata",
         img: "asset/img/wisata andalah/Toyota Avanza.jpeg",
-        price: 300000,
         unit: "hari"
     },
     
@@ -506,14 +505,12 @@ window.sewaData = [
         name: "Perahu Nelayan",
         desc: "Perahu tradisional untuk aktivitas memancing dan wisata laut",
         img: "asset2/WhatsApp Image 2025-08-20 at 12.40.15.jpeg",
-        price: 200000,
         unit: "hari"
     },
     {
         name: "Mobil Innova",
         desc: "Mobil besar yang cocok untuk rombongan wisata",
         img: "asset/img/wisata andalah/Mobil innova.jpeg",
-        price: 400000,
         unit: "hari"
     }
 ];
