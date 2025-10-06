@@ -9,13 +9,8 @@ function getCardsPerPage() {
     if (window.matchMedia('(max-width: 480px)').matches) return 2;
     // Tablet: 2 kolom x 2 baris
     if (window.matchMedia('(max-width: 768px)').matches) return 4;
-<<<<<<< HEAD
     // Desktop: ubah jadi 2 kolom x 2 baris agar selalu ada minimal 2 halaman jika data >=5
     return 4;
-=======
-    // Desktop: ubah jadi 3 kolom x 2 baris (6 kartu per slide)
-    return 6;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 function initializeAkomodasi() {
@@ -94,7 +89,6 @@ function buildAkomodasiCards(container, dataArray) {
                             <div class="location-akomodasi"><i class="fa-solid fa-location-dot"></i> ${data.location}</div>
                             <div class="rating-akomodasi"><span class="stars">${'★'.repeat(data.rating)}${'☆'.repeat(5 - data.rating)}</span></div>
                         </div>
-<<<<<<< HEAD
                         <div class="right">
                             <div class="price-label-akomodasi">Mulai dari</div>
                             <div class="price-akomodasi">${formatPrice(data.price)}</div>
@@ -105,13 +99,6 @@ function buildAkomodasiCards(container, dataArray) {
                     <p>${data.desc}</p>
                     <div class="card-actions-ak">
                         <button type="button" class="ak-cta ak-book-btn" aria-label="Book Now for ${data.name}">Book Now</button>
-=======
-                    </div>
-                    <hr class="ak-panel-hr">
-                    <p>${data.desc_short || ''}</p>
-                    <div class="card-actions-ak">
-                        <button type="button" class="ak-cta ak-book-btn" aria-label="Pesan Sekarang for ${data.name}">Pesan Sekarang</button>
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
                     </div>
                 </div>
             `;
@@ -314,18 +301,13 @@ function openAkomodasiDetailModal(data) {
 
     const title = data.name || 'Detail Akomodasi';
     const price = data.price || 0;
-<<<<<<< HEAD
     const desc = data.desc || '';
-=======
-    const desc_full = data.desc_full || [];
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     const images = data.images || [];
     const type = data.type || '';
     const location = data.location || '';
     const rating = data.rating || 0;
     const stayInfo = data.stayInfo || '1 malam, 2 dewasa';
 
-<<<<<<< HEAD
     const facilitiesMap = {
         hotel: [
             {name: 'WiFi Gratis', icon: 'fa-wifi'},
@@ -359,48 +341,6 @@ function openAkomodasiDetailModal(data) {
         ]
     };
     const facs = facilitiesMap[type] || ['WiFi Gratis','Parkir','AC'];
-=======
-    // Gunakan fasilitas dari data akomodasi jika tersedia, jika tidak gunakan default berdasarkan tipe
-    let facilities = data.facilities || [];
-    
-    // Jika fasilitas tidak tersedia, gunakan default dari facilitiesMap
-    if (!facilities || facilities.length === 0) {
-        const facilitiesMap = {
-            hotel: [
-                {name: 'WiFi Gratis', icon: 'fa-wifi'},
-                {name: 'Kolam Renang', icon: 'fa-swimming-pool'},
-                {name: 'Restoran', icon: 'fa-utensils'},
-                {name: 'Parkir', icon: 'fa-parking'},
-                {name: 'AC', icon: 'fa-snowflake'},
-                {name: 'TV Kabel', icon: 'fa-tv'},
-                {name: '24 Jam Front Desk', icon: 'fa-clock'},
-                {name: 'Layanan Kamar', icon: 'fa-concierge-bell'}
-            ],
-            villa: [
-                {name: 'WiFi Gratis', icon: 'fa-wifi'},
-                {name: 'Private Pool', icon: 'fa-swimming-pool'},
-                {name: 'Dapur', icon: 'fa-utensils'},
-                {name: 'Parkir', icon: 'fa-parking'},
-                {name: 'AC', icon: 'fa-snowflake'},
-                {name: 'Teras Pribadi', icon: 'fa-umbrella-beach'},
-                {name: 'BBQ Area', icon: 'fa-fire'},
-                {name: 'Laundry', icon: 'fa-soap'}
-            ],
-            guesthouse: [
-                {name: 'WiFi Gratis', icon: 'fa-wifi'},
-                {name: 'Parkir', icon: 'fa-parking'},
-                {name: 'Dapur Umum', icon: 'fa-utensils'},
-                {name: 'Kipas Angin', icon: 'fa-fan'},
-                {name: 'Air Panas', icon: 'fa-hot-tub'},
-                {name: 'Taman', icon: 'fa-tree'},
-                {name: 'Ruang Tamu Bersama', icon: 'fa-couch'},
-                {name: 'Teras', icon: 'fa-umbrella-beach'}
-            ]
-        };
-        facilities = facilitiesMap[type] || [{name: 'WiFi Gratis', icon: 'fa-wifi'}, {name: 'Parkir', icon: 'fa-parking'}, {name: 'AC', icon: 'fa-snowflake'}];
-    }
-    
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     const priceText = formatPrice(price);
 
     content.innerHTML = `
@@ -422,34 +362,21 @@ function openAkomodasiDetailModal(data) {
                     ${location ? `<div class="location"><i class="fa-solid fa-location-dot"></i> ${location}</div>` : ''}
                     <div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>
                 </div>
-<<<<<<< HEAD
                 <div class="right">
                     <div class="price-label">Mulai dari</div>
                     <div class="price">${priceText}</div>
                     <div class="price-sub">${stayInfo}</div>
                 </div>
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
             </div>
 
             <hr class="ak-modal-divider" />
 
-<<<<<<< HEAD
             <p class="ak-desc">${desc}</p>
-=======
-            <div class="ak-desc">
-                ${desc_full.map(paragraph => `<p>${paragraph}</p>`).join('')}
-            </div>
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 
             <div class="modal-facilities" id="akomodasiFacilities">
                 <h3>Fasilitas</h3>
                 <div class="facilities-grid">
-<<<<<<< HEAD
                     ${facs.map(f => `
-=======
-                    ${facilities.map(f => `
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
                         <div class="facility-item">
                             <div class="facility-icon">
                                 <i class="fa-solid ${f.icon}"></i>
@@ -460,11 +387,7 @@ function openAkomodasiDetailModal(data) {
                 </div>
             </div>
 
-<<<<<<< HEAD
             <button id="akBookNow" class="ak-cta">Book Now</button>
-=======
-            <button id="akBookNow" class="ak-cta">Pesan Sekarang</button>
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         </div>
     `;
 
@@ -542,11 +465,7 @@ function openAkomodasiDetailModal(data) {
     document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
 
     // Book Now button
-<<<<<<< HEAD
     const waNumber = AKOMODASI_WHATSAPP_NUMBER;
-=======
-    const waNumber = data.whatsapp || AKOMODASI_WHATSAPP_NUMBER;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     const message = encodeURIComponent(`[Akomodasi] ${title}\nHarga: ${priceText}\nSaya ingin memesan untuk tanggal ...`);
     const url = waNumber ? `https://wa.me/${waNumber}?text=${message}` : `https://wa.me/?text=${message}`;
     document.getElementById('akBookNow')?.addEventListener('click', () => window.open(url, '_blank'));
@@ -558,11 +477,7 @@ function initializeAkomodasiImageRotation(card, data) {
     if (!cardImage || !data.images || data.images.length <= 1) return;
 
     // Create rotating images
-<<<<<<< HEAD
     const images = data.images.slice(0, 4); // Use up to 4 images
-=======
-    const images = data.images; // Use all available images
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     if (images.length < 2) return;
 
     // Clear existing content and add rotating images

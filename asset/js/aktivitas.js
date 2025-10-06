@@ -82,13 +82,9 @@ function initImageSlideshow() {
     const cardImages = {
         // Card 1 - Snorkeling
         0: [
-<<<<<<< HEAD
             'asset/img/wisata andalah/pantai-andalan-1.jpeg',
             'asset/img/wisata andalah/pantai-mandala-2.jpeg',
             'asset/img/wisata andalah/pantai-mandala-3.jpeg'
-=======
-            'asset/img/wisata andalah/Snorkeling.jpg',
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         ],
         // Card 2 - Hiking
         1: [

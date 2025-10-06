@@ -101,17 +101,10 @@
 /* Tab Navigation */
 .info-nav-section {
     padding: 0.25rem 0; /* reduced vertical spacing */
-<<<<<<< HEAD
     top: 0;
     z-index: 20;
     height: 60px;
 
-=======
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    height: 60px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 .info-nav-section .container {
@@ -121,11 +114,7 @@
 
 /* Reduce gap between the tabs and the first content section below */
 .info-nav-section + .content-section {
-<<<<<<< HEAD
     padding-top: 0;
-=======
-    padding-top: 2rem;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 .info-nav-tabs {
@@ -150,11 +139,7 @@
     font-weight: 600;
     font-size: 1.1rem;
     font-family: 'Inter', sans-serif;
-<<<<<<< HEAD
     transform: translateY(-50px);
-=======
-    transform: translateY(10px);
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 .tab-button i {
@@ -171,10 +156,6 @@
 /* Content Sections */
 .content-section {
     display: none;
-<<<<<<< HEAD
-=======
-    padding: 4rem 0;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     min-height: 70vh;
 }
 
@@ -925,7 +906,6 @@
     }
 }
 
-<<<<<<< HEAD
 @media (max-width: 400px) {
     .hamburger { display: flex; }
     /* Ensure hamburger lines are visible on dark navbar */
@@ -952,8 +932,6 @@ font-size: 0.8rem;
     margin-top: ;
 }
 }
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 /* === Unified Bold Title Component (Informasi) === */
 .page-title{
     position: relative;

@@ -566,12 +566,8 @@ body {
         transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
         background-color 0.4s ease,
         padding 0.5s ease,
-<<<<<<< HEAD
         box-shadow 0.4s ease,
         border 0.4s ease;
-=======
-        box-shadow 0.4s ease;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     transform: translateY(50%); /* Overlap top edge of main */
     display: grid;
     place-items: center;
@@ -579,7 +575,6 @@ body {
     /* Smooth width transition container */
     width: 100%;
     box-sizing: border-box;
-<<<<<<< HEAD
     /* Beautiful gradient border */
     border: 2px solid transparent;
     background: 
@@ -592,8 +587,6 @@ body {
             var(--secondary-color) 100%
         ) border-box;
     border-radius: 35px;
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 .nav-wrapper.nav-sticky {
@@ -604,15 +597,6 @@ body {
     z-index: 300;
     /* Enhanced sticky state */
     padding: 8px 20px;
-<<<<<<< HEAD
-=======
-    background: linear-gradient(
-        135deg, 
-        rgba(15, 51, 111, 0.05) 0%, 
-        rgba(19, 62, 135, 0.08) 50%, 
-        rgba(96, 139, 193, 0.05) 100%
-    );
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     backdrop-filter: blur(8px);
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.1),
@@ -620,7 +604,6 @@ body {
     border-radius: 30px;
     margin: 0 auto;
     max-width: calc(100% - 40px);
-<<<<<<< HEAD
     /* Enhanced animated gradient border for sticky state */
     border: 3px solid transparent;
     background: 
@@ -640,17 +623,11 @@ body {
         ) border-box;
     background-size: 100% 100%, 200% 200%;
     animation: borderGradientShift 8s ease-in-out infinite;
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 .nav-wrapper.nav-sticky nav {
     /* SMOOTH WIDTH TRANSITION */
     width: auto;
-<<<<<<< HEAD
-=======
-    min-width: max-content;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     border-radius: 25px;
     padding: 12px 30px;
     margin: 0 auto;
@@ -693,7 +670,6 @@ body {
         inset -35px 0 45px -20px rgba(255, 255, 255, 0.15);
 }
 
-<<<<<<< HEAD
 /* Enhanced border glow on hover */
 .nav-wrapper.nav-sticky:hover {
     border-width: 4px;
@@ -714,8 +690,6 @@ body {
     }
 }
 
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 /* SMOOTH TRANSITION PRELOAD SYSTEM */
 .nav-wrapper {
     /* Pre-load transitions to prevent jank */
@@ -774,30 +748,22 @@ body {
         transition: 
             transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
             background-color 0.3s ease,
-<<<<<<< HEAD
             padding 0.3s ease,
             border 0.3s ease;
         padding: 0 10px;
         border-width: 2px;
         border-radius: 25px;
-=======
-            padding 0.3s ease;
-        padding: 0 10px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     }
     
     .nav-wrapper.nav-sticky {
         padding: 6px 15px;
         max-width: calc(100% - 20px);
         border-radius: 20px;
-<<<<<<< HEAD
         border-width: 2px;
     }
     
     .nav-wrapper.nav-sticky:hover {
         border-width: 3px;
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     }
     
     @keyframes stickyNavEntrance {
@@ -823,14 +789,11 @@ body {
     .nav-wrapper.nav-sticky nav {
         transition: padding 0.2s ease;
     }
-<<<<<<< HEAD
     
     .nav-wrapper.nav-sticky {
         animation: none !important;
         background-size: 100% 100%, 100% 100%;
     }
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
 }
 
 /* HARDWARE ACCELERATION OPTIMIZATION */
@@ -928,32 +891,7 @@ nav {
     justify-content: center;
     align-items: center;
     width: max-content;
-<<<<<<< HEAD
     margin: 0 auto;
-=======
-    max-width: min(95vw, 1200px);
-    margin: 0 auto;
-    /* Base gradient background */
-    background: linear-gradient(135deg, #0f336f 0%, #133E87 35%, #4f74b4 65%, #608BC1 100%);
-    border-radius: 25px;
-    padding: 12px 30px;
-    /* Enhanced multi-layer box-shadow for smooth side effects */
-    box-shadow: 
-        /* Main drop shadows */
-        0 8px 25px rgba(0, 0, 0, 0.3), 
-        0 2px 10px rgba(0, 0, 0, 0.1),
-        /* Left side glow enhancement */
-        inset 15px 0 20px -10px rgba(255, 255, 255, 0.18),
-        inset 25px 0 35px -15px rgba(255, 255, 255, 0.08),
-        /* Right side glow enhancement */
-        inset -15px 0 20px -10px rgba(255, 255, 255, 0.18),
-        inset -25px 0 35px -15px rgba(255, 255, 255, 0.08),
-        /* Top/bottom subtle enhancement */
-        inset 0 8px 15px -8px rgba(255, 255, 255, 0.1),
-        inset 0 -8px 15px -8px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     position: relative;
     overflow: visible;
     z-index: 1;
@@ -967,32 +905,6 @@ nav::before {
     left: -3px;
     right: -3px;
     bottom: -3px;
-<<<<<<< HEAD
-=======
-    background: 
-        /* Extended smooth side coverage */
-        radial-gradient(ellipse 140px 105% at 0% 50%, 
-            rgba(255,255,255,0.28) 0%, 
-            rgba(255,255,255,0.18) 25%, 
-            rgba(255,255,255,0.10) 45%, 
-            rgba(255,255,255,0.05) 65%, 
-            transparent 85%),
-        radial-gradient(ellipse 140px 105% at 100% 50%, 
-            rgba(255,255,255,0.28) 0%, 
-            rgba(255,255,255,0.18) 25%, 
-            rgba(255,255,255,0.10) 45%, 
-            rgba(255,255,255,0.05) 65%, 
-            transparent 85%),
-        /* Ambient glow base */
-        radial-gradient(ellipse 180px 100% at 50% 50%, 
-            transparent 40%, 
-            rgba(255,255,255,0.04) 70%, 
-            rgba(255,255,255,0.06) 90%, 
-            transparent 100%),
-        /* Subtle texture enhancement */
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="navGrain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="30" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23navGrain)"/></svg>');
-    border-radius: 28px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     pointer-events: none;
     z-index: 1;
     animation: subtleBreathing 5s ease-in-out infinite;
@@ -1007,29 +919,6 @@ nav::after {
     left: 0;
     right: 0;
     bottom: 0;
-<<<<<<< HEAD
-=======
-    background: 
-        /* Progressive edge highlights */
-        linear-gradient(90deg, 
-            rgba(255,255,255,0.32) 0%, 
-            rgba(255,255,255,0.20) 4%, 
-            rgba(255,255,255,0.12) 8%, 
-            rgba(255,255,255,0.06) 15%, 
-            transparent 35%),
-        linear-gradient(270deg, 
-            rgba(255,255,255,0.32) 0%, 
-            rgba(255,255,255,0.20) 4%, 
-            rgba(255,255,255,0.12) 8%, 
-            rgba(255,255,255,0.06) 15%, 
-            transparent 35%),
-        /* Corner accent enhancement */
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
-        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
-        radial-gradient(circle at 0% 100%, rgba(255,255,255,0.12) 0%, transparent 30%),
-        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.12) 0%, transparent 30%);
-    border-radius: 25px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     pointer-events: none;
     z-index: 2;
     animation: edgeShimmer 6s ease-in-out infinite;
@@ -1356,10 +1245,7 @@ main::before {
 
 .content-container {
     max-width: 1200px;
-<<<<<<< HEAD
     height: 600px;
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.35fr 1fr;
@@ -1440,10 +1326,6 @@ main::before {
 
 #profil-desa::after {
     content: '';
-<<<<<<< HEAD
-=======
-    position: absolute;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     bottom: -80px;
     right: -120px;
     width: 50vw;
@@ -2033,10 +1915,6 @@ main::before {
 .container {
     max-width: 960px;
     margin: 0 auto;
-<<<<<<< HEAD
-=======
-    padding: 80px 40px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     position: relative;
     z-index: 2;
 }
@@ -2795,44 +2673,27 @@ main::before {
     }
 }
 
-<<<<<<< HEAD
 @media (max-width: 534px) {
-=======
-@media (max-width: 548px) {
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     .cta-waves {
         top: 850px;
         height: 200px;
     }
 }
 
-<<<<<<< HEAD
 @media (max-width: 520px) {
     .cta-waves {
         top: 680px;
-=======
-@media (max-width: 496px) {
-    .cta-waves {
-        top: 900px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         height: 200px;
     }
 }
 
-<<<<<<< HEAD
 @media (max-width: 470px) {
     .cta-waves {
         top: 700px;
-=======
-@media (max-width: 480px) {
-    .cta-waves {
-        top: 730px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         height: 200px;
     }
 }
 
-<<<<<<< HEAD
 @media (max-width: 360px) {
     .cta-waves {
         top: 750px;
@@ -2843,11 +2704,6 @@ main::before {
 @media (max-width: 340px) {
     .cta-waves {
         top: 760px;
-=======
-@media (max-width: 375.9px) {
-    .cta-waves {
-        top: 780px;
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         height: 200px;
     }
 }
@@ -3240,7 +3096,6 @@ main::before {
     filter: brightness(1.1) contrast(1.1) saturate(1.2) !important;
 }
 
-<<<<<<< HEAD
 
 @media (max-width: 1220px) {
     .nav-links a{
@@ -3291,10 +3146,6 @@ main::before {
 /* CTA Responsive Design */
 @media (max-width: 1024px) {
     
-=======
-/* CTA Responsive Design */
-@media (max-width: 1024px) {
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     .cta-container {
         gap: 60px;
         padding: 0 30px;
@@ -3669,10 +3520,7 @@ body.menu-open { overflow: hidden; }
     .content-container {
         display: block;
         padding: 40px 20px;
-<<<<<<< HEAD
         height: 800px;
-=======
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     }
 
     .text-content, .image-placeholder {
@@ -3930,18 +3778,13 @@ h2.section-title::before,
 
 /* ===== MOBILE BOTTOM NAVIGATION ===== */
 /* Hide mobile bottom navigation on laptop/computer viewports */
-<<<<<<< HEAD
 @media (min-width: 901px) {
-=======
-@media (min-width: 769px) {
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     .mobile-bottom-nav {
         display: none !important;
     }
 }
 
 /* Show mobile bottom navigation only on mobile devices */
-<<<<<<< HEAD
 @media (max-width: 900px) {
     .mobile-bottom-nav {
         display: block;
@@ -5569,10 +5412,3 @@ h2.section-title::before,
     }
 
 }
-=======
-@media (max-width: 768px) {
-    .mobile-bottom-nav {
-        display: none;
-    }
-}
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a

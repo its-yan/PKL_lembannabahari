@@ -107,35 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle panel hamburger
   hamburger.addEventListener('click', () => {
-<<<<<<< HEAD
     navAtas.classList.toggle('show-menu');
     
     // Initialize dropdowns when menu is opened
     if (navAtas.classList.contains('show-menu') && isMobileTabletView()) {
-=======
-    hamburger.classList.toggle('active');
-
-    // Toggle main-nav active class
-    const mainNav = document.querySelector('.main-nav');
-    if (mainNav) {
-      mainNav.classList.toggle('active');
-    }
-
-    // Toggle show-menu for dropdown initialization
-    navAtas.classList.toggle('show-menu');
-
-    // Toggle body scroll
-    if (mainNav && mainNav.classList.contains('active')) {
-      document.body.classList.add('no-scroll');
-      document.documentElement.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-      document.documentElement.classList.remove('no-scroll');
-    }
-
-    // Initialize dropdowns when menu is opened
-    if (mainNav && mainNav.classList.contains('active') && isMobileTabletView()) {
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
       setTimeout(() => {
         initializeDropdowns();
         // Ensure all menu items are visible
@@ -145,24 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, 10);
     }
-<<<<<<< HEAD
     
     // Close all submenus when panel is closed
     if (!navAtas.classList.contains('show-menu')) {
       document
         .querySelectorAll('.menu-list > li.open')
         .forEach(li => li.classList.remove('open'));
-=======
-
-    // Close all submenus when panel is closed
-    if (mainNav && !mainNav.classList.contains('active')) {
-      navAtas.classList.remove('show-menu');
-      document
-        .querySelectorAll('.menu-list > li.open')
-        .forEach(li => li.classList.remove('open'));
-      document.body.classList.remove('no-scroll');
-      document.documentElement.classList.remove('no-scroll');
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     }
   });
 
@@ -171,24 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const a = e.target.closest('a');
     if (!a) return;
 
-<<<<<<< HEAD
     // Only handle clicks inside the hamburger menu when it is open
     if (!navAtas.classList.contains('show-menu')) return;
 
     // Close the hamburger menu
     navAtas.classList.remove('show-menu');
-=======
-    const mainNav = document.querySelector('.main-nav');
-    // Only handle clicks when the hamburger menu is open
-    if (!mainNav || !mainNav.classList.contains('active')) return;
-
-    // Close the hamburger menu
-    navAtas.classList.remove('show-menu');
-    hamburger.classList.remove('active');
-    mainNav.classList.remove('active');
-    document.body.classList.remove('no-scroll');
-    document.documentElement.classList.remove('no-scroll');
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
   };
 
   menuList.addEventListener('click', closeMenuOnClick);
@@ -196,25 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Also handle mobile menu list
   const mobileMenuList = document.querySelector('.mobile-menu-list');
   if (mobileMenuList) {
-<<<<<<< HEAD
     mobileMenuList.addEventListener('click', closeMenuOnClick);
-=======
-    // Attach click handler to each link in mobile menu
-    const mobileLinks = mobileMenuList.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        // Close the menu immediately
-        navAtas.classList.remove('show-menu');
-        hamburger.classList.remove('active');
-        const mainNav = document.querySelector('.main-nav');
-        if (mainNav) {
-          mainNav.classList.remove('active');
-        }
-        document.body.classList.remove('no-scroll');
-        document.documentElement.classList.remove('no-scroll');
-      });
-    });
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
   }
 
   // Delegation: toggle submenu (mobile/tablet and desktop)
@@ -300,24 +232,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Click outside nav: close panel + submenus
   document.addEventListener('click', (e) => {
-<<<<<<< HEAD
     if (!navAtas.contains(e.target)) {
       navAtas.classList.remove('show-menu');
       document
         .querySelectorAll('.menu-list > li.open')
         .forEach(li => li.classList.remove('open'));
-=======
-    const mainNav = document.querySelector('.main-nav');
-    if (!navAtas.contains(e.target) && mainNav && mainNav.classList.contains('active')) {
-      navAtas.classList.remove('show-menu');
-      mainNav.classList.remove('active');
-      hamburger.classList.remove('active');
-      document
-        .querySelectorAll('.menu-list > li.open')
-        .forEach(li => li.classList.remove('open'));
-      document.body.classList.remove('no-scroll');
-      document.documentElement.classList.remove('no-scroll');
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
     }
   });
 
@@ -333,22 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset states when switching to desktop
       if (!isMobileTabletView()) {
         navAtas.classList.remove('show-menu');
-<<<<<<< HEAD
         document
           .querySelectorAll('.menu-list > li.open')
           .forEach(li => li.classList.remove('open'));
-=======
-        hamburger.classList.remove('active');
-        const mainNav = document.querySelector('.main-nav');
-        if (mainNav) {
-          mainNav.classList.remove('active');
-        }
-        document
-          .querySelectorAll('.menu-list > li.open')
-          .forEach(li => li.classList.remove('open'));
-        document.body.classList.remove('no-scroll');
-        document.documentElement.classList.remove('no-scroll');
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
       }
     }, 150);
   });
@@ -393,25 +299,16 @@ class ModernBottomNav {
   }
 
   getCurrentPage() {
-<<<<<<< HEAD
     const path = window.location.pathname.split('/').pop() || 'index.html';
     const page = path.replace('.html', '');
     // Map index to beranda for consistency
     return page === 'index' ? 'beranda' : page;
-=======
-    const path = window.location.pathname.split('/').pop() || 'profil.html';
-    return path.replace('.html', '');
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
   }
 
   setActiveState() {
     this.navItems.forEach(item => {
       const page = item.dataset.page;
-<<<<<<< HEAD
       if (page === this.currentPage) {
-=======
-      if (page === this.currentPage || (this.currentPage === '' && page === 'profil')) {
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
         item.classList.add('active');
       } else {
         item.classList.remove('active');
@@ -468,7 +365,6 @@ class ModernBottomNav {
 
   navigateToPage(page) {
     const routes = {
-<<<<<<< HEAD
       'beranda': 'index.html',
       'profil': 'profil.html',
       'wisata': 'wisata.html',
@@ -481,24 +377,6 @@ class ModernBottomNav {
       document.body.style.opacity = '0.7';
       setTimeout(() => {
         window.location.href = routes[page];
-=======
-      'beranda': '#',
-      'profil': 'profil.html',
-      'wisata': 'wisata.html',
-      'layanan': 'Layanan.html',
-      'berita': '#'
-    };
-
-    if (page === 'berita') {
-      this.showMoreMenu();
-    } else if (routes[page]) {
-      // Smooth page transition
-      document.body.style.opacity = '0.7';
-      setTimeout(() => {
-        if (routes[page] !== '#') {
-          window.location.href = routes[page];
-        }
->>>>>>> 47ab2a45161137ec494a1bd69b920964237f652a
       }, 200);
     }
   }
