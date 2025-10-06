@@ -115,7 +115,7 @@
 /* =============================================
    MOBILE BREAKPOINT (max-width: 600px)
    ============================================= */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   
   /* Header Section */
   .profil-header {
@@ -453,7 +453,6 @@
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     align-items: center;
-    gap: 6px;
     padding: 8px 10px;
     width: min(560px, calc(100vw - 24px));
     background: linear-gradient(135deg, rgba(19,62,135,0.82) 0%, rgba(96,139,193,0.78) 100%);
@@ -633,7 +632,7 @@
   }
 
   /* Show on mobile only */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .mobile-bottom-nav { 
       display: flex !important;
       justify-content: center !important;

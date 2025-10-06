@@ -701,5 +701,10 @@ style.innerHTML = `
             font-size: 18px;
         }
     }
+        @media (max-width: 768px) {
+        #scrollToTopBtn {
+            top: 475px;
+        }
+    }
 `;
 document.head.appendChild(style);
