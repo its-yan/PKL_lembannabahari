@@ -1122,6 +1122,7 @@ body {
   );
   color: #e8e8e8;
   width: 100vw;
+  height: 790px;
   font-family: "Cormorant Garamond", serif;
   padding: 60px 0 30px 0;
   position: relative;
@@ -1440,6 +1441,64 @@ h2.section-title::before,
   padding: 0 !important;
   margin: 0 !important;
 }
+/* ==========================
+   📱 Mobile Bottom Navigation
+   ========================== */
+.layanan-page .mobile-bottom-nav {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  left: 38%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 480px;
+  height: 75px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background: linear-gradient(135deg, #133E87 0%, #608BC1 100%);
+  border-radius: 20px;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+  z-index: 1200;
+}
+
+.layanan-page .mobile-bottom-nav a {
+  flex: 1;
+  max-width: 480px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  transition: color 0.3s ease;
+}
+
+.layanan-page .mobile-bottom-nav a i {
+  font-size: 1.3rem;
+  display: block;
+}
+
+.layanan-page .mobile-bottom-nav a.active {
+  color:#CBDCEB;/* highlight active tab */
+}
+
+.layanan-page .mobile-bottom-nav a:hover {
+  color: #CBDCEB;
+}
+
+/* Hide on desktop */
+@media (min-width: 901px) {
+  .layanan-page .mobile-bottom-nav {
+    display: none;
+  }
+}
+ 
 /* 📱 Mobile-specific adjustments (max-width: 480px) */
 @media (max-width: 480px) {
   .layanan-page .header-overlay {
@@ -1490,7 +1549,7 @@ h2.section-title::before,
     justify-content: center !important;
     align-items: center !important;
   }
-
+ 
   .layanan-page .main-title h1 {
     background: none !important;
     -webkit-background-clip: initial !important;
@@ -1509,11 +1568,13 @@ h2.section-title::before,
 
   .layanan-page .header-overlay {
     z-index: 1 !important;
+    
   }
 
   .layanan-page .header-content {
     z-index: 2 !important;
     position: relative !important;
+    margin-top: -10vh !important;
   }
 
   .layanan-page .hero-tagline {
